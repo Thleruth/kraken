@@ -1,3 +1,5 @@
-# This repo includes an implementation of the Kraken (exchange) API and is built as part of a final project of a coding bootcanp (Coding Nomads)
+# Kraken (exchange) API implementation
+
+## This repo is built as part of a final project of a coding bootcanp (CodingNomads)
 
 More info to add
