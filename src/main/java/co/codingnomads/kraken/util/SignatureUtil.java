@@ -2,7 +2,10 @@ package co.codingnomads.kraken.util;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,12 +19,18 @@ public class SignatureUtil {
 
     public static byte[] concatArrays(byte[] a, byte[] b) {
 
-        byte[] concat = new byte[a.length + b.length];
-        for (int i = 0; i < concat.length; i++) {
-            concat[i] = i < a.length ? a[i] : b[i - a.length];
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
+
+        try {
+            outputStream.write(a);
+            outputStream.write(b);
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
         }
 
-        return concat;
+        return outputStream.toByteArray( );
+
     }
 
     public static byte[] hmacSha512(byte[] key, byte[] message) throws NoSuchAlgorithmException, InvalidKeyException {
@@ -36,11 +45,6 @@ public class SignatureUtil {
     }
 
     public static byte[] stringToBytes(String input) {
-
-        if (input == null) {
-            System.out.println("ooops");
-        }
-
-        return input.getBytes(Charset.forName(UTF8));
+        return input.getBytes(StandardCharsets.UTF_8);
     }
 }

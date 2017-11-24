@@ -3,7 +3,8 @@ package co.codingnomads.kraken.service;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
+// import java.util.Base64;
+import org.apache.commons.codec.binary.Base64;
 
 import static co.codingnomads.kraken.util.SignatureUtil.*;
 
@@ -14,18 +15,19 @@ import static co.codingnomads.kraken.util.SignatureUtil.*;
 @SuppressWarnings("Depreciated")
 public class KrakenSignature {
 
-    static String nonce = String.valueOf(9);
+    static String nonce = String.valueOf(51);
     static String path = "https://www.kraken.com/0/private/Balance";
     static byte[] pathB = stringToBytes(path);
     static String postData = "nonce=" + nonce;
-    static String secret = "7FROFeUtSh0EewOzkbd/HpZQtZCcIlFTx3tmcuPaSfjhrewC6VnnubhUOh5/az6rrbCaZLCfFFxfgVBsqI7wLQ==";
+    static String secret = "jRCxEhKYVCmYFrb2NI1gwxh/xmQiRUOKxhjyLWpJXo/qv7PYAZ08qktFokAniDIKBl/wL+RpVRmKrvihptLw1w==";
 
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException{
 
-        byte[] sha256 = sha256(nonce + postData);
-        byte[] hmacKey =  Base64.getDecoder().decode(secret);
-        byte[] hmacMessage = concatArrays(pathB, sha256);
-        String hmacDigest = Base64.getEncoder().encodeToString(hmacSha512(hmacKey, hmacMessage));
+        byte[] sha256Data = sha256(nonce + postData);
+        byte[] hmacKey = Base64.decodeBase64(secret);
+        byte[] hmacMessage = concatArrays(pathB, sha256Data);
+        byte[] sha512 = hmacSha512(hmacKey, hmacMessage);
+        String hmacDigest = Base64.encodeBase64String(sha512);
         System.out.println(hmacDigest);
     }
 
