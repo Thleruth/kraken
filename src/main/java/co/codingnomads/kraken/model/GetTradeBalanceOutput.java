@@ -2,6 +2,7 @@ package co.codingnomads.kraken.model;
 
 public class GetTradeBalanceOutput extends OutputGeneric {
 
+    // potential errors
     String[] error;
     //equivalent balance (combined balance of all currencies)
     String eb;
