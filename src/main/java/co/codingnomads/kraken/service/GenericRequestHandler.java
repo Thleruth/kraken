@@ -2,10 +2,9 @@ package co.codingnomads.kraken.service;
 
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.util.TempConstant;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
@@ -13,27 +12,23 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
-@Service
 public class GenericRequestHandler {
 
     private HttpStatus status;
 
-    // takes in the KrakenRequestGeneric and request body and returns a json object
-    // Not a bit fan of the first arg, could use a String somehow bound by the list of action
-    public OutputGeneric callAPI(KrakenRequestGeneric krakenRequest, RequestBodyGeneric requestBody)
+    // takes in the KrakenRequestEnum and request body and returns a json object
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody)
             throws NullPointerException {
-
-        Class outputClass = outputPojoClassSelector(krakenRequest.getClass().getSimpleName());
 
         // should put that in a different package to downsize this
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("API-Key", TempConstant.ApiKey);
 
-        if (krakenRequest.getRequestType().matches("POST")) {
+        if (krakenRequest.getHttpMethod().matches("POST")) {
 
             // not sure how the requestBody String should look like could be the source of invalid Key issue
             // To test, implement a GET method and see it works
+            headers.set("API-Key", TempConstant.ApiKey);
             headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
                     requestBody.toString() + requestBody.getNonce(), TempConstant.ApiSecret, krakenRequest.getEndPoint()));
         }
@@ -49,16 +44,21 @@ public class GenericRequestHandler {
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN));
         restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter);
 
-        String url = krakenRequest.getDOMAIN().concat(krakenRequest.getEndPoint());
 
-        ResponseEntity response = restTemplate.exchange(url, krakenRequest.getRequestType(),
-                entity, outputClass);
+        String url = krakenRequest.getDomain().concat(krakenRequest.getEndPoint());
+
+        // get the correct Response Wrapper (with the correct generic result)
+        ParameterizedTypeReference parameterizedTypeReference =
+                outputPojoClassSelector(krakenRequest.name());
+
+        // let the restTemplate work his magic
+        ResponseEntity response = restTemplate.exchange(url, krakenRequest.getHttpMethod(),
+                entity, parameterizedTypeReference);
 
         // can make a method to check this outside this method
-        System.out.println(response);
         try {
             if (isSuccessful(response.getStatusCode())) {
-                return (OutputGeneric) response.getBody();
+                return (OutputWrapper) response.getBody();
             } else throw new RestClientException(status.getReasonPhrase());
         } catch (RestClientException e) {
             throw e;
@@ -78,11 +78,10 @@ public class GenericRequestHandler {
         else throw new RestClientException(status.getReasonPhrase());
     }
 
-    public static Class outputPojoClassSelector(String methodName) {
+    public static ParameterizedTypeReference outputPojoClassSelector(String methodName) {
         switch (methodName) {
-//            case "GetServerTime":
-//                return new GetServerTimeOutput();
-//                break;
+            case "GETSERVERTIME":
+                return new ParameterizedTypeReference<OutputWrapper<GetServerTimeOutput>>(){};
 //            case "GetAssetInfo":
 //                return new GetAssetInfoOutput();
 //                break;
@@ -108,8 +107,8 @@ public class GenericRequestHandler {
 //                return new GetAccountBalanceOutput();
 //                break;
 
-            case "GetTradeBalance":
-                return GetTradeBalanceOutput.class;
+            case "GETTRADEBALANCE":
+                return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
 //            case "GetOpenOrders":
 //                return new GetOpenOrdersOutput();
 //                break;
