@@ -1,7 +1,6 @@
-package model;
+package co.codingnomads.kraken.model;
 
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 
 public class GetTradeBalance extends KrakenRequestGeneric {
 
@@ -14,5 +13,9 @@ public class GetTradeBalance extends KrakenRequestGeneric {
 
     public static HttpMethod getREQUESTTYPE() {
         return REQUESTTYPE;
+    }
+
+    public GetTradeBalance() {
+        super(ENDPOINT, REQUESTTYPE);
     }
 }

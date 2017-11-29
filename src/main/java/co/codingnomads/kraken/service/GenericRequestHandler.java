@@ -1,9 +1,7 @@
-package com.kraken_api.kraken.service;
+package co.codingnomads.kraken.service;
 
-import model.GetTradeBalanceOutput;
-import model.KrakenRequestGeneric;
-import model.OutputGeneric;
-import model.RequestBodyGeneric;
+import co.codingnomads.kraken.model.*;
+import co.codingnomads.kraken.util.TempConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -18,39 +16,46 @@ import java.util.Arrays;
 @Service
 public class GenericRequestHandler {
 
-    @Autowired
-    private RestTemplate restTemplate;
     private HttpStatus status;
 
-//    //empty body
-//    public V callAPI(KrakenRequestGeneric krakenRequestGeneric) throws RestClientException {
-//        ResponseEntity<V> obj = new ResponseEntity<V>(null);
-//        return obj.getBody();
-//    }
+    // takes in the KrakenRequestGeneric and request body and returns a json object
+    // Not a bit fan of the first arg, could use a String somehow bound by the list of action
+    public OutputGeneric callAPI(KrakenRequestGeneric krakenRequest, RequestBodyGeneric requestBody)
+            throws NullPointerException {
 
-    //takes in the KrakenRequestGeneric and request body and returns a json object
-    public OutputGeneric callAPI(KrakenRequestGeneric krakenRequestGeneric, RequestBodyGeneric requestBody) {
+        Class outputClass = outputPojoClassSelector(krakenRequest.getClass().getSimpleName());
 
-        //creates a new header for the api
-        Header header = new Header();
+        // should put that in a different package to downsize this
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("API-Key", TempConstant.ApiKey);
 
-        //checks to see if the api-key is a post method
-        if (krakenRequestGeneric.getRequestType().toString() == "POST") {
+        if (krakenRequest.getRequestType().matches("POST")) {
+
+            // not sure how the requestBody String should look like could be the source of invalid Key issue
+            // To test, implement a GET method and see it works
+            headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
+                    requestBody.toString() + requestBody.getNonce(), TempConstant.ApiSecret, krakenRequest.getEndPoint()));
         }
-
-        Class output = outputPojoClassSelector(krakenRequestGeneric.getClass().getName());
 
         HttpEntity entity = new HttpEntity(requestBody, headers);
 
+        // need an Autowired version of it
+        RestTemplate restTemplate = new RestTemplate();
+
         // Not sure about this, can't simply use JSON one?
+        // I guess we could also get that outside
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN));
         restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter);
 
-        String url = krakenRequestGeneric.getDOMAIN().concat(krakenRequestGeneric.getEndPoint());
-        ResponseEntity response = restTemplate.exchange(url, krakenRequestGeneric.getRequestType(),
-                entity, output);
+        String url = krakenRequest.getDOMAIN().concat(krakenRequest.getEndPoint());
 
+        ResponseEntity response = restTemplate.exchange(url, krakenRequest.getRequestType(),
+                entity, outputClass);
+
+        // can make a method to check this outside this method
+        System.out.println(response);
         try {
             if (isSuccessful(response.getStatusCode())) {
                 return (OutputGeneric) response.getBody();
@@ -58,8 +63,10 @@ public class GenericRequestHandler {
         } catch (RestClientException e) {
             throw e;
         }
+
     }
 
+    // need to go somewhere else
     public boolean isSuccessful(HttpStatus status)
             throws RestClientException {
         if (status.is2xxSuccessful())
@@ -74,82 +81,70 @@ public class GenericRequestHandler {
     public static Class outputPojoClassSelector(String methodName) {
         switch (methodName) {
 //            case "GetServerTime":
-//                return new GetServerTimePojo();
+//                return new GetServerTimeOutput();
 //                break;
 //            case "GetAssetInfo":
-//                return new GetAssetInfoPojo();
+//                return new GetAssetInfoOutput();
 //                break;
 //            case "GetTradableAssetPairs":
-//                return new GetTradableAssetPairsPojo();
+//                return new GetTradableAssetPairsOutput();
 //                break;
 //            case "GetTickerInformation":
-//                return new GetTickerInformationPojo();
+//                return new GetTickerInformationOutput();
 //                break;
 //            case "GetOHLCData":
-//                return new GetOHLCDatapojo();
+//                return new GetOHLCDataOutput();
 //                break;
 //            case "GetOrderBook":
-//                return new GetOrderBookPojo();
+//                return new GetOrderBookOutput();
 //                break;
 //            case "GetRecentTrades":
-//                return new GetRecentTradesPojo();
+//                return new GetRecentTradesOutput();
 //                break;
 //            case "GetRecentSpreadData":
-//                return new GetRecentSpreadDataPojo();
+//                return new GetRecentSpreadDataOutput();
 //                break;
 //            case "GetAccountBalance":
-//                return new GetAccountBalancePojo();
+//                return new GetAccountBalanceOutput();
 //                break;
 
-            //doing this one
             case "GetTradeBalance":
                 return GetTradeBalanceOutput.class;
 //            case "GetOpenOrders":
-//                return new GetOpenOrdersPojo();
+//                return new GetOpenOrdersOutput();
 //                break;
 //            case "GetClosedOrders":
-//                return new GetClosedOrdersPojo();
+//                return new GetClosedOrdersOutput();
 //                break;
 //            case "QueryOrdersInfo":
-//                return new QueryOrdersInfoPojo();
+//                return new QueryOrdersInfoOutput();
 //                break;
 //            case "GetTradesHistory":
-//                return new GetTradesHistroyPojo();
+//                return new GetTradesHistoryOutput();
 //                break;
 //            case "QueryTradesInfo":
-//                return new QueryTradesInfoPojo();
+//                return new QueryTradesInfoOutput();
 //                break;
 //            case "GetOpenPositions":
-//                return new GetOpenPositionsPojo();
+//                return new GetOpenPositionsOutput();
 //                break;
 //            case "GetLedgersInfo":
-//                return new GetLedgersInfoPojo();
+//                return new GetLedgersInfoOutput();
 //                break;
 //            case "QueryLedgers":
-//                return new QueryLedgersPojo();
+//                return new QueryLedgersOutput();
 //                break;
 //            case "GetTradeVolume":
-//                return new GetTradeVolume();
+//                return new GetTradeVolumeOutput();
 //                break;
 //            case "AddStandardOrder":
-//                return new AddStandardOrder();
+//                return new AddStandardOrderOutput();
 //                break;
 //            case "CancelOpenOrder":
-//                return new CancelOpenOrder();
+//                return new CancelOpenOrderOutput();
 //                break;
         }
         return null;
     }
 
-//    public RestTemplate getRestTemplate() {
-//        return restTemplate;
-//    }
-//
-//    public HttpStatus getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(HttpStatus status) {
-//        this.status = status;
-//    }
 }

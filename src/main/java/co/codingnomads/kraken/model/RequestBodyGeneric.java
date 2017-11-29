@@ -1,4 +1,4 @@
-package model;
+package co.codingnomads.kraken.model;
 
 public abstract class RequestBodyGeneric {
 
@@ -8,4 +8,7 @@ public abstract class RequestBodyGeneric {
         this.nonce = String.valueOf(System.currentTimeMillis());
     }
 
+    public String getNonce() {
+        return nonce;
+    }
 }

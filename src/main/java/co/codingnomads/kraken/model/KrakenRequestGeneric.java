@@ -1,4 +1,4 @@
-package model;
+package co.codingnomads.kraken.model;
 
 import org.springframework.http.HttpMethod;
 
@@ -6,7 +6,6 @@ public abstract class KrakenRequestGeneric {
 
     final private static String DOMAIN = "https://api.kraken.com";
     private String endPoint;
-    //GET, POST;
     private HttpMethod requestType;
 
     public KrakenRequestGeneric(String endPoint, HttpMethod requestType) {
