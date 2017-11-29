@@ -11,9 +11,8 @@ public class Controller {
 
     public static void main(String[] args) throws NullPointerException{
 
-        GetServerTimeRequestBody b = new GetServerTimeRequestBody();
         GenericRequestHandler handler = new GenericRequestHandler();
-        OutputWrapper c = handler.callAPI(KrakenRequestEnum.GETSERVERTIME,b);
+        OutputWrapper c = handler.callAPI(KrakenRequestEnum.GETSERVERTIME,null);
         // System.out.println(c.getErrors()[0]);
         System.out.println(((GetServerTimeOutput) c.getResult()).getUnixtime());
         System.out.println(((GetServerTimeOutput) c.getResult()).getRfc1123());
