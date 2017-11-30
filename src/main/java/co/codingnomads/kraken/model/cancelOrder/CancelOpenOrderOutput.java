@@ -3,6 +3,10 @@ package co.codingnomads.kraken.model.cancelOrder;
 import co.codingnomads.kraken.model.OutputGeneric;
 
 public class CancelOpenOrderOutput extends OutputGeneric {
+    /**
+     * Created by Meghan Boyce on 11/30/17
+     *
+     */
 
     // Number of orders canceled
     int count;
