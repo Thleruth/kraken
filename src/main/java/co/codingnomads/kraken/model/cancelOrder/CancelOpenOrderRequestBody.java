@@ -1,4 +1,6 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.cancelOrder;
+
+import co.codingnomads.kraken.model.RequestBodyGeneric;
 
 public class CancelOpenOrderRequestBody extends RequestBodyGeneric {
 

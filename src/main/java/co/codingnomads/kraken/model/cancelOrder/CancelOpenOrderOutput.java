@@ -1,6 +1,8 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.cancelOrder;
 
-public class CancelOpenOrderOutput {
+import co.codingnomads.kraken.model.OutputGeneric;
+
+public class CancelOpenOrderOutput extends OutputGeneric {
 
     // Number of orders canceled
     int count;
@@ -13,9 +15,8 @@ public class CancelOpenOrderOutput {
         this.pending = pending;
     }
 
-    // Constructor minus pending
-    public CancelOpenOrderOutput(int count) {
-        this.count = count;
+    // Empty Constructor
+    public CancelOpenOrderOutput() {
     }
 
     // Getters and setters
