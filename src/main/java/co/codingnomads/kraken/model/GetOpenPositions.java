@@ -7,7 +7,7 @@ created by PopoPenguin on 11/29/17
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetOpenPositions {
+public class GetOpenPositions extends OutputGeneric {
 
 
 }

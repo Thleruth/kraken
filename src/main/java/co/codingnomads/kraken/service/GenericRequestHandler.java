@@ -85,8 +85,8 @@ public class GenericRequestHandler {
 //            case "GetAssetInfo":
 //                return new GetAssetInfoOutput();
 //                break;
-//            case "GetTradableAssetPairs":
-//                return new GetTradableAssetPairsOutput();
+            case "GETTRADABLEASSETPAIRS":
+                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
 //                break;
 //            case "GetTickerInformation":
 //                return new GetTickerInformationOutput();

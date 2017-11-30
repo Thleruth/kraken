@@ -5,7 +5,7 @@ created by PopoPenguin on 11/29/17
 */
 
 
-public class QueryTradesInfo {
+public class QueryTradesInfo extends OutputGeneric {
 
 
 }
