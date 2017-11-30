@@ -14,56 +14,58 @@ import java.util.Arrays;
 
 public class GenericRequestHandler {
 
-    private HttpStatus status;
-
     // takes in the KrakenRequestEnum and request body and returns a json object
     public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody)
             throws NullPointerException {
 
-        // should put that in a different package to downsize this
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        // Method to set correctly the headers if Post or Get
+        HttpHeaders headers = getHtppHeaders(krakenRequest, requestBody);
 
-        if (krakenRequest.getHttpMethod().matches("POST")) {
-
-            // not sure how the requestBody String should look like could be the source of invalid Key issue
-            // To test, implement a GET method and see it works
-            headers.set("API-Key", TempConstant.ApiKey);
-            headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
-                    requestBody.toString() + requestBody.getNonce(), TempConstant.ApiSecret, krakenRequest.getEndPoint()));
-        }
-
+        //the entity with the body and the headers
         HttpEntity entity = new HttpEntity(requestBody, headers);
 
-        // need an Autowired version of it
+        // need an Autowired version of it but I am getting a null pointer issue
         RestTemplate restTemplate = new RestTemplate();
-
         // Not sure about this, can't simply use JSON one?
-        // I guess we could also get that outside
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN));
         restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter);
-
-
-        String url = krakenRequest.getDomain().concat(krakenRequest.getEndPoint());
 
         // get the correct Response Wrapper (with the correct generic result)
         ParameterizedTypeReference parameterizedTypeReference =
                 outputPojoClassSelector(krakenRequest.name());
 
         // let the restTemplate work his magic
-        ResponseEntity response = restTemplate.exchange(url, krakenRequest.getHttpMethod(),
+        // not working so far with POST method, the result in the wrapper is null, and nothing is added to the OutputWrapper
+        // I have a feeling the issue is with the restTemplate
+        ResponseEntity response = restTemplate.exchange(krakenRequest.getFullURL(), krakenRequest.getHttpMethod(),
                 entity, parameterizedTypeReference);
 
         // can make a method to check this outside this method
         try {
             if (isSuccessful(response.getStatusCode())) {
                 return (OutputWrapper) response.getBody();
-            } else throw new RestClientException(status.getReasonPhrase());
+            } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
         } catch (RestClientException e) {
             throw e;
         }
 
+    }
+
+    public HttpHeaders getHtppHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody) {
+
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        if (krakenRequest.getHttpMethod().matches("POST")) {
+
+            // not sure how the requestBody String should look like could be the source of invalid Key issue
+            headers.set("API-Key", TempConstant.ApiKey);
+            headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
+                    requestBody.toString(), TempConstant.ApiSecret, krakenRequest.getEndPoint()));
+        }
+        return headers;
     }
 
     // need to go somewhere else
@@ -103,10 +105,8 @@ public class GenericRequestHandler {
 //            case "GetRecentSpreadData":
 //                return new GetRecentSpreadDataOutput();
 //                break;
-//            case "GetAccountBalance":
-//                return new GetAccountBalanceOutput();
-//                break;
-
+            case "GETACCOUNTBALANCE":
+                return new ParameterizedTypeReference<OutputWrapper<GetBalanceOutput>>(){};
             case "GETTRADEBALANCE":
                 return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
 //            case "GetOpenOrders":

@@ -7,6 +7,6 @@ package co.codingnomads.kraken.util;
 // probably can make this in a ressource file
 public class TempConstant {
 
-    public static String ApiKey = "--";
-    public static String ApiSecret = "--";
+    public static String ApiKey = "";
+    public static String ApiSecret = "";
 }
