@@ -1,6 +1,7 @@
 package co.codingnomads.kraken.service;
 
 import co.codingnomads.kraken.model.*;
+import co.codingnomads.kraken.model.cancelOrder.CancelOpenOrderOutput;
 import co.codingnomads.kraken.util.TempConstant;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -139,9 +140,8 @@ public class GenericRequestHandler {
 //            case "AddStandardOrder":
 //                return new AddStandardOrderOutput();
 //                break;
-//            case "CancelOpenOrder":
-//                return new CancelOpenOrderOutput();
-//                break;
+            case "CANCELOPENORDER":
+                return new ParameterizedTypeReference<OutputWrapper<CancelOpenOrderOutput>>(){};
         }
         return null;
     }
