@@ -19,7 +19,7 @@ public class GenericRequestHandler {
             throws NullPointerException {
 
         // Method to set correctly the headers if Post or Get
-        HttpHeaders headers = getHtppHeaders(krakenRequest, requestBody);
+        HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
 
         //the entity with the body and the headers
         HttpEntity entity = new HttpEntity(requestBody, headers);
@@ -52,7 +52,7 @@ public class GenericRequestHandler {
 
     }
 
-    public HttpHeaders getHtppHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody) {
+    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody) {
 
         HttpHeaders headers = new HttpHeaders();
 
@@ -84,64 +84,46 @@ public class GenericRequestHandler {
         switch (methodName) {
             case "GETSERVERTIME":
                 return new ParameterizedTypeReference<OutputWrapper<GetServerTimeOutput>>(){};
-//            case "GetAssetInfo":
-//                return new GetAssetInfoOutput();
-//                break;
-//            case "GetTradableAssetPairs":
-//                return new GetTradableAssetPairsOutput();
-//                break;
-//            case "GetTickerInformation":
-//                return new GetTickerInformationOutput();
-//                break;
-//            case "GetOHLCData":
-//                return new GetOHLCDataOutput();
-//                break;
-//            case "GetOrderBook":
-//                return new GetOrderBookOutput();
-//                break;
-//            case "GetRecentTrades":
-//                return new GetRecentTradesOutput();
-//                break;
-//            case "GetRecentSpreadData":
-//                return new GetRecentSpreadDataOutput();
-//                break;
+            case "GETASSETINFO":
+                return new ParameterizedTypeReference<OutputWrapper<GetAssetInfoOutput>>(){};
+            case "GETTRADABLEASSETPAIRS":
+                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
+            case "GETTICKERINFORMATION":
+               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
+            case "GETOHLCDATA":
+                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
+            case "GETORDERBOOK":
+                return new ParameterizedTypeReference<OutputWrapper<GetOrderBookOutput>>(){};
+            case "GETRECENTTRADES":
+                return new ParameterizedTypeReference<OutputWrapper<GetRecentTradesOutput>>(){};
+            case "GETRECENTSPREADDATA":
+                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
             case "GETACCOUNTBALANCE":
                 return new ParameterizedTypeReference<OutputWrapper<GetBalanceOutput>>(){};
             case "GETTRADEBALANCE":
                 return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
-//            case "GetOpenOrders":
-//                return new GetOpenOrdersOutput();
-//                break;
-//            case "GetClosedOrders":
-//                return new GetClosedOrdersOutput();
-//                break;
-//            case "QueryOrdersInfo":
-//                return new QueryOrdersInfoOutput();
-//                break;
-//            case "GetTradesHistory":
-//                return new GetTradesHistoryOutput();
-//                break;
-//            case "QueryTradesInfo":
-//                return new QueryTradesInfoOutput();
-//                break;
-//            case "GetOpenPositions":
-//                return new GetOpenPositionsOutput();
-//                break;
-//            case "GetLedgersInfo":
-//                return new GetLedgersInfoOutput();
-//                break;
-//            case "QueryLedgers":
-//                return new QueryLedgersOutput();
-//                break;
-//            case "GetTradeVolume":
-//                return new GetTradeVolumeOutput();
-//                break;
-//            case "AddStandardOrder":
-//                return new AddStandardOrderOutput();
-//                break;
-//            case "CancelOpenOrder":
-//                return new CancelOpenOrderOutput();
-//                break;
+            case "GETOPENORDERS":
+                return new ParameterizedTypeReference<OutputWrapper<GetOpenOrdersOutput>>(){};
+            case "GETCLOSEDORDERS":
+                return new ParameterizedTypeReference<OutputWrapper<GetClosedOrdersOutput>>(){};
+            case "QUERYORDERINFO":
+                return new ParameterizedTypeReference<OutputWrapper<QueryOrderInfoOutput>>(){};
+            case "GETTRADESHISTORY":
+                return new ParameterizedTypeReference<OutputWrapper<GetTradeHistoryOutput>>(){};
+            case "QUERYTRADESINFO":
+                return new ParameterizedTypeReference<OutputWrapper<QueryTradesInfoOutput>>(){};
+            case "GETOPENPOSITIONS":
+                return new ParameterizedTypeReference<OutputWrapper<GetOpenPositionsOutput>>(){};
+            case "GETLEDGERSINFO":
+                return new ParameterizedTypeReference<OutputWrapper<GetLedgersInfoOutput>>(){};
+            case "QUERYLEDGERS":
+                return new ParameterizedTypeReference<OutputWrapper<GetQueryLedgersOutput>>(){};
+            case "GETTRADEVOLUME":
+                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
+            case "ADDSTRANDARDORDERS":
+               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
+            case "CANCELOPENORDERS":
+                return new ParameterizedTypeReference<OutputWrapper<CancelOpenOrdersOutput>>(){};
         }
         return null;
     }
