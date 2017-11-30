@@ -5,7 +5,7 @@ import org.springframework.http.HttpMethod;
 /**
  * Created by Thomas Leruth on 11/29/17
  */
-
+// You have to a new entry for each API call endpoints
 public enum KrakenRequestEnum {
     GETSERVERTIME("/0/public/Time", HttpMethod.GET),
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST),
