@@ -1,6 +1,6 @@
 package co.codingnomads.kraken.model;
 
-public class GetClosedOrdersRequestBody {
+public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     /**
      * Created by Meghan Boyce on 11/29/17
      *
@@ -12,13 +12,13 @@ public class GetClosedOrdersRequestBody {
     String trades;
     // Restrict results to given user reference id (optional)
     String userref;
-    // Starting unix timestamp or order tx id of results (optional, exclusive)
+    // Starting unix timestamp or GetOpenOrdersOutput tx id of results (optional, exclusive)
     String start;
-    // Ending unix timestamp or order tx id of results (optional, inclusive)
+    // Ending unix timestamp or GetOpenOrdersOutput tx id of results (optional, inclusive)
     String end;
     // Result offset
     String ofs;
-    // Which time to use (optional - open, close, both (default))
+    // Which GetOpenOrdersOutput to use (optional - open, close, both (default))
     String closetime;
 
     // Fully qualified constructor
@@ -31,14 +31,14 @@ public class GetClosedOrdersRequestBody {
         this.closetime = closetime;
     }
 
-    // Constructor minus all optional params with no specified default - userref, start, end
+    // Constructor minus all optional params that have no specified default (userref, start, end)
     public GetClosedOrdersRequestBody(String trades, String ofs, String closetime) {
         this.trades = trades;
         this.ofs = ofs;
         this.closetime = closetime;
     }
 
-    // Constructor with one optional param with no specified default
+    // Constructor with one optional param that has no specified default
     public GetClosedOrdersRequestBody(String trades, String userref, String ofs, String closetime) {
         this.trades = trades;
         this.userref = userref;
@@ -46,7 +46,7 @@ public class GetClosedOrdersRequestBody {
         this.closetime = closetime;
     }
 
-    // Constructory with two optional params with no specified default - userref, start
+    // Constructor with two optional params that have no specified default - userref, start
     public GetClosedOrdersRequestBody(String trades, String userref, String start, String ofs, String closetime) {
         this.trades = trades;
         this.userref = userref;

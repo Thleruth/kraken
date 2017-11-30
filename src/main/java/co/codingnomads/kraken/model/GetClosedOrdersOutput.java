@@ -2,28 +2,23 @@ package co.codingnomads.kraken.model;
 
 import java.util.Arrays;
 
-public class GetClosedOrdersOutput {
+public class GetClosedOrdersOutput extends OutputWrapper {
     /**
      * Created by Meghan Boyce on 11/29/17
+     * I think this includes all fields from get open orders
+     * So can probably use that class once it's created..
      */
 
-    String[] error;
-    // Array of order info.  See Get open orders.  Additional fields:
+    // Array of GetOpenOrdersOutput info (See GetOpenOrdersOutput).
     String[] closed;
-    // Unix timestamp of when order was closed
-    String closetm;
-    // Additional info on status (if any)
-    String reason;
-    // Amount of available order info matching criteria
+    // Additional fields:
+        // Unix timestamp of when GetOpenOrdersOutput was closed
+        String closetm;
+        // Additional info on status (if any)
+        String reason;
+
+    // Amount of available GetOpenOrdersOutput info matching criteria
     String count;
-
-    public String[] getError() {
-        return error;
-    }
-
-    public void setError(String[] error) {
-        this.error = error;
-    }
 
     public String[] getClosed() {
         return closed;
@@ -60,7 +55,6 @@ public class GetClosedOrdersOutput {
     @Override
     public String toString() {
         return "GetClosedOrdersOutput{" +
-                "error=" + Arrays.toString(error) +
                 ", closed=" + Arrays.toString(closed) +
                 ", closetm='" + closetm + '\'' +
                 ", reason='" + reason + '\'' +
