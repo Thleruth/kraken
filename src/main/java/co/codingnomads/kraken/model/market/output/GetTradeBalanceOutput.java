@@ -1,4 +1,6 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.market.output;
+
+import co.codingnomads.kraken.model.OutputGeneric;
 
 public class GetTradeBalanceOutput extends OutputGeneric {
 

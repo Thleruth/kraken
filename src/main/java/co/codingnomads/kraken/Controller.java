@@ -1,6 +1,7 @@
 package co.codingnomads.kraken;
 
 import co.codingnomads.kraken.model.*;
+import co.codingnomads.kraken.model.account.GetBalanceRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 /**
