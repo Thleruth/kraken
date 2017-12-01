@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.account;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 
@@ -22,4 +22,6 @@ public class CancelOpenOrderRequestBody extends RequestBodyGeneric {
     public void setTxid(String txid) {
         this.txid = txid;
     }
+
+
 }

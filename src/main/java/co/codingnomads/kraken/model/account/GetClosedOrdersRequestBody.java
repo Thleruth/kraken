@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.account;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 

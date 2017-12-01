@@ -1,9 +1,10 @@
 package co.codingnomads.kraken.service;
 
 import co.codingnomads.kraken.model.*;
-import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
+import co.codingnomads.kraken.model.account.output.*;
 import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
-import co.codingnomads.kraken.model.market.output.GetTradeBalanceOutput;
+import co.codingnomads.kraken.model.account.GetTradeBalanceOutput;
+import co.codingnomads.kraken.model.trade.output.AddStandardOrdersOutput;
 import co.codingnomads.kraken.util.TempConstant;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
