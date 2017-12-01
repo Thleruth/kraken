@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.openOrders;
 
 public class Description {
     /**

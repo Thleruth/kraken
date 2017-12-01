@@ -1,4 +1,6 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.closedOrders;
+
+import co.codingnomads.kraken.model.OutputWrapper;
 
 import java.util.Arrays;
 

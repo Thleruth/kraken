@@ -1,11 +1,12 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.closedOrders;
+
+import co.codingnomads.kraken.model.RequestBodyGeneric;
 
 public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     /**
      * Created by Meghan Boyce on 11/29/17
      *
      * All instance vars defined as Strings until we know better
-     * Edit constructors if this changes to include all possible options
      */
 
     // Whether or not to include trades in output (optional - default = false)
@@ -21,7 +22,7 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     // Which GetOpenOrdersOutput to use (optional - open, close, both (default))
     String closetime;
 
-    // Fully qualified constructor
+    // Fully qualified Constructor
     public GetClosedOrdersRequestBody(String trades, String userref, String start, String end, String ofs, String closetime) {
         this.trades = trades;
         this.userref = userref;
@@ -31,29 +32,10 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
         this.closetime = closetime;
     }
 
-    // Constructor minus all optional params that have no specified default (userref, start, end)
-    public GetClosedOrdersRequestBody(String trades, String ofs, String closetime) {
-        this.trades = trades;
-        this.ofs = ofs;
-        this.closetime = closetime;
-    }
+    // Empty Constructor
 
-    // Constructor with one optional param that has no specified default
-    public GetClosedOrdersRequestBody(String trades, String userref, String ofs, String closetime) {
-        this.trades = trades;
-        this.userref = userref;
-        this.ofs = ofs;
-        this.closetime = closetime;
-    }
 
-    // Constructor with two optional params that have no specified default - userref, start
-    public GetClosedOrdersRequestBody(String trades, String userref, String start, String ofs, String closetime) {
-        this.trades = trades;
-        this.userref = userref;
-        this.start = start;
-        this.end = end;
-        this.ofs = ofs;
-        this.closetime = closetime;
+    public GetClosedOrdersRequestBody() {
     }
 
     public String getTrades() {

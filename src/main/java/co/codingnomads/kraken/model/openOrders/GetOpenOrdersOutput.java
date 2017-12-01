@@ -1,6 +1,4 @@
-package co.codingnomads.kraken.model;
-
-import java.util.Arrays;
+package co.codingnomads.kraken.model.openOrders;
 
 public class GetOpenOrdersOutput {
     /**

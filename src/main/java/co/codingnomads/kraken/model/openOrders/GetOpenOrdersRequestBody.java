@@ -1,6 +1,8 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.openOrders;
 
-public class GetOpenOrdersRequestBody extends RequestBodyGeneric{
+import co.codingnomads.kraken.model.RequestBodyGeneric;
+
+public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
 
     // Whether or not to include trades in output (optional, default = false)
     Boolean trades;
@@ -13,9 +15,8 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric{
         this.userref = userref;
     }
 
-    // Constructor minus optional-no-default userref
-    public GetOpenOrdersRequestBody(Boolean trades) {
-        this.trades = trades;
+    // Empty Constructor
+    public GetOpenOrdersRequestBody() {
     }
 
     // getters and setters
@@ -35,7 +36,6 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric{
         this.userref = userref;
     }
 
-    // Should nonce be included in toString?
     @Override
     public String toString() {
         return "GetOpenOrdersRequestBody{" +
