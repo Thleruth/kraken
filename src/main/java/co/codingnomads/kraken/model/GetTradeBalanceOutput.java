@@ -1,5 +1,8 @@
 package co.codingnomads.kraken.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GetTradeBalanceOutput extends OutputGeneric {
 
     //equivalent balance (combined balance of all currencies)

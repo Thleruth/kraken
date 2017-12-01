@@ -14,6 +14,9 @@ public class GetTradeBalanceRequestBody extends RequestBodyGeneric {
         this.asset = asset;
     }
 
+    public GetTradeBalanceRequestBody(){
+    }
+
     public String getAssetClass() {
         return assetClass;
     }
@@ -32,8 +35,16 @@ public class GetTradeBalanceRequestBody extends RequestBodyGeneric {
 
     @Override
     public String toString() {
-        return "assetClass='" + assetClass + '\'' +
+        return "GetTradeBalanceRequestBody{" +
+                "assetClass='" + assetClass + '\'' +
                 ", asset='" + asset + '\'' +
-                ", nonce='" + nonce + '\'';
+                '}';
     }
+
+    //    @Override
+//    public String toString() {
+//        return "assetClass='" + assetClass + '\'' +
+//                ", asset='" + asset + '\'' +
+//                ", nonce='" + nonce + '\'';
+//    }
 }

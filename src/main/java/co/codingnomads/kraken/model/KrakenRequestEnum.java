@@ -9,7 +9,8 @@ import org.springframework.http.HttpMethod;
 public enum KrakenRequestEnum {
     GETSERVERTIME("/0/public/Time", HttpMethod.GET),
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST),
-    GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST);
+    GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST),
+    GETTRADEHISTORY("/0/private/TradesHistory", HttpMethod.POST);
 
     private final String domain = "https://api.kraken.com";
     private final String endPoint;
