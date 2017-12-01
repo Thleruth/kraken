@@ -1,4 +1,6 @@
-package co.codingnomads.kraken.model.openOrders;
+package co.codingnomads.kraken.model;
+
+import co.codingnomads.kraken.model.Description;
 
 public class GetOpenOrdersOutput {
     /**

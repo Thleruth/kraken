@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.closedOrders;
+package co.codingnomads.kraken.model;
 
 import co.codingnomads.kraken.model.OutputWrapper;
 
