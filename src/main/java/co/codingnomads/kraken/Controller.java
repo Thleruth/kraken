@@ -16,5 +16,11 @@ public class Controller {
         // System.out.println(c.getErrors()[0]);
         System.out.println(((GetServerTimeOutput) c.getResult()).getUnixtime());
         System.out.println(((GetServerTimeOutput) c.getResult()).getRfc1123());
+
+        OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS,null);
+        System.out.println( d.getResult());
+
+
+
     }
 }
