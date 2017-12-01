@@ -1,9 +1,9 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.market.output;
+
+import co.codingnomads.kraken.model.OutputGeneric;
 
 public class GetTradeBalanceOutput extends OutputGeneric {
 
-    // potential errors
-    String[] error;
     //equivalent balance (combined balance of all currencies)
     String eb;
     //tb = trade balance (combined balance of all equity currencies)
@@ -98,11 +98,4 @@ public class GetTradeBalanceOutput extends OutputGeneric {
     public GetTradeBalanceOutput() {
     }
 
-    public String[] getError() {
-        return error;
-    }
-
-    public void setError(String[] error) {
-        this.error = error;
-    }
 }
