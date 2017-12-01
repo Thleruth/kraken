@@ -1,8 +1,8 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.account.output;
 
 import co.codingnomads.kraken.model.OutputGeneric;
 
-public class CancelOpenOrderOutput extends OutputGeneric {
+public class CancelOpenOrdersOutput extends OutputGeneric {
     /**
      * Created by Meghan Boyce on 11/30/17
      *
@@ -14,13 +14,13 @@ public class CancelOpenOrderOutput extends OutputGeneric {
     String pending;
 
     // Fully qualified constructor
-    public CancelOpenOrderOutput(int count, String pending) {
+    public CancelOpenOrdersOutput(int count, String pending) {
         this.count = count;
         this.pending = pending;
     }
 
     // Empty Constructor
-    public CancelOpenOrderOutput() {
+    public CancelOpenOrdersOutput() {
     }
 
     // Getters and setters
@@ -38,5 +38,13 @@ public class CancelOpenOrderOutput extends OutputGeneric {
 
     public void setPending(String pending) {
         this.pending = pending;
+    }
+
+    @Override
+    public String toString() {
+        return "CancelOpenOrdersOutput{" +
+                "count=" + count +
+                ", pending='" + pending + '\'' +
+                '}';
     }
 }

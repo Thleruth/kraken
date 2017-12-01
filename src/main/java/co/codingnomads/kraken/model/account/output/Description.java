@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.account;
+package co.codingnomads.kraken.model.account.output;
 
 public class Description {
     /**
@@ -24,7 +24,7 @@ public class Description {
     String close;
 
     // Fully qualified Constructor
-    // TODO: Redo Constructor after completing ordertype above, create one w/out close
+    // TODO: Redo Constructor after completing ordertype above
     public Description(String pair, String type, String price, String price2, String leverage, String order, String close) {
         this.pair = pair;
         this.type = type;
@@ -89,5 +89,18 @@ public class Description {
 
     public void setClose(String close) {
         this.close = close;
+    }
+
+    @Override
+    public String toString() {
+        return "Description{" +
+                "pair='" + pair + '\'' +
+                ", type='" + type + '\'' +
+                ", price='" + price + '\'' +
+                ", price2='" + price2 + '\'' +
+                ", leverage='" + leverage + '\'' +
+                ", order='" + order + '\'' +
+                ", close='" + close + '\'' +
+                '}';
     }
 }

@@ -1,12 +1,13 @@
-package co.codingnomads.kraken.model;
+package co.codingnomads.kraken.model.account.output;
 
-import co.codingnomads.kraken.model.Description;
+import co.codingnomads.kraken.model.OutputGeneric;
 
-public class GetOpenOrdersOutput {
+import java.util.Arrays;
+
+public class GetOpenOrdersOutput extends OutputGeneric{
     /**
      * Created by Meghan Boyce on 11/29/17
      *
-     * All vars are Strings until we know better
      */
 
     // Referral order transaction id for order
@@ -184,5 +185,28 @@ public class GetOpenOrdersOutput {
 
     public void setTrades(String[] trades) {
         this.trades = trades;
+    }
+
+    @Override
+    public String toString() {
+        return "GetOpenOrdersOutput{" +
+                "refid='" + refid + '\'' +
+                ", userref='" + userref + '\'' +
+                ", status='" + status + '\'' +
+                ", opentm='" + opentm + '\'' +
+                ", starttm='" + starttm + '\'' +
+                ", expiretm='" + expiretm + '\'' +
+                ", descr=" + descr +
+                ", vol='" + vol + '\'' +
+                ", vol_exec='" + vol_exec + '\'' +
+                ", cost='" + cost + '\'' +
+                ", fee='" + fee + '\'' +
+                ", price='" + price + '\'' +
+                ", stopprice='" + stopprice + '\'' +
+                ", limitprice='" + limitprice + '\'' +
+                ", misc='" + misc + '\'' +
+                ", oflags='" + oflags + '\'' +
+                ", trades=" + Arrays.toString(trades) +
+                '}';
     }
 }
