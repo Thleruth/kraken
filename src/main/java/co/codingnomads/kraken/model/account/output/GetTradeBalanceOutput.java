@@ -1,11 +1,11 @@
-package co.codingnomads.kraken.model.market.output;
+package co.codingnomads.kraken.model.account.output;
 
-import co.codingnomads.kraken.model.OutputGeneric;
-
+import co.codingnomads.kraken.model.OutputWrapper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//need to be reworked for JSON property (see GetBalanceOutput)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetTradeBalanceOutput extends OutputGeneric {
+public class GetTradeBalanceOutput extends OutputWrapper {
 
     //equivalent balance (combined balance of all currencies)
     String eb;
@@ -99,6 +99,7 @@ public class GetTradeBalanceOutput extends OutputGeneric {
     }
 
     public GetTradeBalanceOutput() {
+        super();
     }
 
 }

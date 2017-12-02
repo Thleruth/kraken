@@ -1,11 +1,7 @@
 package co.codingnomads.kraken.model.account.output;
 
-import co.codingnomads.kraken.model.OutputGeneric;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import co.codingnomads.kraken.model.OutputWrapper;
+import com.fasterxml.jackson.annotation.*;
 
 /**
  * Created by Thomas Leruth on 11/29/17
@@ -32,16 +28,16 @@ public class GetBalanceOutput extends OutputWrapper {
 
     String BCH;
 
-
+    // why is the Json not picking up the name without this?
     public GetBalanceOutput(@JsonProperty("ZEUR") String ZEUR,
-                            @JsonProperty("XXBT") String XXBT,
-                            @JsonProperty("XLTC") String XLTC,
-                            @JsonProperty("XETH") String XETH,
-                            @JsonProperty("XDAO") String XDAO,
-                            @JsonProperty("XETC") String XETC,
-                            @JsonProperty("XREP") String XREP,
-                            @JsonProperty("XMLN") String XMLN,
-                            @JsonProperty("BCH")  String BCH) {
+                             @JsonProperty("XXBT") String XXBT,
+                             @JsonProperty("XLTC") String XLTC,
+                             @JsonProperty("XETH") String XETH,
+                             @JsonProperty("XDAO") String XDAO,
+                             @JsonProperty("XETC") String XETC,
+                             @JsonProperty("XREP") String XREP,
+                             @JsonProperty("XMLN") String XMLN,
+                             @JsonProperty("BCH")  String BCH) {
         this.ZEUR = ZEUR;
         this.XXBT = XXBT;
         this.XLTC = XLTC;

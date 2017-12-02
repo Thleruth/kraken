@@ -2,13 +2,18 @@ package co.codingnomads.kraken.model;
 
 public abstract class RequestBodyGeneric {
 
-//    String nonce;
-//
-//    public RequestBodyGeneric() {
-//        this.nonce = String.valueOf(System.currentTimeMillis());
-//    }
-//
-//    public String getNonce() {
-//        return nonce;
-//    }
+    public String nonce;
+
+    public RequestBodyGeneric() {
+        this.nonce = String.valueOf(System.currentTimeMillis());
+    }
+
+    public String getNonce() {
+        return nonce;
+    }
+
+    @Override
+    public String toString() {
+        return "nonce=" + nonce;
+    }
 }

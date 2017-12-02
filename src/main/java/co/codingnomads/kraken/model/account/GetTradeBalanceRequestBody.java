@@ -2,6 +2,7 @@ package co.codingnomads.kraken.model.account;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 
+//need to be reworked for JSON and have to learn how to post the body correctly when multiple elements
 public class GetTradeBalanceRequestBody extends RequestBodyGeneric {
 
     // asset class (optional)

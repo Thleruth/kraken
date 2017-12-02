@@ -2,6 +2,7 @@ package co.codingnomads.kraken;
 
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.account.GetBalanceRequestBody;
+import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 /**
@@ -15,12 +16,9 @@ public class Controller {
         GetBalanceRequestBody a = new GetBalanceRequestBody();
 
         GenericRequestHandler handler = new GenericRequestHandler();
-       // OutputWrapper c = handler.callAPI(KrakenRequestEnum.GETSERVERTIME,null);
-        KrakenBalanceResult d = handler.callAPI(KrakenRequestEnum.GETACCOUNTBALANCE, a);
+        OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETACCOUNTBALANCE, a);
 
-//        System.out.println(c);
-//        System.out.println(c.getErrors()[0]);
-        //System.out.println(((GetServerTimeOutput) c.getResult()).getRfc1123());
         System.out.println(d.toString());
+
     }
 }

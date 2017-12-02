@@ -1,6 +1,9 @@
 package co.codingnomads.kraken.model.account;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
+import com.sun.org.apache.xpath.internal.operations.Mult;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 /**
  * Created by Thomas Leruth on 11/29/17
@@ -8,23 +11,20 @@ import co.codingnomads.kraken.model.RequestBodyGeneric;
 
 public class GetBalanceRequestBody extends RequestBodyGeneric {
 
-    String nonce = System.currentTimeMillis() + "00000";
-
     public GetBalanceRequestBody() {
         super();
     }
 
     @Override
     public String toString() {
-        return "nonce=" + nonce;
+        return super.toString();
     }
 
-//    @Override
-    public String getNonce() {
-        return nonce;
+
+    public MultiValueMap<String, String> postParam(){
+        MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
+        postParameters.add("nonce", super.getNonce());
+        return postParameters;
     }
 
-    public void setNonce(String nonce) {
-        this.nonce = nonce;
-    }
 }
