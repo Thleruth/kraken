@@ -8,6 +8,8 @@ import co.codingnomads.kraken.model.RequestBodyGeneric;
 
 public class GetBalanceRequestBody extends RequestBodyGeneric {
 
+    String nonce = System.currentTimeMillis() + "00000";
+
     public GetBalanceRequestBody() {
         super();
     }
@@ -15,5 +17,14 @@ public class GetBalanceRequestBody extends RequestBodyGeneric {
     @Override
     public String toString() {
         return "nonce=" + nonce;
+    }
+
+//    @Override
+    public String getNonce() {
+        return nonce;
+    }
+
+    public void setNonce(String nonce) {
+        this.nonce = nonce;
     }
 }

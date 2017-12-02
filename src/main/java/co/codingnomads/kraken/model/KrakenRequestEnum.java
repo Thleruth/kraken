@@ -17,17 +17,7 @@ public enum KrakenRequestEnum {
     GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET),
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST),
     GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST),
-    GETOPENORDERS("/0/private/OpenOrders", HttpMethod.POST),
-    GETCLOSEDORDERS("/0/private/ClosedOrders", HttpMethod.POST),
-    QUERYORDERINFO("/0/private/QueryOrders", HttpMethod.POST),
-    GETTRADESHISTORY("/0/private/TradesHistory", HttpMethod.POST),
-    QUERYTRADESINFO("/0/private/QueryTrades", HttpMethod.POST),
-    GETOPENPOSITIONS("/0/private/OpenPositions", HttpMethod.POST),
-    GETLEDGERSINFO("/0/private/Ledgers", HttpMethod.POST),
-    QUERYLEDGERS("/0/private/QueryLedgers", HttpMethod.POST),
-    GETTRADEVOLUME("/0/private/TradesVolume", HttpMethod.POST),
-    ADDSTRANDARDORDERS("/0/private/AddOrder", HttpMethod.POST),
-    CANCELOPENORDERS("/0/private/CancelOrder", HttpMethod.POST);
+    GETTRADEHISTORY("/0/private/TradesHistory", HttpMethod.POST);
 
     private final String domain = "https://api.kraken.com";
     private final String endPoint;

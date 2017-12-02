@@ -4,7 +4,7 @@ package co.codingnomads.kraken.model;
  * Created by Thomas Leruth on 11/29/17
  */
 
-public class OutputWrapper<T extends OutputGeneric> {
+public class OutputWrapper<T> {
 
     String[] errors;
 
