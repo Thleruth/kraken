@@ -3,6 +3,7 @@ package co.codingnomads.kraken.service;
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
 import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
+import co.codingnomads.kraken.model.market.output.GetTradableAssetPairsOutput;
 import co.codingnomads.kraken.model.market.output.GetTradeBalanceOutput;
 import co.codingnomads.kraken.util.TempConstant;
 import org.springframework.core.ParameterizedTypeReference;
@@ -87,46 +88,46 @@ public class GenericRequestHandler {
         switch (methodName) {
             case "GETSERVERTIME":
                 return new ParameterizedTypeReference<OutputWrapper<GetServerTimeOutput>>(){};
-            case "GETASSETINFO":
-                return new ParameterizedTypeReference<OutputWrapper<GetAssetInfoOutput>>(){};
+//            case "GETASSETINFO":
+//                return new ParameterizedTypeReference<OutputWrapper<GetAssetInfoOutput>>(){};
             case "GETTRADABLEASSETPAIRS":
                 return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
-            case "GETTICKERINFORMATION":
-               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
-            case "GETOHLCDATA":
-                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
-            case "GETORDERBOOK":
-                return new ParameterizedTypeReference<OutputWrapper<GetOrderBookOutput>>(){};
-            case "GETRECENTTRADES":
-                return new ParameterizedTypeReference<OutputWrapper<GetRecentTradesOutput>>(){};
-            case "GETRECENTSPREADDATA":
-                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
+//            case "GETTICKERINFORMATION":
+//               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
+//            case "GETOHLCDATA":
+//                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
+//            case "GETORDERBOOK":
+//                return new ParameterizedTypeReference<OutputWrapper<GetOrderBookOutput>>(){};
+//            case "GETRECENTTRADES":
+//                return new ParameterizedTypeReference<OutputWrapper<GetRecentTradesOutput>>(){};
+//            case "GETRECENTSPREADDATA":
+//                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
             case "GETACCOUNTBALANCE":
                 return new ParameterizedTypeReference<OutputWrapper<GetBalanceOutput>>(){};
-            case "GETTRADEBALANCE":
-                return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
-            case "GETOPENORDERS":
-                return new ParameterizedTypeReference<OutputWrapper<GetOpenOrdersOutput>>(){};
-            case "GETCLOSEDORDERS":
-                return new ParameterizedTypeReference<OutputWrapper<GetClosedOrdersOutput>>(){};
-            case "QUERYORDERINFO":
-                return new ParameterizedTypeReference<OutputWrapper<QueryOrderInfoOutput>>(){};
-            case "GETTRADESHISTORY":
-                return new ParameterizedTypeReference<OutputWrapper<GetTradeHistoryOutput>>(){};
-            case "QUERYTRADESINFO":
-                return new ParameterizedTypeReference<OutputWrapper<QueryTradesInfoOutput>>(){};
-            case "GETOPENPOSITIONS":
-                return new ParameterizedTypeReference<OutputWrapper<GetOpenPositionsOutput>>(){};
-            case "GETLEDGERSINFO":
-                return new ParameterizedTypeReference<OutputWrapper<GetLedgersInfoOutput>>(){};
-            case "QUERYLEDGERS":
-                return new ParameterizedTypeReference<OutputWrapper<GetQueryLedgersOutput>>(){};
-            case "GETTRADEVOLUME":
-                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
-            case "ADDSTRANDARDORDERS":
-               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
-            case "CANCELOPENORDERS":
-                return new ParameterizedTypeReference<OutputWrapper<CancelOpenOrdersOutput>>(){};
+//            case "GETTRADEBALANCE":
+//                return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
+//            case "GETOPENORDERS":
+//                return new ParameterizedTypeReference<OutputWrapper<GetOpenOrdersOutput>>(){};
+//            case "GETCLOSEDORDERS":
+//                return new ParameterizedTypeReference<OutputWrapper<GetClosedOrdersOutput>>(){};
+//            case "QUERYORDERINFO":
+//                return new ParameterizedTypeReference<OutputWrapper<QueryOrderInfoOutput>>(){};
+//            case "GETTRADESHISTORY":
+//                return new ParameterizedTypeReference<OutputWrapper<GetTradeHistoryOutput>>(){};
+//            case "QUERYTRADESINFO":
+//                return new ParameterizedTypeReference<OutputWrapper<QueryTradesInfoOutput>>(){};
+//            case "GETOPENPOSITIONS":
+//                return new ParameterizedTypeReference<OutputWrapper<GetOpenPositionsOutput>>(){};
+//            case "GETLEDGERSINFO":
+//                return new ParameterizedTypeReference<OutputWrapper<GetLedgersInfoOutput>>(){};
+//            case "QUERYLEDGERS":
+//                return new ParameterizedTypeReference<OutputWrapper<GetQueryLedgersOutput>>(){};
+//            case "GETTRADEVOLUME":
+//                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
+//            case "ADDSTRANDARDORDERS":
+//               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
+//            case "CANCELOPENORDERS":
+//                return new ParameterizedTypeReference<OutputWrapper<CancelOpenOrdersOutput>>(){};
         }
         return null;
     }

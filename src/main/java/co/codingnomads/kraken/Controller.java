@@ -15,12 +15,14 @@ public class Controller {
         GetBalanceRequestBody a = new GetBalanceRequestBody();
         GenericRequestHandler handler = new GenericRequestHandler();
 
-        OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS,null);
-        System.out.println( d.getResult());
-
         OutputWrapper c = handler.callAPI(KrakenRequestEnum.GETACCOUNTBALANCE,a);
         System.out.println(c);
         System.out.println(c.getResult());
+
+
+        OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS,null);
+        System.out.println(d);
+        System.out.println( d.getResult());
 
     }
 }
