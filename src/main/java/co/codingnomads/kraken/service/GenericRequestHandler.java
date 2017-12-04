@@ -3,6 +3,7 @@ package co.codingnomads.kraken.service;
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.account.GetBalanceRequestBody;
 import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
+import co.codingnomads.kraken.model.market.AssetPairName;
 import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
 
 import co.codingnomads.kraken.model.market.output.GetTradableAssetPairsOutput;
@@ -18,6 +19,8 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 public class GenericRequestHandler {
 
@@ -47,9 +50,17 @@ public class GenericRequestHandler {
         RestTemplate restTemplate = new RestTemplate();
 
         // get the correct Response Wrapper (with the correct generic result)
-        //Class pojoClass = outputPojoClassSelector(krakenRequest.name());
+        ParameterizedTypeReference pojoClass = outputPojoClassSelector(krakenRequest.name());
 
         // let the restTemplate work his magic
+//        ResponseEntity<GetTradableAssetPairsOutput> response = restTemplate.exchange(
+//                krakenRequest.getFullURL(),
+//                krakenRequest.getHttpMethod(),
+//                entity,
+//                GetTradableAssetPairsOutput.class);
+
+        //ParameterizedTypeReference<Map<String, AssetPairName>> typeRef = new ParameterizedTypeReference<Map<String, AssetPairName>>() {};
+
         ResponseEntity response = restTemplate.exchange(
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),

@@ -25,8 +25,7 @@ public class Controller {
         //OutputWrapper<GetBalanceOutput> d = handler.callAPI(KrakenRequestEnum.GETACCOUNTBALANCE, a, GetBalanceOutput.class);
         //OutputWrapper<GetTradeBalanceOutput> f = handler.callAPI(KrakenRequestEnum.GETTRADEBALANCE, b, GetTradeBalanceOutput.class);
 
-
-        GetServerTimeOutput e = (GetServerTimeOutput) handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, GetServerTimeOutput.class).getResult();
+        //GetServerTimeOutput e = (GetServerTimeOutput) handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, GetServerTimeOutput.class).getResult();
 
 
         GetTradableAssetPairsOutput d = (GetTradableAssetPairsOutput) handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS,null, GetTradableAssetPairsOutput.class).getResult();

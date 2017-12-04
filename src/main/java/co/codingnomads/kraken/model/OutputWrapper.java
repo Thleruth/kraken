@@ -2,6 +2,8 @@ package co.codingnomads.kraken.model;
 
 import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -14,10 +16,16 @@ public class OutputWrapper<T> {
 
     T result;
 
-    public OutputWrapper(String[] errors, T result) {
-        this.errors = errors;
+    public OutputWrapper(T result, String[] errors) {
+
         this.result = result;
+        this.errors = errors;
     }
+
+//    public OutputWrapper(T result, String[] errors) {
+//        this.errors = errors;
+//        this.result = result;
+//    }
 
     public String[] getErrors() {
         return errors;
