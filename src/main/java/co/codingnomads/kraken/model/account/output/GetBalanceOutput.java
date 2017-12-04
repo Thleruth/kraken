@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.*;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetBalanceOutput extends OutputWrapper {
+public class GetBalanceOutput extends OutputWrapper<GetBalanceOutput> {
 
     String ZEUR;
 

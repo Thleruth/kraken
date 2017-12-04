@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 //working template for GET
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetServerTimeOutput extends OutputWrapper {
+public class GetServerTimeOutput extends OutputWrapper<GetServerTimeOutput> {
 
     // as unix timestamp
     String unixtime;
@@ -32,6 +32,11 @@ public class GetServerTimeOutput extends OutputWrapper {
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "GetServerTimeOutput{" +
+                "unixtime='" + unixtime + '\'' +
+                ", rfc1123='" + rfc1123 + '\'' +
+                '}';
+    }
 }

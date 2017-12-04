@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //need to be reworked for JSON property (see GetBalanceOutput)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetTradeBalanceOutput extends OutputWrapper {
+public class GetTradeBalanceOutput extends OutputWrapper<GetTradeBalanceOutput> {
 
     //equivalent balance (combined balance of all currencies)
     String eb;

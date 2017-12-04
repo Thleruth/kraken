@@ -2,7 +2,10 @@ package co.codingnomads.kraken;
 
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.account.GetBalanceRequestBody;
+import co.codingnomads.kraken.model.account.GetTradeBalanceRequestBody;
 import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
+import co.codingnomads.kraken.model.account.output.GetTradeBalanceOutput;
+import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 /**
@@ -14,11 +17,17 @@ public class Controller {
     public static void main(String[] args) throws NullPointerException{
 
         GetBalanceRequestBody a = new GetBalanceRequestBody();
+        GetTradeBalanceRequestBody b = new GetTradeBalanceRequestBody();
 
         GenericRequestHandler handler = new GenericRequestHandler();
-        OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETACCOUNTBALANCE, a);
 
-        System.out.println(d.toString());
+        //OutputWrapper<GetBalanceOutput> d = handler.callAPI(KrakenRequestEnum.GETACCOUNTBALANCE, a, GetBalanceOutput.class);
+        //OutputWrapper<GetTradeBalanceOutput> f = handler.callAPI(KrakenRequestEnum.GETTRADEBALANCE, b, GetTradeBalanceOutput.class);
+
+        GetServerTimeOutput e = (GetServerTimeOutput) handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, GetServerTimeOutput.class).getResult();
+
+
+        System.out.println(e.toString());
 
     }
 }

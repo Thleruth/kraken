@@ -17,7 +17,10 @@ import org.springframework.web.client.RestTemplate;
 public class GenericRequestHandler {
 
     // takes in the KrakenRequestEnum and request body and returns a json object
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody)
+    public <T extends OutputWrapper> OutputWrapper callAPI(
+            KrakenRequestEnum krakenRequest,
+            GetBalanceRequestBody requestBody,
+            Class<? extends OutputWrapper<T>> responseType)
             throws NullPointerException {
 
         MultiValueMap<String, String> body;
@@ -39,14 +42,14 @@ public class GenericRequestHandler {
         RestTemplate restTemplate = new RestTemplate();
 
         // get the correct Response Wrapper (with the correct generic result)
-        Class pojoClass = outputPojoClassSelector(krakenRequest.name());
+        //Class pojoClass = outputPojoClassSelector(krakenRequest.name());
 
         // let the restTemplate work his magic
         ResponseEntity response = restTemplate.exchange(
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
-                pojoClass);
+                responseType);
 
         // can make a method to check this outside this method
         try {
@@ -54,7 +57,8 @@ public class GenericRequestHandler {
                 if (krakenRequest.getHttpMethod().matches("GET")) {
                     return (OutputWrapper) response.getBody();
                 }
-                return new OutputWrapper(mapToWrapper(response, pojoClass));
+                return new OutputWrapper(mapToWrapper(response, responseType));
+
             } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
         } catch (RestClientException e) {
             throw e;
