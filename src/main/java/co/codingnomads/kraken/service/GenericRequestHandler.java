@@ -4,6 +4,11 @@ import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.account.GetBalanceRequestBody;
 import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
 import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
+
+import co.codingnomads.kraken.model.market.output.GetTradableAssetPairsOutput;
+import co.codingnomads.kraken.model.account.output.GetTradeBalanceOutput;
+import org.springframework.core.ParameterizedTypeReference;
+
 import co.codingnomads.kraken.util.TempConstant;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.*;
@@ -102,14 +107,14 @@ public class GenericRequestHandler {
         else throw new RestClientException(status.getReasonPhrase());
     }
 
-    public static Class outputPojoClassSelector(String methodName) {
+    public static ParameterizedTypeReference outputPojoClassSelector(String methodName) {
         switch (methodName) {
             case "GETSERVERTIME":
-                return GetServerTimeOutput.class;
+                return new ParameterizedTypeReference<OutputWrapper<GetServerTimeOutput>>(){};
 //            case "GETASSETINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<GetAssetInfoOutput>>(){};
-//            case "GETTRADABLEASSETPAIRS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
+            case "GETTRADABLEASSETPAIRS":
+                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
 //            case "GETTICKERINFORMATION":
 //               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
 //            case "GETOHLCDATA":
@@ -121,7 +126,7 @@ public class GenericRequestHandler {
 //            case "GETRECENTSPREADDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
             case "GETACCOUNTBALANCE":
-                return GetBalanceOutput.class;
+                return new ParameterizedTypeReference<OutputWrapper<GetBalanceOutput>>(){};
 //            case "GETTRADEBALANCE":
 //                return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
 //            case "GETOPENORDERS":
