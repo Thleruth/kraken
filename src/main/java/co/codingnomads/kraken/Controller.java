@@ -17,21 +17,18 @@ public class Controller {
 
     public static void main(String[] args) throws NullPointerException{
 
-        GetBalanceRequestBody a = new GetBalanceRequestBody();
-        GetTradeBalanceRequestBody b = new GetTradeBalanceRequestBody();
-
+//        GetBalanceRequestBody a = new GetBalanceRequestBody();
+//        GetTradeBalanceRequestBody b = new GetTradeBalanceRequestBody();
         GenericRequestHandler handler = new GenericRequestHandler();
 
-        //OutputWrapper<GetBalanceOutput> d = handler.callAPI(KrakenRequestEnum.GETACCOUNTBALANCE, a, GetBalanceOutput.class);
-        //OutputWrapper<GetTradeBalanceOutput> f = handler.callAPI(KrakenRequestEnum.GETTRADEBALANCE, b, GetTradeBalanceOutput.class);
+//        OutputWrapper<GetServerTimeOutput> e = (GetServerTimeOutput) handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, GetServerTimeOutput.class);
+//        String[] errors = e.getErrors();
+//        GetServerTimeOutput obj = e.getResult();
 
-        //GetServerTimeOutput e = (GetServerTimeOutput) handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, GetServerTimeOutput.class).getResult();
+        OutputWrapper<GetTradableAssetPairsOutput> d = (GetTradableAssetPairsOutput) handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS,null, GetTradableAssetPairsOutput.class);
+        String[] errors = d.getErrors();
+        GetTradableAssetPairsOutput obj = d.getResult();
 
-
-        GetTradableAssetPairsOutput d = (GetTradableAssetPairsOutput) handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS,null, GetTradableAssetPairsOutput.class).getResult();
-        System.out.println(d);
-        System.out.println( d.getResult());
-
-
+        System.out.println(obj.toString());
     }
 }
