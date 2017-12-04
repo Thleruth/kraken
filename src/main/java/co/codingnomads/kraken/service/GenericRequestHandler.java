@@ -52,13 +52,6 @@ public class GenericRequestHandler {
         // get the correct Response Wrapper (with the correct generic result)
         ParameterizedTypeReference pojoClass = outputPojoClassSelector(krakenRequest.name());
 
-        // let the restTemplate work his magic
-//        ResponseEntity<GetTradableAssetPairsOutput> response = restTemplate.exchange(
-//                krakenRequest.getFullURL(),
-//                krakenRequest.getHttpMethod(),
-//                entity,
-//                GetTradableAssetPairsOutput.class);
-
         //ParameterizedTypeReference<Map<String, AssetPairName>> typeRef = new ParameterizedTypeReference<Map<String, AssetPairName>>() {};
 
         ResponseEntity response = restTemplate.exchange(

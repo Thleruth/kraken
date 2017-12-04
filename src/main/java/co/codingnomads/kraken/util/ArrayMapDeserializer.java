@@ -42,5 +42,5 @@ public class ArrayMapDeserializer extends JsonDeserializer<Map<String, AssetPair
             return new HashMap<String, AssetPairName>();
         }
     }
-    
+
 }
