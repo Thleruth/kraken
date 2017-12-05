@@ -9,17 +9,17 @@ public class CancelOpenOrderRequestBody extends RequestBodyGeneric {
      */
 
     // Transaction id
-    String txid;
+    int txid;
 
-    public CancelOpenOrderRequestBody(String txid) {
+    public CancelOpenOrderRequestBody(int txid) {
         this.txid = txid;
     }
 
-    public String getTxid() {
+    public int getTxid() {
         return txid;
     }
 
-    public void setTxid(String txid) {
+    public void setTxid(int txid) {
         this.txid = txid;
     }
 

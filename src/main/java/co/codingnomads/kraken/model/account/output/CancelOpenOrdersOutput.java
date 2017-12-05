@@ -1,8 +1,8 @@
 package co.codingnomads.kraken.model.account.output;
 
-import co.codingnomads.kraken.model.OutputGeneric;
+import co.codingnomads.kraken.model.OutputWrapper;
 
-public class CancelOpenOrdersOutput extends OutputGeneric {
+public class CancelOpenOrdersOutput extends OutputWrapper {
     /**
      * Created by Meghan Boyce on 11/30/17
      *
@@ -13,15 +13,19 @@ public class CancelOpenOrdersOutput extends OutputGeneric {
     // If set, order(s) is/are pending cancellation
     String pending;
 
-    // Fully qualified constructor
-    public CancelOpenOrdersOutput(int count, String pending) {
-        this.count = count;
-        this.pending = pending;
+//    // Fully qualified constructor
+//    public CancelOpenOrdersOutput(int count, String pending) {
+//        this.count = count;
+//        this.pending = pending;
+//    }
+
+    public CancelOpenOrdersOutput(Object result) {
+        super(result);
     }
 
-    // Empty Constructor
-    public CancelOpenOrdersOutput() {
-    }
+//    // Empty Constructor
+//    public CancelOpenOrdersOutput() {
+//    }
 
     // Getters and setters
     public int getCount() {

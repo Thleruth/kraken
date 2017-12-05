@@ -1,9 +1,9 @@
 package co.codingnomads.kraken.model.trade.output;
 
-import co.codingnomads.kraken.model.OutputGeneric;
+import co.codingnomads.kraken.model.OutputWrapper;
 import co.codingnomads.kraken.model.account.output.Description;
 
-public class AddStandardOrdersOutput extends OutputGeneric {
+public class AddStandardOrdersOutput extends OutputWrapper {
 
     // Order description info
     Description descr;

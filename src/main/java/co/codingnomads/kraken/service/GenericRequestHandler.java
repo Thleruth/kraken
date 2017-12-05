@@ -1,11 +1,16 @@
 package co.codingnomads.kraken.service;
 
 import co.codingnomads.kraken.model.*;
+
+import co.codingnomads.kraken.model.account.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.model.account.GetBalanceRequestBody;
+import co.codingnomads.kraken.model.account.GetClosedOrdersRequestBody;
+import co.codingnomads.kraken.model.account.output.CancelOpenOrdersOutput;
 import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
 import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
 import co.codingnomads.kraken.util.TempConstant;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -17,7 +22,10 @@ import org.springframework.web.client.RestTemplate;
 public class GenericRequestHandler {
 
     // takes in the KrakenRequestEnum and request body and returns a json object
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody)
+//    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody)
+//            throws NullPointerException {
+
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, CancelOpenOrderRequestBody requestBody)
             throws NullPointerException {
 
         MultiValueMap<String, String> body;
@@ -70,7 +78,7 @@ public class GenericRequestHandler {
         return mapper.convertValue(map,pojoClass);
     }
 
-    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody) {
+    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, CancelOpenOrderRequestBody requestBody) {
         HttpHeaders headers = new HttpHeaders();
 
         if (krakenRequest.getHttpMethod().matches("POST")) {
@@ -140,8 +148,8 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
 //            case "ADDSTRANDARDORDERS":
 //               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
-//            case "CANCELOPENORDERS":
-//                return new ParameterizedTypeReference<OutputWrapper<CancelOpenOrdersOutput>>(){};
+            case "CANCELOPENORDERS":
+                return CancelOpenOrdersOutput.class;
         }
         return null;
     }

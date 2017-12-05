@@ -1,11 +1,10 @@
 package co.codingnomads.kraken.model.account.output;
 
-import co.codingnomads.kraken.model.OutputGeneric;
 import co.codingnomads.kraken.model.OutputWrapper;
 
 import java.util.Arrays;
 
-public class GetClosedOrdersOutput extends OutputGeneric {
+public class GetClosedOrdersOutput extends OutputWrapper {
     /**
      * Created by Meghan Boyce on 11/29/17
      * I think this includes all fields from get open orders
