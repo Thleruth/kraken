@@ -7,6 +7,7 @@ import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
 
 
 import co.codingnomads.kraken.model.ricky.response.GetOrderBookOutput;
+import co.codingnomads.kraken.model.ricky.response.GetRecentTradesOutput;
 import co.codingnomads.kraken.model.ricky.response.GetTickerInformationOutput;
 
 import co.codingnomads.kraken.util.TempConstant;
@@ -117,8 +118,8 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
             case "GETORDERBOOK":
                 return GetOrderBookOutput.class;
-//            case "GETRECENTTRADES":
-//                return new ParameterizedTypeReference<OutputWrapper<GetRecentTradesOutput>>(){};
+           case "GETRECENTTRADES":
+                return GetRecentTradesOutput.class;
 //            case "GETRECENTSPREADDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
 //            case "GETACCOUNTBALANCE":
