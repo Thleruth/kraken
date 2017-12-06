@@ -38,15 +38,15 @@ public class GenericRequestHandler {
         // need an Autowired version of it but I am getting a null pointer issue
         RestTemplate restTemplate = new RestTemplate();
 
-        // get the correct Response Wrapper (with the correct generic result)
-        Class pojoClass = outputPojoClassSelector(krakenRequest.name());
+//        // get the correct Response Wrapper (with the correct generic result)
+//        Class pojoClass = outputPojoClassSelector(krakenRequest.name());
 
         // let the restTemplate work his magic
         ResponseEntity response = restTemplate.exchange(
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
-                pojoClass);
+                OutputWrapper.class);
 
         // can make a method to check this outside this method
         try {
@@ -54,21 +54,24 @@ public class GenericRequestHandler {
                 if (krakenRequest.getHttpMethod().matches("GET")) {
                     return (OutputWrapper) response.getBody();
                 }
-                return new OutputWrapper(mapToWrapper(response, pojoClass));
+//                System.out.println(response);
+//                OutputWrapper a = new OutputWrapper(mapToWrapper(response, pojoClass));
+                
+                return (OutputWrapper) response.getBody();
             } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
         } catch (RestClientException e) {
             throw e;
         }
     }
-    // I hate that I use Object I would love use pojoClass but I do not know how
-    // to initiliaze an object with a variable holding a class
-    // or with generic
-    public Object mapToWrapper(ResponseEntity response, Class pojoClass) {
-
-        Object map = ((OutputWrapper) response.getBody()).getResult();
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.convertValue(map,pojoClass);
-    }
+//    // I hate that I use Object I would love use pojoClass but I do not know how
+//    // to initiliaze an object with a variable holding a class
+//    // or with generic
+//    public Object mapToWrapper(ResponseEntity response, Class pojoClass) {
+//
+//        Object map = ((OutputWrapper) response.getBody()).getResult();
+//        ObjectMapper mapper = new ObjectMapper();
+//        return mapper.convertValue(map,pojoClass);
+//    }
 
     public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody) {
         HttpHeaders headers = new HttpHeaders();
@@ -98,52 +101,52 @@ public class GenericRequestHandler {
         else throw new RestClientException(status.getReasonPhrase());
     }
 
-    public static Class outputPojoClassSelector(String methodName) {
-        switch (methodName) {
-            case "GETSERVERTIME":
-                return GetServerTimeOutput.class;
-//            case "GETASSETINFO":
-//                return new ParameterizedTypeReference<OutputWrapper<GetAssetInfoOutput>>(){};
-//            case "GETTRADABLEASSETPAIRS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
-//            case "GETTICKERINFORMATION":
-//               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
-//            case "GETOHLCDATA":
-//                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
-//            case "GETORDERBOOK":
-//                return new ParameterizedTypeReference<OutputWrapper<GetOrderBookOutput>>(){};
-//            case "GETRECENTTRADES":
-//                return new ParameterizedTypeReference<OutputWrapper<GetRecentTradesOutput>>(){};
-//            case "GETRECENTSPREADDATA":
-//                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
-            case "GETACCOUNTBALANCE":
-                return GetBalanceOutput.class;
-//            case "GETTRADEBALANCE":
-//                return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
-//            case "GETOPENORDERS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetOpenOrdersOutput>>(){};
-//            case "GETCLOSEDORDERS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetClosedOrdersOutput>>(){};
-//            case "QUERYORDERINFO":
-//                return new ParameterizedTypeReference<OutputWrapper<QueryOrderInfoOutput>>(){};
-//            case "GETTRADESHISTORY":
-//                return new ParameterizedTypeReference<OutputWrapper<GetTradeHistoryOutput>>(){};
-//            case "QUERYTRADESINFO":
-//                return new ParameterizedTypeReference<OutputWrapper<QueryTradesInfoOutput>>(){};
-//            case "GETOPENPOSITIONS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetOpenPositionsOutput>>(){};
-//            case "GETLEDGERSINFO":
-//                return new ParameterizedTypeReference<OutputWrapper<GetLedgersInfoOutput>>(){};
-//            case "QUERYLEDGERS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetQueryLedgersOutput>>(){};
-//            case "GETTRADEVOLUME":
-//                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
-//            case "ADDSTRANDARDORDERS":
-//               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
-//            case "CANCELOPENORDERS":
-//                return new ParameterizedTypeReference<OutputWrapper<CancelOpenOrdersOutput>>(){};
-        }
-        return null;
-    }
+//    public static Class outputPojoClassSelector(String methodName) {
+//        switch (methodName) {
+//            case "GETSERVERTIME":
+//                return GetServerTimeOutput.class;
+////            case "GETASSETINFO":
+////                return new ParameterizedTypeReference<OutputWrapper<GetAssetInfoOutput>>(){};
+////            case "GETTRADABLEASSETPAIRS":
+////                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
+////            case "GETTICKERINFORMATION":
+////               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
+////            case "GETOHLCDATA":
+////                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
+////            case "GETORDERBOOK":
+////                return new ParameterizedTypeReference<OutputWrapper<GetOrderBookOutput>>(){};
+////            case "GETRECENTTRADES":
+////                return new ParameterizedTypeReference<OutputWrapper<GetRecentTradesOutput>>(){};
+////            case "GETRECENTSPREADDATA":
+////                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
+//            case "GETACCOUNTBALANCE":
+//                return GetBalanceOutput.class;
+////            case "GETTRADEBALANCE":
+////                return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
+////            case "GETOPENORDERS":
+////                return new ParameterizedTypeReference<OutputWrapper<GetOpenOrdersOutput>>(){};
+////            case "GETCLOSEDORDERS":
+////                return new ParameterizedTypeReference<OutputWrapper<GetClosedOrdersOutput>>(){};
+////            case "QUERYORDERINFO":
+////                return new ParameterizedTypeReference<OutputWrapper<QueryOrderInfoOutput>>(){};
+////            case "GETTRADESHISTORY":
+////                return new ParameterizedTypeReference<OutputWrapper<GetTradeHistoryOutput>>(){};
+////            case "QUERYTRADESINFO":
+////                return new ParameterizedTypeReference<OutputWrapper<QueryTradesInfoOutput>>(){};
+////            case "GETOPENPOSITIONS":
+////                return new ParameterizedTypeReference<OutputWrapper<GetOpenPositionsOutput>>(){};
+////            case "GETLEDGERSINFO":
+////                return new ParameterizedTypeReference<OutputWrapper<GetLedgersInfoOutput>>(){};
+////            case "QUERYLEDGERS":
+////                return new ParameterizedTypeReference<OutputWrapper<GetQueryLedgersOutput>>(){};
+////            case "GETTRADEVOLUME":
+////                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
+////            case "ADDSTRANDARDORDERS":
+////               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
+////            case "CANCELOPENORDERS":
+////                return new ParameterizedTypeReference<OutputWrapper<CancelOpenOrdersOutput>>(){};
+//        }
+//        return null;
+//    }
 
 }

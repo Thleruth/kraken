@@ -16,9 +16,14 @@ public class Controller {
         GetBalanceRequestBody a = new GetBalanceRequestBody();
 
         GenericRequestHandler handler = new GenericRequestHandler();
-        OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETACCOUNTBALANCE, a);
+        OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, a);
 
-        System.out.println(d.toString());
+        if (null == d.getError()) {
+            System.out.println(d.getResult().toString());
+        }
+        else {
+            System.out.println(d.printError());
+        }
 
     }
 }
