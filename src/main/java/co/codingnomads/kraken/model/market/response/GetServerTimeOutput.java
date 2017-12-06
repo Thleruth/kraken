@@ -1,7 +1,7 @@
 package co.codingnomads.kraken.model.market.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.market.pojos.GetServerTime;
+import co.codingnomads.kraken.model.market.pojos.KrakenServerTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,10 +10,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 //working template for GET
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetServerTimeOutput extends OutputWrapper<GetServerTime> {
+public class GetServerTimeOutput extends OutputWrapper<KrakenServerTime> {
 
 
-    public GetServerTimeOutput(@JsonProperty("error") String[] error, @JsonProperty("result") GetServerTime result){
+    public GetServerTimeOutput(@JsonProperty("error") String[] error, @JsonProperty("result") KrakenServerTime result){
         super(result, error);
 
     }

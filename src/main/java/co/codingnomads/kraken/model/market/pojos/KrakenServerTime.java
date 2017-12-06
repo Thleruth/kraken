@@ -3,7 +3,7 @@ package co.codingnomads.kraken.model.market.pojos;
 /**
  * Created by ryandesmond on 12/6/17.
  */
-public class GetServerTime {
+public class KrakenServerTime {
 
     // as unix timestamp
     String unixtime;

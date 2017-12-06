@@ -2,8 +2,7 @@ package co.codingnomads.kraken;
 
 import co.codingnomads.kraken.model.*;
 //import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
-import co.codingnomads.kraken.model.market.pojos.GetServerTime;
-import co.codingnomads.kraken.model.market.pojos.KrakenRecentTrade;
+import co.codingnomads.kraken.model.market.pojos.KrakenServerTime;
 import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +24,8 @@ public class Controller {
         OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null);
         OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null);
 
+        //ricky currnetly working gettickerinfo and getrecenttrades
+
 
         ObjectMapper mapper = new ObjectMapper();
         //get results from OutputWrapper "orderBook"
@@ -34,7 +35,7 @@ public class Controller {
 
 
         //Another exmaple:
-        GetServerTime time = (GetServerTime) serverTime.getResult();
+        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
         String[] serverTimeErrors = serverTime.getError();
 
 
