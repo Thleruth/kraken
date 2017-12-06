@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.account;
+package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 import com.sun.org.apache.xpath.internal.operations.Mult;
