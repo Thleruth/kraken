@@ -1,11 +1,9 @@
-package co.codingnomads.kraken.model.account.output;
+package co.codingnomads.kraken.model.account.pojos;
 
-import co.codingnomads.kraken.model.OutputWrapper;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-//need to be reworked for JSON property (see GetBalanceOutput)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class GetTradeBalanceOutput extends OutputWrapper {
+/**
+ * Created by ryandesmond on 12/6/17.
+ */
+public class KrakenTradeBalance {
 
     //equivalent balance (combined balance of all currencies)
     String eb;
@@ -96,10 +94,6 @@ public class GetTradeBalanceOutput extends OutputWrapper {
 
     public void setMl(String ml) {
         this.ml = ml;
-    }
-
-    public GetTradeBalanceOutput() {
-        super();
     }
 
 }

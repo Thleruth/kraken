@@ -2,17 +2,18 @@ package co.codingnomads.kraken.service;
 
 import co.codingnomads.kraken.model.*;
 
-import co.codingnomads.kraken.model.account.CancelOpenOrderRequestBody;
-import co.codingnomads.kraken.model.account.GetBalanceRequestBody;
-import co.codingnomads.kraken.model.account.GetClosedOrdersRequestBody;
-import co.codingnomads.kraken.model.account.output.CancelOpenOrdersOutput;
-import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
-import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
+//import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
+//import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
+import co.codingnomads.kraken.model.market.response.GetServerTimeOutput;
+
+
+import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
+import co.codingnomads.kraken.model.market.response.GetRecentTradesOutput;
+import co.codingnomads.kraken.model.market.response.GetTickerInformationOutput;
+
 import co.codingnomads.kraken.util.TempConstant;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -22,17 +23,17 @@ import org.springframework.web.client.RestTemplate;
 public class GenericRequestHandler {
 
     // takes in the KrakenRequestEnum and request body and returns a json object
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody)
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody)
             throws NullPointerException {
 
         MultiValueMap<String, String> body;
 
-        if (requestBody != null) {
-            body = requestBody.postParam();
-        }
-        else {
+//        if (requestBody != null) {
+//            body = requestBody.postParam();
+//        }
+//        else {
             body = null;
-        }
+       // }
 
         // Method to set correctly the headers if Post or Get
         HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
@@ -46,8 +47,6 @@ public class GenericRequestHandler {
         // get the correct Response Wrapper (with the correct generic result)
         Class pojoClass = outputPojoClassSelector(krakenRequest.name());
 
-        // let the restTemplate work his magic
-        // @meg - changed formatting for easier reading
         ResponseEntity response = restTemplate.exchange(
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
@@ -61,7 +60,7 @@ public class GenericRequestHandler {
                 if (krakenRequest.getHttpMethod().matches("GET")) {
                     return (OutputWrapper) response.getBody();
                 }
-                return new OutputWrapper(mapToWrapper(response, pojoClass));
+                return null;//new OutputWrapper(mapToWrapper(response, pojoClass));
             } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
         } catch (RestClientException e) {
             throw e;
@@ -77,7 +76,7 @@ public class GenericRequestHandler {
         return mapper.convertValue(map,pojoClass);
     }
 
-    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody) {
+    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody) {
         HttpHeaders headers = new HttpHeaders();
 
         if (krakenRequest.getHttpMethod().matches("POST")) {
@@ -122,18 +121,20 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
 //            case "GETTICKERINFORMATION":
 //               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
+            case "GETTICKERINFORMATION":
+               return GetTickerInformationOutput.class;
 //            case "GETOHLCDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
-//            case "GETORDERBOOK":
-//                return new ParameterizedTypeReference<OutputWrapper<GetOrderBookOutput>>(){};
-//            case "GETRECENTTRADES":
-//                return new ParameterizedTypeReference<OutputWrapper<GetRecentTradesOutput>>(){};
+            case "GETORDERBOOK":
+                return GetOrderBookOutput.class;
+           case "GETRECENTTRADES":
+                return GetRecentTradesOutput.class;
 //            case "GETRECENTSPREADDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
-            case "GETACCOUNTBALANCE":
-                return GetBalanceOutput.class;
+//            case "GETACCOUNTBALANCE":
+//                return GetBalanceOutput.class;
 //            case "GETTRADEBALANCE":
-//                return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
+//                return GetTradeBalanceOutput.class;
 //            case "GETOPENORDERS":
 //                return new ParameterizedTypeReference<OutputWrapper<GetOpenOrdersOutput>>(){};
 //            case "GETCLOSEDORDERS":
@@ -154,8 +155,8 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
 //            case "ADDSTRANDARDORDERS":
 //               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
-            case "CANCELOPENORDERS":
-                return CancelOpenOrdersOutput.class;
+//            case "CANCELOPENORDERS":
+//                return CancelOpenOrdersOutput.class;
         }
         return null;
     }

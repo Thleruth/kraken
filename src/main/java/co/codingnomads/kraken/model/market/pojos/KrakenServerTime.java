@@ -1,14 +1,9 @@
-package co.codingnomads.kraken.model.market.output;
-
-import co.codingnomads.kraken.model.OutputWrapper;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package co.codingnomads.kraken.model.market.pojos;
 
 /**
- * Created by Thomas Leruth on 11/29/17
+ * Created by ryandesmond on 12/6/17.
  */
-//working template for GET
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class GetServerTimeOutput extends OutputWrapper {
+public class KrakenServerTime {
 
     // as unix timestamp
     String unixtime;
@@ -30,7 +25,6 @@ public class GetServerTimeOutput extends OutputWrapper {
     public void setRfc1123(String rfc1123) {
         this.rfc1123 = rfc1123;
     }
-
 
 
 
