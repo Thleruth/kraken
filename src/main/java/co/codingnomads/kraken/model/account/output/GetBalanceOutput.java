@@ -30,14 +30,14 @@ public class GetBalanceOutput extends OutputWrapper {
 
     // why is the Json not picking up the name without this?
     public GetBalanceOutput(@JsonProperty("ZEUR") String ZEUR,
-                             @JsonProperty("XXBT") String XXBT,
-                             @JsonProperty("XLTC") String XLTC,
-                             @JsonProperty("XETH") String XETH,
-                             @JsonProperty("XDAO") String XDAO,
-                             @JsonProperty("XETC") String XETC,
-                             @JsonProperty("XREP") String XREP,
-                             @JsonProperty("XMLN") String XMLN,
-                             @JsonProperty("BCH")  String BCH) {
+                            @JsonProperty("XXBT") String XXBT,
+                            @JsonProperty("XLTC") String XLTC,
+                            @JsonProperty("XETH") String XETH,
+                            @JsonProperty("XDAO") String XDAO,
+                            @JsonProperty("XETC") String XETC,
+                            @JsonProperty("XREP") String XREP,
+                            @JsonProperty("XMLN") String XMLN,
+                            @JsonProperty("BCH")  String BCH) {
         this.ZEUR = ZEUR;
         this.XXBT = XXBT;
         this.XLTC = XLTC;
