@@ -18,7 +18,7 @@ public enum KrakenRequestEnum {
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST),
     GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST),
     GETTRADEHISTORY("/0/private/TradesHistory", HttpMethod.POST),
-    CANCELOPENORDER("/0/Private/CancelOrder", HttpMethod.POST);
+    CANCELOPENORDER("/0/private/CancelOrder", HttpMethod.POST);
 
     private final String domain = "https://api.kraken.com";
     private final String endPoint;

@@ -22,10 +22,7 @@ import org.springframework.web.client.RestTemplate;
 public class GenericRequestHandler {
 
     // takes in the KrakenRequestEnum and request body and returns a json object
-//    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody)
-//            throws NullPointerException {
-
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, CancelOpenOrderRequestBody requestBody)
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody)
             throws NullPointerException {
 
         MultiValueMap<String, String> body;
@@ -50,6 +47,7 @@ public class GenericRequestHandler {
         Class pojoClass = outputPojoClassSelector(krakenRequest.name());
 
         // let the restTemplate work his magic
+        // @meg - changed formatting for easier reading
         ResponseEntity response = restTemplate.exchange(
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
@@ -59,6 +57,7 @@ public class GenericRequestHandler {
         // can make a method to check this outside this method
         try {
             if (isSuccessful(response.getStatusCode())) {
+                // trying changing this to POST - no probably not, this just says if it's get you can return the response, no pojo class?
                 if (krakenRequest.getHttpMethod().matches("GET")) {
                     return (OutputWrapper) response.getBody();
                 }
@@ -78,7 +77,7 @@ public class GenericRequestHandler {
         return mapper.convertValue(map,pojoClass);
     }
 
-    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, CancelOpenOrderRequestBody requestBody) {
+    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, GetBalanceRequestBody requestBody) {
         HttpHeaders headers = new HttpHeaders();
 
         if (krakenRequest.getHttpMethod().matches("POST")) {
@@ -87,6 +86,13 @@ public class GenericRequestHandler {
             headers.set("API-Key", TempConstant.ApiKey);
             headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
                     requestBody.toString(), TempConstant.ApiSecret, krakenRequest.getEndPoint()));
+
+            // @meg- Here I tried changing the order or items, but still get all nulls
+//            headers.set("API-Sign",
+//                    KrakenSignature.ApiSignCreator(krakenRequest.getFullURL(),
+//                    requestBody.getNonce(),
+//                    requestBody.toString(),
+//                    TempConstant.ApiSecret));
         }
 
         // headers.setContentType(MediaType.APPLICATION_JSON);
