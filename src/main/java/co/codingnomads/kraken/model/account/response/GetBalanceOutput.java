@@ -1,7 +1,7 @@
 package co.codingnomads.kraken.model.account.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.account.GetBalance;
+import co.codingnomads.kraken.model.account.pojos.KrakenBalance;
 import com.fasterxml.jackson.annotation.*;
 
 /**
@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.*;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetBalanceOutput extends OutputWrapper<GetBalance> {
+public class GetBalanceOutput extends OutputWrapper<KrakenBalance> {
 
-    public GetBalanceOutput(@JsonProperty("error") String[] error, @JsonProperty("result") GetBalance result){
+    public GetBalanceOutput(@JsonProperty("error") String[] error, @JsonProperty("result") KrakenBalance result){
         super(result, error);
 
     }

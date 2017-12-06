@@ -3,12 +3,12 @@ package co.codingnomads.kraken.service;
 import co.codingnomads.kraken.model.*;
 //import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
 //import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
-import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
+import co.codingnomads.kraken.model.market.response.GetServerTimeOutput;
 
 
-import co.codingnomads.kraken.model.ricky.response.GetOrderBookOutput;
-import co.codingnomads.kraken.model.ricky.response.GetRecentTradesOutput;
-import co.codingnomads.kraken.model.ricky.response.GetTickerInformationOutput;
+import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
+import co.codingnomads.kraken.model.market.response.GetRecentTradesOutput;
+import co.codingnomads.kraken.model.market.response.GetTickerInformationOutput;
 
 import co.codingnomads.kraken.util.TempConstant;
 import com.fasterxml.jackson.databind.ObjectMapper;

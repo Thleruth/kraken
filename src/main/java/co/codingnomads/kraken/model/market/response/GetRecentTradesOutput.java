@@ -1,8 +1,7 @@
-package co.codingnomads.kraken.model.ricky.response;
+package co.codingnomads.kraken.model.market.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.ricky.KrakenRecentTrade;
-import co.codingnomads.kraken.model.ricky.KrakenRecentTrades;
+import co.codingnomads.kraken.model.market.pojos.KrakenRecentTrades;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;

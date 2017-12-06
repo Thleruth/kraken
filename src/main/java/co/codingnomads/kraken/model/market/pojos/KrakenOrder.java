@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.ricky;
+package co.codingnomads.kraken.model.market.pojos;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;

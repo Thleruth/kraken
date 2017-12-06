@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.ricky;
+package co.codingnomads.kraken.model.market.pojos;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +11,7 @@ import java.util.Arrays;
  * 1/Dec/2017
  */
 
-public class GetTickerInformation {
+public class KrakenTickerInformation {
 
     //ask array contains three values(price, whole lot volume, and lot volume). Letter "a"
     private final String ask;
@@ -33,8 +33,8 @@ public class GetTickerInformation {
     private final BigDecimal opening;
 
 
-    public GetTickerInformation(@JsonProperty("a") String ask, @JsonProperty("b") String bid, @JsonProperty("c") String lastTradeClosed, @JsonProperty("v") BigDecimal[] volume,
-                                @JsonProperty("p") BigDecimal[] vwaPrice, @JsonProperty("t") int trades, @JsonProperty("l") BigDecimal[] low, @JsonProperty("h") BigDecimal[] high, @JsonProperty("o") BigDecimal opening) {
+    public KrakenTickerInformation(@JsonProperty("a") String ask, @JsonProperty("b") String bid, @JsonProperty("c") String lastTradeClosed, @JsonProperty("v") BigDecimal[] volume,
+                                   @JsonProperty("p") BigDecimal[] vwaPrice, @JsonProperty("t") int trades, @JsonProperty("l") BigDecimal[] low, @JsonProperty("h") BigDecimal[] high, @JsonProperty("o") BigDecimal opening) {
         this.ask = ask;
         this.bid = bid;
         this.lastTradeClosed = lastTradeClosed;
@@ -84,7 +84,7 @@ public class GetTickerInformation {
 
     @Override
     public String toString() {
-        return "GetTickerInformation{" +
+        return "KrakenTickerInformation{" +
                 "ask='" + ask + '\'' +
                 ", bid='" + bid + '\'' +
                 ", lastTradeClosed='" + lastTradeClosed + '\'' +

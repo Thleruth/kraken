@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.ricky;
+package co.codingnomads.kraken.model.market.pojos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,14 +10,14 @@ import java.util.List;
  */
 
 
-public class GetOrderBook {
+public class KrakenOrderBook {
 
     //ask side array of array contains three values(price, volume, timestamp).
     private final List<KrakenOrder> asks;
     //ask side array of array contains three values(price, volume, timestamp).
     private final List<KrakenOrder> bids;
 
-    public GetOrderBook(@JsonProperty("asks") List<KrakenOrder> asks, @JsonProperty("bids") List<KrakenOrder> bids) {
+    public KrakenOrderBook(@JsonProperty("asks") List<KrakenOrder> asks, @JsonProperty("bids") List<KrakenOrder> bids) {
         this.asks = asks;
         this.bids = bids;
     }
@@ -34,7 +34,7 @@ public class GetOrderBook {
 
     @Override
     public String toString() {
-        return "GetOrderBook{" +
+        return "KrakenOrderBook{" +
                 "asks='" + asks + '\'' +
                 ", bids='" + bids + '\'' +
                 '}';

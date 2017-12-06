@@ -1,9 +1,9 @@
-package co.codingnomads.kraken.model.account;
+package co.codingnomads.kraken.model.account.pojos;
 
 /**
  * Created by ryandesmond on 12/6/17.
  */
-public class GetTradeBalance {
+public class KrakenTradeBalance {
 
     //equivalent balance (combined balance of all currencies)
     String eb;

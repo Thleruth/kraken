@@ -13,7 +13,7 @@ public enum KrakenRequestEnum {
     GETTICKERINFORMATION("/0/public/Ticker?pair=XBTEUR", HttpMethod.GET),
     GETOHLCDATA("/0/public/OHLC", HttpMethod.GET),
     GETORDERBOOK("/0/public/Depth?pair=XBTUSD", HttpMethod.GET),
-    GETRECENTRADES("/0/public/Trades?pair=XBTUSD", HttpMethod.GET),
+    GETRECENTTRADES("/0/public/Trades?pair=XBTUSD", HttpMethod.GET),
     GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET),
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST),
     GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST),

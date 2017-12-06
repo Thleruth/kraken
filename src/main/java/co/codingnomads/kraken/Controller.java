@@ -2,8 +2,9 @@ package co.codingnomads.kraken;
 
 import co.codingnomads.kraken.model.*;
 //import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
-import co.codingnomads.kraken.model.ricky.GetOrderBook;
-import co.codingnomads.kraken.model.ricky.KrakenRecentTrade;
+import co.codingnomads.kraken.model.market.pojos.GetServerTime;
+import co.codingnomads.kraken.model.market.pojos.KrakenRecentTrade;
+import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,23 +22,23 @@ public class Controller {
         //GetBalanceRequestBody a = new GetBalanceRequestBody();
 
         GenericRequestHandler handler = new GenericRequestHandler();
-        //OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETACCOUNTBALANCE, a);
-  //      OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null);
-//        OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null);
-            OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETRECENTRADES, null);
+        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null);
+        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null);
 
-
-        System.out.println(d.toString());
 
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, KrakenRecentTrade> map = (Map<String, KrakenRecentTrade>) d.getResult();
-        //ArrayList<GetOrderBookOutput> pojos = (ArrayList<GetOrderBookOutput>) mapper.convertValue(map, new TypeReference<List<GetOrderBookOutput>>() { });
+        //get results from OutputWrapper "orderBook"
+        Map<String, GetOrderBookOutput> results = (Map<String, GetOrderBookOutput>) orderBook.getResult();
+        //If there are any errors, they will be in orderBook.getErrors()
+        String[] errors = orderBook.getError();
 
-        //OutputWrapper e = handler.callAPI(KrakenRequestEnum.GETTICKERINFORMATION, null);
+
+        //Another exmaple:
+        GetServerTime time = (GetServerTime) serverTime.getResult();
+        String[] serverTimeErrors = serverTime.getError();
 
 
-        System.out.println(d);
-        System.out.println(d.getResult());
+        System.out.println("Put a break point HERE and DEBUG me");
 
     }
 }
