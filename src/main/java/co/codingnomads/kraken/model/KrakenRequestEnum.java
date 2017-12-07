@@ -1,9 +1,11 @@
 package co.codingnomads.kraken.model;
 
-import co.codingnomads.kraken.model.account.output.GetAccountBalanceOutput;
-import co.codingnomads.kraken.model.account.output.GetTradeBalanceOutput;
-import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
-import co.codingnomads.kraken.model.trade.output.CancelOpenOrdersOutput;
+import co.codingnomads.kraken.model.account.response.GetAccountBalanceOutput;
+import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
+// import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
+import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
+import co.codingnomads.kraken.model.market.response.GetServerTimeOutput;
+import co.codingnomads.kraken.model.trade.response.CancelOpenOrdersOutput;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 
@@ -11,14 +13,15 @@ import org.springframework.http.HttpMethod;
  * Created by Thomas Leruth on 11/29/17
  */
 
-
+// have to fix the variable path for GET
 public enum KrakenRequestEnum {
+
     GETSERVERTIME("/0/public/Time", HttpMethod.GET, new ParameterizedTypeReference<OutputWrapper<GetServerTimeOutput>>(){}),
 //    GETASSETINFO("/0/public/Assets", HttpMethod.GET),
 //    GETTRADABLEASSETPAIRS("/0/public/AssetPairs", HttpMethod.GET),
-//    GETTICKERINFORMATION("/0/public/Ticker", HttpMethod.GET),
+//    GETTICKERINFORMATION("/0/public/Ticker?pair=XBTUSD", HttpMethod.GET, new ParameterizedTypeReference<GetTickerInformationOutput>(){}),
 //    GETOHLCDATA("/0/public/OHLC", HttpMethod.GET),
-//    GETORDERBOOK("/0/public/Depth", HttpMethod.GET),
+    GETORDERBOOK("/0/public/Depth?pair=XBTUSD", HttpMethod.GET, new ParameterizedTypeReference<GetOrderBookOutput>(){}),
 //    GETRECENTRADES("/0/public/Trades", HttpMethod.GET),
 //    GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET),
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST,new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){}),

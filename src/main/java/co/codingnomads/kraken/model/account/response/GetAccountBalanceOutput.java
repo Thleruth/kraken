@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.account.output;
+package co.codingnomads.kraken.model.account.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
 import com.fasterxml.jackson.annotation.*;

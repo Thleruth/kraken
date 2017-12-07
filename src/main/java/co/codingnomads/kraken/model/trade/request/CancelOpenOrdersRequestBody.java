@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.trade;
+package co.codingnomads.kraken.model.trade.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;

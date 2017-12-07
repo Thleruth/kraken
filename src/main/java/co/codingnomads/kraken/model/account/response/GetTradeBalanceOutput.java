@@ -1,13 +1,10 @@
-package co.codingnomads.kraken.model.account.output;
+package co.codingnomads.kraken.model.account.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-/**
- * Created by Thomas Leruth on 12/6/17
- */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetTradeBalanceOutput extends OutputWrapper {
 
@@ -137,4 +134,3 @@ public class GetTradeBalanceOutput extends OutputWrapper {
                 '}';
     }
 }
-

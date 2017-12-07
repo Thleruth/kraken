@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.market.output;
+package co.codingnomads.kraken.model.market.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -45,4 +45,5 @@ public class GetServerTimeOutput extends OutputWrapper {
                 ", rfc1123='" + rfc1123 + '\'' +
                 '}';
     }
+
 }

@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.trade.output;
+package co.codingnomads.kraken.model.trade.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
 import com.fasterxml.jackson.annotation.JsonProperty;
