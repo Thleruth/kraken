@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by Thomas Leruth on 11/28/17
  */
 
-public class Controller {
+public class Controller implements Runnable {
 
     public static void main(String[] args) throws NullPointerException{
 
@@ -40,6 +40,13 @@ public class Controller {
 
 
         System.out.println("Put a break point HERE and DEBUG me");
+
+    }
+
+
+
+    @Override
+    public void run() {
 
     }
 }
