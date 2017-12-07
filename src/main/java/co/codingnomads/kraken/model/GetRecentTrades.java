@@ -9,6 +9,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetRecentTrades extends OutputGeneric {
 
+    String pairName;
+    Integer[][] entries;
+    Long lastID;
+
+    //todo no clue what this is supposed to look like , needs a lot of work
+
     /*
     pair_name> = pair name
 
