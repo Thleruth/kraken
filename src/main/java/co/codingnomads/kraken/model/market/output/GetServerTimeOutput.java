@@ -2,6 +2,7 @@ package co.codingnomads.kraken.model.market.output;
 
 import co.codingnomads.kraken.model.OutputWrapper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by Thomas Leruth on 11/29/17
@@ -31,7 +32,17 @@ public class GetServerTimeOutput extends OutputWrapper {
         this.rfc1123 = rfc1123;
     }
 
+    public GetServerTimeOutput(@JsonProperty("unixtime") String unixtime,
+                               @JsonProperty("rfc1123") String rfc1123) {
+        this.unixtime = unixtime;
+        this.rfc1123 = rfc1123;
+    }
 
-
-
+    @Override
+    public String toString() {
+        return "GetServerTimeOutput{" +
+                "unixtime='" + unixtime + '\'' +
+                ", rfc1123='" + rfc1123 + '\'' +
+                '}';
+    }
 }

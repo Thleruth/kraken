@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.*;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetBalanceOutput extends OutputWrapper {
+public class GetAccountBalanceOutput extends OutputWrapper {
 
     String ZEUR;
 
@@ -27,27 +27,6 @@ public class GetBalanceOutput extends OutputWrapper {
     String XMLN;
 
     String BCH;
-
-    // why is the Json not picking up the name without this?
-    public GetBalanceOutput(@JsonProperty("ZEUR") String ZEUR,
-                            @JsonProperty("XXBT") String XXBT,
-                            @JsonProperty("XLTC") String XLTC,
-                            @JsonProperty("XETH") String XETH,
-                            @JsonProperty("XDAO") String XDAO,
-                            @JsonProperty("XETC") String XETC,
-                            @JsonProperty("XREP") String XREP,
-                            @JsonProperty("XMLN") String XMLN,
-                            @JsonProperty("BCH")  String BCH) {
-        this.ZEUR = ZEUR;
-        this.XXBT = XXBT;
-        this.XLTC = XLTC;
-        this.XETH = XETH;
-        this.XDAO = XDAO;
-        this.XETC = XETC;
-        this.XREP = XREP;
-        this.XMLN = XMLN;
-        this.BCH = BCH;
-    }
 
     public String getZEUR() {
         return ZEUR;
@@ -121,9 +100,30 @@ public class GetBalanceOutput extends OutputWrapper {
         this.BCH = BCH;
     }
 
+    // why is the Json not picking up the name without this?
+    public GetAccountBalanceOutput(@JsonProperty("ZEUR") String ZEUR,
+                                   @JsonProperty("XXBT") String XXBT,
+                                   @JsonProperty("XLTC") String XLTC,
+                                   @JsonProperty("XETH") String XETH,
+                                   @JsonProperty("XDAO") String XDAO,
+                                   @JsonProperty("XETC") String XETC,
+                                   @JsonProperty("XREP") String XREP,
+                                   @JsonProperty("XMLN") String XMLN,
+                                   @JsonProperty("BCH")  String BCH) {
+        this.ZEUR = ZEUR;
+        this.XXBT = XXBT;
+        this.XLTC = XLTC;
+        this.XETH = XETH;
+        this.XDAO = XDAO;
+        this.XETC = XETC;
+        this.XREP = XREP;
+        this.XMLN = XMLN;
+        this.BCH = BCH;
+    }
+
     @Override
     public String toString() {
-        return "GetBalanceOutput{" +
+        return "GetAccountBalanceOutput{" +
                 "ZEUR='" + ZEUR + '\'' +
                 ", XXBT='" + XXBT + '\'' +
                 ", XLTC='" + XLTC + '\'' +

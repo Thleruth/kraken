@@ -1,8 +1,7 @@
 package co.codingnomads.kraken;
 
 import co.codingnomads.kraken.model.*;
-import co.codingnomads.kraken.model.account.GetBalanceRequestBody;
-import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
+import co.codingnomads.kraken.model.account.GetAccountBalanceRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 /**
@@ -13,12 +12,12 @@ public class Controller {
 
     public static void main(String[] args) throws NullPointerException{
 
-        GetBalanceRequestBody a = new GetBalanceRequestBody();
+        GetAccountBalanceRequestBody a = new GetAccountBalanceRequestBody();
 
         GenericRequestHandler handler = new GenericRequestHandler();
         OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, a);
 
-        if (null == d.getError()) {
+        if (d.getError().length == 0) {
             System.out.println(d.getResult().toString());
         }
         else {

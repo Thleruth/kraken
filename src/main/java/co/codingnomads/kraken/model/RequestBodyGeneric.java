@@ -1,5 +1,8 @@
 package co.codingnomads.kraken.model;
 
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
 public abstract class RequestBodyGeneric {
 
     public String nonce;
@@ -12,8 +15,8 @@ public abstract class RequestBodyGeneric {
         return nonce;
     }
 
-    @Override
-    public String toString() {
-        return "nonce=" + nonce;
-    }
+    public abstract String signPostParam();
+
+    public abstract MultiValueMap<String, String> postParam();
+
 }
