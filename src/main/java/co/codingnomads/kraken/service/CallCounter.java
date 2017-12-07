@@ -6,7 +6,6 @@ import co.codingnomads.kraken.model.KrakenRequestEnum;
 import org.springframework.stereotype.Service;
 
 
-
 /**
  * @author Kevin Neag
  */

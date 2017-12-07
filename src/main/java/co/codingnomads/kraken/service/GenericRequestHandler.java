@@ -1,5 +1,7 @@
 package co.codingnomads.kraken.service;
 
+import co.codingnomads.kraken.exception.BackLogFullException;
+import co.codingnomads.kraken.exception.RateLimitException;
 import co.codingnomads.kraken.model.*;
 //import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
 //import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
@@ -29,45 +31,63 @@ public class GenericRequestHandler {
         //only proceed is response is true
         //otherwise throw exception
 
-        MultiValueMap<String, String> body;
-//
-//        if (requestBody != null) {
-//            body = requestBody.postParam();
-//        }
-//        else {
-            body = null;
-//        }
+        ApiKey key = new ApiKey("sye788W1gS7zo45NfXg/1wW1immnXCnjcWXZ/3kewTOUKsA+ZOVRGphk", 2,
+                "E0Br9v7hENdPukatvxUvppVY5ouhtxX85hzTFSwAmTP4rAShiSZ3OoyyLive/opAfXrQtnBNsAFIWzia7l4ZKw==");
 
-        // Method to set correctly the headers if Post or Get
-        HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
+        CallCounter callCounter = new CallCounter();
 
-        //the entity with the body and the headers
-        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
-
-        // need an Autowired version of it but I am getting a null pointer issue
-        RestTemplate restTemplate = new RestTemplate();
-
-        // get the correct Response Wrapper (with the correct generic result)
-        Class pojoClass = outputPojoClassSelector(krakenRequest.name());
-
-        ResponseEntity response = restTemplate.exchange(
-                krakenRequest.getFullURL(),
-                krakenRequest.getHttpMethod(),
-                entity,
-                pojoClass);
-
-        // can make a method to check this outside this method
         try {
-            if (isSuccessful(response.getStatusCode())) {
-                if (krakenRequest.getHttpMethod().matches("GET")) {
-                    return (OutputWrapper) response.getBody();
+            if (callCounter.isUnderRateLimit(key, KrakenRequestEnum.GETSERVERTIME) == true) {
+
+
+                MultiValueMap<String, String> body;
+    //
+    //        if (requestBody != null) {
+    //            body = requestBody.postParam();
+    //        }
+    //        else {
+                body = null;
+    //        }
+
+                // Method to set correctly the headers if Post or Get
+                HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
+
+                //the entity with the body and the headers
+                HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+
+                // need an Autowired version of it but I am getting a null pointer issue
+                RestTemplate restTemplate = new RestTemplate();
+
+                // get the correct Response Wrapper (with the correct generic result)
+                Class pojoClass = outputPojoClassSelector(krakenRequest.name());
+
+                ResponseEntity response = restTemplate.exchange(
+                        krakenRequest.getFullURL(),
+                        krakenRequest.getHttpMethod(),
+                        entity,
+                        pojoClass);
+
+                // can make a method to check this outside this method
+                try {
+                    if (isSuccessful(response.getStatusCode())) {
+                        if (krakenRequest.getHttpMethod().matches("GET")) {
+                            return (OutputWrapper) response.getBody();
+                        }
+                        return null;//new OutputWrapper(mapToWrapper(response, pojoClass));
+                    } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
+                } catch (RestClientException e) {
+                    throw e;
                 }
-                return null;//new OutputWrapper(mapToWrapper(response, pojoClass));
-            } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
-        } catch (RestClientException e) {
-            throw e;
+            }
+        } catch (RateLimitException e) {
+            e.printStackTrace();
+        } catch (BackLogFullException e) {
+            e.printStackTrace();
         }
+
+        return null;
     }
+
     // I hate that I use Object I would love use pojoClass but I do not know how
     // to initiliaze an object with a variable holding a class
     // or with generic
