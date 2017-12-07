@@ -30,6 +30,8 @@ public class GenericRequestHandler {
         //the entity with the body and the headers
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 
+        System.out.println(entity);
+
         // need an Autowired version of it but I am getting a null pointer issue
         RestTemplate restTemplate = new RestTemplate();
 
