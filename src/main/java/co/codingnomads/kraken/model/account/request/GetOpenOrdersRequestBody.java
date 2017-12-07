@@ -11,6 +11,7 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
 
     // Fully qualified constructor
     public GetOpenOrdersRequestBody(Boolean trades, String userref) {
+        super();
         this.trades = trades;
         this.userref = userref;
     }
@@ -41,7 +42,7 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
         return "GetOpenOrdersRequestBody{" +
                 "trades=" + trades +
                 ", userref='" + userref + '\'' +
+                ", nonce='" + nonce + '\'' +
                 '}';
     }
-
 }

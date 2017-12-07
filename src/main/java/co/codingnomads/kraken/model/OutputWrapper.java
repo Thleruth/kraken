@@ -11,8 +11,8 @@ import java.util.Arrays;
 
 public class OutputWrapper<T> {
 
-    private final T result;
     private final String[] error;
+    private final T result;
 
     /**
      * Constructor
@@ -21,10 +21,10 @@ public class OutputWrapper<T> {
      * @param error
      */
     @JsonCreator
-    public OutputWrapper(@JsonProperty("return") T result, @JsonProperty("error") String[] error) {
+    public OutputWrapper(@JsonProperty("error") String[] error, @JsonProperty("return") T result) {
 
-        this.result = result;
         this.error = error;
+        this.result = result;
     }
 
 //    public OutputWrapper(){}

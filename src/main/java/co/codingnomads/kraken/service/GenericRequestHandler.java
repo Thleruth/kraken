@@ -2,17 +2,18 @@ package co.codingnomads.kraken.service;
 
 import co.codingnomads.kraken.model.*;
 
-//import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
-//import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
+import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
+import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
 import co.codingnomads.kraken.model.market.response.GetServerTimeOutput;
-
-
 import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
 import co.codingnomads.kraken.model.market.response.GetRecentTradesOutput;
 import co.codingnomads.kraken.model.market.response.GetTickerInformationOutput;
+import co.codingnomads.kraken.model.trade.response.CancelOpenOrderOutput;
 
 import co.codingnomads.kraken.util.TempConstant;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.http.*;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
@@ -155,8 +156,8 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
 //            case "ADDSTRANDARDORDERS":
 //               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
-//            case "CANCELOPENORDERS":
-//                return CancelOpenOrderOutput.class;
+            case "CANCELOPENORDERS":
+                return CancelOpenOrderOutput.class;
         }
         return null;
     }

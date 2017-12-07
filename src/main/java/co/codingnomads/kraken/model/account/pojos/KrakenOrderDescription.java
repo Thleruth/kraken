@@ -1,6 +1,6 @@
 package co.codingnomads.kraken.model.account.pojos;
 
-public class Description {
+public class KrakenOrderDescription {
     /**
      * Created by Meghan Boyce on 11/29/17
      *
@@ -25,7 +25,7 @@ public class Description {
 
     // Fully qualified Constructor
     // TODO: Redo Constructor after completing ordertype above
-    public Description(String pair, String type, String price, String price2, String leverage, String order, String close) {
+    public KrakenOrderDescription(String pair, String type, String price, String price2, String leverage, String order, String close) {
         this.pair = pair;
         this.type = type;
         this.price = price;
@@ -93,7 +93,7 @@ public class Description {
 
     @Override
     public String toString() {
-        return "Description{" +
+        return "KrakenOrderDescription{" +
                 "pair='" + pair + '\'' +
                 ", type='" + type + '\'' +
                 ", price='" + price + '\'' +

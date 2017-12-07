@@ -14,6 +14,7 @@ public class CancelOpenOrderRequestBody extends RequestBodyGeneric {
     int txid;
 
     public CancelOpenOrderRequestBody(int txid) {
+        super();
         this.txid = txid;
     }
 
@@ -32,11 +33,11 @@ public class CancelOpenOrderRequestBody extends RequestBodyGeneric {
         return postParameters;
     }
 
-    // Once working, comment this toString out and test if still works
     @Override
     public String toString() {
-        return super.toString() + "&txid=" + getTxid();
+        return "CancelOpenOrderRequestBody{" +
+                "txid=" + txid +
+                ", nonce='" + nonce + '\'' +
+                '}';
     }
-
-
 }

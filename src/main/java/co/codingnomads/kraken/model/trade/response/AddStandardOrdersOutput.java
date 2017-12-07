@@ -1,26 +1,26 @@
 //package co.codingnomads.kraken.model.trade.response;
 //
 //import co.codingnomads.kraken.model.OutputWrapper;
-//import co.codingnomads.kraken.model.account.pojos.Description;
+//import co.codingnomads.kraken.model.account.pojos.KrakenOrderDescription;
 //
 //public class AddStandardOrdersOutput extends OutputWrapper {
 //
 //    // Order description info
-//    Description descr;
+//    KrakenOrderDescription descr;
 //    // Array of transaction ids for order (if order was added successfully)
 //    // -- Is this actually an array?
 //    String txid;
 //
-//    public AddStandardOrdersOutput(Description descr, String txid) {
+//    public AddStandardOrdersOutput(KrakenOrderDescription descr, String txid) {
 //        this.descr = descr;
 //        this.txid = txid;
 //    }
 //
-//    public Description getDescr() {
+//    public KrakenOrderDescription getDescr() {
 //        return descr;
 //    }
 //
-//    public void setDescr(Description descr) {
+//    public void setDescr(KrakenOrderDescription descr) {
 //        this.descr = descr;
 //    }
 //
