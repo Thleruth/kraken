@@ -3,6 +3,8 @@ package co.codingnomads.kraken;
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.market.pojos.KrakenServerTime;
 import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
+import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
+import co.codingnomads.kraken.model.trade.response.CancelOpenOrderOutput;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -22,6 +24,9 @@ public class Controller {
         GenericRequestHandler handler = new GenericRequestHandler();
         OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null);
         OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null);
+        // RequestBody shouldn't be null here:
+        CancelOpenOrderRequestBody cancelOpenOrderRequestBody = new CancelOpenOrderRequestBody(0);
+        OutputWrapper cancelOrder = handler.callAPI(KrakenRequestEnum.CANCELOPENORDER, cancelOpenOrderRequestBody);
 
         //ricky currnetly working gettickerinfo and getrecenttrades
 
@@ -36,6 +41,9 @@ public class Controller {
         //Another exmaple:
         KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
         String[] serverTimeErrors = serverTime.getError();
+
+        Map<String, CancelOpenOrderOutput> results2 = (Map<String, CancelOpenOrderOutput>) cancelOrder.getResult();
+        String[] cancelOrderErrors = cancelOrder.getError();
 
 
         System.out.println("Put a break point HERE and DEBUG me");

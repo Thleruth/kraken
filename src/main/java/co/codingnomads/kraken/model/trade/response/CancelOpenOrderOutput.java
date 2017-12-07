@@ -10,7 +10,7 @@ public class CancelOpenOrderOutput extends OutputWrapper<Map<String, KrakenCance
 
     public CancelOpenOrderOutput(@JsonProperty("error") String[] error,
                                  @JsonProperty("result") Map<String, KrakenCancelOrder> result) {
-        super(error, result);
+        super(result, error);
 
     }
 

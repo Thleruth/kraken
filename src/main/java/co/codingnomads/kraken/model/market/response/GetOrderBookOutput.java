@@ -14,7 +14,7 @@ import java.util.Map;
 public class GetOrderBookOutput extends OutputWrapper<Map<String, KrakenOrderBook>> {
 
     public GetOrderBookOutput(@JsonProperty("error") String[] error, @JsonProperty("result") Map<String, KrakenOrderBook> result){
-        super(error, result);
+        super(result, error);
 
     }
 
