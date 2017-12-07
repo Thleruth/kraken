@@ -22,8 +22,8 @@ public class Controller {
         //GetBalanceRequestBody a = new GetBalanceRequestBody();
 
         GenericRequestHandler handler = new GenericRequestHandler();
-        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null);
-        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null);
+       // OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null);
+       // OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null);
         // RequestBody shouldn't be null here:
         CancelOpenOrderRequestBody cancelOpenOrderRequestBody = new CancelOpenOrderRequestBody(0);
         OutputWrapper cancelOrder = handler.callAPI(KrakenRequestEnum.CANCELOPENORDER, cancelOpenOrderRequestBody);
@@ -33,14 +33,14 @@ public class Controller {
 
         ObjectMapper mapper = new ObjectMapper();
         //get results from OutputWrapper "orderBook"
-        Map<String, GetOrderBookOutput> results = (Map<String, GetOrderBookOutput>) orderBook.getResult();
+        //Map<String, GetOrderBookOutput> results = (Map<String, GetOrderBookOutput>) orderBook.getResult();
         //If there are any errors, they will be in orderBook.getErrors()
-        String[] errors = orderBook.getError();
+        //String[] errors = orderBook.getError();
 
 
         //Another exmaple:
-        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
-        String[] serverTimeErrors = serverTime.getError();
+//        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
+//        String[] serverTimeErrors = serverTime.getError();
 
         Map<String, CancelOpenOrderOutput> results2 = (Map<String, CancelOpenOrderOutput>) cancelOrder.getResult();
         String[] cancelOrderErrors = cancelOrder.getError();

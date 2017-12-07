@@ -29,12 +29,12 @@ public class GenericRequestHandler {
 
         MultiValueMap<String, String> body;
 
-//        if (requestBody != null) {
-//            body = requestBody.postParam();
-//        }
-//        else {
+        if (requestBody != null) {
+            body = requestBody.postParam();
+        }
+        else {
             body = null;
-       // }
+        }
 
         // Method to set correctly the headers if Post or Get
         HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
@@ -52,12 +52,12 @@ public class GenericRequestHandler {
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
+                //OutputWrapper.class);
                 pojoClass);
 
         // can make a method to check this outside this method
         try {
             if (isSuccessful(response.getStatusCode())) {
-                // trying changing this to POST - no probably not, this just says if it's get you can return the response, no pojo class?
                 if (krakenRequest.getHttpMethod().matches("GET")) {
                     return (OutputWrapper) response.getBody();
                 }
@@ -156,7 +156,7 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
 //            case "ADDSTRANDARDORDERS":
 //               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
-            case "CANCELOPENORDERS":
+            case "CANCELOPENORDER":
                 return CancelOpenOrderOutput.class;
         }
         return null;

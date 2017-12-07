@@ -26,11 +26,12 @@ public class KrakenCancelOrder {
         return pending;
     }
 
-    @Override
-    public String toString() {
-        return "KrakenCancelOrder{" +
-                "count=" + count +
-                ", pending=" + pending +
-                '}';
-    }
+    // I don't think this is necessary - toString in requestBody is what's used in GenericRequestHandler
+//    @Override
+//    public String toString() {
+//        return "KrakenCancelOrder{" +
+//                "count=" + count +
+//                ", pending=" + pending +
+//                '}';
+//    }
 }

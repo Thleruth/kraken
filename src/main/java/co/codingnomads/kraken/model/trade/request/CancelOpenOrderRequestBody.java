@@ -33,10 +33,10 @@ public class CancelOpenOrderRequestBody extends RequestBodyGeneric {
         return postParameters;
     }
 
+    // fiddle with this
     @Override
     public String toString() {
-        return "CancelOpenOrderRequestBody{" +
-                "txid=" + txid +
+        return "?txid=" + txid +
                 ", nonce='" + nonce + '\'' +
                 '}';
     }
