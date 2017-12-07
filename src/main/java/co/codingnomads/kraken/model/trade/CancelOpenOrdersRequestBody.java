@@ -1,27 +1,37 @@
-package co.codingnomads.kraken.model.account;
+package co.codingnomads.kraken.model.trade;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
-import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import java.lang.reflect.Field;
-
 /**
- * Created by Thomas Leruth on 11/29/17
+ * Created by Meghan Boyce on 11/30/17
+ *
  */
 
-public class GetAccountBalanceRequestBody extends RequestBodyGeneric {
+public class CancelOpenOrdersRequestBody extends RequestBodyGeneric {
 
-    public GetAccountBalanceRequestBody() {
-        super();
+    // Transaction id
+    String txid;
+
+    //todo add exception if string is null
+    public CancelOpenOrdersRequestBody(String txid) {
+        this.txid = txid;
+    }
+
+    public String getTxid() {
+        return txid;
+    }
+
+    public void setTxid(String txid) {
+        this.txid = txid;
     }
 
     @Override
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
         postParameters.add("nonce", getNonce());
-        // for more: postParameters.add("InstanceVariableXName", "InstanceVariableXValueInString");
+        postParameters.add("txid", getTxid());
         return postParameters;
     }
 
@@ -29,7 +39,7 @@ public class GetAccountBalanceRequestBody extends RequestBodyGeneric {
     public String signPostParam() {
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
-        // for more: sb.append("&").append("=").append("InstanceVariableXName").append("InstanceVariableXValueInString")
+        sb.append("&").append("txid").append("=").append(getTxid());
         return sb.toString();
     }
 }

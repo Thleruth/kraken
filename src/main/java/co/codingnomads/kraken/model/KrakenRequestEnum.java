@@ -3,6 +3,7 @@ package co.codingnomads.kraken.model;
 import co.codingnomads.kraken.model.account.output.GetAccountBalanceOutput;
 import co.codingnomads.kraken.model.account.output.GetTradeBalanceOutput;
 import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
+import co.codingnomads.kraken.model.trade.output.CancelOpenOrdersOutput;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 
@@ -21,7 +22,7 @@ public enum KrakenRequestEnum {
 //    GETRECENTRADES("/0/public/Trades", HttpMethod.GET),
 //    GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET),
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST,new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){}),
-    GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST, new ParameterizedTypeReference<OutputWrapper<GetAccountBalanceOutput>>(){});
+    GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST, new ParameterizedTypeReference<OutputWrapper<GetAccountBalanceOutput>>(){}),
 //    GETOPENORDERS("/0/private/OpenOrders", HttpMethod.POST),
 //    GETCLOSEDORDERS("/0/private/ClosedOrders", HttpMethod.POST),
 //    QUERYORDERINFO("/0/private/QueryOrders", HttpMethod.POST),
@@ -32,7 +33,7 @@ public enum KrakenRequestEnum {
 //    QUERYLEDGERS("/0/private/QueryLedgers", HttpMethod.POST),
 //    GETTRADEVOLUME("/0/private/TradesVolume", HttpMethod.POST),
 //    ADDSTRANDARDORDERS("/0/private/AddOrder", HttpMethod.POST),
-//    CANCELOPENORDERS("/0/private/CancelOrder", HttpMethod.POST);
+    CANCELOPENORDERS("/0/private/CancelOrder", HttpMethod.POST,new ParameterizedTypeReference<OutputWrapper<CancelOpenOrdersOutput>>(){});
 
     private final String endPoint;
     private final HttpMethod httpMethod;
