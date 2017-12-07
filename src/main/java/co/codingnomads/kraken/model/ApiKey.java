@@ -10,22 +10,20 @@ import java.time.LocalDateTime;
 public class ApiKey {
 
 
-    private String apiKey = "sye788W1gS7zo45NfXg/1wW1immnXCnjcWXZ/3kewTOUKsA+ZOVRGphk";
-    // private String apiEndPoint;
-    private int tierLevel = 2;
+    private String apiKey;
+    private int tierLevel;
     private int callCounter;
-    private String secret = "E0Br9v7hENdPukatvxUvppVY5ouhtxX85hzTFSwAmTP4rAShiSZ3OoyyLive/opAfXrQtnBNsAFIWzia7l4ZKw==";
-    // private boolean wasSent;
+    private String secret;
     private Timestamp lastCallTime = Timestamp.valueOf("2017-12-06 10:09:30");
     private int backLog;
 
 
 
     public ApiKey(String apiKey, int tierLevel, String secret) {
-        this.apiKey = apiKey;
-        this.tierLevel = tierLevel;
-        this.callCounter = 0;
-        this.secret = secret;
+        this.apiKey = "Enter API key";
+        this.tierLevel = 2;
+        this.callCounter = 200;
+        this.secret = "Enter API Secret";
         this.backLog = 0;
 
     }

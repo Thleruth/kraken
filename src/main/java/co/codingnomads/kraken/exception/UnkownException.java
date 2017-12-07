@@ -5,10 +5,18 @@ package co.codingnomads.kraken.exception;
  */
 public class UnkownException extends Exception {
 
-    String errorMsg = "Unknown Exception";
+    String errorMsg;
+
+    public UnkownException(String message) {
+        super(message);
+    }
 
     public String getErrorMsg() {
         return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
     @Override

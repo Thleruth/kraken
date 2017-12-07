@@ -1,7 +1,8 @@
 package co.codingnomads.kraken.service;
 
-import co.codingnomads.kraken.exception.BackLogFullException;
+import co.codingnomads.kraken.KrakenExchange;
 import co.codingnomads.kraken.exception.RateLimitException;
+import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
 //import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
 //import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
@@ -24,68 +25,61 @@ import org.springframework.web.client.RestTemplate;
 public class GenericRequestHandler {
 
     // takes in the KrakenRequestEnum and request body and returns a json object
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody)
-            throws NullPointerException {
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiKey key)
+            throws NullPointerException, UnkownException, RateLimitException {
 
-        //callCounter  isunderRateLimit method here
-        //only proceed is response is true
-        //otherwise throw exception
 
-        ApiKey key = new ApiKey("sye788W1gS7zo45NfXg/1wW1immnXCnjcWXZ/3kewTOUKsA+ZOVRGphk", 2,
-                "E0Br9v7hENdPukatvxUvppVY5ouhtxX85hzTFSwAmTP4rAShiSZ3OoyyLive/opAfXrQtnBNsAFIWzia7l4ZKw==");
 
-        CallCounter callCounter = new CallCounter();
 
         try {
-            if (callCounter.isUnderRateLimit(key, KrakenRequestEnum.GETSERVERTIME) == true) {
-
-
-                MultiValueMap<String, String> body;
-    //
-    //        if (requestBody != null) {
-    //            body = requestBody.postParam();
-    //        }
-    //        else {
-                body = null;
-    //        }
-
-                // Method to set correctly the headers if Post or Get
-                HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
-
-                //the entity with the body and the headers
-                HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
-
-                // need an Autowired version of it but I am getting a null pointer issue
-                RestTemplate restTemplate = new RestTemplate();
-
-                // get the correct Response Wrapper (with the correct generic result)
-                Class pojoClass = outputPojoClassSelector(krakenRequest.name());
-
-                ResponseEntity response = restTemplate.exchange(
-                        krakenRequest.getFullURL(),
-                        krakenRequest.getHttpMethod(),
-                        entity,
-                        pojoClass);
-
-                // can make a method to check this outside this method
-                try {
-                    if (isSuccessful(response.getStatusCode())) {
-                        if (krakenRequest.getHttpMethod().matches("GET")) {
-                            return (OutputWrapper) response.getBody();
-                        }
-                        return null;//new OutputWrapper(mapToWrapper(response, pojoClass));
-                    } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
-                } catch (RestClientException e) {
-                    throw e;
-                }
+            if (!CallCounter.isUnderRateLimit(key, krakenRequest)) {
+                throw new UnkownException("RateLimit Exception - callApi +");
             }
         } catch (RateLimitException e) {
             e.printStackTrace();
-        } catch (BackLogFullException e) {
-            e.printStackTrace();
+            throw e;
         }
 
-        return null;
+        System.out.println("callAPI executing - " + Thread.currentThread().getName());
+
+        MultiValueMap<String, String> body;
+        //
+        //        if (requestBody != null) {
+        //            body = requestBody.postParam();
+        //        }
+        //        else {
+        body = null;
+        //        }
+
+        // Method to set correctly the headers if Post or Get
+        HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
+
+        //the entity with the body and the headers
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+
+        // need an Autowired version of it but I am getting a null pointer issue
+        RestTemplate restTemplate = new RestTemplate();
+
+        // get the correct Response Wrapper (with the correct generic result)
+        Class pojoClass = outputPojoClassSelector(krakenRequest.name());
+
+        ResponseEntity response = restTemplate.exchange(
+                krakenRequest.getFullURL(),
+                krakenRequest.getHttpMethod(),
+                entity,
+                pojoClass);
+
+        // can make a method to check this outside this method
+        try {
+            if (isSuccessful(response.getStatusCode())) {
+                if (krakenRequest.getHttpMethod().matches("GET")) {
+                    return (OutputWrapper) response.getBody();
+                }
+                return null;//new OutputWrapper(mapToWrapper(response, pojoClass));
+            } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
+        } catch (RestClientException e) {
+            throw e;
+        }
     }
 
     // I hate that I use Object I would love use pojoClass but I do not know how
@@ -95,7 +89,7 @@ public class GenericRequestHandler {
 
         Object map = ((OutputWrapper) response.getBody()).getResult();
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.convertValue(map,pojoClass);
+        return mapper.convertValue(map, pojoClass);
     }
 
     public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody) {
@@ -137,12 +131,12 @@ public class GenericRequestHandler {
 //            case "GETTICKERINFORMATION":
 //               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
             case "GETTICKERINFORMATION":
-               return GetTickerInformationOutput.class;
+                return GetTickerInformationOutput.class;
 //            case "GETOHLCDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
             case "GETORDERBOOK":
                 return GetOrderBookOutput.class;
-           case "GETRECENTTRADES":
+            case "GETRECENTTRADES":
                 return GetRecentTradesOutput.class;
 //            case "GETRECENTSPREADDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
