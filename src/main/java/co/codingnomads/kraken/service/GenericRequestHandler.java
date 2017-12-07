@@ -156,7 +156,7 @@ public class GenericRequestHandler {
 //            case "ADDSTRANDARDORDERS":
 //               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
 //            case "CANCELOPENORDERS":
-//                return CancelOpenOrdersOutput.class;
+//                return CancelOpenOrderOutput.class;
         }
         return null;
     }
