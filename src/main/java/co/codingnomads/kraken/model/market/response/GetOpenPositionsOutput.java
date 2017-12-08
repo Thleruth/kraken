@@ -5,7 +5,7 @@ created by PopoPenguin on 12/8/17
 */
 
 
-import co.codingnomads.kraken.model.market.pojos.KrakenOpenPositions;
+import co.codingnomads.kraken.model.market.pojo.KrakenOpenPositions;
 import co.codingnomads.kraken.model.OutputWrapper;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

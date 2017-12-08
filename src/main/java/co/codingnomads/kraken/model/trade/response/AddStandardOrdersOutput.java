@@ -1,8 +1,7 @@
 package co.codingnomads.kraken.model.trade.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.account.pojos.KrakenOrderDescription;
-import co.codingnomads.kraken.model.trade.pojos.KrakenAddOrder;
+import co.codingnomads.kraken.model.trade.pojo.KrakenAddOrder;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;

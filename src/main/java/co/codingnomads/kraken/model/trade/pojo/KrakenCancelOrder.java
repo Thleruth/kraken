@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.trade.pojos;
+package co.codingnomads.kraken.model.trade.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

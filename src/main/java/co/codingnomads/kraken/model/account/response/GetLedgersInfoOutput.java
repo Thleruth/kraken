@@ -1,10 +1,9 @@
 package co.codingnomads.kraken.model.account.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.account.pojos.KrakenLedgers;
+import co.codingnomads.kraken.model.account.pojo.KrakenLedgers;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class GetLedgersInfoOutput extends OutputWrapper<Map<String, KrakenLedgers>> {

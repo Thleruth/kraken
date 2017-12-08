@@ -6,7 +6,7 @@ created by PopoPenguin on 12/8/17
 
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.trade.pojos.QueryTradesInfo;
+import co.codingnomads.kraken.model.trade.pojo.QueryTradesInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;

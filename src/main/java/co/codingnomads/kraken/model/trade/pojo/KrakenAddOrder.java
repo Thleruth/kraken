@@ -1,6 +1,6 @@
-package co.codingnomads.kraken.model.trade.pojos;
+package co.codingnomads.kraken.model.trade.pojo;
 
-import co.codingnomads.kraken.model.account.pojos.KrakenOrderDescription;
+import co.codingnomads.kraken.model.account.pojo.KrakenOrderDescription;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class KrakenAddOrder {
