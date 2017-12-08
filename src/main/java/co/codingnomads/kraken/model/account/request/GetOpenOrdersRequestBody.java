@@ -1,6 +1,8 @@
 package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
 
@@ -44,5 +46,23 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
                 ", userref='" + userref + '\'' +
                 ", nonce='" + nonce + '\'' +
                 '}';
+    }
+
+    @Override
+    public MultiValueMap<String, String> postParam(){
+        MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
+        postParameters.add("nonce", getNonce());
+        postParameters.add("trades", getTrades().toString());
+        postParameters.add("userref", getUserref());
+        return postParameters;
+    }
+
+    @Override
+    public String signPostParam() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("nonce").append("=").append(getNonce());
+        sb.append("&").append("trades").append("=").append(getTrades().toString());
+        sb.append("&").append("userref").append("=").append(getUserref());
+        return sb.toString();
     }
 }
