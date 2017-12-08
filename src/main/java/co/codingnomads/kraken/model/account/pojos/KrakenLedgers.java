@@ -37,4 +37,68 @@ public class KrakenLedgers {
         this.fee = fee;
         this.balance = balance;
     }
+
+    public String getRefid() {
+        return refid;
+    }
+
+    public void setRefid(String refid) {
+        this.refid = refid;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getAclass() {
+        return aclass;
+    }
+
+    public void setAclass(String aclass) {
+        this.aclass = aclass;
+    }
+
+    public String getAsset() {
+        return asset;
+    }
+
+    public void setAsset(String asset) {
+        this.asset = asset;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getFee() {
+        return fee;
+    }
+
+    public void setFee(String fee) {
+        this.fee = fee;
+    }
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
 }

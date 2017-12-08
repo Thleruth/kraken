@@ -1,6 +1,7 @@
 package co.codingnomads.kraken.model.trade.pojos;
 
 import co.codingnomads.kraken.model.account.pojos.KrakenOrderDescription;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class KrakenAddOrder {
     /**
@@ -13,7 +14,8 @@ public class KrakenAddOrder {
     // Array of transaction ids for order (if order was added successfully)
     String txid;
 
-    public KrakenAddOrder (KrakenOrderDescription descr, String txid) {
+    public KrakenAddOrder (@JsonProperty("descr") KrakenOrderDescription descr,
+                           @JsonProperty("txid") String txid) {
         this.descr = descr;
         this.txid = txid;
     }

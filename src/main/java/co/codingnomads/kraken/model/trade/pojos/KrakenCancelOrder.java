@@ -13,7 +13,8 @@ public class KrakenCancelOrder {
     // If set, order(s) is/are pending cancellation
     boolean pending;
 
-    public KrakenCancelOrder(@JsonProperty("count")int count, @JsonProperty("pending")boolean pending) {
+    public KrakenCancelOrder(@JsonProperty("count")int count,
+                             @JsonProperty("pending")boolean pending) {
         this.count = count;
         this.pending = pending;
     }
@@ -22,8 +23,16 @@ public class KrakenCancelOrder {
         return count;
     }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public boolean isPending() {
         return pending;
+    }
+
+    public void setPending(boolean pending) {
+        this.pending = pending;
     }
 
     // I don't think this is necessary - toString in requestBody is what's used in GenericRequestHandler

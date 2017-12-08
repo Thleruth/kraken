@@ -1,5 +1,7 @@
 package co.codingnomads.kraken.model.account.pojos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class KrakenOrderDescription {
     /**
      * Created by Meghan Boyce on 11/29/17
@@ -11,7 +13,8 @@ public class KrakenOrderDescription {
     String pair;
     // Type of order (buy/sell)
     String type;
-    // TODO: ordertype = order type (See Add standard order, steal from Thomas)
+    // See add standard order
+    String ordertype;
     // Primary price
     String price;
     // Secondary price
@@ -23,11 +26,17 @@ public class KrakenOrderDescription {
     // Conditional close order description (if conditional close set)
     String close;
 
-    // Fully qualified Constructor
-    // TODO: Redo Constructor after completing ordertype above
-    public KrakenOrderDescription(String pair, String type, String price, String price2, String leverage, String order, String close) {
+    public KrakenOrderDescription(@JsonProperty("pair")String pair,
+                                  @JsonProperty("type")String type,
+                                  @JsonProperty("ordertype")String ordertype,
+                                  @JsonProperty("price")String price,
+                                  @JsonProperty("price2")String price2,
+                                  @JsonProperty("leverage")String leverage,
+                                  @JsonProperty("order")String order,
+                                  @JsonProperty("close")String close) {
         this.pair = pair;
         this.type = type;
+        this.ordertype = ordertype;
         this.price = price;
         this.price2 = price2;
         this.leverage = leverage;
@@ -35,72 +44,5 @@ public class KrakenOrderDescription {
         this.close = close;
     }
 
-    public String getPair() {
-        return pair;
-    }
 
-    public void setPair(String pair) {
-        this.pair = pair;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getPrice2() {
-        return price2;
-    }
-
-    public void setPrice2(String price2) {
-        this.price2 = price2;
-    }
-
-    public String getLeverage() {
-        return leverage;
-    }
-
-    public void setLeverage(String leverage) {
-        this.leverage = leverage;
-    }
-
-    public String getOrder() {
-        return order;
-    }
-
-    public void setOrder(String order) {
-        this.order = order;
-    }
-
-    public String getClose() {
-        return close;
-    }
-
-    public void setClose(String close) {
-        this.close = close;
-    }
-
-    @Override
-    public String toString() {
-        return "KrakenOrderDescription{" +
-                "pair='" + pair + '\'' +
-                ", type='" + type + '\'' +
-                ", price='" + price + '\'' +
-                ", price2='" + price2 + '\'' +
-                ", leverage='" + leverage + '\'' +
-                ", order='" + order + '\'' +
-                ", close='" + close + '\'' +
-                '}';
-    }
 }
