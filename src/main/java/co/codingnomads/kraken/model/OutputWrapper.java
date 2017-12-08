@@ -12,8 +12,8 @@ import java.util.Arrays;
 
 public class OutputWrapper<T> {
 
-    private final T result;
     private final String[] error;
+    private final T result;
 
     /**
      * Constructor
@@ -23,8 +23,8 @@ public class OutputWrapper<T> {
      */
     @JsonCreator
     public OutputWrapper(@JsonProperty("return") T result, @JsonProperty("error") String[] error) {
-        this.result = result;
         this.error = error;
+        this.result = result;
     }
 
 //    public OutputWrapper(){}
@@ -49,43 +49,4 @@ public class OutputWrapper<T> {
 
         return String.format("KrakenResult[%s: %s]", isSuccess() ? "OK" : "error", isSuccess() ? result.toString() : error);
     }
-
-//    String[] errors;
-//
-//    T result;
-//
-//    public OutputWrapper(String[] errors, T result) {
-//        this.errors = errors;
-//        this.result = result;
-//    }
-//
-//    public String[] getErrors() {
-//        return errors;
-//    }
-//
-//    public void setErrors(String[] errors) {
-//        this.errors = errors;
-//    }
-//
-//    public T getResult() {
-//        return result;
-//    }
-//
-//    public void setResult(T result) {
-//        this.result = result;
-//    }
-//
-//    public String toString() {
-//        return "OutputWrapper{" +
-//                "errors=" + Arrays.toString(errors) +
-//                ", result=" + result +
-//                '}';
-//    }
-//
-//    public OutputWrapper(T result) {
-//        this.result = result;
-//    }
-//
-//    public OutputWrapper() {
-//    }
 }
