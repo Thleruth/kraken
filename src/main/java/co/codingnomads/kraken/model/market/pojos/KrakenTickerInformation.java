@@ -21,7 +21,7 @@ public class KrakenTickerInformation {
     private final String lastTradeClosed;
     //volume array asking for two values(today, last 24 hours). Letter "v"
     private final BigDecimal[] volume;
-    //volume weighted average price array requesting tw values(today, last 24 hours). Letter "p"
+    //volume weighted average price array requesting two values(today, last 24 hours). Letter "p"
     private final BigDecimal[] vwaPrice;
     //number of trades array with two values(today, last 24 hours). Letter "t"
     private final int trades;
