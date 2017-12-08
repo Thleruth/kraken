@@ -1,31 +1,27 @@
 package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
-//need to be reworked for JSON and have to learn how to post the body correctly when multiple elements
+/**
+ * Created by Thomas Leruth on 12/6/17
+ */
+
 public class GetTradeBalanceRequestBody extends RequestBodyGeneric {
 
     // asset class (optional)
-    String assetClass;
+    String aClass;
 
     // base asset used to determine balance (default = ZUSD) (optional)
     String asset;
 
-    public GetTradeBalanceRequestBody(String assetClass, String asset) {
-        super();
-        this.assetClass = assetClass;
-        this.asset = asset;
+    public String getAClass() {
+        return aClass;
     }
 
-    public GetTradeBalanceRequestBody(){
-    }
-
-    public String getAssetClass() {
-        return assetClass;
-    }
-
-    public void setAssetClass(String assetClass) {
-        this.assetClass = assetClass;
+    public void setAClass(String alass) {
+        this.aClass = aClass;
     }
 
     public String getAsset() {
@@ -37,17 +33,36 @@ public class GetTradeBalanceRequestBody extends RequestBodyGeneric {
     }
 
     @Override
-    public String toString() {
-        return "GetTradeBalanceRequestBody{" +
-                "assetClass='" + assetClass + '\'' +
-                ", asset='" + asset + '\'' +
-                '}';
+    public MultiValueMap<String, String> postParam(){
+        MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
+        postParameters.add("nonce", getNonce());
+        // for more: postParameters.add("InstanceVariableXName", "InstanceVariableXValueInString");
+        if (aClass != null)
+            postParameters.add("aClass", getAClass());
+        if (asset != null)
+            postParameters.add("asset", getAsset());
+        return postParameters;
     }
 
-    //    @Override
-//    public String toString() {
-//        return "assetClass='" + assetClass + '\'' +
-//                ", asset='" + asset + '\'' +
-//                ", nonce='" + nonce + '\'';
-//    }
+    @Override
+    public String signPostParam() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("nonce").append("=").append(getNonce());
+        // for more: sb.append("&").append("InstanceVariableXName").append("=").append("InstanceVariableXValueInString")
+        if (aClass != null)
+            sb.append("&").append("aClass").append("=").append(getAClass());
+        if (asset != null)
+            sb.append("&").append("asset").append("=").append(getAsset());
+        return sb.toString();
+    }
+
+    public GetTradeBalanceRequestBody(String aClass, String asset) {
+        super();
+        if (aClass != null)
+            this.aClass = aClass;
+        if (asset != null)
+            this.asset = asset;
+    }
+
 }
+

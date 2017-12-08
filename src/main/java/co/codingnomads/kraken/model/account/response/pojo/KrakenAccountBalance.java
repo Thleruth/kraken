@@ -1,11 +1,12 @@
-package co.codingnomads.kraken.model.account.pojos;
+package co.codingnomads.kraken.model.account.response.pojo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 /**
- * Created by ryandesmond on 12/6/17.
+ * Created by Thomas Leruth on 11/29/17
  */
-public class KrakenBalance {
+
+public class KrakenAccountBalance {
 
     String ZEUR;
 
@@ -24,27 +25,6 @@ public class KrakenBalance {
     String XMLN;
 
     String BCH;
-
-    // why is the Json not picking up the name without this?
-    public KrakenBalance(@JsonProperty("ZEUR") String ZEUR,
-                         @JsonProperty("XXBT") String XXBT,
-                         @JsonProperty("XLTC") String XLTC,
-                         @JsonProperty("XETH") String XETH,
-                         @JsonProperty("XDAO") String XDAO,
-                         @JsonProperty("XETC") String XETC,
-                         @JsonProperty("XREP") String XREP,
-                         @JsonProperty("XMLN") String XMLN,
-                         @JsonProperty("BCH")  String BCH) {
-        this.ZEUR = ZEUR;
-        this.XXBT = XXBT;
-        this.XLTC = XLTC;
-        this.XETH = XETH;
-        this.XDAO = XDAO;
-        this.XETC = XETC;
-        this.XREP = XREP;
-        this.XMLN = XMLN;
-        this.BCH = BCH;
-    }
 
     public String getZEUR() {
         return ZEUR;
@@ -118,9 +98,29 @@ public class KrakenBalance {
         this.BCH = BCH;
     }
 
+    public KrakenAccountBalance(@JsonProperty("ZEUR") String ZEUR,
+                                @JsonProperty("XXBT") String XXBT,
+                                @JsonProperty("XLTC") String XLTC,
+                                @JsonProperty("XETH") String XETH,
+                                @JsonProperty("XDAO") String XDAO,
+                                @JsonProperty("XETC") String XETC,
+                                @JsonProperty("XREP") String XREP,
+                                @JsonProperty("XMLN") String XMLN,
+                                @JsonProperty("BCH")  String BCH) {
+        this.ZEUR = ZEUR;
+        this.XXBT = XXBT;
+        this.XLTC = XLTC;
+        this.XETH = XETH;
+        this.XDAO = XDAO;
+        this.XETC = XETC;
+        this.XREP = XREP;
+        this.XMLN = XMLN;
+        this.BCH = BCH;
+    }
+
     @Override
     public String toString() {
-        return "GetBalanceOutput{" +
+        return "KrakenAccountBalance{" +
                 "ZEUR='" + ZEUR + '\'' +
                 ", XXBT='" + XXBT + '\'' +
                 ", XLTC='" + XLTC + '\'' +
@@ -132,5 +132,4 @@ public class KrakenBalance {
                 ", BCH='" + BCH + '\'' +
                 '}';
     }
-
 }
