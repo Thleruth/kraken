@@ -9,13 +9,14 @@ import org.springframework.http.HttpMethod;
 public enum KrakenRequestEnum {
 
 
+
     GETSERVERTIME("/0/public/Time", HttpMethod.GET,  1),
     GETASSETINFO("/0/public/Assets", HttpMethod.GET, 1),
     GETTRADABLEASSETPAIRS("/0/public/AssetPairs", HttpMethod.GET, 1),
     GETTICKERINFORMATION("/0/public/Ticker?pair=XBTEUR", HttpMethod.GET, 1),
     GETOHLCDATA("/0/public/OHLC", HttpMethod.GET, 1),
     GETORDERBOOK("/0/public/Depth?pair=XBTUSD", HttpMethod.GET, 1),
-    GETRECENTRADES("/0/public/Trades?pair=XBTUSD", HttpMethod.GET, 1),
+    GETRECENTTRADES("/0/public/Trades?pair=XBTUSD", HttpMethod.GET, 1),
     GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET, 1),
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST, 1),
     GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST, 1),
@@ -30,6 +31,7 @@ public enum KrakenRequestEnum {
     GETTRADEVOLUME("/0/private/TradesVolume", HttpMethod.POST, 1),
     ADDSTRANDARDORDERS("/0/private/AddOrder", HttpMethod.POST, 0),
     CANCELOPENORDERS("/0/private/CancelOrder", HttpMethod.POST, 0);
+
 
     private final String domain = "https://api.kraken.com";
     private final String endPoint;

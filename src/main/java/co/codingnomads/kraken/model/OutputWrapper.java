@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
 
+
 /**
  * Created by Thomas Leruth on 11/29/17
  */
@@ -22,7 +23,6 @@ public class OutputWrapper<T> {
      */
     @JsonCreator
     public OutputWrapper(@JsonProperty("return") T result, @JsonProperty("error") String[] error) {
-
         this.result = result;
         this.error = error;
     }

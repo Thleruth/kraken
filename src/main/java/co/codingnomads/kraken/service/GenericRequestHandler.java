@@ -3,12 +3,8 @@ package co.codingnomads.kraken.service;
 import co.codingnomads.kraken.model.*;
 //import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
 //import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
-import co.codingnomads.kraken.model.market.response.GetServerTimeOutput;
+import co.codingnomads.kraken.model.market.response.*;
 
-
-import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
-import co.codingnomads.kraken.model.market.response.GetRecentTradesOutput;
-import co.codingnomads.kraken.model.market.response.GetTickerInformationOutput;
 
 import co.codingnomads.kraken.util.TempConstant;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -112,8 +108,8 @@ public class GenericRequestHandler {
                 return GetServerTimeOutput.class;
 //            case "GETASSETINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<GetAssetInfoOutput>>(){};
-//            case "GETTRADABLEASSETPAIRS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
+            case "GETTRADABLEASSETPAIRS":
+                return GetTradableAssetPairsOutput.class;
 //            case "GETTICKERINFORMATION":
 //               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
             case "GETTICKERINFORMATION":
@@ -140,8 +136,8 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetTradeHistoryOutput>>(){};
 //            case "QUERYTRADESINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<QueryTradesInfoOutput>>(){};
-//            case "GETOPENPOSITIONS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetOpenPositionsOutput>>(){};
+            case "GETOPENPOSITIONS":
+                return GetOpenPositionsOutput.class;
 //            case "GETLEDGERSINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<GetLedgersInfoOutput>>(){};
 //            case "QUERYLEDGERS":
