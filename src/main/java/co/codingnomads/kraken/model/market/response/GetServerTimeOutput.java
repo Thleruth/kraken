@@ -1,49 +1,16 @@
 package co.codingnomads.kraken.model.market.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import co.codingnomads.kraken.model.market.response.pojo.KrakenServerTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Created by Thomas Leruth on 11/29/17
+ * Created by Thomas Leruth on 12/7/17
  */
-//working template for GET
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class GetServerTimeOutput extends OutputWrapper {
 
-    // as unix timestamp
-    String unixtime;
-    // as RFC 1123 time format
-    String rfc1123;
+public class GetServerTimeOutput extends OutputWrapper<KrakenServerTime> {
 
-    public String getUnixtime() {
-        return unixtime;
+    public GetServerTimeOutput(@JsonProperty("error") String[] error, @JsonProperty("result") KrakenServerTime result){
+        super(result, error);
     }
-
-    public void setUnixtime(String unixtime) {
-        this.unixtime = unixtime;
-    }
-
-    public String getRfc1123() {
-        return rfc1123;
-    }
-
-    public void setRfc1123(String rfc1123) {
-        this.rfc1123 = rfc1123;
-    }
-
-    public GetServerTimeOutput(@JsonProperty("unixtime") String unixtime,
-                               @JsonProperty("rfc1123") String rfc1123) {
-        this.unixtime = unixtime;
-        this.rfc1123 = rfc1123;
-    }
-
-    @Override
-    public String toString() {
-        return "GetServerTimeOutput{" +
-                "unixtime='" + unixtime + '\'' +
-                ", rfc1123='" + rfc1123 + '\'' +
-                '}';
-    }
-
 }

@@ -31,15 +31,8 @@ public class OutputWrapper<T> {
         this.result = result;
     }
 
-    public String toString() {
-        return "OutputWrapper{" +
-                "error=" + Arrays.toString(error) +
-                ", result=" + result +
-                '}';
-    }
-
     public String printError() {
-        return "error=" + Arrays.toString(error);
+        return Arrays.toString(error);
     }
 
     public OutputWrapper() {
@@ -51,13 +44,13 @@ public class OutputWrapper<T> {
         this.error = error;
     }
 
-//    public boolean isSuccess() {
-//        return error.length == 0;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return String.format("KrakenResult[%s: %s]", isSuccess() ? "OK" : "error", isSuccess() ? result.toString() : error);
-//    }
+    public boolean isSuccess() {
+        return error.length == 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("KrakenResult[%s: %s]", isSuccess() ? "OK" : "error", isSuccess() ? result.toString() : printError());
+    }
 
 }

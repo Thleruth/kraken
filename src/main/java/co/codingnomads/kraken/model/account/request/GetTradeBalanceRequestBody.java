@@ -1,6 +1,5 @@
 package co.codingnomads.kraken.model.account.request;
 
-import co.codingnomads.kraken.model.OutputWrapper;
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;

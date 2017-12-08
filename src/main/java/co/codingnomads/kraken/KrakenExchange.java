@@ -1,33 +1,23 @@
 package co.codingnomads.kraken;
 
+import co.codingnomads.kraken.model.ApiAuthentication;
+
 /**
  * Created by Thomas Leruth on 11/30/17
  */
 
 public class KrakenExchange {
 
-    private String ApiKey;
-    private String ApiSecret;
-    private int tier;
+    ApiAuthentication apiAuthentication;
 
     //todo constructor with API key, Secret, and tier level
 
     public KrakenExchange(String apiKey, String apiSecret, int tier) {
-        ApiKey = apiKey;
-        ApiSecret = apiSecret;
-        this.tier = tier;
+        apiAuthentication = new ApiAuthentication(apiKey, tier, apiSecret);
     }
 
-    public String getApiKey() {
-        return ApiKey;
-    }
-
-    public String getApiSecret() {
-        return ApiSecret;
-    }
-
-    public int getTier() {
-        return tier;
+    public ApiAuthentication getApiAuthentication() {
+        return apiAuthentication;
     }
 
     //todo one method for each potential KrakenRequest enum item (via the CallAPI)

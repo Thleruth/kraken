@@ -1,49 +1,16 @@
 package co.codingnomads.kraken.model.trade.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
+import co.codingnomads.kraken.model.trade.response.pojo.KrakenCancelOpenOrders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Created by Meghan Boyce on 11/30/17
- *
+ * Created by Thomas Leruth on 12/7/17
  */
 
-public class CancelOpenOrdersOutput extends OutputWrapper {
+public class CancelOpenOrdersOutput extends OutputWrapper<KrakenCancelOpenOrders> {
 
-    // Number of orders canceled
-    int count;
-    // If set, order(s) is/are pending cancellation
-    String pending;
-
-    // Getters and setters
-    public int getCount() {
-        return count;
+    public CancelOpenOrdersOutput(@JsonProperty("error") String[] error, @JsonProperty("result") KrakenCancelOpenOrders result){
+        super(result, error);
     }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public String getPending() {
-        return pending;
-    }
-
-    public void setPending(String pending) {
-        this.pending = pending;
-    }
-
-    public CancelOpenOrdersOutput(@JsonProperty("count") int count,
-                                  @JsonProperty("pending") String pending) {
-        this.count = count;
-        this.pending = pending;
-    }
-
-    @Override
-    public String toString() {
-        return "CancelOpenOrdersOutput{" +
-                "count=" + count +
-                ", pending='" + pending + '\'' +
-                '}';
-    }
-
 }

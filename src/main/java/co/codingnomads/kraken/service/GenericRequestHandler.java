@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 public class GenericRequestHandler {
 
     // for now passing in KrakenExchange but later will be removed as KrakenExchange will call this method parametized
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, KrakenExchange exchange)
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication)
             throws NullPointerException {
 
         MultiValueMap<String, String> body;
@@ -26,7 +26,7 @@ public class GenericRequestHandler {
         }
 
         // Method to set correctly the headers if Post or Get
-        HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody, exchange.getApiKey(), exchange.getApiSecret());
+        HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody, apiAuthentication);
 
         //the entity with the body and the headers
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
@@ -50,15 +50,14 @@ public class GenericRequestHandler {
         }
     }
 
-    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, String apiKey, String apiSecret) {
+    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication){
         HttpHeaders headers = new HttpHeaders();
 
         if (krakenRequest.getHttpMethod().matches("POST")) {
 
-            headers.set("API-Key", apiKey);
+            headers.set("API-Key", apiAuthentication.getApiKey());
             headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
-                    requestBody.signPostParam(), apiSecret, krakenRequest.getEndPoint()));
-            System.out.println(requestBody.signPostParam());
+                    requestBody.signPostParam(), apiAuthentication.getSecret(), krakenRequest.getEndPoint()));
         }
 
         return headers;
