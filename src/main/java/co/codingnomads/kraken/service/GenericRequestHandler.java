@@ -25,14 +25,18 @@ public class GenericRequestHandler {
     public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody)
             throws NullPointerException {
 
-        MultiValueMap<String, String> body;
+        //callCounter  isunderRateLimit method here
+        //only proceed is response is true
+        //otherwise throw exception
 
+        MultiValueMap<String, String> body;
+//
 //        if (requestBody != null) {
 //            body = requestBody.postParam();
 //        }
 //        else {
             body = null;
-       // }
+//        }
 
         // Method to set correctly the headers if Post or Get
         HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
