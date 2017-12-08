@@ -1,12 +1,10 @@
 package co.codingnomads.kraken.model;
 
-import co.codingnomads.kraken.model.account.response.GetAccountBalanceOutput;
-import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
+import co.codingnomads.kraken.model.market.response.GetOpenPositionsOutput;
 import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
 import co.codingnomads.kraken.model.market.response.GetServerTimeOutput;
 import co.codingnomads.kraken.model.market.response.GetTradableAssetPairsOutput;
-import co.codingnomads.kraken.model.trade.response.CancelOpenOrdersOutput;
-import org.springframework.core.ParameterizedTypeReference;
+import co.codingnomads.kraken.model.trade.response.QueryTradesInfoOutput;
 import org.springframework.http.HttpMethod;
 
 /**
@@ -20,7 +18,7 @@ public enum KrakenRequestEnum {
     GETTRADABLEASSETPAIRS("/0/public/AssetPairs", HttpMethod.GET, 1, GetTradableAssetPairsOutput.class),
 //    GETTICKERINFORMATION("/0/public/Ticker?pair=XBTEUR", HttpMethod.GET, 1,),
 //    GETOHLCDATA("/0/public/OHLC", HttpMethod.GET, 1),
-    GETORDERBOOK("/0/public/Depth?pair=XBTUSD", HttpMethod.GET, 1, GetOrderBookOutput.class);
+    GETORDERBOOK("/0/public/Depth?pair=XBTUSD", HttpMethod.GET, 1, GetOrderBookOutput.class),
 //    GETRECENTTRADES("/0/public/Trades?pair=XBTUSD", HttpMethod.GET, 1,),
 //    GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET, 1,),
 //    GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST, 1),
@@ -29,8 +27,8 @@ public enum KrakenRequestEnum {
 //    GETCLOSEDORDERS("/0/private/ClosedOrders", HttpMethod.POST, 1),
 //    QUERYORDERINFO("/0/private/QueryOrders", HttpMethod.POST, 1),
 //    GETTRADESHISTORY("/0/private/TradesHistory", HttpMethod.POST, 2),
-//    QUERYTRADESINFO("/0/private/QueryTrades", HttpMethod.POST, 1),
-//    GETOPENPOSITIONS("/0/private/OpenPositions", HttpMethod.POST, 1),
+    QUERYTRADESINFO("/0/private/QueryTrades", HttpMethod.POST, 1, QueryTradesInfoOutput.class),
+    GETOPENPOSITIONS("/0/private/OpenPositions",HttpMethod.POST, 1,GetOpenPositionsOutput.class);
 //    GETLEDGERSINFO("/0/private/Ledgers", HttpMethod.POST, 2),
 //    QUERYLEDGERS("/0/private/QueryLedgers", HttpMethod.POST, 2),
 //    GETTRADEVOLUME("/0/private/TradesVolume", HttpMethod.POST, 1),
