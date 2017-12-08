@@ -6,6 +6,7 @@ created by PopoPenguin on 11/29/17
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -19,23 +20,23 @@ public class KrakenAssetPairName {
     String aclass_quote;
     String quote;
     String lot;
-    int pair_decimals;
-    int lot_decimals;
-    int lot_multiplier;
+    BigDecimal pair_decimals;
+    BigDecimal lot_decimals;
+    BigDecimal lot_multiplier;
     List<Integer> leverage_buy;
     List<Integer> leverage_sell;
     List<KrakenFees> fees;
     List<KrakenFees> fees_maker;
     String fee_volume_currency;
-    int margin_call;
-    int margin_stop;
+    BigDecimal margin_call;
+    BigDecimal margin_stop;
 
     public KrakenAssetPairName(@JsonProperty("altname")String altname, @JsonProperty("aclass_base")String aclass_base, @JsonProperty("base")String base,
                                @JsonProperty("aclass_quote")String aclass_quote, @JsonProperty("quote")String quote, @JsonProperty("lot")String lot,
-                               @JsonProperty("pair_decimals")int pair_decimals, @JsonProperty("lot_decimals")int lot_decimals, @JsonProperty("lot_multiplier")int lot_multiplier,
+                               @JsonProperty("pair_decimals")BigDecimal pair_decimals, @JsonProperty("lot_decimals")BigDecimal lot_decimals, @JsonProperty("lot_multiplier")BigDecimal lot_multiplier,
                                @JsonProperty("leverage_buy")List<Integer> leverage_buy, @JsonProperty("leverage_sell")List<Integer> leverage_sell,
                                @JsonProperty("fees")List<KrakenFees> fees, @JsonProperty("fees_maker")List<KrakenFees> fees_maker, @JsonProperty("fee_volume_currency")String fee_volume_currency,
-                               @JsonProperty("margin_call")int margin_call, @JsonProperty("margin_stop")int margin_stop) {
+                               @JsonProperty("margin_call")BigDecimal margin_call, @JsonProperty("margin_stop")BigDecimal margin_stop) {
         this.altname = altname;
         this.aclass_base = aclass_base;
         this.base = base;
@@ -78,15 +79,15 @@ public class KrakenAssetPairName {
         return lot;
     }
 
-    public int getPair_decimals() {
+    public BigDecimal getPair_decimals() {
         return pair_decimals;
     }
 
-    public int getLot_decimals() {
+    public BigDecimal getLot_decimals() {
         return lot_decimals;
     }
 
-    public int getLot_multiplier() {
+    public BigDecimal getLot_multiplier() {
         return lot_multiplier;
     }
 
@@ -110,11 +111,11 @@ public class KrakenAssetPairName {
         return fee_volume_currency;
     }
 
-    public int getMargin_call() {
+    public BigDecimal getMargin_call() {
         return margin_call;
     }
 
-    public int getMargin_stop() {
+    public BigDecimal getMargin_stop() {
         return margin_stop;
     }
 

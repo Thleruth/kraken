@@ -3,6 +3,7 @@ package co.codingnomads.kraken;
 import co.codingnomads.kraken.model.*;
 //import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
 import co.codingnomads.kraken.model.market.pojos.KrakenServerTime;
+import co.codingnomads.kraken.model.market.response.GetOpenPositionsOutput;
 import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
 import co.codingnomads.kraken.model.market.response.GetRecentTradesOutput;
 import co.codingnomads.kraken.model.market.response.GetTradableAssetPairsOutput;
@@ -27,6 +28,7 @@ public class Controller {
         OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null);
         OutputWrapper recentTrades = handler.callAPI(KrakenRequestEnum.GETRECENTTRADES, null);
         OutputWrapper tradableAssetPairs = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS, null);
+//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, null);
 
 
         //ricky currnetly working gettickerinfo and getrecenttrades
@@ -39,12 +41,16 @@ public class Controller {
         String[] errors = orderBook.getError();
 
         //test for recentTrades
-        Map<String, GetRecentTradesOutput> resultsRecentTrades = (Map<String, GetRecentTradesOutput>) recentTrades.getResult();
-        String[] errorsRecentTrades = recentTrades.getError();
+        Map<String, GetRecentTradesOutput> recentTradesResult = (Map<String, GetRecentTradesOutput>) recentTrades.getResult();
+        String[] recentTradesError = recentTrades.getError();
 
         //test for tradableAssetPairs
-        Map<String, GetTradableAssetPairsOutput> resultTradeableAssetPairs = (Map<String, GetTradableAssetPairsOutput>) tradableAssetPairs.getResult();
-        String[] errorsTradableAssetPairs = tradableAssetPairs.getError();
+        Map<String, GetTradableAssetPairsOutput> tradeableAssetPairsResult = (Map<String, GetTradableAssetPairsOutput>) tradableAssetPairs.getResult();
+        String[] tradableAssetPairsError = tradableAssetPairs.getError();
+
+        //test for openpositions
+//        Map<String, GetOpenPositionsOutput> openPositionsResult = (Map<String, GetOpenPositionsOutput>) openPositions.getResult();
+//        String[] openPositionError = openPositions.getError();
 
 
         //Another exmaple:

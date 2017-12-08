@@ -15,9 +15,19 @@ public enum KrakenRequestEnum {
     GETORDERBOOK("/0/public/Depth?pair=XBTUSD", HttpMethod.GET),
     GETRECENTTRADES("/0/public/Trades?pair=XBTUSD", HttpMethod.GET),
     GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET),
-    GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST),
     GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST),
-    GETTRADEHISTORY("/0/private/TradesHistory", HttpMethod.POST);
+    GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST),
+    GETOPENORDERS("/0/private/OpenOrders", HttpMethod.POST),
+    GETCLOSEDORDERS("/0/private/ClosedOrders", HttpMethod.POST),
+    GETQUERYORDERSINFO("/0/private/QueryOrders", HttpMethod.POST),
+    GETTRADEHISTORY("/0/private/TradesHistory", HttpMethod.POST),
+    GETQUERYTRADESINFO("/0/private/QueryTrades", HttpMethod.POST),
+    GETOPENPOSITIONS("/0/private/OpenPositions", HttpMethod.POST),
+    GETLEDGERSINFO("/0/private/Ledgers", HttpMethod.POST),
+    GETQUERYLEDGERS("/0/private/QueryLedgers", HttpMethod.POST),
+    GETTRADEVOLUME("/0/private/TradeVolume", HttpMethod.POST),
+    GETADDSTANDARDORDER("/0/private/AddOrder", HttpMethod.POST),
+    GETCANCELOPENORDER("/0/private/CancelOrder", HttpMethod.POST);
 
     private final String domain = "https://api.kraken.com";
     private final String endPoint;

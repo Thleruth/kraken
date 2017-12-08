@@ -132,8 +132,8 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetTradeHistoryOutput>>(){};
 //            case "QUERYTRADESINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<QueryTradesInfoOutput>>(){};
-//            case "GETOPENPOSITIONS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetOpenPositionsOutput>>(){};
+            case "GETOPENPOSITIONS":
+                return GetOpenPositionsOutput.class;
 //            case "GETLEDGERSINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<GetLedgersInfoOutput>>(){};
 //            case "QUERYLEDGERS":
