@@ -42,18 +42,11 @@ public class Controller {
 //        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
 //        String[] serverTimeErrors = serverTime.getError();
 
-        Map<String, CancelOpenOrderOutput> results2 = (Map<String, CancelOpenOrderOutput>) cancelOrder.getResult();
-        String[] cancelOrderErrors = cancelOrder.getError();
+//        Map<String, CancelOpenOrderOutput> results2 = (Map<String, CancelOpenOrderOutput>) cancelOrder.getResult();
+//        String[] cancelOrderErrors = cancelOrder.getError();
 
 
         System.out.println("Put a break point HERE and DEBUG me");
-
-        // @meg - Cancel open order testing
-//        CancelOpenOrderRequestBody coorb = new CancelOpenOrderRequestBody(1);
-//        GenericRequestHandler handler1 = new GenericRequestHandler();
-        //this doesn't work because callAPI 2nd param is GetBalanceRequestBody object.
-        //Don't know if this is intentional or just how Thomas was testing if it works.
-//        OutputWrapper ow = handler1.callAPI(KrakenRequestEnum.CANCELOPENORDER, coorb);
 
     }
 }
