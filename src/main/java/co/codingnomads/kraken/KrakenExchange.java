@@ -40,10 +40,11 @@ public class KrakenExchange {
      * @return
      * @throws KrakenException
      */
-    public Map<String, KrakenOrderBook> getOrderBook(String pair) throws KrakenException{
+    // pair required, count optional
+    public Map<String, KrakenOrderBook> getOrderBook(String pair, String count) throws KrakenException{
 
         OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK,
-                null, authentication, pair, "gfdsg");
+                null, authentication, pair, count, "another query");
 
         if (orderBook.getError().length > 0){
             throw new KrakenException(orderBook.getError(), "General exception");

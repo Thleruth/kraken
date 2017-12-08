@@ -14,19 +14,20 @@ public class Controller {
         KrakenExchange exchange = new KrakenExchange(
                 "Insert API-Key",
                 "Insert API-Secret",
-                4);
+                3);
 
-        GenericRequestHandler handler = new GenericRequestHandler();
+        // @meg - This now happens in KrakenExchange:
+//        GenericRequestHandler handler = new GenericRequestHandler();
+//
+//        RequestBodyGeneric a = new GetTradeBalanceRequestBody(null, "ZEUR");
+//
+//        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, exchange.getApiAuthentication());
 
-        RequestBodyGeneric a = new GetTradeBalanceRequestBody(null, "ZEUR");
-
-        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, exchange.getApiAuthentication());
-        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, exchange.getApiAuthentication());
+        //        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, exchange.getApiAuthentication());
 //        OutputWrapper recentTrades = handler.callAPI(KrakenRequestEnum.GETRECENTTRADES, null);
 //        OutputWrapper tradableAssetPairs = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS, null);
 //        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, null);
 
-        //ricky currnetly working gettickerinfo and getrecenttrades
 
 
 //        ObjectMapper mapper = new ObjectMapper();

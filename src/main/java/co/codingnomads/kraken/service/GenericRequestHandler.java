@@ -15,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class GenericRequestHandler {
 
-    // for now passing in KrakenExchange but later will be removed as KrakenExchange will call this method parametized
     public OutputWrapper callAPI(KrakenRequestEnum krakenRequest,
                                  RequestBodyGeneric requestBody,
                                  ApiAuthentication apiAuthentication,
