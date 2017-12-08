@@ -1,12 +1,9 @@
-package co.codingnomads.kraken.model.market.output;
-
-import co.codingnomads.kraken.model.OutputGeneric;
+package co.codingnomads.kraken.model.market.pojos;
 
 /**
- * Created by Thomas Leruth on 11/29/17
+ * Created by ryandesmond on 12/6/17.
  */
-
-public class GetServerTimeOutput extends OutputGeneric {
+public class KrakenServerTime {
 
     // as unix timestamp
     String unixtime;
@@ -28,6 +25,7 @@ public class GetServerTimeOutput extends OutputGeneric {
     public void setRfc1123(String rfc1123) {
         this.rfc1123 = rfc1123;
     }
+
 
 
 }

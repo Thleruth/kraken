@@ -1,7 +1,8 @@
-package co.codingnomads.kraken.model.account;
+package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 
+//need to be reworked for JSON and have to learn how to post the body correctly when multiple elements
 public class GetTradeBalanceRequestBody extends RequestBodyGeneric {
 
     // asset class (optional)
@@ -14,6 +15,9 @@ public class GetTradeBalanceRequestBody extends RequestBodyGeneric {
         super();
         this.assetClass = assetClass;
         this.asset = asset;
+    }
+
+    public GetTradeBalanceRequestBody(){
     }
 
     public String getAssetClass() {
@@ -34,8 +38,16 @@ public class GetTradeBalanceRequestBody extends RequestBodyGeneric {
 
     @Override
     public String toString() {
-        return "assetClass='" + assetClass + '\'' +
+        return "GetTradeBalanceRequestBody{" +
+                "assetClass='" + assetClass + '\'' +
                 ", asset='" + asset + '\'' +
-                ", nonce='" + nonce + '\'';
+                '}';
     }
+
+    //    @Override
+//    public String toString() {
+//        return "assetClass='" + assetClass + '\'' +
+//                ", asset='" + asset + '\'' +
+//                ", nonce='" + nonce + '\'';
+//    }
 }

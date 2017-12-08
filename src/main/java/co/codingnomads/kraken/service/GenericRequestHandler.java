@@ -1,20 +1,23 @@
 package co.codingnomads.kraken.service;
 
 import co.codingnomads.kraken.model.*;
-import co.codingnomads.kraken.model.account.output.GetBalanceOutput;
-import co.codingnomads.kraken.model.market.output.GetServerTimeOutput;
-import co.codingnomads.kraken.model.market.output.GetTradableAssetPairsOutput;
-import co.codingnomads.kraken.model.market.output.GetTradeBalanceOutput;
+//import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
+//import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
+import co.codingnomads.kraken.model.market.response.GetServerTimeOutput;
+
+
+import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
+import co.codingnomads.kraken.model.market.response.GetRecentTradesOutput;
+import co.codingnomads.kraken.model.market.response.GetTickerInformationOutput;
+
 import co.codingnomads.kraken.util.TempConstant;
-import org.springframework.core.ParameterizedTypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.*;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Arrays;
 
 public class GenericRequestHandler {
 
@@ -22,45 +25,57 @@ public class GenericRequestHandler {
     public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody)
             throws NullPointerException {
 
+        MultiValueMap<String, String> body;
+
+//        if (requestBody != null) {
+//            body = requestBody.postParam();
+//        }
+//        else {
+            body = null;
+       // }
+
         // Method to set correctly the headers if Post or Get
         HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
 
         //the entity with the body and the headers
-        HttpEntity entity = new HttpEntity(requestBody, headers);
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 
         // need an Autowired version of it but I am getting a null pointer issue
         RestTemplate restTemplate = new RestTemplate();
-        // Not sure about this, can't simply use JSON one?
-        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
-        mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN));
-        restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter);
 
         // get the correct Response Wrapper (with the correct generic result)
-        ParameterizedTypeReference parameterizedTypeReference =
-                outputPojoClassSelector(krakenRequest.name());
+        Class pojoClass = outputPojoClassSelector(krakenRequest.name());
 
-        // let the restTemplate work his magic
-        // not working so far with POST method, the result in the wrapper is null, and nothing is added to the OutputWrapper
-        // I have a feeling the issue is with the restTemplate
-        ResponseEntity response = restTemplate.exchange(krakenRequest.getFullURL(), krakenRequest.getHttpMethod(),
-                entity, parameterizedTypeReference);
+        ResponseEntity response = restTemplate.exchange(
+                krakenRequest.getFullURL(),
+                krakenRequest.getHttpMethod(),
+                entity,
+                pojoClass);
 
         // can make a method to check this outside this method
         try {
             if (isSuccessful(response.getStatusCode())) {
-                return (OutputWrapper) response.getBody();
+                if (krakenRequest.getHttpMethod().matches("GET")) {
+                    return (OutputWrapper) response.getBody();
+                }
+                return null;//new OutputWrapper(mapToWrapper(response, pojoClass));
             } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
         } catch (RestClientException e) {
             throw e;
         }
+    }
+    // I hate that I use Object I would love use pojoClass but I do not know how
+    // to initiliaze an object with a variable holding a class
+    // or with generic
+    public Object mapToWrapper(ResponseEntity response, Class pojoClass) {
 
+        Object map = ((OutputWrapper) response.getBody()).getResult();
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.convertValue(map,pojoClass);
     }
 
     public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody) {
-
         HttpHeaders headers = new HttpHeaders();
-
-        headers.setContentType(MediaType.APPLICATION_JSON);
 
         if (krakenRequest.getHttpMethod().matches("POST")) {
 
@@ -69,6 +84,9 @@ public class GenericRequestHandler {
             headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
                     requestBody.toString(), TempConstant.ApiSecret, krakenRequest.getEndPoint()));
         }
+
+        // headers.setContentType(MediaType.APPLICATION_JSON);
+
         return headers;
     }
 
@@ -84,28 +102,30 @@ public class GenericRequestHandler {
         else throw new RestClientException(status.getReasonPhrase());
     }
 
-    public static ParameterizedTypeReference outputPojoClassSelector(String methodName) {
+    public static Class outputPojoClassSelector(String methodName) {
         switch (methodName) {
             case "GETSERVERTIME":
-                return new ParameterizedTypeReference<OutputWrapper<GetServerTimeOutput>>(){};
+                return GetServerTimeOutput.class;
 //            case "GETASSETINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<GetAssetInfoOutput>>(){};
-            case "GETTRADABLEASSETPAIRS":
-                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
+//            case "GETTRADABLEASSETPAIRS":
+//                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
 //            case "GETTICKERINFORMATION":
 //               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
+            case "GETTICKERINFORMATION":
+               return GetTickerInformationOutput.class;
 //            case "GETOHLCDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
-//            case "GETORDERBOOK":
-//                return new ParameterizedTypeReference<OutputWrapper<GetOrderBookOutput>>(){};
-//            case "GETRECENTTRADES":
-//                return new ParameterizedTypeReference<OutputWrapper<GetRecentTradesOutput>>(){};
+            case "GETORDERBOOK":
+                return GetOrderBookOutput.class;
+           case "GETRECENTTRADES":
+                return GetRecentTradesOutput.class;
 //            case "GETRECENTSPREADDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
-            case "GETACCOUNTBALANCE":
-                return new ParameterizedTypeReference<OutputWrapper<GetBalanceOutput>>(){};
+//            case "GETACCOUNTBALANCE":
+//                return GetBalanceOutput.class;
 //            case "GETTRADEBALANCE":
-//                return new ParameterizedTypeReference<OutputWrapper<GetTradeBalanceOutput>>(){};
+//                return GetTradeBalanceOutput.class;
 //            case "GETOPENORDERS":
 //                return new ParameterizedTypeReference<OutputWrapper<GetOpenOrdersOutput>>(){};
 //            case "GETCLOSEDORDERS":

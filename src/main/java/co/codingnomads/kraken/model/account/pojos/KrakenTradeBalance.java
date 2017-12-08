@@ -1,8 +1,9 @@
-package co.codingnomads.kraken.model.market.output;
+package co.codingnomads.kraken.model.account.pojos;
 
-import co.codingnomads.kraken.model.OutputGeneric;
-
-public class GetTradeBalanceOutput extends OutputGeneric {
+/**
+ * Created by ryandesmond on 12/6/17.
+ */
+public class KrakenTradeBalance {
 
     //equivalent balance (combined balance of all currencies)
     String eb;
@@ -93,9 +94,6 @@ public class GetTradeBalanceOutput extends OutputGeneric {
 
     public void setMl(String ml) {
         this.ml = ml;
-    }
-
-    public GetTradeBalanceOutput() {
     }
 
 }

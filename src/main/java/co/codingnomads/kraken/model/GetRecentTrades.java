@@ -7,7 +7,7 @@ created by PopoPenguin on 11/29/17
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetRecentTrades extends OutputGeneric {
+public class GetRecentTrades {
 
     String pairName;
     Integer[][] entries;
