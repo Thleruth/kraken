@@ -1,9 +1,10 @@
 package co.codingnomads.kraken.service;
 
-import co.codingnomads.kraken.KrakenExchange;
 import co.codingnomads.kraken.model.*;
-
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -16,12 +17,15 @@ public class GenericRequestHandler {
     public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication)
             throws NullPointerException {
 
+        //callCounter  isunderRateLimit method here
+        //only proceed is response is true
+        //otherwise throw exception
+
         MultiValueMap<String, String> body;
 
         if (requestBody != null) {
             body = requestBody.postParam();
-        }
-        else {
+        } else {
             body = null;
         }
 
@@ -72,6 +76,7 @@ public class GenericRequestHandler {
             throw new HttpClientErrorException(status);
         else if (status.is5xxServerError())
             throw new HttpServerErrorException(status);
-        else throw new RestClientException(status.getReasonPhrase());
+        else
+            throw new RestClientException(status.getReasonPhrase());
     }
 }

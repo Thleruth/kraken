@@ -1,10 +1,6 @@
 package co.codingnomads.kraken;
-
 import co.codingnomads.kraken.model.*;
-import co.codingnomads.kraken.model.account.request.GetAccountBalanceRequestBody;
 import co.codingnomads.kraken.model.account.request.GetTradeBalanceRequestBody;
-import co.codingnomads.kraken.model.account.response.GetAccountBalanceOutput;
-import co.codingnomads.kraken.model.trade.request.CancelOpenOrdersRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 /**
@@ -24,9 +20,43 @@ public class Controller {
 
         RequestBodyGeneric a = new GetTradeBalanceRequestBody(null, "ZEUR");
 
-        OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETTRADEBALANCE, a, exchange.apiAuthentication);
+        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, exchange.getApiAuthentication());
+        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, exchange.getApiAuthentication());
+//        OutputWrapper recentTrades = handler.callAPI(KrakenRequestEnum.GETRECENTTRADES, null);
+//        OutputWrapper tradableAssetPairs = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS, null);
+//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, null);
 
-        System.out.println(d.toString());
+        //ricky currnetly working gettickerinfo and getrecenttrades
+
+
+//        ObjectMapper mapper = new ObjectMapper();
+        //get results from OutputWrapper "orderBook"
+        //Map<String, GetOrderBookOutput> results = (Map<String, GetOrderBookOutput>) orderBook.getResult();
+        //If there are any errors, they will be in orderBook.getErrors()
+        //String[] errors = orderBook.getError();
+
+        //test for recentTrades
+//        Map<String, GetRecentTradesOutput> recentTradesResult = (Map<String, GetRecentTradesOutput>) recentTrades.getResult();
+//        String[] recentTradesError = recentTrades.getError();
+
+        //test for tradableAssetPairs
+//        Map<String, GetTradableAssetPairsOutput> tradeableAssetPairsResult = (Map<String, GetTradableAssetPairsOutput>) tradableAssetPairs.getResult();
+//        String[] tradableAssetPairsError = tradableAssetPairs.getError();
+
+        //test for openpositions
+//        Map<String, GetOpenPositionsOutput> openPositionsResult = (Map<String, GetOpenPositionsOutput>) openPositions.getResult();
+//        String[] openPositionError = openPositions.getError();
+
+
+        //Another exmaple:
+//        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
+//        String[] serverTimeErrors = serverTime.getError();
+
+//        Map<String, CancelOpenOrderOutput> results2 = (Map<String, CancelOpenOrderOutput>) cancelOrder.getResult();
+//        String[] cancelOrderErrors = cancelOrder.getError();
+
+
+
 
     }
 }
