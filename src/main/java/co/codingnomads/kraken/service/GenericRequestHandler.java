@@ -3,13 +3,12 @@ package co.codingnomads.kraken.service;
 import co.codingnomads.kraken.model.*;
 //import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
 //import co.codingnomads.kraken.model.account.response.GetTradeBalanceOutput;
+import co.codingnomads.kraken.model.market.response.*;
 import co.codingnomads.kraken.model.market.response.GetServerTimeOutput;
-
-
 import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
 import co.codingnomads.kraken.model.market.response.GetRecentTradesOutput;
 import co.codingnomads.kraken.model.market.response.GetTickerInformationOutput;
-
+import co.codingnomads.kraken.model.trade.response.CancelOpenOrderOutput;
 import co.codingnomads.kraken.util.TempConstant;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.*;
@@ -30,13 +29,12 @@ public class GenericRequestHandler {
         //otherwise throw exception
 
         MultiValueMap<String, String> body;
-//
-//        if (requestBody != null) {
-//            body = requestBody.postParam();
-//        }
-//        else {
+
+        if (requestBody != null) {
+            body = requestBody.postParam();
+        } else {
             body = null;
-//        }
+        }
 
         // Method to set correctly the headers if Post or Get
         HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody);
@@ -54,6 +52,7 @@ public class GenericRequestHandler {
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
+                //OutputWrapper.class);
                 pojoClass);
 
         // can make a method to check this outside this method
@@ -63,11 +62,13 @@ public class GenericRequestHandler {
                     return (OutputWrapper) response.getBody();
                 }
                 return null;//new OutputWrapper(mapToWrapper(response, pojoClass));
-            } else throw new RestClientException(response.getStatusCode().getReasonPhrase());
+            } else
+                throw new RestClientException(response.getStatusCode().getReasonPhrase());
         } catch (RestClientException e) {
             throw e;
         }
     }
+
     // I hate that I use Object I would love use pojoClass but I do not know how
     // to initiliaze an object with a variable holding a class
     // or with generic
@@ -75,7 +76,7 @@ public class GenericRequestHandler {
 
         Object map = ((OutputWrapper) response.getBody()).getResult();
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.convertValue(map,pojoClass);
+        return mapper.convertValue(map, pojoClass);
     }
 
     public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody) {
@@ -87,6 +88,13 @@ public class GenericRequestHandler {
             headers.set("API-Key", TempConstant.ApiKey);
             headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
                     requestBody.toString(), TempConstant.ApiSecret, krakenRequest.getEndPoint()));
+
+            // @meg- Here I tried changing the order or items, but still get all nulls
+//            headers.set("API-Sign",
+//                    KrakenSignature.ApiSignCreator(krakenRequest.getFullURL(),
+//                    requestBody.getNonce(),
+//                    requestBody.toString(),
+//                    TempConstant.ApiSecret));
         }
 
         // headers.setContentType(MediaType.APPLICATION_JSON);
@@ -103,7 +111,8 @@ public class GenericRequestHandler {
             throw new HttpClientErrorException(status);
         else if (status.is5xxServerError())
             throw new HttpServerErrorException(status);
-        else throw new RestClientException(status.getReasonPhrase());
+        else
+            throw new RestClientException(status.getReasonPhrase());
     }
 
     public static Class outputPojoClassSelector(String methodName) {
@@ -112,17 +121,17 @@ public class GenericRequestHandler {
                 return GetServerTimeOutput.class;
 //            case "GETASSETINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<GetAssetInfoOutput>>(){};
-//            case "GETTRADABLEASSETPAIRS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetTradableAssetPairsOutput>>(){};
+            case "GETTRADABLEASSETPAIRS":
+                return GetTradableAssetPairsOutput.class;
 //            case "GETTICKERINFORMATION":
 //               return new ParameterizedTypeReference<OutputWrapper<GetTickerInformationOutput>>(){};
             case "GETTICKERINFORMATION":
-               return GetTickerInformationOutput.class;
+                return GetTickerInformationOutput.class;
 //            case "GETOHLCDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetOHLCDataOutput>>(){};
             case "GETORDERBOOK":
                 return GetOrderBookOutput.class;
-           case "GETRECENTTRADES":
+            case "GETRECENTTRADES":
                 return GetRecentTradesOutput.class;
 //            case "GETRECENTSPREADDATA":
 //                return new ParameterizedTypeReference<OutputWrapper<GetRecentSpreadDataOutput>>(){};
@@ -140,8 +149,8 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetTradeHistoryOutput>>(){};
 //            case "QUERYTRADESINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<QueryTradesInfoOutput>>(){};
-//            case "GETOPENPOSITIONS":
-//                return new ParameterizedTypeReference<OutputWrapper<GetOpenPositionsOutput>>(){};
+            case "GETOPENPOSITIONS":
+                return GetOpenPositionsOutput.class;
 //            case "GETLEDGERSINFO":
 //                return new ParameterizedTypeReference<OutputWrapper<GetLedgersInfoOutput>>(){};
 //            case "QUERYLEDGERS":
@@ -150,8 +159,8 @@ public class GenericRequestHandler {
 //                return new ParameterizedTypeReference<OutputWrapper<GetGetTradeVolumeOutput>>(){};
 //            case "ADDSTRANDARDORDERS":
 //               return new ParameterizedTypeReference<OutputWrapper<AddStandardOrdersOutput>>(){};
-//            case "CANCELOPENORDERS":
-//                return new ParameterizedTypeReference<OutputWrapper<CancelOpenOrdersOutput>>(){};
+            case "CANCELOPENORDER":
+                return CancelOpenOrderOutput.class;
         }
         return null;
     }
