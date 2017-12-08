@@ -9,27 +9,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class KrakenServerTime {
 
     // as unix timestamp
-    String unixtime;
+    long unixtime;
     // as RFC 1123 time format
     String rfc1123;
 
-//    public String getUnixtime() {
-//        return unixtime;
-//    }
-//
-//    public void setUnixtime(String unixtime) {
-//        this.unixtime = unixtime;
-//    }
-//
-//    public String getRfc1123() {
-//        return rfc1123;
-//    }
-//
-//    public void setRfc1123(String rfc1123) {
-//        this.rfc1123 = rfc1123;
-//    }
-
-    public KrakenServerTime(@JsonProperty("unixtime") String unixtime,
+    public KrakenServerTime(@JsonProperty("unixtime") long unixtime,
                             @JsonProperty("rfc1123") String rfc1123) {
         this.unixtime = unixtime;
         this.rfc1123 = rfc1123;

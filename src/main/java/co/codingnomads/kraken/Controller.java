@@ -24,7 +24,6 @@ public class Controller {
 
         RequestBodyGeneric a = new GetTradeBalanceRequestBody(null, "ZEUR");
 
-        // passing exchange as an argument is temporary (until we have the KrakenExchange class being working fully)
         OutputWrapper d = handler.callAPI(KrakenRequestEnum.GETTRADEBALANCE, a, exchange.apiAuthentication);
 
         System.out.println(d.toString());

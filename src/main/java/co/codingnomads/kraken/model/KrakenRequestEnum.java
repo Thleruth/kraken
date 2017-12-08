@@ -19,7 +19,7 @@ public enum KrakenRequestEnum {
 //    GETTRADABLEASSETPAIRS("/0/public/AssetPairs", HttpMethod.GET),
 //    GETTICKERINFORMATION("/0/public/Ticker?pair=XBTUSD", HttpMethod.GET, new ParameterizedTypeReference<GetTickerInformationOutput>(){}),
 //    GETOHLCDATA("/0/public/OHLC", HttpMethod.GET),
-    GETORDERBOOK("/0/public/Depth?pair=XBUSD", HttpMethod.GET, GetOrderBookOutput.class),
+    GETORDERBOOK("/0/public/Depth?pair=XBTUSD", HttpMethod.GET, GetOrderBookOutput.class),
 //    GETRECENTRADES("/0/public/Trades", HttpMethod.GET),
 //    GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET),
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST, GetTradeBalanceOutput.class),
