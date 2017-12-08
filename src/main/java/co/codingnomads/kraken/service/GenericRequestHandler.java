@@ -5,16 +5,21 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+@Service
 public class GenericRequestHandler {
 
     // for now passing in KrakenExchange but later will be removed as KrakenExchange will call this method parametized
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication)
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest,
+                                 RequestBodyGeneric requestBody,
+                                 ApiAuthentication apiAuthentication,
+                                 String ... queryParams)
             throws NullPointerException {
 
         //callCounter  isunderRateLimit method here
@@ -31,6 +36,9 @@ public class GenericRequestHandler {
 
         // Method to set correctly the headers if Post or Get
         HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody, apiAuthentication);
+
+        // Call a method to set the fullURL with any arguments that have been passed in, pass it queryParams
+        // if queryPArams>0, format correctly
 
         //the entity with the body and the headers
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);

@@ -20,7 +20,7 @@ public enum KrakenRequestEnum {
     GETTRADABLEASSETPAIRS("/0/public/AssetPairs", HttpMethod.GET, 1, GetTradableAssetPairsOutput.class),
 //    GETTICKERINFORMATION("/0/public/Ticker?pair=XBTEUR", HttpMethod.GET, 1,),
 //    GETOHLCDATA("/0/public/OHLC", HttpMethod.GET, 1),
-    GETORDERBOOK("/0/public/Depth?pair=XBTUSD", HttpMethod.GET, 1, GetOrderBookOutput.class);
+    GETORDERBOOK("/0/public/Depth?pair=", HttpMethod.GET, 1, GetOrderBookOutput.class);
 //    GETRECENTTRADES("/0/public/Trades?pair=XBTUSD", HttpMethod.GET, 1,),
 //    GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET, 1,),
 //    GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST, 1),
@@ -70,6 +70,14 @@ public enum KrakenRequestEnum {
         this.callAmount = callAmount;
         this.outputClass = outputClass;
         this.fullURL = domain + endPoint;
+    }
+
+    KrakenRequestEnum(String endPoint, HttpMethod httpMethod, int callAmount, Class outputClass, String pair) {
+        this.endPoint = endPoint + pair;
+        this.httpMethod = httpMethod;
+        this.callAmount = callAmount;
+        this.outputClass = outputClass;
+        this.fullURL = domain + endPoint + pair;
     }
 
     public int getCallAmount() {
