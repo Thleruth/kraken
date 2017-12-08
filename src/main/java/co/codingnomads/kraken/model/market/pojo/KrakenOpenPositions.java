@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.market.pojos;
+package co.codingnomads.kraken.model.market.pojo;
 
 /*
 created by PopoPenguin on 11/29/17

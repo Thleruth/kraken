@@ -4,8 +4,7 @@ import co.codingnomads.kraken.exception.KrakenException;
 import co.codingnomads.kraken.model.ApiAuthentication;
 import co.codingnomads.kraken.model.KrakenRequestEnum;
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
-import co.codingnomads.kraken.model.market.response.pojo.KrakenOrderBook;
+import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 

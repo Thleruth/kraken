@@ -1,7 +1,7 @@
 package co.codingnomads.kraken.model.market.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.market.response.pojo.KrakenServerTime;
+import co.codingnomads.kraken.model.market.pojo.KrakenServerTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

@@ -1,6 +1,5 @@
-package co.codingnomads.kraken.model.market.pojos;
+package co.codingnomads.kraken.model.market.pojo;
 
-import co.codingnomads.kraken.model.RequestBodyGeneric;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
