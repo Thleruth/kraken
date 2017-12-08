@@ -29,7 +29,6 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric{
     // Validate inputs only, do not submit order (optional)
     String validate;
 
-    // TODO: What is this?
 //    optional closing order to add to system when order gets filled:
 //    close[ordertype] = order type
 //    close[price] = price
