@@ -1,19 +1,17 @@
-package co.codingnomads.kraken.model.market;
+package co.codingnomads.kraken.model.market.pojos;
 
 /*
 created by PopoPenguin on 11/29/17
 */
 
-import co.codingnomads.kraken.model.market.Fees;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 
-public class AssetPairName {
+public class KrakenAssetPairName {
 
-    //Pojo of AssetPairName output
+    //Pojo of KrakenAssetPairName output
 
     String altname;
     String aclass_base;
@@ -26,16 +24,18 @@ public class AssetPairName {
     int lot_multiplier;
     List<Integer> leverage_buy;
     List<Integer> leverage_sell;
-    List<Fees> fees;
-    List<Fees> fees_maker;
+    List<KrakenFees> fees;
+    List<KrakenFees> fees_maker;
     String fee_volume_currency;
     int margin_call;
     int margin_stop;
 
-    public AssetPairName(String altname, String aclass_base, String base, String aclass_quote, String quote, String lot,
-                         int pair_decimals, int lot_decimals, int lot_multiplier, List<Integer> leverage_buy,
-                         List<Integer> leverage_sell, List<Fees> fees, List<Fees> fees_maker, String fee_volume_currency,
-                         int margin_call, int margin_stop) {
+    public KrakenAssetPairName(@JsonProperty("altname")String altname, @JsonProperty("aclass_base")String aclass_base, @JsonProperty("base")String base,
+                               @JsonProperty("aclass_quote")String aclass_quote, @JsonProperty("quote")String quote, @JsonProperty("lot")String lot,
+                               @JsonProperty("pair_decimals")int pair_decimals, @JsonProperty("lot_decimals")int lot_decimals, @JsonProperty("lot_multiplier")int lot_multiplier,
+                               @JsonProperty("leverage_buy")List<Integer> leverage_buy, @JsonProperty("leverage_sell")List<Integer> leverage_sell,
+                               @JsonProperty("fees")List<KrakenFees> fees, @JsonProperty("fees_maker")List<KrakenFees> fees_maker, @JsonProperty("fee_volume_currency")String fee_volume_currency,
+                               @JsonProperty("margin_call")int margin_call, @JsonProperty("margin_stop")int margin_stop) {
         this.altname = altname;
         this.aclass_base = aclass_base;
         this.base = base;
@@ -98,11 +98,11 @@ public class AssetPairName {
         return leverage_sell;
     }
 
-    public List<Fees> getFees() {
+    public List<KrakenFees> getFees() {
         return fees;
     }
 
-    public List<Fees> getFees_maker() {
+    public List<KrakenFees> getFees_maker() {
         return fees_maker;
     }
 
@@ -120,7 +120,7 @@ public class AssetPairName {
 
     @Override
     public String toString() {
-        return "AssetPairName{" +
+        return "KrakenAssetPairName{" +
                 "altname='" + altname + '\'' +
                 ", aclass_base='" + aclass_base + '\'' +
                 ", base='" + base + '\'' +
