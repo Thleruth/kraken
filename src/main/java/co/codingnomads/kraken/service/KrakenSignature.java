@@ -14,7 +14,7 @@ import static co.codingnomads.kraken.util.EncodingUtil.*;
 public class KrakenSignature {
 
     /**
-     * Make the API-Sign based on Kraken requirment
+     * Make the API-Sign based on Kraken requirement
      * @return the message to be used for POST request headers
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeyException

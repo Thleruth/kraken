@@ -1,7 +1,7 @@
 package co.codingnomads.kraken.service;
 
 import co.codingnomads.kraken.exception.RateLimitException;
-import co.codingnomads.kraken.model.ApiKey;
+import co.codingnomads.kraken.model.ApiAuthentication;
 import co.codingnomads.kraken.model.KrakenRequestEnum;
 import org.springframework.stereotype.Service;
 
@@ -64,18 +64,18 @@ public class CallCounter {
 
 
     //method to track the backlogger by tier level
-    public static void throttleByTier(ApiKey key) throws RateLimitException {
+    public static void throttleByTier(ApiAuthentication apiAuthentication) throws RateLimitException {
 
         //if backlog greater than 10 throw custom exception that the backlog is full, please wait at least 30 seconds
         //we do not want the backlog to be greater than 10
 
-        if (key.getBackLog() > 10) {
+        if (apiAuthentication.getBackLog() > 10) {
 
 
             throw new RateLimitException("Backlog is full, please wait at least 30 seconds");
         }
         //add one to the backlog
-        key.setBackLog(key.getBackLog() + 1);
+        apiAuthentication.setBackLog(apiAuthentication.getBackLog() + 1);
 
 
         try {
@@ -86,17 +86,17 @@ public class CallCounter {
             int tierDelay;
 
             //if it is tierLevel 2, tierdelay is three seconds
-            if (key.getTierLevel() == 2) {
+            if (apiAuthentication.getTierLevel() == 2) {
 
                 tierDelay = 3000;
             }
             //if it is tierlevel 3, tierdelay is 2 seconds
-            else if (key.getTierLevel() == 3) {
+            else if (apiAuthentication.getTierLevel() == 3) {
 
                 tierDelay = 2000;
             }
             //if it is thierlevel 4, tierdelya is 1 second
-            else if (key.getTierLevel() == 4) {
+            else if (apiAuthentication.getTierLevel() == 4) {
 
                 tierDelay = 1000;
 
@@ -104,14 +104,14 @@ public class CallCounter {
             // else tierdelay is zero
             else {
 
-                tierDelay = 0;
+                tierDelay = 3000;
             }
             //print out the time the thread will sleep so the user knows
-            System.out.println("Rate Limit Throttled - The Thread will sleep for" + " " + (key.getBackLog() * tierDelay) / 1000 + " "+"seconds");
+            System.out.println("Rate Limit Throttled - The Thread will sleep for" + " " + (apiAuthentication.getBackLog() * tierDelay) / 1000 + " "+"seconds");
 
             //make the thread sleep by the tier delay * the backlog number
             //so if 6 threads were in the queue and the last thread was tier 2 the thread would sleep for 18 seconds
-            Thread.sleep((key.getBackLog() * tierDelay));
+            Thread.sleep((apiAuthentication.getBackLog() * tierDelay));
 
             //print out that the thread is resumed
             System.out.println("Thread resumed");
@@ -122,13 +122,13 @@ public class CallCounter {
 
         }
         //subtract one from the backlog after the thread runs because it is no longer in the backlog
-        key.setBackLog(key.getBackLog() - 1);
+        apiAuthentication.setBackLog(apiAuthentication.getBackLog() - 1);
     }
 
 
     //methods returns true if the api can be called, and returns false if the api can not be called
 
-    public static boolean isUnderRateLimit(ApiKey key, KrakenRequestEnum krakenRequestEnum) throws RateLimitException {
+    public static boolean isUnderRateLimit(ApiAuthentication apiAuthentication, KrakenRequestEnum krakenRequestEnum) throws RateLimitException {
 
 
         // get the number of calls charged / method taken in by the kraken enum
@@ -136,16 +136,16 @@ public class CallCounter {
 
 
         // find the max amount of calls you are able to make based on the tier level
-        int rateLimit = rateLimitCalc(key.getTierLevel());
+        int rateLimit = rateLimitCalc(apiAuthentication.getTierLevel());
 
         // the amount of seconds needed to gain 1 call back based on tier level
-        int callDecreaser = callDecreaserCalc(key.getTierLevel());
+        int callDecreaser = callDecreaserCalc(apiAuthentication.getTierLevel());
 
         //the time you are making the call = current time
         long callTime = System.currentTimeMillis();
 
         // the difference in time between the current time and the time of the last api call
-        long timeDifferenceInMillis = (callTime - key.getLastCallTime().getTime());
+        long timeDifferenceInMillis = (callTime - apiAuthentication.getLastCallTime().getTime());
 
 
         //callGained is the maxNumber of calls a method can get back
@@ -159,7 +159,7 @@ public class CallCounter {
         }
 
         //new variable  that calcs the updated calls by getting the calls made and subtracting the amount of calls gained
-        double updatedCallCounter = (key.getCallCounter() - callGained);
+        double updatedCallCounter = (apiAuthentication.getCallCounter() - callGained);
 
         //call counter can not be less than zero
         if (updatedCallCounter < 0) {
@@ -177,7 +177,7 @@ public class CallCounter {
             try {
 
                 System.out.println("Throttle by tier");
-                throttleByTier(key);
+                throttleByTier(apiAuthentication);
 
             } catch (RateLimitException r) {
                 System.out.println("RateLimit Exception");

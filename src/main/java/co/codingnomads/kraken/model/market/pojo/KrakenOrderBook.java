@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.market.pojos;
+package co.codingnomads.kraken.model.market.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -29,8 +29,6 @@ public class KrakenOrderBook {
     public List<KrakenOrder> getBids() {
         return bids;
     }
-
-
 
     @Override
     public String toString() {

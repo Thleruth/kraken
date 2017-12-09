@@ -1,8 +1,7 @@
-package co.codingnomads.kraken.model.account.pojos;
+package co.codingnomads.kraken.model.account.pojo;
 
-/**
- * Created by ryandesmond on 12/6/17.
- */
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class KrakenTradeBalance {
 
     //equivalent balance (combined balance of all currencies)
@@ -96,4 +95,38 @@ public class KrakenTradeBalance {
         this.ml = ml;
     }
 
+    public KrakenTradeBalance(@JsonProperty("eb") String eb,
+                              @JsonProperty("tb") String tb,
+                              @JsonProperty("m") String m,
+                              @JsonProperty("n") String n,
+                              @JsonProperty("c") String c,
+                              @JsonProperty("v") String v,
+                              @JsonProperty("e") String e,
+                              @JsonProperty("mf") String mf,
+                              @JsonProperty("ml") String ml) {
+        this.eb = eb;
+        this.tb = tb;
+        this.m = m;
+        this.n = n;
+        this.c = c;
+        this.v = v;
+        this.e = e;
+        this.mf = mf;
+        this.ml = ml;
+    }
+
+    @Override
+    public String toString() {
+        return "KrakenTradeBalance{" +
+                "eb='" + eb + '\'' +
+                ", tb='" + tb + '\'' +
+                ", m='" + m + '\'' +
+                ", n='" + n + '\'' +
+                ", c='" + c + '\'' +
+                ", v='" + v + '\'' +
+                ", e='" + e + '\'' +
+                ", mf='" + mf + '\'' +
+                ", ml='" + ml + '\'' +
+                '}';
+    }
 }

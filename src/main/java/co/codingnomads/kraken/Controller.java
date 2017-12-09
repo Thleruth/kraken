@@ -1,20 +1,8 @@
 package co.codingnomads.kraken;
-
-
-import co.codingnomads.kraken.exception.RateLimitException;
-import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
-//import co.codingnomads.kraken.model.account.response.GetBalanceOutput;
-import co.codingnomads.kraken.model.account.request.GetBalanceRequestBody;
-import co.codingnomads.kraken.model.market.pojos.KrakenServerTime;
-import co.codingnomads.kraken.model.market.response.GetOrderBookOutput;
-import co.codingnomads.kraken.service.CallCounter;
+import co.codingnomads.kraken.model.account.request.GetTradeBalanceRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 import co.codingnomads.kraken.util.RateLimitThreadTest;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
-import java.util.Map;
 
 /**
  * Created by Thomas Leruth on 11/28/17
@@ -24,53 +12,54 @@ public class Controller {
 
     public static void main(String[] args) throws NullPointerException{
 
-        //Kevin testing
-        ApiKey key = new ApiKey("Enter Api key", 2,
-        "Enter API secret");
 
-
-        //Kevin testing rate limit
-        //testRateLimit(key);
-
-
-        GetBalanceRequestBody a = new GetBalanceRequestBody();
+        KrakenExchange exchange = new KrakenExchange(
+                "Insert API-Key",
+                "Insert API-Secret",
+                4);
 
         GenericRequestHandler handler = new GenericRequestHandler();
-        OutputWrapper orderBook = null;
-        try {
-            orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, key);
-        } catch (UnkownException e) {
-            e.printStackTrace();
-        } catch (RateLimitException e) {
-            e.printStackTrace();
-        }
 
+        RequestBodyGeneric a = new GetTradeBalanceRequestBody(null, "ZEUR");
 
-        OutputWrapper serverTime = null;
-        try {
-            serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, key);
-        } catch (UnkownException e) {
-            e.printStackTrace();
-        } catch (RateLimitException e) {
-            e.printStackTrace();
-        }
+        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, exchange.getApiAuthentication());
+        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, exchange.getApiAuthentication());
+//        OutputWrapper recentTrades = handler.callAPI(KrakenRequestEnum.GETRECENTTRADES, null);
+//        OutputWrapper tradableAssetPairs = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS, null);
+//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, null);
+
 
         //ricky currnetly working gettickerinfo and getrecenttrades
 
 
-        ObjectMapper mapper = new ObjectMapper();
+//        ObjectMapper mapper = new ObjectMapper();
         //get results from OutputWrapper "orderBook"
-        Map<String, GetOrderBookOutput> results = (Map<String, GetOrderBookOutput>) orderBook.getResult();
+        //Map<String, GetOrderBookOutput> results = (Map<String, GetOrderBookOutput>) orderBook.getResult();
         //If there are any errors, they will be in orderBook.getErrors()
-        String[] errors = orderBook.getError();
+        //String[] errors = orderBook.getError();
+
+        //test for recentTrades
+//        Map<String, GetRecentTradesOutput> recentTradesResult = (Map<String, GetRecentTradesOutput>) recentTrades.getResult();
+//        String[] recentTradesError = recentTrades.getError();
+
+        //test for tradableAssetPairs
+//        Map<String, GetTradableAssetPairsOutput> tradeableAssetPairsResult = (Map<String, GetTradableAssetPairsOutput>) tradableAssetPairs.getResult();
+//        String[] tradableAssetPairsError = tradableAssetPairs.getError();
+
+        //test for openpositions
+//        Map<String, GetOpenPositionsOutput> openPositionsResult = (Map<String, GetOpenPositionsOutput>) openPositions.getResult();
+//        String[] openPositionError = openPositions.getError();
 
 
         //Another exmaple:
-        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
-        String[] serverTimeErrors = serverTime.getError();
+//        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
+//        String[] serverTimeErrors = serverTime.getError();
+
+//        Map<String, CancelOpenOrderOutput> results2 = (Map<String, CancelOpenOrderOutput>) cancelOrder.getResult();
+//        String[] cancelOrderErrors = cancelOrder.getError();
 
 
-        System.out.println("Put a break point HERE and DEBUG me");
+
 
 
     }

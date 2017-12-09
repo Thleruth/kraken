@@ -1,31 +1,30 @@
 package co.codingnomads.kraken.model;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 /**
  * @author Kevin Neag
  */
-public class ApiKey {
 
+public class ApiAuthentication {
 
     private String apiKey;
+    // private String apiEndPoint;
     private int tierLevel;
     private int callCounter;
     private String secret;
-    private Timestamp lastCallTime = Timestamp.valueOf("2017-12-06 10:09:30");
+    // private boolean wasSent;
+    private Timestamp lastCallTime;
     private int backLog;
 
-
-
-    public ApiKey(String apiKey, int tierLevel, String secret) {
-        this.apiKey = "Enter API key";
-        this.tierLevel = 2;
-        this.callCounter = 200;
-        this.secret = "Enter API Secret";
+    //todo lastCallTime has to be fixed
+    public ApiAuthentication(String apiKey, int tierLevel, String secret) {
+        this.apiKey = apiKey;
+        this.tierLevel = tierLevel;
+        this.callCounter = 0;
+        this.secret = secret;
         this.backLog = 0;
-
+        lastCallTime = Timestamp.valueOf("2017-12-06 10:09:30");
     }
 
     public String getApiKey() {
