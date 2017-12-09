@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 
 @JsonDeserialize(using = KrakenFees.FeesDeserializer.class)
 
+//Fee ranges associated to KrakenAssetPair data
 public class KrakenFees {
 
 

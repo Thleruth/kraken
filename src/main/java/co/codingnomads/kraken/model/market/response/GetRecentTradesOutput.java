@@ -12,4 +12,6 @@ public class GetRecentTradesOutput extends OutputWrapper<Map<String, KrakenRecen
         super(result, error);
 
     }
+
+    //TODO need to test recent trades
 }
