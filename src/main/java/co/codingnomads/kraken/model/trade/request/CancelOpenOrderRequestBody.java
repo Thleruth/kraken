@@ -4,31 +4,34 @@ import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+/**
+ * Created by Meghan Boyce on 11/30/17
+ *
+ */
+
 public class CancelOpenOrderRequestBody extends RequestBodyGeneric {
-    /**
-     * Created by Meghan Boyce on 11/30/17
-     *
-     */
 
     // Transaction id
-    int txid;
+    String txid;
 
-    public CancelOpenOrderRequestBody(int txid) {
+    //todo add exception if string is null
+    public CancelOpenOrderRequestBody(String txid) {
         this.txid = txid;
     }
 
-    public int getTxid() {
+    public String getTxid() {
         return txid;
     }
 
-    public void setTxid(int txid) {
+    public void setTxid(String txid) {
         this.txid = txid;
     }
 
+    @Override
     public MultiValueMap<String, String> postParam(){
-        MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
-        postParameters.add("nonce", super.getNonce());
-        postParameters.add("txid", String.valueOf(getTxid()));
+        MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
+        postParameters.add("nonce", getNonce());
+        postParameters.add("txid", getTxid());
         return postParameters;
     }
 
@@ -39,5 +42,4 @@ public class CancelOpenOrderRequestBody extends RequestBodyGeneric {
         sb.append("&").append("txid").append("=").append(getTxid());
         return sb.toString();
     }
-
 }
