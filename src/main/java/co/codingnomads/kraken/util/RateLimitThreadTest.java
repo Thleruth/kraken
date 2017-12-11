@@ -2,7 +2,7 @@ package co.codingnomads.kraken.util;
 
 
 import co.codingnomads.kraken.exception.RateLimitException;
-import co.codingnomads.kraken.exception.UnkownException;
+import co.codingnomads.kraken.exception.UnknownException;
 import co.codingnomads.kraken.model.ApiAuthentication;
 import co.codingnomads.kraken.model.KrakenRequestEnum;
 import co.codingnomads.kraken.model.OutputWrapper;
@@ -35,9 +35,7 @@ public class RateLimitThreadTest implements Runnable{
         OutputWrapper serverTime = null;
         try {
             serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, apiAuthentication);
-        } catch (UnkownException e) {
-            e.printStackTrace();
-        } catch (RateLimitException e) {
+        } catch (RateLimitException | UnknownException e) {
             e.printStackTrace();
         }
         System.out.println(thrd.getName() + " terminating.");
