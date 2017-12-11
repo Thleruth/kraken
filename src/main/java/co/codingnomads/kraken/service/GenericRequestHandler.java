@@ -14,13 +14,12 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-@Service
+
 public class GenericRequestHandler {
 
     public OutputWrapper callAPI(KrakenRequestEnum krakenRequest,
                                  RequestBodyGeneric requestBody,
-                                 ApiAuthentication apiAuthentication,
-                                 String ... queryParams)
+                                 ApiAuthentication apiAuthentication)
             throws NullPointerException, UnkownException, RateLimitException {
 
 

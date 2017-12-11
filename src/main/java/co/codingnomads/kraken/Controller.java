@@ -3,8 +3,11 @@ import co.codingnomads.kraken.exception.KrakenException;
 import co.codingnomads.kraken.exception.RateLimitException;
 import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
+import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
+
+import java.util.Map;
 
 /**
  * Created by Thomas Leruth on 11/28/17
@@ -34,5 +37,12 @@ public class Controller {
 
         System.out.println(result.toString());
 
+        // Meghan testing
+        try {
+            Map<String, KrakenOrderBook> orderBookMap = exchange.getOrderBook("XBTUSD", "0");
+            System.out.println(orderBookMap.size());
+        } catch (KrakenException e){
+            System.out.println(e.toString());
+        }
     }
 }

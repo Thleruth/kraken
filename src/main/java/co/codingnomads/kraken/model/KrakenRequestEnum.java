@@ -34,11 +34,11 @@ public enum KrakenRequestEnum {
     ADDSTRANDARDORDERS("/0/private/AddOrder", HttpMethod.POST, 0, AddStandardOrderOutput.class),
     CANCELOPENORDERS("/0/private/CancelOrder",HttpMethod.POST, 0,CancelOpenOrderOutput.class);
 
-    private final String endPoint;
+    private String endPoint;
     private final HttpMethod httpMethod;
     private final Class outputClass;
     private final int callAmount;
-    private final String fullURL;
+    private String fullURL;
     private final String domain = "https://api.kraken.com";
 
     public String getEndPoint() {
@@ -59,6 +59,11 @@ public enum KrakenRequestEnum {
 
     public Class getOutputClass() {
         return outputClass;
+    }
+
+    public void updateEndpoint(String queryParams){
+        this.endPoint = this.endPoint + queryParams;
+        this.fullURL = this.fullURL + queryParams;
     }
 
     KrakenRequestEnum(String endPoint, HttpMethod httpMethod, int callAmount, Class outputClass) {

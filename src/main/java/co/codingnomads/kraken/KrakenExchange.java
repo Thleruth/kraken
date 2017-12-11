@@ -18,8 +18,8 @@ public class KrakenExchange {
 
     ApiAuthentication authentication;
 
-    @Autowired
-    GenericRequestHandler handler;
+
+    GenericRequestHandler handler = new GenericRequestHandler();
 
     public KrakenExchange(String apiKey, String apiSecret, int tier) {
         authentication = new ApiAuthentication(apiKey, tier, apiSecret);
@@ -42,8 +42,11 @@ public class KrakenExchange {
     // pair required, count optional
     public Map<String, KrakenOrderBook> getOrderBook(String pair, String count) throws KrakenException{
 
-        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK,
-                null, authentication, pair, count, "another query");
+        KrakenRequestEnum test = KrakenRequestEnum.GETORDERBOOK;
+        // can make a method to get queryParams
+        test.updateEndpoint("?pair=" + pair);// + "&count=" + count);
+
+        OutputWrapper orderBook = handler.callAPI(test,null, authentication);
 
         if (orderBook.getError().length > 0){
             throw new KrakenException(orderBook.getError(), "General exception");
