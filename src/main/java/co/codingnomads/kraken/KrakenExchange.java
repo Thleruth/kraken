@@ -40,6 +40,7 @@ public class KrakenExchange {
      * @return
      * @throws KrakenException
      */
+
     // pair required, count optional
     public Map<String, KrakenOrderBook> getOrderBook(String pair, String count) throws KrakenException{
 

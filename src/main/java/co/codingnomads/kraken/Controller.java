@@ -12,8 +12,10 @@ public class Controller {
     public static void main(String[] args) throws NullPointerException{
 
         KrakenExchange exchange = new KrakenExchange(
-                "Insert API-Key",
-                "Insert API-Secret",
+                //"Insert API-Key",
+                "DF5FK19pKy7kROX0VCTNEtlOM0cECxfjOukobPyds6wV84mpth8XCkzP",
+                //"Insert API-Secret",
+                "WDSFe2oivvzxBvvyHSrOLbLjL6Vous0wBkEfgGOf8CCQAmZZfERqNoDZ9NZUGbpada1X9wt5e3yyIxpvRieb5A==",
                 3);
 
         // @meg - This now happens in KrakenExchange:
