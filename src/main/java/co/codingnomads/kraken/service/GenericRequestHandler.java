@@ -42,7 +42,8 @@ public class GenericRequestHandler {
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
-                krakenRequest.getOutputClass());
+                OutputWrapper.class);
+//                krakenRequest.getOutputClass());
 
         // can make a method to check this outside this method
         try {

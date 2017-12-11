@@ -1,6 +1,7 @@
 package co.codingnomads.kraken;
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.account.request.GetTradeBalanceRequestBody;
+import co.codingnomads.kraken.model.trade.request.GetTradeHistoryRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 /**
@@ -12,19 +13,20 @@ public class Controller {
     public static void main(String[] args) throws NullPointerException{
 
         KrakenExchange exchange = new KrakenExchange(
-                "Insert API-Key",
-                "Insert API-Secret",
+                "ApiKey Goes Here",
+                "ApiSecret Goes Here",
                 4);
 
         GenericRequestHandler handler = new GenericRequestHandler();
 
         RequestBodyGeneric a = new GetTradeBalanceRequestBody(null, "ZEUR");
+        RequestBodyGeneric b = new GetTradeHistoryRequestBody("10");
 
-        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, exchange.getApiAuthentication());
-        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, exchange.getApiAuthentication());
-//        OutputWrapper recentTrades = handler.callAPI(KrakenRequestEnum.GETRECENTTRADES, null);
-//        OutputWrapper tradableAssetPairs = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS, null);
-//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, null);
+//        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, exchange.getApiAuthentication());
+//        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, exchange.getApiAuthentication());
+        OutputWrapper tradeHistory = handler.callAPI(KrakenRequestEnum.GETTRADESHISTORY, b, exchange.getApiAuthentication());
+//        OutputWrapper queryTradeInfo = handler.callAPI(KrakenRequestEnum.QUERYTRADESINFO, null, exchange.getApiAuthentication());
+//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, null, exchange.getApiAuthentication());
 
         //ricky currnetly working gettickerinfo and getrecenttrades
 
@@ -34,19 +36,6 @@ public class Controller {
         //Map<String, GetOrderBookOutput> results = (Map<String, GetOrderBookOutput>) orderBook.getResult();
         //If there are any errors, they will be in orderBook.getErrors()
         //String[] errors = orderBook.getError();
-
-        //test for recentTrades
-//        Map<String, GetRecentTradesOutput> recentTradesResult = (Map<String, GetRecentTradesOutput>) recentTrades.getResult();
-//        String[] recentTradesError = recentTrades.getError();
-
-        //test for tradableAssetPairs
-//        Map<String, GetTradableAssetPairsOutput> tradeableAssetPairsResult = (Map<String, GetTradableAssetPairsOutput>) tradableAssetPairs.getResult();
-//        String[] tradableAssetPairsError = tradableAssetPairs.getError();
-
-        //test for openpositions
-//        Map<String, GetOpenPositionsOutput> openPositionsResult = (Map<String, GetOpenPositionsOutput>) openPositions.getResult();
-//        String[] openPositionError = openPositions.getError();
-
 
         //Another exmaple:
 //        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();

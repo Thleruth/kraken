@@ -25,7 +25,6 @@ public class KrakenTradeInfo {
     BigDecimal margin;
     String misc;
     String closing;
-    String count;
     String posstatus;
     BigDecimal cprice;
     BigDecimal ccost;
@@ -41,7 +40,7 @@ public class KrakenTradeInfo {
                            @JsonProperty("cost") BigDecimal cost,@JsonProperty("fee") BigDecimal fee,
                            @JsonProperty("vol") BigDecimal vol,@JsonProperty("margin") BigDecimal margin,
                            @JsonProperty("misc") String misc,@JsonProperty("closing") String closing,
-                           @JsonProperty("count") String count,@JsonProperty("posstatus") String posstatus,
+                           @JsonProperty("posstatus") String posstatus,
                            @JsonProperty("cprice") BigDecimal cprice,@JsonProperty("ccost") BigDecimal ccost,
                            @JsonProperty("cfee") BigDecimal cfee,@JsonProperty("cvol") BigDecimal cvol,
                            @JsonProperty("cmargin") BigDecimal cmargin,@JsonProperty("net") BigDecimal net,
@@ -58,7 +57,6 @@ public class KrakenTradeInfo {
         this.margin = margin;
         this.misc = misc;
         this.closing = closing;
-        this.count = count;
         this.posstatus = posstatus;
         this.cprice = cprice;
         this.ccost = ccost;
@@ -117,10 +115,6 @@ public class KrakenTradeInfo {
         return closing;
     }
 
-    public String getCount() {
-        return count;
-    }
-
     public String getPosstatus() {
         return posstatus;
     }
@@ -168,7 +162,6 @@ public class KrakenTradeInfo {
                 ", margin=" + margin +
                 ", misc='" + misc + '\'' +
                 ", closing='" + closing + '\'' +
-                ", count='" + count + '\'' +
                 ", posstatus='" + posstatus + '\'' +
                 ", cprice=" + cprice +
                 ", ccost=" + ccost +

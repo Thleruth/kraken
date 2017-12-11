@@ -22,7 +22,7 @@ public class OutputWrapper<T> {
      * @param error
      */
     @JsonCreator
-    public OutputWrapper(@JsonProperty("return") T result, @JsonProperty("error") String[] error) {
+    public OutputWrapper(@JsonProperty("result") T result, @JsonProperty("error") String[] error) {
         this.error = error;
         this.result = result;
     }
