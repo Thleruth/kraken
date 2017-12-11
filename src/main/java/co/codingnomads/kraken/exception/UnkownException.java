@@ -3,18 +3,16 @@ package co.codingnomads.kraken.exception;
 /**
  * @author Kevin Neag
  */
-public class UnkownException extends Exception {
+public class UnkownException extends KrakenException {
 
-    String errorMsg = "Unknown Exception";
-
-    public String getErrorMsg() {
-        return errorMsg;
+    public UnkownException(String message) {
+        super(message);
     }
 
     @Override
     public String toString() {
         return "UnkownException{" +
-                "errorMsg='" + errorMsg + '\'' +
+                "errorMsg='" + message + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,7 @@
 package co.codingnomads.kraken.service;
 
+import co.codingnomads.kraken.exception.RateLimitException;
+import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,22 +21,30 @@ public class GenericRequestHandler {
                                  RequestBodyGeneric requestBody,
                                  ApiAuthentication apiAuthentication,
                                  String ... queryParams)
-            throws NullPointerException {
+            throws NullPointerException, UnkownException, RateLimitException {
 
-        //callCounter  isunderRateLimit method here
-        //only proceed is response is true
-        //otherwise throw exception
 
-        MultiValueMap<String, String> body;
+        MultiValueMap<String, String> body = null;
+        HttpHeaders headers = null;
 
-        if (requestBody != null) {
+        //no need of doing it for public method
+        if (krakenRequest.getHttpMethod().matches("POST")) {
+            try {
+                if (!CallCounter.isUnderRateLimit(apiAuthentication, krakenRequest)) {
+                    throw new UnkownException("RateLimit Exception - callApi +");
+                    //todo Kevin: aren't we missing something after the +
+                }
+            } catch (RateLimitException e) {
+                e.printStackTrace();
+                throw e;
+            }
+
             body = requestBody.postParam();
-        } else {
-            body = null;
+            headers = getHttpPostHeaders(krakenRequest, requestBody, apiAuthentication);
         }
 
-        // Method to set correctly the headers if Post or Get
-        HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody, apiAuthentication);
+        System.out.println("callAPI executing - " + Thread.currentThread().getName());
+        //todo Kevin: needed?
 
         // Call a method to set the fullURL with any arguments that have been passed in, pass it queryParams
         // if queryPArams>0, format correctly
@@ -61,15 +71,15 @@ public class GenericRequestHandler {
         }
     }
 
-    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication){
+
+    public HttpHeaders getHttpPostHeaders(KrakenRequestEnum krakenRequest,
+                                          RequestBodyGeneric requestBody,
+                                          ApiAuthentication apiAuthentication) {
+
         HttpHeaders headers = new HttpHeaders();
-
-        if (krakenRequest.getHttpMethod().matches("POST")) {
-
-            headers.set("API-Key", apiAuthentication.getApiKey());
-            headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
+        headers.set("API-Key", apiAuthentication.getApiKey());
+        headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
                     requestBody.signPostParam(), apiAuthentication.getSecret(), krakenRequest.getEndPoint()));
-        }
 
         return headers;
     }

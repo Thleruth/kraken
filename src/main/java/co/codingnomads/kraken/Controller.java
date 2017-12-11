@@ -1,6 +1,9 @@
 package co.codingnomads.kraken;
+import co.codingnomads.kraken.exception.KrakenException;
+import co.codingnomads.kraken.exception.RateLimitException;
+import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
-import co.codingnomads.kraken.model.account.request.GetTradeBalanceRequestBody;
+import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 /**
@@ -9,57 +12,27 @@ import co.codingnomads.kraken.service.GenericRequestHandler;
 
 public class Controller {
 
-    public static void main(String[] args) throws NullPointerException{
+    public static void main(String[] args) throws KrakenException {
 
+        //so far not used as we call method directly, will later call method on that
+        // todo ryan: Correct my thinking but later we could call within the exchange getters of
+        // of the apiAuthentication and thus getting the elements no (no need to pass in as Param)?
+        // just for security purpose and we could raise the access level of the ApiAuthentication
         KrakenExchange exchange = new KrakenExchange(
+
                 //"Insert API-Key",
                 "DF5FK19pKy7kROX0VCTNEtlOM0cECxfjOukobPyds6wV84mpth8XCkzP",
                 //"Insert API-Secret",
                 "WDSFe2oivvzxBvvyHSrOLbLjL6Vous0wBkEfgGOf8CCQAmZZfERqNoDZ9NZUGbpada1X9wt5e3yyIxpvRieb5A==",
                 3);
 
-        // @meg - This now happens in KrakenExchange:
-//        GenericRequestHandler handler = new GenericRequestHandler();
-//
-//        RequestBodyGeneric a = new GetTradeBalanceRequestBody(null, "ZEUR");
-//
-//        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, exchange.getApiAuthentication());
+        GenericRequestHandler handler = new GenericRequestHandler();
+        
+        RequestBodyGeneric a = null;
 
-        //        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, exchange.getApiAuthentication());
-//        OutputWrapper recentTrades = handler.callAPI(KrakenRequestEnum.GETRECENTTRADES, null);
-//        OutputWrapper tradableAssetPairs = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS, null);
-//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, null);
+        OutputWrapper result = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, a, exchange.getApiAuthentication());
 
-
-
-//        ObjectMapper mapper = new ObjectMapper();
-        //get results from OutputWrapper "orderBook"
-        //Map<String, GetOrderBookOutput> results = (Map<String, GetOrderBookOutput>) orderBook.getResult();
-        //If there are any errors, they will be in orderBook.getErrors()
-        //String[] errors = orderBook.getError();
-
-        //test for recentTrades
-//        Map<String, GetRecentTradesOutput> recentTradesResult = (Map<String, GetRecentTradesOutput>) recentTrades.getResult();
-//        String[] recentTradesError = recentTrades.getError();
-
-        //test for tradableAssetPairs
-//        Map<String, GetTradableAssetPairsOutput> tradeableAssetPairsResult = (Map<String, GetTradableAssetPairsOutput>) tradableAssetPairs.getResult();
-//        String[] tradableAssetPairsError = tradableAssetPairs.getError();
-
-        //test for openpositions
-//        Map<String, GetOpenPositionsOutput> openPositionsResult = (Map<String, GetOpenPositionsOutput>) openPositions.getResult();
-//        String[] openPositionError = openPositions.getError();
-
-
-        //Another exmaple:
-//        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
-//        String[] serverTimeErrors = serverTime.getError();
-
-//        Map<String, CancelOpenOrderOutput> results2 = (Map<String, CancelOpenOrderOutput>) cancelOrder.getResult();
-//        String[] cancelOrderErrors = cancelOrder.getError();
-
-
-
+        System.out.println(result.toString());
 
     }
 }

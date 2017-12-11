@@ -21,8 +21,6 @@ public class KrakenExchange {
     @Autowired
     GenericRequestHandler handler;
 
-    //todo constructor with API key, Secret, and tier level
-
     public KrakenExchange(String apiKey, String apiSecret, int tier) {
         authentication = new ApiAuthentication(apiKey, tier, apiSecret);
     }
