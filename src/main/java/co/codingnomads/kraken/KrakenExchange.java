@@ -8,7 +8,6 @@ import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.model.trade.pojo.KrakenCancelOpenOrder;
 import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
@@ -66,7 +65,7 @@ public class KrakenExchange {
 
         KrakenRequestEnum cancelOrderTestEnum = KrakenRequestEnum.CANCELOPENORDERS;
 
-        cancelOrderTestEnum.updateEndpoint("txid=" + txid);
+        cancelOrderTestEnum.updateEndpoint("?txid=" + txid);
         CancelOpenOrderRequestBody cancelOpenOrderRB = new CancelOpenOrderRequestBody("1");
 
         OutputWrapper cancelOrder = handler.callAPI(cancelOrderTestEnum, cancelOpenOrderRB, authentication);

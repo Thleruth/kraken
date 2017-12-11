@@ -24,10 +24,8 @@ public class Controller {
         // just for security purpose and we could raise the access level of the ApiAuthentication
         KrakenExchange exchange = new KrakenExchange(
 
-                "Insert API-Key",
-
-                "Insert API-Secret",
-
+                "",
+                "==",
                 3);
 
         GenericRequestHandler handler = new GenericRequestHandler();
@@ -39,12 +37,12 @@ public class Controller {
         System.out.println(result.toString());
 
         // Meghan testing
-        try {
-            Map<String, KrakenOrderBook> orderBookMap = exchange.getOrderBook("XBTUSD", "0");
-            System.out.println(orderBookMap.size());
-        } catch (KrakenException e){
-            System.out.println(e.toString());
-        }
+//        try {
+//            Map<String, KrakenOrderBook> orderBookMap = exchange.getOrderBook("XBTUSD", "0");
+//            System.out.println(orderBookMap.size());
+//        } catch (KrakenException e){
+//            System.out.println(e.toString());
+//        }
 
         try {
             Map<String, KrakenCancelOpenOrder> cancelOrderMap = exchange.cancelOpenOrder("1");
