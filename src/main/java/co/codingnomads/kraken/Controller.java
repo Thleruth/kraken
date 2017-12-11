@@ -1,4 +1,6 @@
 package co.codingnomads.kraken;
+import co.codingnomads.kraken.exception.RateLimitException;
+import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.account.request.GetTradeBalanceRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
@@ -10,7 +12,7 @@ import co.codingnomads.kraken.util.RateLimitThreadTest;
 
 public class Controller {
 
-    public static void main(String[] args) throws NullPointerException{
+    public static void main(String[] args) throws NullPointerException, RateLimitException, UnkownException {
 
 
         KrakenExchange exchange = new KrakenExchange(
@@ -65,13 +67,13 @@ public class Controller {
     }
 
 
-    public static void testRateLimit(ApiKey key) {
+    public static void testRateLimit(ApiAuthentication apiAuthentication) {
 
         System.out.println("Testing rate limit");
 
         for(int i =0; i < 20; i++){
 
-            RateLimitThreadTest threadOne = new RateLimitThreadTest("thread" + i, key);
+            RateLimitThreadTest threadOne = new RateLimitThreadTest("thread" + i, apiAuthentication);
 
             try {
                 Thread.sleep(1000);
