@@ -15,12 +15,6 @@ import org.springframework.web.client.RestTemplate;
 
 public class GenericRequestHandler {
 
-<<<<<<< HEAD
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest,
-                                 RequestBodyGeneric requestBody,
-                                 ApiAuthentication apiAuthentication)
-            throws NullPointerException, UnkownException, RateLimitException {
-=======
     /**
      * A generic Request Handler being able to call all end points
      * @param krakenRequest An Enum containing the endpoint, http request type, the API allowance utilization, and
@@ -34,10 +28,10 @@ public class GenericRequestHandler {
      * @throws RateLimitException
      */
 
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication)
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest,
+                                 RequestBodyGeneric requestBody,
+                                 ApiAuthentication apiAuthentication)
             throws NullPointerException, UnknownException, RateLimitException {
->>>>>>> 36a03ad71532aa4d6b53cd39167c902b71dd5c55
-
 
         MultiValueMap<String, String> body = null;
         HttpHeaders headers = null;
@@ -62,14 +56,12 @@ public class GenericRequestHandler {
         //todo Kevin: needed?
         System.out.println("callAPI executing - " + Thread.currentThread().getName());
 
-<<<<<<< HEAD
         // Call a method to set the fullURL with any arguments that have been passed in, pass it queryParams
         // if queryPArams>0, format correctly
 
         //the entity with the body and the headers
-=======
+
         // Set the full http entity using the body and headers
->>>>>>> 36a03ad71532aa4d6b53cd39167c902b71dd5c55
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 
         // need an Autowired version of it but I am getting a null pointer issue
