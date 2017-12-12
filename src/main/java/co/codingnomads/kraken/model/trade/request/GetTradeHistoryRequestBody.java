@@ -14,7 +14,7 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
     //type is optional, by default all
     String type;
     //trades is optional, false by default
-    String trades;
+    boolean trades;
     //start time is optional, exclusive by default
     String start;
     //end time is optional, inclusive by default
@@ -26,7 +26,7 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         this.ofs = ofs;
     }
 
-    public GetTradeHistoryRequestBody(String type, String trades, String start, String end, String ofs) {
+    public GetTradeHistoryRequestBody(String type, boolean trades, String start, String end, String ofs) {
         this.type = type;
         this.trades = trades;
         this.start = start;
@@ -42,11 +42,11 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         this.type = type;
     }
 
-    public String getTrades() {
+    public boolean getTrades() {
         return trades;
     }
 
-    public void setTrades(String trades) {
+    public void setTrades(boolean trades) {
         this.trades = trades;
     }
 
@@ -74,27 +74,23 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         this.ofs = ofs;
     }
 
-//    @Override
-//    public String toString() {
-//        return "GetTradeHistoryRequestBody{" +
-//                "type='" + type + '\'' +
-//                ", trades='" + trades + '\'' +
-//                ", start='" + start + '\'' +
-//                ", end='" + end + '\'' +
-//                ", ofs='" + ofs + '\'' +
-//                '}';
-//    }
-
     @Override
     public String signPostParam() {
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
+        if (null != getType()) {
+            sb.append("&").append("type").append("=").append(getType());
+        }
+        if (false != getTrades()){
+            sb.append("&").append("trades").append("=").append(getTrades());
+        }
+        if (null != getStart()){
+            sb.append("&").append("start").append("=").append(getStart());
+        }
+        if (null != getEnd()) {
+            sb.append("&").append("end").append("=").append(getEnd());
+        }
         sb.append("&").append("ofs").append("=").append(getOfs());
-        //TODO include if statements for appending data when included
-//        sb.append("&").append("type").append("=").append(getType());
-//        sb.append("&").append("trades").append("=").append(getTrades());
-//        sb.append("&").append("start").append("=").append(getStart());
-//        sb.append("&").append("end").append("=").append(getEnd());
         return sb.toString();
     }
 
@@ -102,12 +98,19 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
     public MultiValueMap<String, String> postParam() {
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
         postParameters.add("nonce", super.getNonce());
+        if (null != getType()){
+            postParameters.add("type", getType());
+        }
+        if (false != getTrades()) {
+            postParameters.add("trades", String.valueOf(getTrades()));
+        }
+        if (null != getStart()) {
+            postParameters.add("start", getStart());
+        }
+        if (null != getEnd()) {
+            postParameters.add("end", getEnd());
+        }
         postParameters.add("ofs", getOfs());
-        //TODO include if statements for appending data when included
-//        postParameters.add("type", getType());
-//        postParameters.add("trades", getTrades());
-//        postParameters.add("start", getStart());
-//        postParameters.add("end", getEnd());
         return postParameters;
     }
 

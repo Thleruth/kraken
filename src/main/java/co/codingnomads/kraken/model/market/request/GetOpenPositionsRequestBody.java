@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.trade.request;
+package co.codingnomads.kraken.model.market.request;
 
 /*
 created by PopoPenguin on 12/11/17
@@ -9,21 +9,21 @@ import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-public class QueryTradesInfoRequestBody extends RequestBodyGeneric {
+public class GetOpenPositionsRequestBody extends RequestBodyGeneric {
 
     // Transaction id
     int txid;
-    // To include trades or not, false by default
-    boolean trades;
+    // To include docalcs or not, false by default
+    boolean docalcs;
 
-    public QueryTradesInfoRequestBody (int txid) {
+    public GetOpenPositionsRequestBody(int txid) {
         this.txid = txid;
-        this.trades = false;
+        this.docalcs = false;
     }
 
-    public QueryTradesInfoRequestBody(int txid, boolean trades) {
+    public GetOpenPositionsRequestBody(int txid, boolean docalcs) {
         this.txid = txid;
-        this.trades = trades;
+        this.docalcs = docalcs;
     }
 
     public int getTxid() {
@@ -34,13 +34,12 @@ public class QueryTradesInfoRequestBody extends RequestBodyGeneric {
         this.txid = txid;
     }
 
-
-    public boolean isTrades() {
-        return trades;
+    public boolean isDocalcs() {
+        return docalcs;
     }
 
-    public void setTrades(boolean trades) {
-        this.trades = trades;
+    public void setDocalcs(boolean docalcs) {
+        this.docalcs = docalcs;
     }
 
     @Override
@@ -48,8 +47,8 @@ public class QueryTradesInfoRequestBody extends RequestBodyGeneric {
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
         postParameters.add("nonce", super.getNonce());
         postParameters.add("txid", String.valueOf(getTxid()));
-        if (false != isTrades()) {
-            postParameters.add("trades", String.valueOf(isTrades()));
+        if (false != isDocalcs()) {
+            postParameters.add("trades", String.valueOf(isDocalcs()));
         }
         return postParameters;
     }
@@ -59,9 +58,10 @@ public class QueryTradesInfoRequestBody extends RequestBodyGeneric {
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
         sb.append("&").append("txid").append("=").append(getTxid());
-        if (false != isTrades()){
-            sb.append("&").append("trades").append("=").append(isTrades());
+        if (false != isDocalcs()){
+            sb.append("&").append("trades").append("=").append(isDocalcs());
         }
         return sb.toString();
     }
+
 }
