@@ -43,7 +43,7 @@ public class Controller {
         // TODO Demonstrating functional example using KrakenExchange. You need to add methods to KrakenExchange.
         // Ask Meghan for assistance if needed.
         try {
-            // HashMap needed if API URL requires query parameters
+            // HashMap needed if API URL requires query parameters. First String is param name, second is param value
             HashMap<String, String> params = new HashMap<>();
             params.put("pair", "XBTUSD");
             // Call to KrakenExchange class, you will need to add KrakenExchange method for each API call
