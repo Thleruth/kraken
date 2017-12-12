@@ -35,12 +35,6 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
         this.closetime = closetime;
     }
 
-    // Empty Constructor
-
-
-    public GetClosedOrdersRequestBody() {
-    }
-
     public String getTrades() {
         return trades;
     }

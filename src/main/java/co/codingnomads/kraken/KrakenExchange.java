@@ -10,8 +10,6 @@ public class KrakenExchange {
 
     ApiAuthentication apiAuthentication;
 
-    //todo constructor with API key, Secret, and tier level
-
     public KrakenExchange(String apiKey, String apiSecret, int tier) {
         apiAuthentication = new ApiAuthentication(apiKey, tier, apiSecret);
     }
@@ -21,4 +19,5 @@ public class KrakenExchange {
     }
 
     //todo one method for each potential KrakenRequest enum item (via the CallAPI)
+
 }

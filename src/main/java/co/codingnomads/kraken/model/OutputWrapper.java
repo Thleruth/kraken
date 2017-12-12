@@ -10,16 +10,19 @@ import java.util.Arrays;
  * Created by Thomas Leruth on 11/29/17
  */
 
+/**
+ * Response OutputWrapper class including a field for potential error and one the result of the call (if no error)
+ * @param <T> The result will depending on the call
+ */
 public class OutputWrapper<T> {
 
     String[] error;
     T result;
 
     /**
-     * Constructor
-     *
-     * @param result
-     * @param error
+     * JSON constructor
+     * @param result the call response
+     * @param error a potential API error returned
      */
     @JsonCreator
     public OutputWrapper(@JsonProperty("result") T result, @JsonProperty("error") String[] error) {
@@ -47,14 +50,16 @@ public class OutputWrapper<T> {
         return Arrays.toString(error);
     }
 
-    public OutputWrapper() {
-    }
-
+    public OutputWrapper() {}
 
     public boolean isSuccess() {
         return error.length == 0;
     }
 
+    /**
+     * Modified toString method to print in a nice format the result with error or a valid one
+     * @return
+     */
     @Override
     public String toString() {
         return String.format("KrakenResult[%s: %s]", isSuccess() ? "OK" : "error", isSuccess() ? result.toString() : printError());
