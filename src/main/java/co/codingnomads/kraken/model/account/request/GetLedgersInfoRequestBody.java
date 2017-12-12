@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
@@ -156,3 +157,14 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
 
 
 
+=======
+
+//todo fix this one
+
+//package co.codingnomads.kraken.model.account.request;
+//
+//import co.codingnomads.kraken.model.RequestBodyGeneric;
+//
+//public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
+//}
+>>>>>>> 02d55952d9b5a4ee1f6450287797dbf162629bfc

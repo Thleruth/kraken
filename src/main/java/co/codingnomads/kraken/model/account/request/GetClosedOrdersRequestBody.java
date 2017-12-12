@@ -1,6 +1,7 @@
 package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -8,7 +9,6 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     /**
      * Created by Meghan Boyce on 11/29/17
      *
-     * All instance vars defined as Strings until we know better
      */
 
     // Whether or not to include trades in output (optional - default = false)
@@ -21,7 +21,7 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     String end;
     // Result offset
     String ofs;
-    // Which GetOpenOrdersOutput to use (optional - open, close, both (default))
+    // Which time to use (optional - open, close, both (default))
     String closetime;
 
     // Fully qualified Constructor
@@ -33,6 +33,14 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
         this.end = end;
         this.ofs = ofs;
         this.closetime = closetime;
+    }
+
+    // do we need a variety of constructors that cover all the options of variables that could be entered?
+    public GetClosedOrdersRequestBody(String ofs) {
+        this.ofs = ofs;
+    }
+
+    public GetClosedOrdersRequestBody() {
     }
 
     public String getTrades() {
@@ -99,12 +107,24 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
         postParameters.add("nonce", super.getNonce());
-        postParameters.add("trades", getTrades());
-        postParameters.add("userref", getUserref());
-        postParameters.add("start", getStart());
-        postParameters.add("end", getEnd());
-        postParameters.add("ofs", getOfs());
-        postParameters.add("closetime", getClosetime());
+        if (null != trades){
+            postParameters.add("trades", getTrades());
+        }
+        if (null != userref){
+            postParameters.add("userref", getUserref());
+        }
+        if (null != start){
+            postParameters.add("start", getStart());
+        }
+        if (null != end){
+            postParameters.add("end", getEnd());
+        }
+        if (null != ofs){
+            postParameters.add("ofs", getOfs());
+        }
+        if (null != closetime){
+            postParameters.add("closetime", getClosetime());
+        }
         return postParameters;
     }
 
@@ -112,12 +132,24 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     public String signPostParam() {
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
-        sb.append("&").append("trades").append("=").append(getTrades());
-        sb.append("&").append("userref").append("=").append(getUserref());
-        sb.append("&").append("start").append("=").append(getStart());
-        sb.append("&").append("end").append("=").append(getEnd());
-        sb.append("&").append("ofs").append("=").append(getOfs());
-        sb.append("&").append("closetime").append("=").append(getClosetime());
+        if (null != trades){
+            sb.append("&").append("trades").append("=").append(getTrades());
+        }
+        if (null != userref) {
+            sb.append("&").append("userref").append("=").append(getUserref());
+        }
+        if (null != start) {
+            sb.append("&").append("start").append("=").append(getStart());
+        }
+        if (null != end){
+            sb.append("&").append("end").append("=").append(getEnd());
+        }
+        if (null != ofs) {
+            sb.append("&").append("ofs").append("=").append(getOfs());
+        }
+        if (null != closetime){
+            sb.append("&").append("closetime").append("=").append(getClosetime());
+        }
         return sb.toString();
     }
 }

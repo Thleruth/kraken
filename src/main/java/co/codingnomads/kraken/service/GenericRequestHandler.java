@@ -28,7 +28,9 @@ public class GenericRequestHandler {
      * @throws RateLimitException
      */
 
-    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication)
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest,
+                                 RequestBodyGeneric requestBody,
+                                 ApiAuthentication apiAuthentication)
             throws NullPointerException, UnknownException, RateLimitException {
 
         MultiValueMap<String, String> body = null;
@@ -53,6 +55,7 @@ public class GenericRequestHandler {
             headers = getHttpPostHeaders(krakenRequest, requestBody, apiAuthentication);
         }
 
+
         // Set the full http entity using the body and headers
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 
@@ -64,8 +67,8 @@ public class GenericRequestHandler {
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
-                OutputWrapper.class);
-//                krakenRequest.getOutputClass());
+               krakenRequest.getOutputClass());
+
 
         // check if it was a success and return the item if so
         try {
