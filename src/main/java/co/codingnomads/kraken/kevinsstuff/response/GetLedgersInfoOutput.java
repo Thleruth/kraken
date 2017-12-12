@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.kevinsstuff;
+package co.codingnomads.kraken.kevinsstuff.response;
 
 import java.util.ArrayList;
 

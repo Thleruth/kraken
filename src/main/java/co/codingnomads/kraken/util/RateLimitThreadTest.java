@@ -12,13 +12,16 @@ import co.codingnomads.kraken.service.GenericRequestHandler;
 /**
  * @author Kevin Neag
  */
+//todo Kevin: This is just a class to test right? Do we need this now that we have a functioning limiter?
 public class RateLimitThreadTest implements Runnable{
 
     Thread thrd;
     ApiAuthentication apiAuthentication;
 
     // Construct a new thread.
-    public RateLimitThreadTest(String name, ApiAuthentication key) {
+
+    public RateLimitThreadTest(String name, ApiAuthentication apiAuthentication) {
+
         thrd = new Thread(this, name);
         this.apiAuthentication = apiAuthentication;
         thrd.start(); // start the thread
@@ -29,12 +32,6 @@ public class RateLimitThreadTest implements Runnable{
         System.out.println(thrd.getName() + " starting.");
 
         CallCounter callCounter = new CallCounter();
-
-//        try {
-//            callCounter.isUnderRateLimit(key, KrakenRequestEnum.GETSERVERTIME);
-//        } catch (RateLimitException e) {
-//            e.printStackTrace();
-//        }
 
         GenericRequestHandler handler = new GenericRequestHandler();
         OutputWrapper serverTime = null;

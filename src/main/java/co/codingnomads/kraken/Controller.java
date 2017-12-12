@@ -2,9 +2,9 @@ package co.codingnomads.kraken;
 import co.codingnomads.kraken.exception.RateLimitException;
 import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
-import co.codingnomads.kraken.model.account.request.GetTradeBalanceRequestBody;
+import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
-import co.codingnomads.kraken.util.RateLimitThreadTest;
+import org.springframework.util.MultiValueMap;
 
 /**
  * Created by Thomas Leruth on 11/28/17
@@ -15,76 +15,36 @@ public class Controller {
     public static void main(String[] args) throws NullPointerException, RateLimitException, UnkownException {
 
 
+
+        //so far not used as we call method directly, will later call method on that
+        // todo ryan: Correct my thinking but later we could call within the exchange getters of
+        // of the apiAuthentication and thus getting the elements no (no need to pass in as Param)?
+        // just for security purpose and we could raise the access level of the ApiAuthentication
         KrakenExchange exchange = new KrakenExchange(
-                "Insert API-Key",
-                "Insert API-Secret",
+                "RHjkEcaWRSEOYmOvfQSfXrzYeB1ZFJoX/B9ewO0cpkMPnI74uMx8AGF4",
+                "qjcKcR6o37vv56BPUEw3FPPpiOvBvjVO0JQpC0bfEUV/bNkYFNGDya9VtFuKDJwrQ4PBAgMSQkKVC+QHxiJ/PA==",
                 4);
 
         GenericRequestHandler handler = new GenericRequestHandler();
-
-        RequestBodyGeneric a = new GetTradeBalanceRequestBody(null, "ZEUR");
-
-        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, exchange.getApiAuthentication());
-        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, exchange.getApiAuthentication());
-//        OutputWrapper recentTrades = handler.callAPI(KrakenRequestEnum.GETRECENTTRADES, null);
-//        OutputWrapper tradableAssetPairs = handler.callAPI(KrakenRequestEnum.GETTRADABLEASSETPAIRS, null);
-//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, null);
-
-
-        //ricky currnetly working gettickerinfo and getrecenttrades
-
-
-//        ObjectMapper mapper = new ObjectMapper();
-        //get results from OutputWrapper "orderBook"
-        //Map<String, GetOrderBookOutput> results = (Map<String, GetOrderBookOutput>) orderBook.getResult();
-        //If there are any errors, they will be in orderBook.getErrors()
-        //String[] errors = orderBook.getError();
-
-        //test for recentTrades
-//        Map<String, GetRecentTradesOutput> recentTradesResult = (Map<String, GetRecentTradesOutput>) recentTrades.getResult();
-//        String[] recentTradesError = recentTrades.getError();
-
-        //test for tradableAssetPairs
-//        Map<String, GetTradableAssetPairsOutput> tradeableAssetPairsResult = (Map<String, GetTradableAssetPairsOutput>) tradableAssetPairs.getResult();
-//        String[] tradableAssetPairsError = tradableAssetPairs.getError();
-
-        //test for openpositions
-//        Map<String, GetOpenPositionsOutput> openPositionsResult = (Map<String, GetOpenPositionsOutput>) openPositions.getResult();
-//        String[] openPositionError = openPositions.getError();
-
-
-        //Another exmaple:
-//        KrakenServerTime time = (KrakenServerTime) serverTime.getResult();
-//        String[] serverTimeErrors = serverTime.getError();
-
-//        Map<String, CancelOpenOrderOutput> results2 = (Map<String, CancelOpenOrderOutput>) cancelOrder.getResult();
-//        String[] cancelOrderErrors = cancelOrder.getError();
-
-
-
-
-
-    }
-
-
-    public static void testRateLimit(ApiAuthentication apiAuthentication) {
-
-        System.out.println("Testing rate limit");
-
-        for(int i =0; i < 20; i++){
-
-            RateLimitThreadTest threadOne = new RateLimitThreadTest("thread" + i, apiAuthentication);
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        
+        RequestBodyGeneric a = new RequestBodyGeneric() {
+            @Override
+            public String signPostParam() {
+                return null;
             }
-        }
 
+            @Override
+            public MultiValueMap<String, String> postParam() {
+                return null;
+            }
+        };
 
-        System.out.println("All done");
+//        OutputWrapper result = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, a, exchange.getApiAuthentication());
 
+//        System.out.println(result.toString());
+
+        OutputWrapper result = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME, a, exchange.getApiAuthentication());
+        System.out.println(result.toString());
     }
 
 }

@@ -1,6 +1,5 @@
 package co.codingnomads.kraken.service;
 
-import co.codingnomads.kraken.KrakenExchange;
 import co.codingnomads.kraken.exception.RateLimitException;
 import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
@@ -16,33 +15,30 @@ import org.springframework.web.client.RestTemplate;
 
 public class GenericRequestHandler {
 
-
-    // for now passing in KrakenExchange but later will be removed as KrakenExchange will call this method parametized
     public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication)
             throws NullPointerException, UnkownException, RateLimitException {
 
+        MultiValueMap<String, String> body = null;
+        HttpHeaders headers = null;
 
-        try {
-            if (!CallCounter.isUnderRateLimit(apiAuthentication, krakenRequest)) {
-                throw new UnkownException("RateLimit Exception - callApi +");
+        //no need of doing it for public method
+        if (krakenRequest.getHttpMethod().matches("POST")) {
+            try {
+                if (!CallCounter.isUnderRateLimit(apiAuthentication, krakenRequest)) {
+                    throw new UnkownException("RateLimit Exception - callApi");
+                    //todo Kevin: aren't we missing something after the +
+                }
+            } catch (RateLimitException e) {
+                e.printStackTrace();
+                throw e;
             }
-        } catch (RateLimitException e) {
-            e.printStackTrace();
-            throw e;
+
+            body = requestBody.postParam();
+            headers = getHttpPostHeaders(krakenRequest, requestBody, apiAuthentication);
         }
 
         System.out.println("callAPI executing - " + Thread.currentThread().getName());
-
-        MultiValueMap<String, String> body;
-
-        if (requestBody != null) {
-            body = requestBody.postParam();
-        } else {
-            body = null;
-        }
-
-        // Method to set correctly the headers if Post or Get
-        HttpHeaders headers = getHttpHeaders(krakenRequest, requestBody, apiAuthentication);
+        //todo Kevin: needed?
 
         //the entity with the body and the headers
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
@@ -54,7 +50,8 @@ public class GenericRequestHandler {
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
-                krakenRequest.getOutputClass());
+                OutputWrapper.class);
+//                krakenRequest.getOutputClass());
 
         // can make a method to check this outside this method
         try {
@@ -67,15 +64,14 @@ public class GenericRequestHandler {
     }
 
 
-    public HttpHeaders getHttpHeaders(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication){
+    public HttpHeaders getHttpPostHeaders(KrakenRequestEnum krakenRequest,
+                                          RequestBodyGeneric requestBody,
+                                          ApiAuthentication apiAuthentication) {
+
         HttpHeaders headers = new HttpHeaders();
-
-        if (krakenRequest.getHttpMethod().matches("POST")) {
-
-            headers.set("API-Key", apiAuthentication.getApiKey());
-            headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
+        headers.set("API-Key", apiAuthentication.getApiKey());
+        headers.set("API-Sign", KrakenSignature.ApiSignCreator(requestBody.getNonce(),
                     requestBody.signPostParam(), apiAuthentication.getSecret(), krakenRequest.getEndPoint()));
-        }
 
         return headers;
     }
@@ -89,7 +85,6 @@ public class GenericRequestHandler {
             throw new HttpClientErrorException(status);
         else if (status.is5xxServerError())
             throw new HttpServerErrorException(status);
-
         else
             throw new RestClientException(status.getReasonPhrase());
     }
