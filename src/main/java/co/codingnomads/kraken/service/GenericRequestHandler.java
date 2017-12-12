@@ -1,7 +1,7 @@
 package co.codingnomads.kraken.service;
 
 import co.codingnomads.kraken.exception.RateLimitException;
-import co.codingnomads.kraken.exception.UnkownException;
+import co.codingnomads.kraken.exception.UnknownException;
 import co.codingnomads.kraken.model.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,50 +15,74 @@ import org.springframework.web.client.RestTemplate;
 
 public class GenericRequestHandler {
 
+<<<<<<< HEAD
     public OutputWrapper callAPI(KrakenRequestEnum krakenRequest,
                                  RequestBodyGeneric requestBody,
                                  ApiAuthentication apiAuthentication)
             throws NullPointerException, UnkownException, RateLimitException {
+=======
+    /**
+     * A generic Request Handler being able to call all end points
+     * @param krakenRequest An Enum containing the endpoint, http request type, the API allowance utilization, and
+     *                     the response output call,
+     * @param requestBody What is based into the call (for GET will be used to adapt the URL,
+     *                    for POST will be the request body)
+     * @param apiAuthentication The parameters to authenticate the call
+     * @return An OutputWrapper With an error field and a result firled
+     * @throws NullPointerException
+     * @throws UnknownException
+     * @throws RateLimitException
+     */
+
+    public OutputWrapper callAPI(KrakenRequestEnum krakenRequest, RequestBodyGeneric requestBody, ApiAuthentication apiAuthentication)
+            throws NullPointerException, UnknownException, RateLimitException {
+>>>>>>> 36a03ad71532aa4d6b53cd39167c902b71dd5c55
 
 
         MultiValueMap<String, String> body = null;
         HttpHeaders headers = null;
 
-        //no need of doing it for public method
+        // For post only do multiple things
+        // 1) run the API rate limiter
+        // 2) set the body
+        // 3) set the headers
         if (krakenRequest.getHttpMethod().matches("POST")) {
             try {
                 if (!CallCounter.isUnderRateLimit(apiAuthentication, krakenRequest)) {
-                    throw new UnkownException("RateLimit Exception - callApi +");
-                    //todo Kevin: aren't we missing something after the +
+                    throw new UnknownException("RateLimit Exception - callApi");
                 }
             } catch (RateLimitException e) {
                 e.printStackTrace();
                 throw e;
             }
-
             body = requestBody.postParam();
             headers = getHttpPostHeaders(krakenRequest, requestBody, apiAuthentication);
         }
 
-        System.out.println("callAPI executing - " + Thread.currentThread().getName());
         //todo Kevin: needed?
+        System.out.println("callAPI executing - " + Thread.currentThread().getName());
 
+<<<<<<< HEAD
         // Call a method to set the fullURL with any arguments that have been passed in, pass it queryParams
         // if queryPArams>0, format correctly
 
         //the entity with the body and the headers
+=======
+        // Set the full http entity using the body and headers
+>>>>>>> 36a03ad71532aa4d6b53cd39167c902b71dd5c55
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 
         // need an Autowired version of it but I am getting a null pointer issue
         RestTemplate restTemplate = new RestTemplate();
 
+        // Map the response of the call to the getOutputClass
         ResponseEntity response = restTemplate.exchange(
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
                 krakenRequest.getOutputClass());
 
-        // can make a method to check this outside this method
+        // check if it was a success and return the item if so
         try {
             if (isSuccessful(response.getStatusCode())) {
                 return (OutputWrapper) response.getBody();
@@ -68,7 +92,13 @@ public class GenericRequestHandler {
         }
     }
 
-
+    /**
+     * Set the post headers
+     * @param krakenRequest Needed for finding the endpoint
+     * @param requestBody Needed as part of the API-Sign
+     * @param apiAuthentication Needed for authentication
+     * @return the valid headers
+     */
     public HttpHeaders getHttpPostHeaders(KrakenRequestEnum krakenRequest,
                                           RequestBodyGeneric requestBody,
                                           ApiAuthentication apiAuthentication) {
@@ -81,7 +111,12 @@ public class GenericRequestHandler {
         return headers;
     }
 
-    // need to go somewhere else
+    /**
+     * Method made to check if the call was successful
+     * @param status the returned status of the Http call
+     * @return true if success
+     * @throws RestClientException
+     */
     public boolean isSuccessful(HttpStatus status)
             throws RestClientException {
         if (status.is2xxSuccessful())

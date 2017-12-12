@@ -1,13 +1,7 @@
 package co.codingnomads.kraken;
 import co.codingnomads.kraken.exception.KrakenException;
-import co.codingnomads.kraken.exception.RateLimitException;
-import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.account.pojo.KrakenClosedOrders;
-import co.codingnomads.kraken.model.account.pojo.KrakenOpenOrders;
-import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
-import co.codingnomads.kraken.model.trade.pojo.KrakenCancelOpenOrder;
-import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 import java.util.Map;
@@ -61,6 +55,6 @@ public class Controller {
 //            System.out.println(e.toString());
 //        }
 
-
+        System.out.println("callAPI ending - " + Thread.currentThread().getName());
     }
 }
