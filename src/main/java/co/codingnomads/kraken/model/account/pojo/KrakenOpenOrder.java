@@ -1,10 +1,13 @@
 package co.codingnomads.kraken.model.account.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
-public class KrakenOpenOrders {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class KrakenOrder {
     /**
      * Created by Meghan Boyce on 12/07/17
      *
@@ -54,15 +57,21 @@ public class KrakenOpenOrders {
     //Xchange does List<String> trades
     String[]trades;
 
-    public KrakenOpenOrders(@JsonProperty("refid")String refid, @JsonProperty("userref")String userref,
-                            @JsonProperty("status")String status, @JsonProperty("opentm")double opentm,
-                            @JsonProperty("starttm")double starttm, @JsonProperty("expiretm")double expiretm,
-                            @JsonProperty("descr")KrakenOrderDescription descr,
-                            @JsonProperty("vol")BigDecimal vol, @JsonProperty("vol_exec")BigDecimal vol_exec,
-                            @JsonProperty("cost")BigDecimal cost, @JsonProperty("fee")BigDecimal fee,
-                            @JsonProperty("price")BigDecimal price, @JsonProperty("stopprice")BigDecimal stopprice,
-                            @JsonProperty("limitprice")BigDecimal limitprice, @JsonProperty("misc")String misc,
-                            @JsonProperty("oflags")String oflags, @JsonProperty("trades")String[] trades) {
+    // Additional fields for getClosedOrders:
+    // Unix timestamp of when order was closed
+    String closetm;
+    // Additional info on status (if any)
+    String reason;
+
+    public KrakenOrder(@JsonProperty("refid")String refid, @JsonProperty("userref")String userref,
+                       @JsonProperty("status")String status, @JsonProperty("opentm")double opentm,
+                       @JsonProperty("starttm")double starttm, @JsonProperty("expiretm")double expiretm,
+                       @JsonProperty("descr")KrakenOrderDescription descr,
+                       @JsonProperty("vol")BigDecimal vol, @JsonProperty("vol_exec")BigDecimal vol_exec,
+                       @JsonProperty("cost")BigDecimal cost, @JsonProperty("fee")BigDecimal fee,
+                       @JsonProperty("price")BigDecimal price, @JsonProperty("stopprice")BigDecimal stopprice,
+                       @JsonProperty("limitprice")BigDecimal limitprice, @JsonProperty("misc")String misc,
+                       @JsonProperty("oflags")String oflags, @JsonProperty("trades")String[] trades)    {
         this.refid = refid;
         this.userref = userref;
         this.status = status;
@@ -80,6 +89,39 @@ public class KrakenOpenOrders {
         this.misc = misc;
         this.oflags = oflags;
         this.trades = trades;
+    }
+
+    // This constructor is used for KrakenClosedOrders
+    public KrakenOrder(@JsonProperty("refid")String refid, @JsonProperty("userref")String userref,
+                       @JsonProperty("status")String status, @JsonProperty("opentm")double opentm,
+                       @JsonProperty("starttm")double starttm, @JsonProperty("expiretm")double expiretm,
+                       @JsonProperty("descr")KrakenOrderDescription descr,
+                       @JsonProperty("vol")BigDecimal vol, @JsonProperty("vol_exec")BigDecimal vol_exec,
+                       @JsonProperty("cost")BigDecimal cost, @JsonProperty("fee")BigDecimal fee,
+                       @JsonProperty("price")BigDecimal price, @JsonProperty("stopprice")BigDecimal stopprice,
+                       @JsonProperty("limitprice")BigDecimal limitprice, @JsonProperty("misc")String misc,
+                       @JsonProperty("oflags")String oflags, @JsonProperty("trades")String[] trades,
+                       @JsonProperty("closetm")String closetm, @JsonProperty("reason")String reason)
+    {
+        this.refid = refid;
+        this.userref = userref;
+        this.status = status;
+        this.opentm = opentm;
+        this.starttm = starttm;
+        this.expiretm = expiretm;
+        this.descr = descr;
+        this.vol = vol;
+        this.vol_exec = vol_exec;
+        this.cost = cost;
+        this.fee = fee;
+        this.price = price;
+        this.stopprice = stopprice;
+        this.limitprice = limitprice;
+        this.misc = misc;
+        this.oflags = oflags;
+        this.trades = trades;
+        this.closetm = closetm;
+        this.reason = reason;
     }
 
     public String getRefid() {
@@ -216,5 +258,21 @@ public class KrakenOpenOrders {
 
     public void setTrades(String[] trades) {
         this.trades = trades;
+    }
+
+    public String getClosetm() {
+        return closetm;
+    }
+
+    public void setClosetm(String closetm) {
+        this.closetm = closetm;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }
