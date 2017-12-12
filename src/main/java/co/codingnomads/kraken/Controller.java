@@ -1,7 +1,9 @@
 package co.codingnomads.kraken;
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.account.request.GetTradeBalanceRequestBody;
+import co.codingnomads.kraken.model.market.request.GetOpenPositionsRequestBody;
 import co.codingnomads.kraken.model.trade.request.GetTradeHistoryRequestBody;
+import co.codingnomads.kraken.model.trade.request.QueryTradesInfoRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 /**
@@ -15,18 +17,19 @@ public class Controller {
         KrakenExchange exchange = new KrakenExchange(
                 "ApiKey Goes Here",
                 "ApiSecret Goes Here",
-                4);
+                3);
 
         GenericRequestHandler handler = new GenericRequestHandler();
 
         RequestBodyGeneric a = new GetTradeBalanceRequestBody(null, "ZEUR");
-        RequestBodyGeneric b = new GetTradeHistoryRequestBody("10");
+        RequestBodyGeneric b = new QueryTradesInfoRequestBody(24);
+        RequestBodyGeneric c = new GetOpenPositionsRequestBody(24);
 
 //        OutputWrapper orderBook = handler.callAPI(KrakenRequestEnum.GETORDERBOOK, null, exchange.getApiAuthentication());
 //        OutputWrapper serverTime = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, null, exchange.getApiAuthentication());
-        OutputWrapper tradeHistory = handler.callAPI(KrakenRequestEnum.GETTRADESHISTORY, b, exchange.getApiAuthentication());
-//        OutputWrapper queryTradeInfo = handler.callAPI(KrakenRequestEnum.QUERYTRADESINFO, null, exchange.getApiAuthentication());
-//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, null, exchange.getApiAuthentication());
+//        OutputWrapper tradeHistory = handler.callAPI(KrakenRequestEnum.GETTRADESHISTORY, b, exchange.getApiAuthentication());
+//        OutputWrapper queryTradeInfo = handler.callAPI(KrakenRequestEnum.QUERYTRADESINFO, b, exchange.getApiAuthentication());
+        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, c, exchange.getApiAuthentication());
 
         //ricky currnetly working gettickerinfo and getrecenttrades
 
