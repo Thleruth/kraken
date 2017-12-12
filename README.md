@@ -5,8 +5,8 @@
 | Calls  | Status |
 |:------:|--------|
 |`GetServerTime` | Implemented and tested |
-|`GetAssetInfo` | Work in Progress | 
-|`GetTradableAssetPairs` | Work in Progress | 
+|`GetAssetInfo` | Implemented and tested |
+|`GetTradableAssetPairs` | Implemented and tested |
 |`GetTickerInformation` | Implemented and Tested |
 |`GetOHLCdata` | Work in Progress | 
 |`GetOrderBook` | Implemented and Tested |
@@ -17,9 +17,9 @@
 |`GetOpenOrders` | Work in Progress | 
 |`GetClosedOrders` | Work in Progress | 
 |`QueryOrdersInfo` | Requires Testing (txid) |
-|`GetTradesHistory` | Work in Progress | 
-|`QueryTradesInfo` | Work in Progress | 
-|`GetOpenPositions` | Work in Progress | 
+|`GetTradesHistory` | Requires Testing (trade history) |
+|`QueryTradesInfo` | Requires Testing (txid) |
+|`GetOpenPositions` | Requires Testing (txid) |
 |`GetLedgersInfo` | Work in Progress | 
 |`QueryLedgers` | Work in Progress | 
 |`GetTradeVolume` | Work in Progress |
