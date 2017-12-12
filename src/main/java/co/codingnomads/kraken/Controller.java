@@ -1,6 +1,6 @@
 package co.codingnomads.kraken;
 import co.codingnomads.kraken.exception.RateLimitException;
-import co.codingnomads.kraken.exception.UnkownException;
+import co.codingnomads.kraken.exception.UnknownException;
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
@@ -11,7 +11,7 @@ import co.codingnomads.kraken.service.GenericRequestHandler;
 
 public class Controller {
 
-    public static void main(String[] args) throws NullPointerException, RateLimitException, UnkownException {
+    public static void main(String[] args) throws NullPointerException, RateLimitException, UnknownException {
 
         //so far not used as we call method directly, will later call method on that
         // todo ryan: Correct my thinking but later we could call within the exchange getters of
@@ -29,6 +29,8 @@ public class Controller {
         OutputWrapper result = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, a, exchange.getApiAuthentication());
 
         System.out.println(result.toString());
+
+        System.out.println("callAPI ending - " + Thread.currentThread().getName());
 
     }
 }
