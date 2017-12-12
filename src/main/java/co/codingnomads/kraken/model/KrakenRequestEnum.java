@@ -1,6 +1,6 @@
 package co.codingnomads.kraken.model;
 
-import co.codingnomads.kraken.model.market.response.GetTradeVolumeOutput;
+import co.codingnomads.kraken.model.account.response.GetTradeVolumeOutput;
 import co.codingnomads.kraken.model.account.response.*;
 import co.codingnomads.kraken.model.market.response.*;
 import co.codingnomads.kraken.model.trade.response.*;

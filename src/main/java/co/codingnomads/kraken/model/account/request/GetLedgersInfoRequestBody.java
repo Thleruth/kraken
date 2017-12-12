@@ -1,47 +1,60 @@
-//todo fix this one
 package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
+import co.codingnomads.kraken.model.account.pojo.KrakenLedgerType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.sql.Timestamp;
+
+/**
+ * @author Kevin Neag
+ */
+
+
 public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
 
-    //asset class (optional), currency (default)
-    String aclass;
-    //comma delimited list of assets to restrict output to (optional.  default = all)
-    String asset;
-    //type is optional, by default all
-    String type;
-    //start time is optional, exclusive by default
-    Long start;
-    //end time is optional, inclusive by default
-    Long end;
-    //String ofs is a required field
-    String ofs;
+    private String assetclass; //optional
+    private String currency; //default
+    private String asset; //optional, default all
+    private String type; //optional, default all, deposit, withdrawal, trade, margin
+    private long start; //starting unix timestamp or ledger id of results (optional.  exclusive)
+    private long end;//ending unix timestamp or ledger id of results (optional.  inclusive)
+    private String ofs;
 
-    public GetLedgersInfoRequestBody(String ofs) {
-        this.ofs = ofs;
-    }
-
-    public GetLedgersInfoRequestBody(@JsonProperty("aclass")String aclass, @JsonProperty("asset")String asset,
-                                     @JsonProperty("type")String type, @JsonProperty("start")Long start,
-                                     @JsonProperty("end")Long end, @JsonProperty("ofs")String ofs) {
-        this.aclass = aclass;
+    public GetLedgersInfoRequestBody(@JsonProperty("aclass") String assetclass, @JsonProperty("currency") String currency,
+                                     @JsonProperty("asset") String asset, @JsonProperty("type") String type,
+                                     @JsonProperty("start") long start, @JsonProperty("end") long end,
+                                     @JsonProperty("ofs") String ofs) {
+        this.assetclass = assetclass;
+        this.currency = currency;
         this.asset = asset;
         this.type = type;
         this.start = start;
         this.end = end;
         this.ofs = ofs;
+
     }
 
-    public String getAclass() {
-        return aclass;
+    public GetLedgersInfoRequestBody(@JsonProperty("ofs") String ofs) {
+        this.ofs = ofs;
     }
 
-    public void setAclass(String aclass) {
-        this.aclass = aclass;
+    public String getAssetclass() {
+        return assetclass;
+    }
+
+    public void setAssetclass(String assetclass) {
+        this.assetclass = assetclass;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public String getAsset() {
@@ -60,19 +73,19 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
         this.type = type;
     }
 
-    public Long getStart() {
+    public long getStart() {
         return start;
     }
 
-    public void setStart(Long start) {
+    public void setStart(long start) {
         this.start = start;
     }
 
-    public Long getEnd() {
+    public long getEnd() {
         return end;
     }
 
-    public void setEnd(Long end) {
+    public void setEnd(long end) {
         this.end = end;
     }
 
@@ -85,50 +98,61 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
     }
 
     @Override
-    public String signPostParam() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("nonce").append("=").append(getNonce());
-        if (null != getAclass()) {
-            sb.append("&").append("type").append("=").append(getAclass());
+    public MultiValueMap<String, String> postParam(){
+        MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
+        postParameters.add("nonce", getNonce());
+        if (null != assetclass ){
+            postParameters.add("aclass", getAssetclass());
         }
-        if (null != getAsset()) {
-            sb.append("&").append("type").append("=").append(getAsset());
+        if (null != currency){
+            postParameters.add("currency", getCurrency());
         }
-        if (null != getType()) {
-            sb.append("&").append("type").append("=").append(getType());
+        if (null != asset){
+            postParameters.add("asset", getAsset());
         }
-        if (null != getStart()){
-            sb.append("&").append("start").append("=").append(getStart());
-        }
-        if (null != getEnd()) {
-            sb.append("&").append("end").append("=").append(getEnd());
-        }
-        sb.append("&").append("ofs").append("=").append(getOfs());
-        return sb.toString();
-    }
-
-    @Override
-    public MultiValueMap<String, String> postParam() {
-        MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
-        postParameters.add("nonce", super.getNonce());
-        if (null != getAclass()){
-            postParameters.add("type", getAclass());
-        }
-        if (null != getAsset()){
-            postParameters.add("type", getAsset());
-        }
-        if (null != getType()){
+        if (null != type){
             postParameters.add("type", getType());
         }
-        if (null != getStart()) {
+        if (start > 0){
             postParameters.add("start", String.valueOf(getStart()));
         }
-        if (null != getEnd()) {
+        if (end > 0){
             postParameters.add("end", String.valueOf(getEnd()));
         }
         postParameters.add("ofs", getOfs());
+
         return postParameters;
     }
 
+    @Override
+    public String signPostParam() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("nonce").append("=").append(getNonce());
+        if (null != assetclass){
+            sb.append("aclass").append("=").append(getAssetclass());
+        }
+        if (null != currency){
+            sb.append("currency").append("=").append(getCurrency());
+        }
+        if (null != asset) {
+            sb.append("asset").append("=").append(getAsset());
+        }
+        if (null != type) {
+            sb.append("type").append("=").append(getType());
+        }
+        if (start > 0){
+            sb.append("start").append("=").append(getStart());
+        }
+        if (end > 0) {
+            sb.append("end").append("=").append(getEnd());
+        }
+        sb.append("ofs").append("=").append(getOfs());
+        return sb.toString();
+    }
+
+
 
 }
+
+
+
