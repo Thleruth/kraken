@@ -9,7 +9,6 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     /**
      * Created by Meghan Boyce on 11/29/17
      *
-     * All instance vars defined as Strings until we know better
      */
 
     // Whether or not to include trades in output (optional - default = false)

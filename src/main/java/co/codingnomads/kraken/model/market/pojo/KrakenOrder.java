@@ -46,7 +46,7 @@ public class KrakenOrder {
     @Override
     public String toString() {
 
-        return "KrakenOrder [price=" + price + ", volume=" + volume + ", timestamp=" + timestamp + "]";
+        return "KrakenOpenOrder [price=" + price + ", volume=" + volume + ", timestamp=" + timestamp + "]";
     }
 
     static class OrderDeserializer extends JsonDeserializer<KrakenOrder> {

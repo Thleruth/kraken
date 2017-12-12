@@ -26,7 +26,7 @@ public enum KrakenRequestEnum {
 //    GETOHLCDATA("/0/public/OHLC", HttpMethod.GET, 0),
     GETORDERBOOK("/0/public/Depth", HttpMethod.GET, 0, GetOrderBookOutput.class),
     GETRECENTTRADES("/0/public/Trades?pair=XBTUSD", HttpMethod.GET, 0, GetRecentTradesOutput.class),
-//    GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET, 0,),
+    GETRECENTSPREADDATA("/0/public/Spread", HttpMethod.GET, 0, GetSpreadDataOutput.class),
     GETACCOUNTBALANCE("/0/private/Balance", HttpMethod.POST, 1, GetAccountBalanceOutput.class),
     GETTRADEBALANCE("/0/private/TradeBalance", HttpMethod.POST, 1, GetTradeBalanceOutput.class),
     GETOPENORDERS("/0/private/OpenOrders", HttpMethod.POST, 1, GetOpenOrdersOutput.class),
