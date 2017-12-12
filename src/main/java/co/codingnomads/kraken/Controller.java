@@ -3,6 +3,8 @@ import co.codingnomads.kraken.exception.KrakenException;
 import co.codingnomads.kraken.exception.RateLimitException;
 import co.codingnomads.kraken.exception.UnkownException;
 import co.codingnomads.kraken.model.*;
+import co.codingnomads.kraken.model.account.pojo.KrakenClosedOrders;
+import co.codingnomads.kraken.model.account.pojo.KrakenOpenOrders;
 import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.model.trade.pojo.KrakenCancelOpenOrder;
 import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
@@ -37,6 +39,21 @@ public class Controller {
         System.out.println(result.toString());
 
         // Meghan testing
+
+//        try {
+//            Map<String, KrakenOpenOrders> openOrdersMap = exchange.getOpenOrder();
+//            System.out.println(openOrdersMap.size());
+//        } catch (KrakenException e){
+//            System.out.println(e.toString());
+//        }
+
+        try {
+            Map<String, KrakenClosedOrders> closedOrdersMap = exchange.getClosedOrder();
+            System.out.println(closedOrdersMap.size());
+        } catch (KrakenException e){
+            System.out.println(e.toString());
+        }
+
 //        try {
 //            Map<String, KrakenOrderBook> orderBookMap = exchange.getOrderBook("XBTUSD", "0");
 //            System.out.println(orderBookMap.size());
@@ -44,11 +61,6 @@ public class Controller {
 //            System.out.println(e.toString());
 //        }
 
-        try {
-            Map<String, KrakenCancelOpenOrder> cancelOrderMap = exchange.cancelOpenOrder("1");
-            System.out.println(cancelOrderMap.size());
-        } catch (KrakenException e){
-            System.out.println(e.toString());
-        }
+
     }
 }

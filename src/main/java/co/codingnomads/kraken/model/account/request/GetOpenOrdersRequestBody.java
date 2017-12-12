@@ -7,22 +7,25 @@ import org.springframework.util.MultiValueMap;
 public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
 
     // Whether or not to include trades in output (optional, default = false)
-    Boolean trades;
+    String trades;
     // Restrict results to given user reference id (optional)
     String userref;
 
     // Fully qualified constructor
-    public GetOpenOrdersRequestBody(Boolean trades, String userref) {
+    public GetOpenOrdersRequestBody(String trades, String userref) {
         this.trades = trades;
         this.userref = userref;
     }
 
+    public GetOpenOrdersRequestBody() {
+    }
+
     // getters and setters
-    public Boolean getTrades() {
+    public String getTrades() {
         return trades;
     }
 
-    public void setTrades(Boolean trades) {
+    public void setTrades(String trades) {
         this.trades = trades;
     }
 
@@ -47,17 +50,28 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
         postParameters.add("nonce", getNonce());
-        postParameters.add("trades", getTrades().toString());
-        postParameters.add("userref", getUserref());
+        if (null != getTrades()) {
+            postParameters.add("trades", getTrades());
+        }
+        if (null != getUserref()) {
+            postParameters.add("userref", getUserref());
+        }
         return postParameters;
     }
 
     @Override
     public String signPostParam() {
+
+        // need a way to adjust this string to accomodate different variable options
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
-        sb.append("&").append("trades").append("=").append(getTrades().toString());
-        sb.append("&").append("userref").append("=").append(getUserref());
+        if (null != getTrades()) {
+            sb.append("&").append("trades").append("=").append(getTrades());
+        }
+
+        if (null != getUserref()) {
+           sb.append("&").append("userref").append("=").append(getUserref());
+        }
         return sb.toString();
     }
 }
