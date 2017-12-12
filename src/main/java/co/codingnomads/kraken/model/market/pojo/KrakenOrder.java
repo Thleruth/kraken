@@ -13,14 +13,19 @@ import java.math.BigDecimal;
 
 /**
  * Created by ryandesmond on 12/6/17.
+ * Given that the Json format for OrderBook displays the values in a form of different data types within
+ * an array, the best course of action was to map the results as objects and then utilize a deserializer
+ * to adjust to the correct data types.
  */
 @JsonDeserialize(using = KrakenOrder.OrderDeserializer.class)
 public class KrakenOrder {
 
+    //Using BigDecimal rather than String since it is the most accurate data type when dealing with monetary values
     private final BigDecimal price;
     private final BigDecimal volume;
     private final long timestamp;
 
+    //Fully qualified constructor
     public KrakenOrder(BigDecimal price, BigDecimal volume, long timestamp) {
 
         this.price = price;
@@ -28,6 +33,7 @@ public class KrakenOrder {
         this.timestamp = timestamp;
     }
 
+    //Getters and setters
     public BigDecimal getPrice() {
 
         return price;
@@ -51,6 +57,7 @@ public class KrakenOrder {
 
     static class OrderDeserializer extends JsonDeserializer<KrakenOrder> {
 
+        //Deserializer method which returns a constructor with parameters already matched to the Json format.
         @Override
         public KrakenOrder deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 
