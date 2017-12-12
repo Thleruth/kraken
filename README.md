@@ -11,11 +11,11 @@
 |`GetOHLCdata` | Work in Progress | 
 |`GetOrderBook` | Work in Progress | 
 |`GetRecentTrades` | Work in Progress | 
-|`GetRecentSpreadData` | Work in Progress | 
+|`GetRecentSpreadData` | Implemeted and tested |
 |`GetAccountBalance` | Implemented and tested | 
 |`GetTradeBalance` | Implemented and tested | 
-|`GetOpenOrders` | Work in Progress | 
-|`GetClosedOrders` | Work in Progress | 
+|`GetOpenOrders` | Implemeted and tested |
+|`GetClosedOrders` | Implemeted and tested |
 |`QueryOrdersInfo` | Work in Progress | 
 |`GetTradesHistory` | Work in Progress | 
 |`QueryTradesInfo` | Work in Progress | 
@@ -24,6 +24,6 @@
 |`QueryLedgers` | Work in Progress | 
 |`GetTradeVolume` | Work in Progress |
 |`AddStandardOrder` | Work in Progress |
-|`CancelOpenOrder` | Work in Progress |
+|`CancelOpenOrder` | Implemeted and tested |
 
 This project is a work in progress and should NOT be used as is. Any liabilities or damages induced by the use of this tool is the sole responsability of the user of this tools and not the developpers

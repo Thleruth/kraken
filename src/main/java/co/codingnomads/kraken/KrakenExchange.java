@@ -14,6 +14,8 @@ import co.codingnomads.kraken.model.trade.pojo.KrakenCancelOpenOrder;
 import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -37,6 +39,25 @@ public class KrakenExchange {
 
     //todo one method for each potential KrakenRequest enum item (via the CallAPI)
 
+    public Map<String, KrakenSpread> getRecentSpreadData(HashMap<String, String> params) throws KrakenException{
+
+        KrakenRequestEnum recentSpreadDataEnum = KrakenRequestEnum.GETRECENTSPREADDATA;
+        recentSpreadDataEnum.updateEndpoint(createQueryParams(params));
+        // add if() for addition query params
+
+        OutputWrapper getRecentSpreadData = handler.callAPI(recentSpreadDataEnum,null, authentication);
+
+        if (getRecentSpreadData.getError().length > 0){
+            throw new KrakenException(getRecentSpreadData.getError(), "General exception");
+        } else {
+            Map<String, KrakenSpread> results = (Map<String, KrakenSpread>) getRecentSpreadData.getResult();
+            if (results.isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
 
     /**
      *
@@ -66,11 +87,11 @@ public class KrakenExchange {
         }
     }
 
-    public Map<String, KrakenCancelOpenOrder> cancelOpenOrder(String txid) throws KrakenException{
+    public Map<String, KrakenCancelOpenOrder> cancelOpenOrder(HashMap<String, String> params) throws KrakenException{
 
         KrakenRequestEnum cancelOrderTestEnum = KrakenRequestEnum.CANCELOPENORDERS;
 
-        cancelOrderTestEnum.updateEndpoint("?txid=" + txid);
+        cancelOrderTestEnum.updateEndpoint(createQueryParams(params));
         CancelOpenOrderRequestBody cancelOpenOrderRB = new CancelOpenOrderRequestBody("1");
 
         OutputWrapper cancelOrder = handler.callAPI(cancelOrderTestEnum, cancelOpenOrderRB, authentication);
@@ -131,23 +152,14 @@ public class KrakenExchange {
         }
     }
 
-    public Map<String, KrakenSpread> getRecentSpreadData(String pair) throws KrakenException{
-
-        KrakenRequestEnum recentSpreadDataEnum = KrakenRequestEnum.GETRECENTSPREADDATA;
-        recentSpreadDataEnum.updateEndpoint("?pair=" + pair);
-        // add if() for addition query params
-
-        OutputWrapper getRecentSpreadData = handler.callAPI(recentSpreadDataEnum,null, authentication);
-
-        if (getRecentSpreadData.getError().length > 0){
-            throw new KrakenException(getRecentSpreadData.getError(), "General exception");
-        } else {
-            Map<String, KrakenSpread> results = (Map<String, KrakenSpread>) getRecentSpreadData.getResult();
-            if (results.isEmpty()){
-                throw new KrakenException("General exception, results are null");
-            } else {
-                return results;
-            }
+    public String createQueryParams(HashMap<String, String> params){
+        StringBuilder sb = new StringBuilder();
+        Iterator it = params.entrySet().iterator();
+        sb.append("?");
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            sb.append(pair.getKey() + "=" + pair.getValue());
         }
+        return sb.toString();
     }
 }

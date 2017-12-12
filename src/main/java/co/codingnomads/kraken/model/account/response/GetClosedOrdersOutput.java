@@ -17,15 +17,21 @@ public class GetClosedOrdersOutput extends OutputWrapper<GetClosedOrdersOutput.K
     public static class KrakenClosedOrders {
 
         private final Map<String, KrakenClosedOrder> orders;
+        private final int count;
 
-        public KrakenClosedOrders(@JsonProperty("closed") Map<String, KrakenClosedOrder> orders) {
+        public KrakenClosedOrders(@JsonProperty("closed") Map<String, KrakenClosedOrder> orders, int count) {
 
             this.orders = orders;
+            this.count = count;
         }
 
         public Map<String, KrakenClosedOrder> getOrders() {
 
             return orders;
+        }
+
+        public int getCount() {
+            return count;
         }
     }
 
