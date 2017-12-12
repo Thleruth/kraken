@@ -19,7 +19,6 @@ public class KrakenSignature {
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeyException
      */
-
     public static String ApiSignCreator(String nonce, String postData, String apiSecret, String path) {
 
         try {

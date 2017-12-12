@@ -6,7 +6,7 @@ import org.springframework.util.MultiValueMap;
 
 public class AddStandardOrderRequestBody extends RequestBodyGeneric{
 
-    // Asset pair
+    // KrakenAsset pair
     String pair;
     // Type of order (buy/sell)
     String type;

@@ -3,11 +3,11 @@ package co.codingnomads.kraken.exception;
 /**
  * @author Kevin Neag
  */
-public class UnkownException extends Exception {
+public class UnknownException extends Exception {
 
     String errorMsg;
 
-    public UnkownException(String message) {
+    public UnknownException(String message) {
         super(message);
     }
 

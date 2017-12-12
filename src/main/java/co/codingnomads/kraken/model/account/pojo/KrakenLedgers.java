@@ -13,9 +13,9 @@ public class KrakenLedgers {
     String time;
     // Type of ledger entry
     String type;
-    // Asset class
+    // KrakenAsset class
     String aclass;
-    // Asset
+    // KrakenAsset
     String asset;
     // Transaction amount
     String amount;

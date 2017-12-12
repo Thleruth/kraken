@@ -49,7 +49,7 @@ public class KrakenOrder {
         return "KrakenOrder [price=" + price + ", volume=" + volume + ", timestamp=" + timestamp + "]";
     }
 
-    static class OrderDeserializer extends JsonDeserializer<KrakenOrder> {
+    public static class OrderDeserializer extends JsonDeserializer<KrakenOrder> {
 
         @Override
         public KrakenOrder deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {

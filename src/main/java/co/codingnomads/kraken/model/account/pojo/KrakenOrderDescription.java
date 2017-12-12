@@ -9,7 +9,7 @@ public class KrakenOrderDescription {
      * order description info
      */
 
-    // Asset pair
+    // KrakenAsset pair
     String pair;
     // Type of order (buy/sell)
     String type;

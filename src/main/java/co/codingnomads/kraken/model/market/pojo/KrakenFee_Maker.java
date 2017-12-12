@@ -88,6 +88,15 @@ public class KrakenFee_Maker {
         this.tiervolume = tiervolume;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "KrakenFee_Maker{" +
+                "fee=" + fee +
+                ", minFee=" + minFee +
+                ", maxFee=" + maxFee +
+                ", nextFee=" + nextFee +
+                ", nextVolume=" + nextVolume +
+                ", tiervolume=" + tiervolume +
+                '}';
+    }
 }

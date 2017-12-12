@@ -11,6 +11,13 @@ import org.springframework.http.HttpMethod;
  * Created by Thomas Leruth on 11/29/17
  */
 
+/**
+ * Enum class to get specific information about the calls as
+ * 1) endPoint
+ * 2) Type of HTTP call
+ * 3) Number of call allowance used to make that call (for the call limiter)
+ * 4) Class of the response output
+ */
 public enum KrakenRequestEnum {
 
     GETSERVERTIME("/0/public/Time", HttpMethod.GET, 0, GetServerTimeOutput.class),

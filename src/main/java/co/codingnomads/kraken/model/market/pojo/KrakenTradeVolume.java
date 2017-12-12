@@ -9,15 +9,15 @@ import java.util.List;
  */
 public class KrakenTradeVolume {
 
-    private final String currency;
+    private String currency;
 
-    private final long volume;
+    private long volume;
 
     private List<KrakenFee> fee; //if requested
 
     private List<KrakenFee_Maker> fee_maker; // if requested
 
-    public KrakenTradeVolume(String currency, long volume, @JsonProperty("fee")List<KrakenFee> fee, @JsonProperty("fee_maker")List<KrakenFee_Maker> fee_maker) {
+    public KrakenTradeVolume(@JsonProperty("currency") String currency, @JsonProperty("volume") long volume, @JsonProperty("fee")List<KrakenFee> fee, @JsonProperty("fee_maker")List<KrakenFee_Maker> fee_maker) {
 
         this.currency = currency;
         this.volume = volume;
@@ -51,5 +51,16 @@ public class KrakenTradeVolume {
 
     public void setFee_maker(List<KrakenFee_Maker> fee_maker) {
         this.fee_maker = fee_maker;
+    }
+
+
+    @Override
+    public String toString() {
+        return "KrakenTradeVolume{" +
+                "currency='" + currency + '\'' +
+                ", volume=" + volume +
+                ", fee=" + fee +
+                ", fee_maker=" + fee_maker +
+                '}';
     }
 }

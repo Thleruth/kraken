@@ -1,6 +1,6 @@
 package co.codingnomads.kraken;
 import co.codingnomads.kraken.exception.RateLimitException;
-import co.codingnomads.kraken.exception.UnkownException;
+import co.codingnomads.kraken.exception.UnknownException;
 import co.codingnomads.kraken.model.*;
 import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
@@ -12,7 +12,7 @@ import org.springframework.util.MultiValueMap;
 
 public class Controller {
 
-    public static void main(String[] args) throws NullPointerException, RateLimitException, UnkownException {
+    public static void main(String[] args) throws NullPointerException, RateLimitException, UnknownException {
 
 
 
@@ -21,9 +21,9 @@ public class Controller {
         // of the apiAuthentication and thus getting the elements no (no need to pass in as Param)?
         // just for security purpose and we could raise the access level of the ApiAuthentication
         KrakenExchange exchange = new KrakenExchange(
-                "RHjkEcaWRSEOYmOvfQSfXrzYeB1ZFJoX/B9ewO0cpkMPnI74uMx8AGF4",
-                "qjcKcR6o37vv56BPUEw3FPPpiOvBvjVO0JQpC0bfEUV/bNkYFNGDya9VtFuKDJwrQ4PBAgMSQkKVC+QHxiJ/PA==",
-                4);
+                "key",
+                "your-secret",
+                56);
 
         GenericRequestHandler handler = new GenericRequestHandler();
         
@@ -39,12 +39,12 @@ public class Controller {
             }
         };
 
-//        OutputWrapper result = handler.callAPI(KrakenRequestEnum.GETSERVERTIME, a, exchange.getApiAuthentication());
+       OutputWrapper result = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME, a, exchange.getApiAuthentication());
 
-//        System.out.println(result.toString());
+        System.out.println(result.getResult());
 
-        OutputWrapper result = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME, a, exchange.getApiAuthentication());
-        System.out.println(result.toString());
+        System.out.println("callAPI ending - " + Thread.currentThread().getName());
+
     }
 
 }
