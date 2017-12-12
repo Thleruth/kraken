@@ -16,9 +16,9 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
     //trades is optional, false by default
     boolean trades;
     //start time is optional, exclusive by default
-    String start;
+    Long start;
     //end time is optional, inclusive by default
-    String end;
+    Long end;
     //String ofs is a required field
     String ofs;
 
@@ -26,7 +26,7 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         this.ofs = ofs;
     }
 
-    public GetTradeHistoryRequestBody(String type, boolean trades, String start, String end, String ofs) {
+    public GetTradeHistoryRequestBody(String type, boolean trades, Long start, Long end, String ofs) {
         this.type = type;
         this.trades = trades;
         this.start = start;
@@ -50,19 +50,19 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         this.trades = trades;
     }
 
-    public String getStart() {
+    public Long getStart() {
         return start;
     }
 
-    public void setStart(String start) {
+    public void setStart(Long start) {
         this.start = start;
     }
 
-    public String getEnd() {
+    public Long getEnd() {
         return end;
     }
 
-    public void setEnd(String end) {
+    public void setEnd(Long end) {
         this.end = end;
     }
 
@@ -105,10 +105,10 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
             postParameters.add("trades", String.valueOf(getTrades()));
         }
         if (null != getStart()) {
-            postParameters.add("start", getStart());
+            postParameters.add("start", String.valueOf(getStart()));
         }
         if (null != getEnd()) {
-            postParameters.add("end", getEnd());
+            postParameters.add("end", String.valueOf(getEnd()));
         }
         postParameters.add("ofs", getOfs());
         return postParameters;

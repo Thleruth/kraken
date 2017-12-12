@@ -13,7 +13,8 @@ import java.util.Map;
 
 public class QueryTradesInfoOutput extends OutputWrapper<Map<String, KrakenTradeInfo>> {
 
-    public QueryTradesInfoOutput(@JsonProperty("error") String[] error, @JsonProperty("result") Map<String, KrakenTradeInfo> result) {
+    public QueryTradesInfoOutput(@JsonProperty("error") String[] error,
+                                 @JsonProperty("result") Map<String, KrakenTradeInfo> result) {
         super(result, error);
     }
 

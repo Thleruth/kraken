@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.market.request;
+package co.codingnomads.kraken.model.trade.request;
 
 /*
 created by PopoPenguin on 12/11/17
@@ -9,28 +9,31 @@ import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.util.List;
+
 public class GetOpenPositionsRequestBody extends RequestBodyGeneric {
 
     // Transaction id
-    int txid;
+    String txid;
     // To include docalcs or not, false by default
     boolean docalcs;
 
-    public GetOpenPositionsRequestBody(int txid) {
+
+    public GetOpenPositionsRequestBody(String txid) {
         this.txid = txid;
         this.docalcs = false;
     }
 
-    public GetOpenPositionsRequestBody(int txid, boolean docalcs) {
+    public GetOpenPositionsRequestBody(String txid, boolean docalcs) {
         this.txid = txid;
         this.docalcs = docalcs;
     }
 
-    public int getTxid() {
+    public String getTxid() {
         return txid;
     }
 
-    public void setTxid(int txid) {
+    public void setTxid(String txid) {
         this.txid = txid;
     }
 
@@ -46,7 +49,7 @@ public class GetOpenPositionsRequestBody extends RequestBodyGeneric {
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
         postParameters.add("nonce", super.getNonce());
-        postParameters.add("txid", String.valueOf(getTxid()));
+        postParameters.add("txid", getTxid());
         if (false != isDocalcs()) {
             postParameters.add("trades", String.valueOf(isDocalcs()));
         }

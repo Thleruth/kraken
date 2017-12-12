@@ -10,11 +10,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
-public class GetTradesHistoryOutput extends OutputWrapper<Map<String, Map<String,KrakenTradeInfo>>> {
+public class GetTradesHistoryOutput extends OutputWrapper<GetTradesHistoryOutput.KrakenTradeHistory> {
 
-    //This currently ignores "count" response
-    public GetTradesHistoryOutput(@JsonProperty("error") String[] error, @JsonProperty("result") Map<String, KrakenTradeInfo> result) {
-        super((Map<String, Map<String,KrakenTradeInfo>>)result.get("trades"), error);
+
+    public GetTradesHistoryOutput(@JsonProperty("result") KrakenTradeHistory result, @JsonProperty("error") String[] error) {
+
+        super(result, error);
+    }
+
+    public static class KrakenTradeHistory {
+
+        private final Map<String, KrakenTradeInfo> trades;
+        private final int count;
+
+        public KrakenTradeHistory(@JsonProperty("trades") Map<String, KrakenTradeInfo> trades, @JsonProperty ("count") int count) {
+
+            this.trades = trades;
+            this.count = count;
+        }
+
+        public Map<String, KrakenTradeInfo> getTrades() {
+
+            return trades;
+        }
+
+        public int getCount() {
+            return count;
+        }
     }
 
 }

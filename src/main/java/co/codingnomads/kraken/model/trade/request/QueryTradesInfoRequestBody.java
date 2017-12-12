@@ -12,25 +12,25 @@ import org.springframework.util.MultiValueMap;
 public class QueryTradesInfoRequestBody extends RequestBodyGeneric {
 
     // Transaction id
-    int txid;
+    String txid;
     // To include trades or not, false by default
     boolean trades;
 
-    public QueryTradesInfoRequestBody (int txid) {
+    public QueryTradesInfoRequestBody (String txid) {
         this.txid = txid;
         this.trades = false;
     }
 
-    public QueryTradesInfoRequestBody(int txid, boolean trades) {
+    public QueryTradesInfoRequestBody(String txid, boolean trades) {
         this.txid = txid;
         this.trades = trades;
     }
 
-    public int getTxid() {
+    public String getTxid() {
         return txid;
     }
 
-    public void setTxid(int txid) {
+    public void setTxid(String txid) {
         this.txid = txid;
     }
 
@@ -47,7 +47,7 @@ public class QueryTradesInfoRequestBody extends RequestBodyGeneric {
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
         postParameters.add("nonce", super.getNonce());
-        postParameters.add("txid", String.valueOf(getTxid()));
+        postParameters.add("txid", getTxid());
         if (false != isTrades()) {
             postParameters.add("trades", String.valueOf(isTrades()));
         }

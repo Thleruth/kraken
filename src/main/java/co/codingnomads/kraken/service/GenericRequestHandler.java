@@ -65,8 +65,10 @@ public class GenericRequestHandler {
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
-                OutputWrapper.class);
-//                krakenRequest.getOutputClass());
+                // uncomment OutputWrapper.class and comment out krakenRequest.getOutputClass()) to see
+                // output error for idea of structure of json
+//                OutputWrapper.class);
+                krakenRequest.getOutputClass());
 
         // check if it was a success and return the item if so
         try {

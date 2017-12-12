@@ -21,7 +21,7 @@ import org.springframework.http.HttpMethod;
 public enum KrakenRequestEnum {
 
     GETSERVERTIME("/0/public/Time", HttpMethod.GET, 0, GetServerTimeOutput.class),
-//    GETASSETINFO("/0/public/Assets", HttpMethod.GET, 0, GetServerTimeOutput.class,),
+    GETASSETINFO("/0/public/Assets", HttpMethod.GET, 0, GetAssetInfoOutput.class),
     GETTRADABLEASSETPAIRS("/0/public/AssetPairs", HttpMethod.GET, 0, GetTradableAssetPairsOutput.class),
     GETTICKERINFORMATION("/0/public/Ticker", HttpMethod.GET, 0, GetTickerInformationOutput.class),
 //    GETOHLCDATA("/0/public/OHLC", HttpMethod.GET, 0),
