@@ -1,4 +1,6 @@
-package co.codingnomads.kraken.model.market.pojo;
+package co.codingnomads.kraken.model.account.pojo;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
@@ -15,7 +17,9 @@ public class KrakenFee_Maker {
     long nextVolume; //volume level of next tier (if not fixed fee.  nil if at lowest fee tier)
     long tiervolume; //volume level of current tier (if not fixed fee.  nil if at lowest fee tier)
 
-    public KrakenFee_Maker(BigDecimal fee, BigDecimal minFee, BigDecimal maxFee, BigDecimal nextFee, long nextVolume, long tiervolume) {
+    public KrakenFee_Maker(@JsonProperty("fee") BigDecimal fee, @JsonProperty("minfee") BigDecimal minFee,
+                           @JsonProperty("maxfee") BigDecimal maxFee, @JsonProperty("nextfee") BigDecimal nextFee,
+                           @JsonProperty("nextvolume") long nextVolume, @JsonProperty("tiervolume") long tiervolume) {
         this.fee = fee;
 
         if(minFee != null) {

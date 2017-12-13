@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.market.request;
+package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
@@ -9,7 +9,8 @@ import org.springframework.util.MultiValueMap;
  */
 public class QueryLedgersRequestBody extends RequestBodyGeneric {
 
-    private String id; //max 20
+    //comma delimited list of ledger ids to query info about (20 maximum)
+    private String id;
 
     public QueryLedgersRequestBody(String id) {
         this.id = id;
@@ -35,7 +36,7 @@ public class QueryLedgersRequestBody extends RequestBodyGeneric {
     public String signPostParam() {
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
-        sb.append("id").append("=").append(getNonce());
+        sb.append("&").append("id").append("=").append(getId());
         return sb.toString();
     }
 

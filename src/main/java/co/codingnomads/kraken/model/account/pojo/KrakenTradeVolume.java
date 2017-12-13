@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.market.pojo;
+package co.codingnomads.kraken.model.account.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,6 +16,15 @@ public class KrakenTradeVolume {
     private List<KrakenFee> fee; //if requested
 
     private List<KrakenFee_Maker> fee_maker; // if requested
+
+
+    //make a constructor with only currency and volume;
+
+
+    public KrakenTradeVolume(@JsonProperty("currency") String currency,@JsonProperty("volume") long volume) {
+        this.currency = currency;
+        this.volume = volume;
+    }
 
     public KrakenTradeVolume(@JsonProperty("currency") String currency, @JsonProperty("volume") long volume, @JsonProperty("fee")List<KrakenFee> fee, @JsonProperty("fee_maker")List<KrakenFee_Maker> fee_maker) {
 

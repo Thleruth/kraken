@@ -1,7 +1,7 @@
-package co.codingnomads.kraken.model.market.response;
+package co.codingnomads.kraken.model.account.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.market.pojo.KrakenLedgersInfo;
+import co.codingnomads.kraken.model.account.pojo.KrakenLedgersInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
