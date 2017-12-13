@@ -1,18 +1,20 @@
 package co.codingnomads.kraken.model.market.pojo;
-
-/*
-created by PopoPenguin on 11/29/17
-*/
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+/*
+created by PopoPenguin on 11/29/17
+*/
+
+/**
+ * KrakenAssetPair POJO for api call <url>https://api.kraken.com/0/public/AssetPairs</url>
+ *
+ * Kraken API Documentation for this call <url>https://www.kraken.com/help/api#get-tradable-pairs</url>
+ */
 
 public class KrakenAssetPairName {
-
-    //Pojo of KrakenAssetPairName output
 
     String altname;
     String aclass_base;
@@ -31,6 +33,26 @@ public class KrakenAssetPairName {
     BigDecimal margin_call;
     BigDecimal margin_stop;
 
+    /**
+     * Class Constructor
+     *
+     * @param altname           alternate pair name
+     * @param aclass_base       asset class of base component
+     * @param base              asset id of base component
+     * @param aclass_quote      asset class of quote component
+     * @param quote             asset id of quote component
+     * @param lot               volume lot size
+     * @param pair_decimals     scaling decimal places for pair
+     * @param lot_decimals      scaling decimal places for volume
+     * @param lot_multiplier    amount to multiply lot volume by to get currency volume
+     * @param leverage_buy      array of leverage amounts available when buying
+     * @param leverage_sell     array of leverage amounts available when selling
+     * @param fees              fee schedule array in [volume, percent fee] tuples
+     * @param fees_maker        maker fee schedule array in [volume, percent fee] tuples (if on maker/taker)
+     * @param fee_volume_currency   volume discount currency
+     * @param margin_call       margin call level
+     * @param margin_stop       stop-out/liquidation margin level
+     */
     public KrakenAssetPairName(@JsonProperty("altname")String altname, @JsonProperty("aclass_base")String aclass_base, @JsonProperty("base")String base,
                                @JsonProperty("aclass_quote")String aclass_quote, @JsonProperty("quote")String quote, @JsonProperty("lot")String lot,
                                @JsonProperty("pair_decimals")BigDecimal pair_decimals, @JsonProperty("lot_decimals")BigDecimal lot_decimals, @JsonProperty("lot_multiplier")BigDecimal lot_multiplier,

@@ -13,4 +13,6 @@ public class GetRecentTradesOutput extends OutputWrapper<KrakenRecentTrades> {
 
         super(result, error);
     }
+
+    //TODO need to test recent trades
 }
