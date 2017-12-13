@@ -1,8 +1,7 @@
-<<<<<<< HEAD
+
 package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
-import co.codingnomads.kraken.model.account.pojo.KrakenLedgerType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -157,14 +156,4 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
 
 
 
-=======
 
-//todo fix this one
-
-//package co.codingnomads.kraken.model.account.request;
-//
-//import co.codingnomads.kraken.model.RequestBodyGeneric;
-//
-//public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
-//}
->>>>>>> 02d55952d9b5a4ee1f6450287797dbf162629bfc
