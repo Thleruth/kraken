@@ -22,6 +22,7 @@ import java.util.Map;
  * Created by Thomas Leruth on 11/30/17
  */
 
+
 public class KrakenExchange {
 
     ApiAuthentication authentication;
@@ -76,8 +77,6 @@ public class KrakenExchange {
      * @return
      * @throws KrakenException
      */
-
-    // pair required, count optional
     public Map<String, KrakenOrderBook> getOrderBook(String pair, String count) throws KrakenException{
 
         KrakenRequestEnum test = KrakenRequestEnum.GETORDERBOOK;
@@ -163,6 +162,14 @@ public class KrakenExchange {
         }
     }
 
+    /**
+     * Method for calls that include query parameters. Takes a String key - String value HashMap parameter.
+     * Builds a string beginning with "?" followed by the key + value for all params passed in.
+     * The String is returned and added to the end of the URL endpoint in API call methods above requiring
+     * query params.
+     * @param params
+     * @return
+     */
     public String createQueryParams(HashMap<String, String> params){
         StringBuilder sb = new StringBuilder();
         Iterator it = params.entrySet().iterator();
