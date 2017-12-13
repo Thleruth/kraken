@@ -38,7 +38,7 @@ public enum KrakenRequestEnum {
     QUERYTRADESINFO("/0/private/QueryTrades", HttpMethod.POST, 1, QueryTradesInfoOutput.class),
     GETOPENPOSITIONS("/0/private/OpenPositions",HttpMethod.POST, 1,GetOpenPositionsOutput.class),
    GETLEDGERSINFO("/0/private/Ledgers", HttpMethod.POST, 2, GetLedgersInfoOutput.class),
-    QUERYLEDGERS("/0/private/QueryLedgersRequestBody", HttpMethod.POST, 2, QueryLedgersOutput.class),
+    QUERYLEDGERS("/0/private/QueryLedgers", HttpMethod.POST, 2, QueryLedgersOutput.class),
     GETTRADEVOLUME("/0/private/TradeVolume", HttpMethod.POST, 1, GetTradeVolumeOutput.class),
     ADDSTRANDARDORDERS("/0/private/AddOrder", HttpMethod.POST, 0, AddStandardOrderOutput.class),
     CANCELOPENORDERS("/0/private/CancelOrder",HttpMethod.POST, 0,CancelOpenOrderOutput.class);

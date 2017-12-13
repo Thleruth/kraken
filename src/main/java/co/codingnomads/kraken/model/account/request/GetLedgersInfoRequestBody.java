@@ -21,23 +21,20 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
     private String type; //optional, default all, deposit, withdrawal, trade, margin
     private long start; //starting unix timestamp or ledger id of results (optional.  exclusive)
     private long end;//ending unix timestamp or ledger id of results (optional.  inclusive)
-    private String ofs;
+    private long ofs;
 
-    public GetLedgersInfoRequestBody(@JsonProperty("aclass") String assetclass, @JsonProperty("currency") String currency,
-                                     @JsonProperty("asset") String asset, @JsonProperty("type") String type,
-                                     @JsonProperty("start") long start, @JsonProperty("end") long end,
-                                     @JsonProperty("ofs") String ofs) {
-        this.assetclass = assetclass;
+    public GetLedgersInfoRequestBody(String assetclass, String currency, String asset, String type, long start, long end, long ofs) {
+        if (null != assetclass)
+            this.assetclass = assetclass;
         this.currency = currency;
-        this.asset = asset;
-        this.type = type;
-        this.start = start;
-        this.end = end;
-        this.ofs = ofs;
-
-    }
-
-    public GetLedgersInfoRequestBody(@JsonProperty("ofs") String ofs) {
+        if (null != asset)
+            this.asset = asset;
+        if (null != type)
+            this.type = type;
+        if (start > 0)
+            this.start = start;
+        if (end > 0)
+            this.end = end;
         this.ofs = ofs;
     }
 
@@ -89,11 +86,11 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
         this.end = end;
     }
 
-    public String getOfs() {
+    public long getOfs() {
         return ofs;
     }
 
-    public void setOfs(String ofs) {
+    public void setOfs(long ofs) {
         this.ofs = ofs;
     }
 
@@ -119,7 +116,7 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
         if (end > 0){
             postParameters.add("end", String.valueOf(getEnd()));
         }
-        postParameters.add("ofs", getOfs());
+        postParameters.add("ofs", String.valueOf(getOfs()));
 
         return postParameters;
     }
@@ -129,24 +126,24 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
         if (null != assetclass){
-            sb.append("aclass").append("=").append(getAssetclass());
+            sb.append("&").append("aclass").append("=").append(getAssetclass());
         }
         if (null != currency){
-            sb.append("currency").append("=").append(getCurrency());
+            sb.append("&").append("currency").append("=").append(getCurrency());
         }
         if (null != asset) {
-            sb.append("asset").append("=").append(getAsset());
+            sb.append("&").append("asset").append("=").append(getAsset());
         }
         if (null != type) {
-            sb.append("type").append("=").append(getType());
+            sb.append("&").append("type").append("=").append(getType());
         }
         if (start > 0){
-            sb.append("start").append("=").append(getStart());
+            sb.append("&").append("start").append("=").append(getStart());
         }
         if (end > 0) {
-            sb.append("end").append("=").append(getEnd());
+            sb.append("&").append("end").append("=").append(getEnd());
         }
-        sb.append("ofs").append("=").append(getOfs());
+        sb.append("&").append("ofs").append("=").append(getOfs());
         return sb.toString();
     }
 

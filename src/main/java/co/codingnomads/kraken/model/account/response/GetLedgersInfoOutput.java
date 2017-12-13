@@ -6,10 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
+/**
+ * @author Kevin Neag
+ */
 public class GetLedgersInfoOutput extends OutputWrapper<Map<String, KrakenLedgersInfo>> {
-    /**
-     * Created by Meghan Boyce on 11/29/17
-     */
+
 
     public GetLedgersInfoOutput(@JsonProperty("result") Map<String, KrakenLedgersInfo> result,
                                 @JsonProperty("error")String[] error) {

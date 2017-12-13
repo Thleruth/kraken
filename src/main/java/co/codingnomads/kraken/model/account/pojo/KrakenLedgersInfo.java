@@ -11,8 +11,8 @@ import java.sql.Timestamp;
 public class KrakenLedgersInfo {
 
 
-    int refid;
-    Timestamp time;
+    String refid;
+    float time;
     String type;
     String assetClass;
     String asset;
@@ -20,7 +20,7 @@ public class KrakenLedgersInfo {
     BigDecimal fee;
     BigDecimal balance;
 
-    public KrakenLedgersInfo(@JsonProperty("refid") int refid, @JsonProperty("time") Timestamp time,
+    public KrakenLedgersInfo(@JsonProperty("refid") String refid, @JsonProperty("time") float time,
                              @JsonProperty("type") String type, @JsonProperty("aclass") String assetClass,
                              @JsonProperty("asset") String asset, @JsonProperty("amount") BigDecimal amount,
                              @JsonProperty("fee") BigDecimal fee, @JsonProperty("balance") BigDecimal balance) {
@@ -34,19 +34,19 @@ public class KrakenLedgersInfo {
         this.balance = balance;
     }
 
-    public int getRefid() {
+    public String getRefid() {
         return refid;
     }
 
-    public void setRefid(int refid) {
+    public void setRefid(String refid) {
         this.refid = refid;
     }
 
-    public Timestamp getTime() {
+    public float getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(float time) {
         this.time = time;
     }
 
