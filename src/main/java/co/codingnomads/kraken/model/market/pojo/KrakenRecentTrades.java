@@ -1,8 +1,6 @@
 package co.codingnomads.kraken.model.market.pojo;
 
 
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,6 +21,7 @@ import java.util.Map;
 public class KrakenRecentTrades {
 
     private final List<KrakenRecentTrade> trades;
+
     private final long last;
 
     public KrakenRecentTrades(List<KrakenRecentTrade> trades, long last) {

@@ -74,5 +74,4 @@ public class KrakenOrder {
             return null;
         }
     }
-
 }

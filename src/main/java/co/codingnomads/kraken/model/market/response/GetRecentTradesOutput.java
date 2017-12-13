@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class GetRecentTradesOutput extends OutputWrapper<KrakenRecentTrades> {
     public GetRecentTradesOutput(@JsonProperty("error") String[] error, @JsonProperty("result") KrakenRecentTrades result) {
-        super(result, error);
 
+        super(result, error);
     }
 }
