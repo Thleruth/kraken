@@ -36,7 +36,7 @@ public class QueryLedgersRequestBody extends RequestBodyGeneric {
     public String signPostParam() {
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
-        sb.append("id").append("=").append(getNonce());
+        sb.append("&").append("id").append("=").append(getId());
         return sb.toString();
     }
 

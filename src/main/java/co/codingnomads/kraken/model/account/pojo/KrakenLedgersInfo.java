@@ -1,18 +1,29 @@
 package co.codingnomads.kraken.model.account.pojo;
 
+import co.codingnomads.kraken.model.market.pojo.KrakenFees;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
  * @author Kevin Neag
  */
+
+
 public class KrakenLedgersInfo {
 
 
-    int refid;
-    Timestamp time;
+    String refid;
+    float time;
     String type;
     String assetClass;
     String asset;
@@ -20,7 +31,7 @@ public class KrakenLedgersInfo {
     BigDecimal fee;
     BigDecimal balance;
 
-    public KrakenLedgersInfo(@JsonProperty("refid") int refid, @JsonProperty("time") Timestamp time,
+    public KrakenLedgersInfo(@JsonProperty("refid") String refid, @JsonProperty("time") float time,
                              @JsonProperty("type") String type, @JsonProperty("aclass") String assetClass,
                              @JsonProperty("asset") String asset, @JsonProperty("amount") BigDecimal amount,
                              @JsonProperty("fee") BigDecimal fee, @JsonProperty("balance") BigDecimal balance) {
@@ -34,19 +45,19 @@ public class KrakenLedgersInfo {
         this.balance = balance;
     }
 
-    public int getRefid() {
+    public String getRefid() {
         return refid;
     }
 
-    public void setRefid(int refid) {
+    public void setRefid(String refid) {
         this.refid = refid;
     }
 
-    public Timestamp getTime() {
+    public float getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(float time) {
         this.time = time;
     }
 
@@ -110,5 +121,26 @@ public class KrakenLedgersInfo {
                 ", fee=" + fee +
                 ", balance=" + balance +
                 '}';
+
+
+
+//        static class LedgersInfoDeserializer extends JsonDeserializer<KrakenFees> {
+//
+//            @Override
+//            public KrakenLedgersInfo deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+//
+//                ObjectCodec oc = jsonParser.getCodec();
+//                JsonNode node = oc.readTree(jsonParser);
+//                if (node.isArray()){
+//                    BigDecimal volume = new BigDecimal(node.path(0).asText());
+//                    BigDecimal percentFee = new BigDecimal(node.path(1).asText());
+//
+//                    return new KrakenFees(volume, percentFee);
+//                }
+//
+//                return null;
+
+//            }
+//        }
     }
 }

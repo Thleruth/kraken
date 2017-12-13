@@ -20,9 +20,9 @@
 |`GetTradesHistory` | Requires Testing (trade history) |
 |`QueryTradesInfo` | Requires Testing (txid) |
 |`GetOpenPositions` | Requires Testing (txid) |
-|`GetLedgersInfo` | Work in Progress | 
-|`QueryLedgers` | Work in Progress | 
-|`GetTradeVolume` | Work in Progress |
+|`GetLedgersInfo` | Implemented and tested |
+|`QueryLedgers` | Implemented and tested |
+|`GetTradeVolume` | Requires testing (trade history) |
 |`AddStandardOrder` | Work in Progress |
 |`CancelOpenOrder` | Implemeted and tested |
 

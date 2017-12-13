@@ -1,4 +1,4 @@
-package co.codingnomads.kraken.model.market.request;
+package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;

@@ -29,27 +29,30 @@ public class Controller {
         // of the apiAuthentication and thus getting the elements no (no need to pass in as Param)?
         // just for security purpose and we could raise the access level of the ApiAuthentication
         KrakenExchange exchange = new KrakenExchange(
-                "",
-                "",
-                1
-                );
+                "OF8MsjLKb9tmeDE2EYPNhYzpW/l1l/Zk7O7bdnYtrpU/dchBHCqSuGeW",
+                "LY0LlBBxSXMbzG1uccoU6MRLkJcW7WmqviQ9JpOqrH5zFSMFPZZ2O9sCIKiz9SIWIo5zfGzJEDvd35Z4FQ3BLA==",
+                2);
 
-        GenericRequestHandler handler = new GenericRequestHandler();
 
-        RequestBodyGeneric b = new QueryTradesInfoRequestBody("1");
-        RequestBodyGeneric c = new GetOpenPositionsRequestBody("1,2,3");
-        RequestBodyGeneric d = new GetTradeHistoryRequestBody("10");
 
 //        //TODO these need to be tested with Thomas
 //        RequestBodyGeneric queryLedgers = new QueryLedgersRequestBody("thoma's ledger id");
 //        OutputWrapper kevinCallOne = handler.callAPI(KrakenRequestEnum.QUERYLEDGERS,queryLedgers, exchange.getApiAuthentication());
 //
-         //TODO invalid key
+            GenericRequestHandler handler = new GenericRequestHandler();
+            RequestBodyGeneric b = new GetLedgersInfoRequestBody(5);
+            OutputWrapper outputWrapper = handler.callAPI(KrakenRequestEnum.GETLEDGERSINFO, b, exchange.getApiAuthentication());
+            System.out.println(outputWrapper.toString());
+
+
+        //TODO kevin tradevolume internal error, may need Tom's key
+//        RequestBodyGeneric tradeVolume = new GetTradeVolumeRequestBody();
+//        OutputWrapper kevinCallThree = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME,tradeVolume, exchange.getApiAuthentication());
+
+        //TODO invalid key
 //        RequestBodyGeneric getledgersinfo = new GetLedgersInfoRequestBody("1");
 //        OutputWrapper kevinCallTwo = handler.callAPI(KrakenRequestEnum.GETLEDGERSINFO,getledgersinfo, exchange.getApiAuthentication());
 
-        RequestBodyGeneric tradeVolume = new GetTradeVolumeRequestBody();
-        OutputWrapper kevinCallThree = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME,tradeVolume, exchange.getApiAuthentication());
 
         //TODO These need to be tested with an api key that has transaction ids
 //        OutputWrapper tradeHistory = handler.callAPI(KrakenRequestEnum.GETTRADESHISTORY, d, exchange.getApiAuthentication());
@@ -69,6 +72,8 @@ public class Controller {
 //        } catch (KrakenException e){
 //            System.out.println(e.toString());
 //        }
+
+
 
     }
 
