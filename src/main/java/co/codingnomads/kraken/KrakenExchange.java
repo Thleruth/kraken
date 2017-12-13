@@ -20,12 +20,11 @@ import java.util.Map;
 
 /**
  * Created by Thomas Leruth on 11/30/17
+ * Contains methods for all Kraken Exchange API calls and to set call query parameters.
  */
-
 public class KrakenExchange {
 
     ApiAuthentication authentication;
-
 
     GenericRequestHandler handler =  new GenericRequestHandler();
 
@@ -176,11 +175,10 @@ public class KrakenExchange {
         }
     }
 
-
     /**
-     * Method for calls that include query parameters. Takes a String key - String value HashMap parameter.
+     * For calls that include query parameters. Takes a String key - String value HashMap parameter.
      * Builds a string beginning with "?" followed by the key + value for all params passed in.
-     * The String is returned and added to the end of the URL endpoint in API call methods above that use
+     * String is returned and added to the end of the URL endpoint in API call methods above that use
      * query params.
      * @param params - map of query parameter names and values
      * @return String - formatted url query parameters
