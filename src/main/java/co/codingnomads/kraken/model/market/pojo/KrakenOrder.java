@@ -55,7 +55,7 @@ public class KrakenOrder {
         return "KrakenOpenOrder [price=" + price + ", volume=" + volume + ", timestamp=" + timestamp + "]";
     }
 
-    static class OrderDeserializer extends JsonDeserializer<KrakenOrder> {
+    public static class OrderDeserializer extends JsonDeserializer<KrakenOrder> {
 
         //Deserializer method which returns a constructor with parameters already matched to the Json format.
         @Override

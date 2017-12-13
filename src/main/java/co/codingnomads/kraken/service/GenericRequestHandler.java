@@ -43,7 +43,9 @@ public class GenericRequestHandler {
         if (krakenRequest.getHttpMethod().matches("POST")) {
             try {
                 if (!CallCounter.isUnderRateLimit(apiAuthentication, krakenRequest)) {
+
                     throw new UnknownException("RateLimit Exception - callApi");
+
                 }
             } catch (RateLimitException e) {
                 e.printStackTrace();
@@ -52,14 +54,6 @@ public class GenericRequestHandler {
             body = requestBody.postParam();
             headers = getHttpPostHeaders(krakenRequest, requestBody, apiAuthentication);
         }
-
-        //todo Kevin: needed?
-        System.out.println("callAPI executing - " + Thread.currentThread().getName());
-
-        // Call a method to set the fullURL with any arguments that have been passed in, pass it queryParams
-        // if queryPArams>0, format correctly
-
-        //the entity with the body and the headers
 
         // Set the full http entity using the body and headers
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
@@ -73,7 +67,6 @@ public class GenericRequestHandler {
                 krakenRequest.getHttpMethod(),
                 entity,
                krakenRequest.getOutputClass());
-
 
         // check if it was a success and return the item if so
         try {
