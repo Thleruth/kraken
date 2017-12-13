@@ -39,18 +39,29 @@ public class KrakenExchange {
 
     //todo one method for each potential KrakenRequest enum item (via the CallAPI)
 
+    /**
+     * Method for the Get Recent Spread Data API call. Returns a Map containing Strings and highest level POJO
+     * corresponding to call's output (KrakenSpread).
+     * This method is called in the Controller and passed a HashMap of query parameters.
+     * @param params
+     * @return Map<String, KrakenSpread>
+     * @throws KrakenException
+     */
     public Map<String, KrakenSpread> getRecentSpreadData(HashMap<String, String> params) throws KrakenException{
-
+        // Assign specific call enum.
         KrakenRequestEnum recentSpreadDataEnum = KrakenRequestEnum.GETRECENTSPREADDATA;
+        // Update endpoint to add query parameters
         recentSpreadDataEnum.updateEndpoint(createQueryParams(params));
-        // add if() for addition query params
-
+        // Call the callAPI method, pass in enum type, null request body (no request body for public get calls),
+        // and authentication.
         OutputWrapper getRecentSpreadData = handler.callAPI(recentSpreadDataEnum,null, authentication);
-
+        // If an error is received throw exception
         if (getRecentSpreadData.getError().length > 0){
             throw new KrakenException(getRecentSpreadData.getError(), "General exception");
         } else {
+            // If no initial error, store & return results as String ("error")/KrakenSpread("result") Map
             Map<String, KrakenSpread> results = (Map<String, KrakenSpread>) getRecentSpreadData.getResult();
+            // If no results are retrieved throw exception.
             if (results.isEmpty()){
                 throw new KrakenException("General exception, results are null");
             } else {
