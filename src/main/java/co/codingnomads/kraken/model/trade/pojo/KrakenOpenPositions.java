@@ -1,13 +1,20 @@
-package co.codingnomads.kraken.model.market.pojo;
+package co.codingnomads.kraken.model.trade.pojo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /*
 created by PopoPenguin on 11/29/17
 */
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.math.BigDecimal;
-import java.util.List;
+/**
+ * KrakenOpenPositions POJO for api call <url>https://api.kraken.com/0/private/OpenPositions</url>
+ *
+ * Kraken API Documentation for this call<url>https://www.kraken.com/help/api#get-open-positions</url>
+ *
+ *
+ */
 
 public class KrakenOpenPositions {
 

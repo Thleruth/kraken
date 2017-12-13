@@ -4,26 +4,26 @@
 
 | Calls  | Status |
 |:------:|--------|
-|`GetServerTime` | Implemeted and tested |
-|`GetAssetInfo` | Work in Progress | 
-|`GetTradableAssetPairs` | Work in Progress | 
-|`GetTickerInformation` | Work in Progress | 
+|`GetServerTime` | Implemented and tested |
+|`GetAssetInfo` | Implemented and tested |
+|`GetTradableAssetPairs` | Implemented and tested |
+|`GetTickerInformation` | Implemented and Tested |
 |`GetOHLCdata` | Work in Progress | 
-|`GetOrderBook` | Work in Progress | 
+|`GetOrderBook` | Implemented and Tested |
 |`GetRecentTrades` | Work in Progress | 
-|`GetRecentSpreadData` | Work in Progress | 
+|`GetRecentSpreadData` | Implemeted and tested |
 |`GetAccountBalance` | Implemented and tested | 
-|`GetTradeBalance` | Implemented and tested | 
-|`GetOpenOrders` | Work in Progress | 
-|`GetClosedOrders` | Work in Progress | 
-|`QueryOrdersInfo` | Work in Progress | 
-|`GetTradesHistory` | Work in Progress | 
-|`QueryTradesInfo` | Work in Progress | 
-|`GetOpenPositions` | Work in Progress | 
+|`GetTradeBalance` | Implemented and tested |
+|`GetOpenOrders` | Implemeted and tested |
+|`GetClosedOrders` | Implemeted and tested |
+|`QueryOrdersInfo` | Requires Testing (txid) |
+|`GetTradesHistory` | Requires Testing (trade history) |
+|`QueryTradesInfo` | Requires Testing (txid) |
+|`GetOpenPositions` | Requires Testing (txid) |
 |`GetLedgersInfo` | Work in Progress | 
 |`QueryLedgers` | Work in Progress | 
 |`GetTradeVolume` | Work in Progress |
 |`AddStandardOrder` | Work in Progress |
-|`CancelOpenOrder` | Work in Progress |
+|`CancelOpenOrder` | Implemeted and tested |
 
 This project is a work in progress and should NOT be used as is. Any liabilities or damages induced by the use of this tool is the sole responsability of the user of this tools and not the developpers

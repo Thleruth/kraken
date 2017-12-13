@@ -4,28 +4,34 @@ import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
+public class QueryOrderInfoRequestBody extends RequestBodyGeneric{
 
     // Whether or not to include trades in output (optional, default = false)
-    String trades;
+    private Boolean trades;
     // Restrict results to given user reference id (optional)
-    String userref;
+    private String userref;
+
+    private String txid;
 
     // Fully qualified constructor
-    public GetOpenOrdersRequestBody(String trades, String userref) {
+    public QueryOrderInfoRequestBody(Boolean trades, String userref, String txid) {
         this.trades = trades;
         this.userref = userref;
+        this.txid = txid;
     }
 
-    public GetOpenOrdersRequestBody() {
+    public QueryOrderInfoRequestBody(String txid) {
+        this.txid = txid;
     }
 
     // getters and setters
-    public String getTrades() {
+
+
+    public Boolean getTrades() {
         return trades;
     }
 
-    public void setTrades(String trades) {
+    public void setTrades(Boolean trades) {
         this.trades = trades;
     }
 
@@ -37,12 +43,21 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
         this.userref = userref;
     }
 
+
+    public String getTxid() {
+        return txid;
+    }
+
+    public void setTxid(String txid) {
+        this.txid = txid;
+    }
+
     @Override
     public String toString() {
-        return "GetOpenOrdersRequestBody{" +
+        return "QueryOrderInfoRequestBody{" +
                 "trades=" + trades +
                 ", userref='" + userref + '\'' +
-                ", nonce='" + nonce + '\'' +
+                ", txid='" + txid + '\'' +
                 '}';
     }
 
@@ -50,28 +65,29 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
         postParameters.add("nonce", getNonce());
-        if (null != getTrades()) {
-            postParameters.add("trades", getTrades());
+        if(!getTrades()) {
+            postParameters.add("trades", getTrades().toString());
         }
-        if (null != getUserref()) {
+        if(null != getUserref()) {
             postParameters.add("userref", getUserref());
         }
+        postParameters.add("txid", getTxid());
+
         return postParameters;
     }
 
     @Override
     public String signPostParam() {
-
-        // need a way to adjust this string to accomodate different variable options
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
-        if (null != getTrades()) {
-            sb.append("&").append("trades").append("=").append(getTrades());
+        if(!getTrades()) {
+            sb.append("&").append("trades").append("=").append(getTrades().toString());
         }
+        if(null!=getUserref()) {
+            sb.append("&").append("userref").append("=").append(getUserref());
+        }
+        sb.append("&").append("txid").append("=").append(getTxid());
 
-        if (null != getUserref()) {
-           sb.append("&").append("userref").append("=").append(getUserref());
-        }
         return sb.toString();
     }
 }

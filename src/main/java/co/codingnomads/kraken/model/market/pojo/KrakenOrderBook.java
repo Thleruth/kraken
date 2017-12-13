@@ -17,11 +17,13 @@ public class KrakenOrderBook {
     //ask side array of array contains three values(price, volume, timestamp).
     private final List<KrakenOrder> bids;
 
+    //Fully qualified constructor
     public KrakenOrderBook(@JsonProperty("asks") List<KrakenOrder> asks, @JsonProperty("bids") List<KrakenOrder> bids) {
         this.asks = asks;
         this.bids = bids;
     }
 
+    //getters and setters
     public List<KrakenOrder> getAsks() {
         return asks;
     }

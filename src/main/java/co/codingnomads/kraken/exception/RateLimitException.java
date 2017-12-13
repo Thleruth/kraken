@@ -3,22 +3,16 @@ package co.codingnomads.kraken.exception;
 /**
  * @author Kevin Neag
  */
-public class RateLimitException extends Exception {
-
-    String errorMessage;
+public class RateLimitException extends KrakenException {
 
     public RateLimitException(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
+        super(errorMessage);
     }
 
     @Override
     public String toString() {
         return "RateLimitException{" +
-                "errorMessage='" + errorMessage + '\'' +
+                "errorMessage='" + message + '\'' +
                 '}';
     }
 }
