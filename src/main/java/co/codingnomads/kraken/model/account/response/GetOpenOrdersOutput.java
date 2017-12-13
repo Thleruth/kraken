@@ -12,6 +12,11 @@ public class GetOpenOrdersOutput extends OutputWrapper<Map<String, KrakenOpenOrd
      *
      */
 
+    /**
+     *
+     * @param error
+     * @param result
+     */
     public GetOpenOrdersOutput(@JsonProperty("error") String[] error,
                                @JsonProperty("result") Map<String, KrakenOpenOrder> result) {
         super(result, error);

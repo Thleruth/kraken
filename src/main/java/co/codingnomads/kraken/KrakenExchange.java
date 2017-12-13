@@ -124,7 +124,7 @@ public class KrakenExchange {
         KrakenRequestEnum closedOrderEnum = KrakenRequestEnum.GETCLOSEDORDERS;
         // Update endpoint to add query parameters
         closedOrderEnum.updateEndpoint(createQueryParams(params));
-        // Create instance of GetOpenOrdersRequestBody for the handler
+        // Create instance of GetClosedOrdersRequestBody for the handler
         GetClosedOrdersRequestBody getclosedOrdersRequestBody = new GetClosedOrdersRequestBody();
         // Call the callAPI method, pass in enum type, request body (required for private calls), authentication.
         OutputWrapper getClosedOrder = handler.callAPI(closedOrderEnum, getclosedOrdersRequestBody, authentication);

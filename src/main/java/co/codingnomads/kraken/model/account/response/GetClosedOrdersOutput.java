@@ -8,7 +8,11 @@ import java.util.Map;
 
 public class GetClosedOrdersOutput extends OutputWrapper<GetClosedOrdersOutput.KrakenClosedOrders> {
 
-
+    /**
+     *
+     * @param error
+     * @param result
+     */
     public GetClosedOrdersOutput(@JsonProperty("error") String[] error,
                                  @JsonProperty("result") KrakenClosedOrders result) {
         super(result, error);
@@ -34,6 +38,4 @@ public class GetClosedOrdersOutput extends OutputWrapper<GetClosedOrdersOutput.K
             return count;
         }
     }
-
-
 }

@@ -24,7 +24,15 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     // Which time to use (optional - open, close, both (default))
     String closetime;
 
-    // Fully qualified Constructor
+    /**
+     * Fully qualified Constructor
+     * @param trades
+     * @param userref
+     * @param start
+     * @param end
+     * @param ofs
+     * @param closetime
+     */
     public GetClosedOrdersRequestBody(String trades, String userref, String start, String end,
                                       String ofs, String closetime) {
         this.trades = trades;
@@ -35,7 +43,10 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
         this.closetime = closetime;
     }
 
-    // do we need a variety of constructors that cover all the options of variables that could be entered?
+    /**
+     *
+     * @param ofs
+     */
     public GetClosedOrdersRequestBody(String ofs) {
         this.ofs = ofs;
     }
@@ -43,54 +54,106 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
     public GetClosedOrdersRequestBody() {
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getTrades() {
         return trades;
     }
 
+    /**
+     *
+     * @param trades
+     */
     public void setTrades(String trades) {
         this.trades = trades;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getUserref() {
         return userref;
     }
 
+    /**
+     *
+     * @param userref
+     */
     public void setUserref(String userref) {
         this.userref = userref;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getStart() {
         return start;
     }
 
+    /**
+     *
+     * @param start
+     */
     public void setStart(String start) {
         this.start = start;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getEnd() {
         return end;
     }
 
+    /**
+     *
+     * @param end
+     */
     public void setEnd(String end) {
         this.end = end;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getOfs() {
         return ofs;
     }
 
+    /**
+     *
+     * @param ofs
+     */
     public void setOfs(String ofs) {
         this.ofs = ofs;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getClosetime() {
         return closetime;
     }
 
+    /**
+     *
+     * @param closetime
+     */
     public void setClosetime(String closetime) {
         this.closetime = closetime;
     }
 
+    /**
+     *
+     * @return String
+     */
     @Override
     public String toString() {
         return "GetClosedOrdersRequestBody{" +
@@ -103,6 +166,10 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
                 '}';
     }
 
+    /**
+     * Sets parameters for POST calls.
+     * @return MultiValueMap<String, String> String key - String value map
+     */
     @Override
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
@@ -128,6 +195,10 @@ public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
         return postParameters;
     }
 
+    /**
+     * Builds String required for POST call signature
+     * @return String
+     */
     @Override
     public String signPostParam() {
         StringBuilder sb = new StringBuilder();

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KrakenOpenOrder {
@@ -18,7 +19,6 @@ public class KrakenOpenOrder {
     // User reference id
     String userref;
     // Status of order (pending, open, closed, canceled, expired)
-    // Xchange made status an enum.
     String status;
     // Unix timestamp of when order was placed
     double opentm;
@@ -43,21 +43,35 @@ public class KrakenOpenOrder {
     // Triggered limit price (quote currency, when limit based order type triggered)
     BigDecimal limitprice;
     // Comma delimited list of miscellaneous info:
-    // stopped (triggered by stop price), touched (triggered by touch price),
-    // liquidated, partial(partial fill)
+    // stopped (triggered by stop price), touched (triggered by touch price), liquidated, partial(partial fill)
     String misc;
     // Order flags, comma delimited list:
-    // viqc = volume in quote currency,
-    // fcib = prefer fee in base currency (default if selling)
-    // fciq = prefer fee in quote currency (default if buying)
-    // nompp = no market price protection
-    //Xchange does Set<KrakenOrderFlags> oflags - KrakenOrderFlags is enum
+    // viqc = volume in quote currency, fcib = prefer fee in base currency (default if selling),
+    // fciq = prefer fee in quote currency (default if buying), nompp = no market price protection
     String oflags;
     // Array of trade ids related to order (if trades info requested and data available)
-    //Xchange does List<String> trades
-    String[]trades;
+    String[] trades;
 
-
+    /**
+     * Fully qualified constructor
+     * @param refid
+     * @param userref
+     * @param status
+     * @param opentm
+     * @param starttm
+     * @param expiretm
+     * @param descr
+     * @param vol
+     * @param vol_exec
+     * @param cost
+     * @param fee
+     * @param price
+     * @param stopprice
+     * @param limitprice
+     * @param misc
+     * @param oflags
+     * @param trades
+     */
     public KrakenOpenOrder(@JsonProperty("refid")String refid, @JsonProperty("userref")String userref,
                            @JsonProperty("status")String status, @JsonProperty("opentm")double opentm,
                            @JsonProperty("starttm")double starttm, @JsonProperty("expiretm")double expiretm,
@@ -86,139 +100,298 @@ public class KrakenOpenOrder {
         this.trades = trades;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getRefid() {
         return refid;
     }
 
+    /**
+     *
+     * @param refid
+     */
     public void setRefid(String refid) {
         this.refid = refid;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getUserref() {
         return userref;
     }
 
+    /**
+     *
+     * @param userref
+     */
     public void setUserref(String userref) {
         this.userref = userref;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     *
+     * @return double
+     */
     public double getOpentm() {
         return opentm;
     }
 
+    /**
+     *
+     * @param opentm
+     */
     public void setOpentm(double opentm) {
         this.opentm = opentm;
     }
 
+    /**
+     *
+     * @return double
+     */
     public double getStarttm() {
         return starttm;
     }
 
+    /**
+     *
+      * @param starttm
+     */
     public void setStarttm(double starttm) {
         this.starttm = starttm;
     }
 
+    /**
+     *
+     * @return double
+     */
     public double getExpiretm() {
         return expiretm;
     }
 
+    /**
+     *
+     * @param expiretm
+     */
     public void setExpiretm(double expiretm) {
         this.expiretm = expiretm;
     }
 
+    /**
+     *
+     * @return KrakenOrderDescription
+     */
     public KrakenOrderDescription getDescr() {
         return descr;
     }
 
+    /**
+     *
+      * @param descr
+     */
     public void setDescr(KrakenOrderDescription descr) {
         this.descr = descr;
     }
 
+    /**
+     *
+     * @return BigDecimal
+     */
     public BigDecimal getVol() {
         return vol;
     }
 
+    /**
+     *
+     * @param vol
+     */
     public void setVol(BigDecimal vol) {
         this.vol = vol;
     }
 
+    /**
+     *
+     * @return BigDecimal
+     */
     public BigDecimal getVol_exec() {
         return vol_exec;
     }
 
+    /**
+     *
+     * @param vol_exec
+     */
     public void setVol_exec(BigDecimal vol_exec) {
         this.vol_exec = vol_exec;
     }
 
+    /**
+     *
+     * @return BigDecimal
+     */
     public BigDecimal getCost() {
         return cost;
     }
 
+    /**
+     *
+     * @param cost
+     */
     public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 
+    /**
+     *
+     * @return BigDecimal
+     */
     public BigDecimal getFee() {
         return fee;
     }
 
+    /**
+     *
+     * @param fee
+     */
     public void setFee(BigDecimal fee) {
         this.fee = fee;
     }
 
+    /**
+     *
+     * @return BigDecimal
+     */
     public BigDecimal getPrice() {
         return price;
     }
 
+    /**
+     *
+     * @param price
+     */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
+    /**
+     *
+     * @return BigDecimal
+     */
     public BigDecimal getStopprice() {
         return stopprice;
     }
 
+    /**
+     *
+     * @param stopprice
+     */
     public void setStopprice(BigDecimal stopprice) {
         this.stopprice = stopprice;
     }
 
+    /**
+     *
+     * @return BigDecimal
+     */
     public BigDecimal getLimitprice() {
         return limitprice;
     }
 
+    /**
+     *
+     * @param limitprice
+     */
     public void setLimitprice(BigDecimal limitprice) {
         this.limitprice = limitprice;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getMisc() {
         return misc;
     }
 
+    /**
+     *
+     * @param misc
+     */
     public void setMisc(String misc) {
         this.misc = misc;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getOflags() {
         return oflags;
     }
 
+    /**
+     *
+     * @param oflags
+     */
     public void setOflags(String oflags) {
         this.oflags = oflags;
     }
 
+    /**
+     *
+     * @return String[]
+     */
     public String[] getTrades() {
         return trades;
     }
 
+    /**
+     *
+     * @param trades
+     */
     public void setTrades(String[] trades) {
         this.trades = trades;
+    }
+
+    @Override
+    public String toString() {
+        return "KrakenOpenOrder{" +
+                "refid='" + refid + '\'' +
+                ", userref='" + userref + '\'' +
+                ", status='" + status + '\'' +
+                ", opentm=" + opentm +
+                ", starttm=" + starttm +
+                ", expiretm=" + expiretm +
+                ", descr=" + descr +
+                ", vol=" + vol +
+                ", vol_exec=" + vol_exec +
+                ", cost=" + cost +
+                ", fee=" + fee +
+                ", price=" + price +
+                ", stopprice=" + stopprice +
+                ", limitprice=" + limitprice +
+                ", misc='" + misc + '\'' +
+                ", oflags='" + oflags + '\'' +
+                ", trades=" + Arrays.toString(trades) +
+                '}';
     }
 }
