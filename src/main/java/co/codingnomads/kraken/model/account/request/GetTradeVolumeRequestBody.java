@@ -7,18 +7,22 @@ import org.springframework.util.MultiValueMap;
 /**
  * @author Kevin Neag
  */
+
 public class GetTradeVolumeRequestBody extends RequestBodyGeneric {
 
-//    pair = comma delimited list of asset pairs to get fee info on (optional)
-//    fee-info = whether or not to include fee info in results (optional)
+    private String pair; //pair = comma delimited list of asset pairs to get fee info on (optional)
+    private String feeInfo; //fee-info = whether or not to include fee info in results (optional)
 
-    private String pair;
-    private String feeInfo;
 
     public GetTradeVolumeRequestBody(String pair, String feeInfo) {
         super();
         this.pair = pair;
         this.feeInfo = feeInfo;
+    }
+
+    public GetTradeVolumeRequestBody(String pair) {
+        super();
+        this.pair = pair;
     }
 
     public GetTradeVolumeRequestBody() {
@@ -38,6 +42,14 @@ public class GetTradeVolumeRequestBody extends RequestBodyGeneric {
 
     public void setFeeInfo(String feeInfo) {
         this.feeInfo = feeInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "GetTradeVolumeRequestBody{" +
+                "pair='" + pair + '\'' +
+                ", feeInfo='" + feeInfo + '\'' +
+                '}';
     }
 
     @Override

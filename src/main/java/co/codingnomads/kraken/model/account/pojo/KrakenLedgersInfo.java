@@ -1,18 +1,9 @@
 package co.codingnomads.kraken.model.account.pojo;
 
-import co.codingnomads.kraken.model.market.pojo.KrakenFees;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+
 
 /**
  * @author Kevin Neag
@@ -119,28 +110,7 @@ public class KrakenLedgersInfo {
                 ", asset='" + asset + '\'' +
                 ", amount=" + amount +
                 ", fee=" + fee +
-                ", balance=" + balance +
-                '}';
+                ", balance=" + balance + '}';
 
-
-
-//        static class LedgersInfoDeserializer extends JsonDeserializer<KrakenFees> {
-//
-//            @Override
-//            public KrakenLedgersInfo deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-//
-//                ObjectCodec oc = jsonParser.getCodec();
-//                JsonNode node = oc.readTree(jsonParser);
-//                if (node.isArray()){
-//                    BigDecimal volume = new BigDecimal(node.path(0).asText());
-//                    BigDecimal percentFee = new BigDecimal(node.path(1).asText());
-//
-//                    return new KrakenFees(volume, percentFee);
-//                }
-//
-//                return null;
-
-//            }
-//        }
     }
 }

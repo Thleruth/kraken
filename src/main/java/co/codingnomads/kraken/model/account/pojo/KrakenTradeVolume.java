@@ -1,34 +1,30 @@
 package co.codingnomads.kraken.model.account.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * @author Kevin Neag
  */
+
 public class KrakenTradeVolume {
 
     private String currency;
 
-    private long volume;
+    private BigDecimal volume;
 
     private List<KrakenFee> fee; //if requested
 
     private List<KrakenFee_Maker> fee_maker; // if requested
 
 
-    //make a constructor with only currency and volume;
+    public KrakenTradeVolume(@JsonProperty("currency") String currency, @JsonProperty("volume") BigDecimal volume,
+                             @JsonProperty("fee")List<KrakenFee> fee, @JsonProperty("fee_maker")List<KrakenFee_Maker> fee_maker) {
 
-
-    public KrakenTradeVolume(@JsonProperty("currency") String currency,@JsonProperty("volume") long volume) {
-        this.currency = currency;
-        this.volume = volume;
-    }
-
-    public KrakenTradeVolume(@JsonProperty("currency") String currency, @JsonProperty("volume") long volume, @JsonProperty("fee")List<KrakenFee> fee, @JsonProperty("fee_maker")List<KrakenFee_Maker> fee_maker) {
-
-        this.currency = currency;
+        if(currency != null) {
+            this.currency = currency;
+        }
         this.volume = volume;
         if(fee != null) {
             this.fee = fee;
@@ -42,7 +38,7 @@ public class KrakenTradeVolume {
         return currency;
     }
 
-    public long getVolume() {
+    public BigDecimal getVolume() {
         return volume;
     }
 

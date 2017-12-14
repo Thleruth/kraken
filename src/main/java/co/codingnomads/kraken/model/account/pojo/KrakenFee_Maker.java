@@ -4,22 +4,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
+
 /**
  * @author Kevin Neag
  */
-public class KrakenFee_Maker {
 
+public class KrakenFee_Maker {
 
     BigDecimal fee;
     BigDecimal minFee; //fee for pair (if not fixed fee)
     BigDecimal maxFee; //fee for pair (if not fixed fee)
     BigDecimal nextFee; //next tier's fee for pair (if not fixed fee.  nil if at lowest fee tier)
-    long nextVolume; //volume level of next tier (if not fixed fee.  nil if at lowest fee tier)
-    long tiervolume; //volume level of current tier (if not fixed fee.  nil if at lowest fee tier)
+    BigDecimal nextVolume; //volume level of next tier (if not fixed fee.  nil if at lowest fee tier)
+    BigDecimal tiervolume; //volume level of current tier (if not fixed fee.  nil if at lowest fee tier)
 
-    public KrakenFee_Maker(@JsonProperty("fee") BigDecimal fee, @JsonProperty("minfee") BigDecimal minFee,
-                           @JsonProperty("maxfee") BigDecimal maxFee, @JsonProperty("nextfee") BigDecimal nextFee,
-                           @JsonProperty("nextvolume") long nextVolume, @JsonProperty("tiervolume") long tiervolume) {
+    public KrakenFee_Maker(@JsonProperty("fee") BigDecimal fee,@JsonProperty("minfee") BigDecimal minFee,
+                     @JsonProperty("maxfee") BigDecimal maxFee, @JsonProperty("nextfee") BigDecimal nextFee,
+                     @JsonProperty("nextvolume") BigDecimal nextVolume, @JsonProperty("tiervolume") BigDecimal tiervolume) {
+
         this.fee = fee;
 
         if(minFee != null) {
@@ -34,67 +36,18 @@ public class KrakenFee_Maker {
             this.nextFee = nextFee;
         }
 
-        if(nextVolume != 0) {
+        if(nextVolume != null) {
             this.nextVolume = nextVolume;
         }
 
-        if (tiervolume != 0) {
+        if (tiervolume != null) {
             this.tiervolume = tiervolume;
         }
     }
 
-
-    public BigDecimal getFee() {
-        return fee;
-    }
-
-    public void setFee(BigDecimal fee) {
-        this.fee = fee;
-    }
-
-    public BigDecimal getMinFee() {
-        return minFee;
-    }
-
-    public void setMinFee(BigDecimal minFee) {
-        this.minFee = minFee;
-    }
-
-    public BigDecimal getMaxFee() {
-        return maxFee;
-    }
-
-    public void setMaxFee(BigDecimal maxFee) {
-        this.maxFee = maxFee;
-    }
-
-    public BigDecimal getNextFee() {
-        return nextFee;
-    }
-
-    public void setNextFee(BigDecimal nextFee) {
-        this.nextFee = nextFee;
-    }
-
-    public long getNextVolume() {
-        return nextVolume;
-    }
-
-    public void setNextVolume(long nextVolume) {
-        this.nextVolume = nextVolume;
-    }
-
-    public long getTiervolume() {
-        return tiervolume;
-    }
-
-    public void setTiervolume(long tiervolume) {
-        this.tiervolume = tiervolume;
-    }
-
     @Override
     public String toString() {
-        return "KrakenFee_Maker{" +
+        return "KrakenFee{" +
                 "fee=" + fee +
                 ", minFee=" + minFee +
                 ", maxFee=" + maxFee +

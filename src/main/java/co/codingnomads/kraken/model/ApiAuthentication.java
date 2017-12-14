@@ -1,6 +1,6 @@
 package co.codingnomads.kraken.model;
 
-import java.sql.Timestamp;
+
 
 /**
  * @author Kevin Neag
@@ -8,13 +8,12 @@ import java.sql.Timestamp;
 
 public class ApiAuthentication {
 
+    //todo make callcounter keep track of the calls
     private String apiKey;
-    // private String apiEndPoint;
     private int tierLevel;
     private int callCounter;
     private String secret;
-    // private boolean wasSent;
-    private Timestamp lastCallTime;
+    private long lastCallTime;
     private int backLog;
 
     //todo lastCallTime has to be fixed
@@ -24,7 +23,7 @@ public class ApiAuthentication {
         this.callCounter = 0;
         this.secret = secret;
         this.backLog = 0;
-        lastCallTime = Timestamp.valueOf("2017-12-06 10:09:30");
+        lastCallTime = System.currentTimeMillis();
     }
 
     public String getApiKey() {
@@ -52,11 +51,11 @@ public class ApiAuthentication {
         this.callCounter = callCounter;
     }
 
-    public Timestamp getLastCallTime() {
+    public long getLastCallTime() {
         return lastCallTime;
     }
 
-    public void setLastCallTime(Timestamp lastCallTime) {
+    public void setLastCallTime(long lastCallTime) {
         this.lastCallTime = lastCallTime;
     }
 

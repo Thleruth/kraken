@@ -5,8 +5,10 @@ import co.codingnomads.kraken.model.ApiAuthentication;
 import co.codingnomads.kraken.model.KrakenRequestEnum;
 import co.codingnomads.kraken.model.OutputWrapper;
 import co.codingnomads.kraken.model.account.pojo.KrakenClosedOrder;
+import co.codingnomads.kraken.model.account.pojo.KrakenLedgersInfo;
 import co.codingnomads.kraken.model.account.pojo.KrakenOpenOrder;
 import co.codingnomads.kraken.model.account.request.GetClosedOrdersRequestBody;
+import co.codingnomads.kraken.model.account.request.GetLedgersInfoRequestBody;
 import co.codingnomads.kraken.model.account.request.GetOpenOrdersRequestBody;
 import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.model.market.pojo.KrakenSpread;
@@ -162,6 +164,28 @@ public class KrakenExchange {
             }
         }
     }
+
+    //TODO kevin comment 
+    public Map<String, KrakenLedgersInfo> getLedgerInfo() throws KrakenException{
+
+        KrakenRequestEnum LedgerInfoEnum = KrakenRequestEnum.GETLEDGERSINFO;
+
+        GetLedgersInfoRequestBody getLedgersInfoRequestBody = new GetLedgersInfoRequestBody(1);
+
+        OutputWrapper getLedgersInfo = handler.callAPI(LedgerInfoEnum, getLedgersInfoRequestBody, authentication);
+
+        if (getLedgersInfo.getError().length > 0){
+            throw new KrakenException(getLedgersInfo.getError(), "General exception");
+        } else {
+            Map<String, KrakenLedgersInfo> results = (Map<String, KrakenLedgersInfo>) getLedgersInfo.getResult();
+            if (results.isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
 
     public String createQueryParams(HashMap<String, String> params){
         StringBuilder sb = new StringBuilder();

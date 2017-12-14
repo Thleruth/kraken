@@ -12,6 +12,7 @@ import co.codingnomads.kraken.service.GenericRequestHandler;
 /**
  * @author Kevin Neag
  */
+
 //todo Kevin: This is just a class to test right? Do we need this now that we have a functioning limiter?
 public class RateLimitThreadTest implements Runnable{
 
