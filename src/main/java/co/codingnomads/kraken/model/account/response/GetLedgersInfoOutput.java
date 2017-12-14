@@ -1,17 +1,16 @@
 package co.codingnomads.kraken.model.account.response;
 
 import co.codingnomads.kraken.model.OutputWrapper;
-import co.codingnomads.kraken.model.account.pojo.KrakenLedgers;
+import co.codingnomads.kraken.model.account.pojo.KrakenLedgersInfoResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Map;
+/**
+ * @author Kevin Neag
+ */
+public class GetLedgersInfoOutput extends OutputWrapper<KrakenLedgersInfoResult> {
 
-public class GetLedgersInfoOutput extends OutputWrapper<Map<String, KrakenLedgers>> {
-    /**
-     * Created by Meghan Boyce on 11/29/17
-     */
 
-    public GetLedgersInfoOutput(@JsonProperty("result") Map<String, KrakenLedgers> result,
+    public GetLedgersInfoOutput(@JsonProperty("result") KrakenLedgersInfoResult result,
                                 @JsonProperty("error")String[] error) {
         super(result, error);
     }

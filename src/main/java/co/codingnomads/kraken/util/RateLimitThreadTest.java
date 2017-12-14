@@ -19,7 +19,9 @@ public class RateLimitThreadTest implements Runnable{
     ApiAuthentication apiAuthentication;
 
     // Construct a new thread.
+
     public RateLimitThreadTest(String name, ApiAuthentication apiAuthentication) {
+
         thrd = new Thread(this, name);
         this.apiAuthentication = apiAuthentication;
         thrd.start(); // start the thread

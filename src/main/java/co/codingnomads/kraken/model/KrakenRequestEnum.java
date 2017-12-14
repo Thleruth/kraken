@@ -1,6 +1,6 @@
 package co.codingnomads.kraken.model;
 
-
+import co.codingnomads.kraken.model.account.response.GetTradeVolumeOutput;
 import co.codingnomads.kraken.model.account.response.*;
 import co.codingnomads.kraken.model.market.response.*;
 import co.codingnomads.kraken.model.trade.response.*;
@@ -36,9 +36,9 @@ public enum KrakenRequestEnum {
     GETTRADESHISTORY("/0/private/TradesHistory", HttpMethod.POST, 2, GetTradesHistoryOutput.class),
     QUERYTRADESINFO("/0/private/QueryTrades", HttpMethod.POST, 1, QueryTradesInfoOutput.class),
     GETOPENPOSITIONS("/0/private/OpenPositions",HttpMethod.POST, 1,GetOpenPositionsOutput.class),
-//    GETLEDGERSINFO("/0/private/Ledgers", HttpMethod.POST, 2),
-//    QUERYLEDGERS("/0/private/QueryLedgers", HttpMethod.POST, 2),
-//    GETTRADEVOLUME("/0/private/TradesVolume", HttpMethod.POST, 1),
+   GETLEDGERSINFO("/0/private/Ledgers", HttpMethod.POST, 2, GetLedgersInfoOutput.class),
+    QUERYLEDGERS("/0/private/QueryLedgers", HttpMethod.POST, 2, QueryLedgersOutput.class),
+    GETTRADEVOLUME("/0/private/TradeVolume", HttpMethod.POST, 1, GetTradeVolumeOutput.class),
     ADDSTRANDARDORDERS("/0/private/AddOrder", HttpMethod.POST, 0, AddStandardOrderOutput.class),
     CANCELOPENORDERS("/0/private/CancelOrder",HttpMethod.POST, 0,CancelOpenOrderOutput.class);
 
