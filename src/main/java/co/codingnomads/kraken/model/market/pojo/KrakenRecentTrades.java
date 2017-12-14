@@ -24,12 +24,14 @@ public class KrakenRecentTrades {
 
     private final long last;
 
+    //Fully qualified constructor
     public KrakenRecentTrades(List<KrakenRecentTrade> trades, long last) {
 
         this.trades = trades;
         this.last = last;
     }
 
+    //Getters and setters
     public long getLast() {
 
         return last;

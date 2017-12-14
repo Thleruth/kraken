@@ -8,8 +8,11 @@ import co.codingnomads.kraken.model.account.pojo.KrakenClosedOrder;
 import co.codingnomads.kraken.model.account.pojo.KrakenOpenOrder;
 import co.codingnomads.kraken.model.account.request.GetClosedOrdersRequestBody;
 import co.codingnomads.kraken.model.account.request.GetOpenOrdersRequestBody;
+import co.codingnomads.kraken.model.market.pojo.KrakenOHLC;
+import co.codingnomads.kraken.model.market.pojo.KrakenOHLCResults;
 import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.model.market.pojo.KrakenSpread;
+import co.codingnomads.kraken.model.market.response.GetOHLCOutput;
 import co.codingnomads.kraken.model.trade.pojo.KrakenCancelOpenOrder;
 import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.service.GenericRequestHandler;
@@ -97,6 +100,26 @@ public class KrakenExchange {
             }
         }
     }
+
+    //TODO javadoc comments
+    public KrakenOHLCResults getOHCLOutput(HashMap<String, String> params) throws KrakenException{
+        KrakenRequestEnum test = KrakenRequestEnum.GETOHLCDATA;
+        test.updateEndpoint(createQueryParams(params) );
+
+        OutputWrapper ohlcdata = handler.callAPI(test, null, null);
+
+        if (ohlcdata.getError().length > 0){
+            throw new KrakenException(ohlcdata.getError(), "General exception");
+        } else {
+           KrakenOHLCResults results = (KrakenOHLCResults) ohlcdata.getResult();
+            if (results.getOHLCs().isEmpty())   {
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
 
     public Map<String, KrakenCancelOpenOrder> cancelOpenOrder(HashMap<String, String> params) throws KrakenException{
 
