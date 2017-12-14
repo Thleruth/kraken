@@ -93,7 +93,7 @@ public class KrakenExchange {
         }
     }
 
-    //TODO javadoc comments
+    //TODO javadoc comments - ricky
     public KrakenOHLCResults getOHCLOutput(HashMap<String, String> params) throws KrakenException{
         KrakenRequestEnum test = KrakenRequestEnum.GETOHLCDATA;
         test.updateEndpoint(createQueryParams(params) );
