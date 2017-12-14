@@ -15,21 +15,28 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/** Created by Ricardo Roque
- * December, 12 2017
+/**
+ * Created by Ricardo Roque - December 12, 2017
  */
 
 @JsonDeserialize(using = KrakenOHLCResults.KrakenOHLCDeserializer.class)
 public class KrakenOHLCResults {
 
-    private final List<KrakenOHLC> OHLCs;
+    /**
+     * @param OHLCs = array of array entries(<time>, <open>, <high>, <low>, <close>, <vwap>, <volume>, <count>
+     * @param last = id to be used as since when polling for new, committed OHLC data
+     */
 
+    private final List<KrakenOHLC> OHLCs;
     private final long last;
 
+
+    //Fully qualified constructor
     public KrakenOHLCResults(List<KrakenOHLC> OHLCs, long last) {
         this.OHLCs = OHLCs;
         this.last = last;
     }
+
 
     public List<KrakenOHLC> getOHLCs() {
         return OHLCs;
@@ -39,10 +46,17 @@ public class KrakenOHLCResults {
         return last;
     }
 
+
     @Override
     public String toString() {
         return "KrakenOHLCResults [OHLCs=" + OHLCs + ", last=" + last + "]";
     }
+
+
+    /**
+     * Customized deserializer based on boiler plate deserializer code by timmolter.
+     * Deals with KrakenOHLC containing multiple data types.
+     */
 
     static class KrakenOHLCDeserializer extends JsonDeserializer<KrakenOHLCResults> {
 

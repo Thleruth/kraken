@@ -16,8 +16,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by Ricardo Roque
+ */
 
 public class KrakenRecentTrade {
+
+    /**
+     * @param price
+     * @param volume
+     * @param time
+     * @param buySell
+     * @param marketLimit
+     * @param miscellaneous
+     */
 
     private final BigDecimal price;
     private final BigDecimal volume;
@@ -26,6 +38,8 @@ public class KrakenRecentTrade {
     private final String marketLimit;
     private final String miscellaneous;
 
+
+    //Fully qualified constructor
     public KrakenRecentTrade(@JsonProperty("price") BigDecimal price, @JsonProperty("volume") BigDecimal volume,
                              @JsonProperty("time") double time, @JsonProperty("buySell") String buySell,
                              @JsonProperty("marketLimit") String marketLimit,

@@ -5,15 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * Created by Ricardo Roque
- * 1/Dec/2017
+ * Created by Ricardo Roque - Dec/1/2017
  */
-
 
 public class KrakenOrderBook {
 
+    /**
+     * @param asks
+     * @param bids
+     */
+
     //ask side array of array contains three values(price, volume, timestamp).
     private final List<KrakenOrder> asks;
+
     //ask side array of array contains three values(price, volume, timestamp).
     private final List<KrakenOrder> bids;
 
@@ -23,7 +27,6 @@ public class KrakenOrderBook {
         this.bids = bids;
     }
 
-    //getters and setters
     public List<KrakenOrder> getAsks() {
         return asks;
     }

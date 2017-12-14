@@ -2,7 +2,22 @@ package co.codingnomads.kraken.model.market.pojo;
 
 import java.math.BigDecimal;
 
+/**
+ * created by Ricardo Roque - December 12, 2017
+ */
+
 public class KrakenOHLC {
+
+    /**
+     * @param time
+     * @param open
+     * @param high
+     * @param low
+     * @param close
+     * @param vwap
+     * @param volume
+     * @param count
+     */
 
     private final long time;
     private final BigDecimal open;
@@ -13,6 +28,7 @@ public class KrakenOHLC {
     private final BigDecimal volume;
     private final long count;
 
+    //Fully qualified constructor
     public KrakenOHLC(long time, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close,
                       BigDecimal vwap, BigDecimal volume, long count) {
         this.time = time;

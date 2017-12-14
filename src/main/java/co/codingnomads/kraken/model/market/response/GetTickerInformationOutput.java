@@ -9,10 +9,14 @@ import java.util.Map;
 
 
 /**
- * Created by Ricardo Roque 1/Dec/2017
- * Given the way the Json element displays the values, a Map is being used with a String[] of errors.
+ * Created by Ricardo Roque - Dec/1/2017
  */
 public class GetTickerInformationOutput extends OutputWrapper<Map<String, KrakenTickerInformation>> {
+
+    /**
+     * @param error  as a String array
+     * @param result as a Map<String, KrakenTickerInformation>
+     */
 
     public GetTickerInformationOutput(@JsonProperty("error") String[] error, @JsonProperty("result") Map<String, KrakenTickerInformation> result) {
 

@@ -4,12 +4,18 @@ import co.codingnomads.kraken.model.OutputWrapper;
 import co.codingnomads.kraken.model.market.pojo.KrakenOHLCResults;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Created by Ricardo Roque -  * December 12, 2017
+/**
+ * Created by Ricardo Roque -  December 12, 2017
  */
 
 public class GetOHLCOutput extends OutputWrapper<KrakenOHLCResults> {
 
-    public GetOHLCOutput(@JsonProperty("error") String[] error, @JsonProperty("result") KrakenOHLCResults result){
+    /**
+     * @param error  as a String array
+     * @param result as an object of KrakenOHLCResults
+     */
+
+    public GetOHLCOutput(@JsonProperty("error") String[] error, @JsonProperty("result") KrakenOHLCResults result) {
 
         super(result, error);
     }

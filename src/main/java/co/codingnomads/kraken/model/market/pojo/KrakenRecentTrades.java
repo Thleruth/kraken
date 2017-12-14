@@ -17,12 +17,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by Ricardo Roque
+ */
+
 @JsonDeserialize(using = KrakenRecentTrades.KrakenTradeDeserializer.class)
 public class KrakenRecentTrades {
 
-    private final List<KrakenRecentTrade> trades;
+    /**
+     * @param trades = array of array entries(<price>, <volume>, <time>, <buy/sell>, <market/limit>, <miscellaneous>)
+     * @param last = id to be used as since when polling for new trade data
+     */
 
+    private final List<KrakenRecentTrade> trades;
     private final long last;
+
 
     //Fully qualified constructor
     public KrakenRecentTrades(List<KrakenRecentTrade> trades, long last) {
@@ -30,6 +39,7 @@ public class KrakenRecentTrades {
         this.trades = trades;
         this.last = last;
     }
+
 
     //Getters and setters
     public long getLast() {
@@ -42,15 +52,19 @@ public class KrakenRecentTrades {
         return trades;
     }
 
+
     @Override
     public String toString() {
 
         return "KrakenTrades [trades=" + trades + ", last=" + last + "]";
     }
 
+
     /**
-     * customized deserializer.
+     * Customized deserializer based on boiler plate deserializer code by timmolter.
+     * Deals with List<KrakenRecentTrade> containing multiple data types.
      */
+
     static class KrakenTradeDeserializer extends JsonDeserializer<KrakenRecentTrades> {
 
         @Override

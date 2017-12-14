@@ -4,6 +4,12 @@ import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+/**
+ * Created by Ricardo Roque
+ */
+
+ //TODO needs to be tested
+
 public class QueryOrderInfoRequestBody extends RequestBodyGeneric{
 
     // Whether or not to include trades in output (optional, default = false)
