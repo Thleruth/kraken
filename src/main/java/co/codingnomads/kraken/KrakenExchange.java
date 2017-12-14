@@ -163,13 +163,44 @@ public class KrakenExchange {
         }
     }
 
+    //modify this to adjust to my code JIALOR CODES FOLLOWING BELOW
+//    public Map<String, KrakenSpread> getTradableAssetPairs(HashMap<String, String> params) throws KrakenException{
+//        // Assign specific call enum.
+//        KrakenRequestEnum recentSpreadDataEnum = KrakenRequestEnum.GETRECENTSPREADDATA;
+//        // Update endpoint to add query parameters if params are given
+//        if (null != params){
+//            recentSpreadDataEnum.updateEndpoint(createQueryParams(params));
+//        }
+//        // Call the callAPI method, pass in enum type, null request body (no request body for public get calls),
+//        // and authentication.
+//        OutputWrapper getRecentSpreadData = handler.callAPI(recentSpreadDataEnum,null, authentication);
+//        // If an error is received throw exception
+//        if (getRecentSpreadData.getError().length > 0){
+//            throw new KrakenException(getRecentSpreadData.getError(), "General exception");
+//        } else {
+//            // If no initial error, store & return results as String ("error")/KrakenSpread("result") Map
+//            Map<String, KrakenSpread> results = (Map<String, KrakenSpread>) getRecentSpreadData.getResult();
+//            // If no results are retrieved throw exception.
+//            if (results.isEmpty()){
+//                throw new KrakenException("General exception, results are null");
+//            } else {
+//                return results;
+//            }
+//        }
+//    }
+
     public String createQueryParams(HashMap<String, String> params){
         StringBuilder sb = new StringBuilder();
         Iterator it = params.entrySet().iterator();
         sb.append("?");
+        int count = 0;
         while (it.hasNext()) {
+            if (count > 0){
+                sb.append("&");
+            }
             Map.Entry pair = (Map.Entry)it.next();
             sb.append(pair.getKey() + "=" + pair.getValue());
+            count++;
         }
         return sb.toString();
     }

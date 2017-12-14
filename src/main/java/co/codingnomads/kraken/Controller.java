@@ -37,7 +37,7 @@ public class Controller {
 
         RequestBodyGeneric b = new QueryTradesInfoRequestBody("1");
         RequestBodyGeneric c = new GetOpenPositionsRequestBody("1,2,3");
-        RequestBodyGeneric d = new GetTradeHistoryRequestBody("10");
+        RequestBodyGeneric d = new GetTradeHistoryRequestBody(10);
 
 
 
@@ -58,24 +58,25 @@ public class Controller {
         
 
         //TODO These need to be tested with an api key that has transaction ids
-//        OutputWrapper tradeHistory = handler.callAPI(KrakenRequestEnum.GETTRADESHISTORY, d, exchange.getApiAuthentication());
+        OutputWrapper tradeHistory = handler.callAPI(KrakenRequestEnum.GETTRADESHISTORY, d, exchange.getApiAuthentication());
 //        OutputWrapper queryTradeInfo = handler.callAPI(KrakenRequestEnum.QUERYTRADESINFO, b, exchange.getApiAuthentication());
 //        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, c, exchange.getApiAuthentication());
 
         // TODO Demonstrating functional example using KrakenExchange. You need to add methods to KrakenExchange.
         // Ask Meghan for assistance if needed.
 
-        try {
-            // HashMap needed if API URL requires query parameters. First String is param name, second is param value
-            HashMap<String, String> params = new HashMap<>();
-            params.put("pair", "XBTUSD");
-            // Call to KrakenExchange class, you will need to add KrakenExchange method for each API call
-            // you implemented. Use getRecentSpreadData as a working example.
-            Map<String, KrakenSpread> recentSpreadDataMap = exchange.getRecentSpreadData(params);
-            System.out.println(recentSpreadDataMap.size());
-        } catch (KrakenException e) {
-            System.out.println(e.toString());
-        }
+        //Meghan's example to use for other api call tests
+//        try {
+//            // HashMap needed if API URL requires query parameters. First String is param name, second is param value
+//            HashMap<String, String> params = new HashMap<>();
+//            params.put("pair", "XBTUSD");
+//            // Call to KrakenExchange class, you will need to add KrakenExchange method for each API call
+//            // you implemented. Use getRecentSpreadData as a working example.
+//            Map<String, KrakenSpread> recentSpreadDataMap = exchange.getRecentSpreadData(params);
+//            System.out.println(recentSpreadDataMap.size());
+//        } catch (KrakenException e) {
+//            System.out.println(e.toString());
+//        }
     }
 
 }
