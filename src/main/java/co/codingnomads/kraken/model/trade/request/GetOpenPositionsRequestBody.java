@@ -1,34 +1,52 @@
 package co.codingnomads.kraken.model.trade.request;
 
-/*
-created by PopoPenguin on 12/11/17
-*/
-
-
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import java.util.List;
 
+/**
+ * created by Jialor Cheung on 12/11/17
+ *
+ * This is the request body for api call GetOpenPositions <url>https://api.kraken.com/0/private/OpenPositions</url>
+ *
+ * Kraken API Documentation for this call can be found  <url>https://www.kraken.com/help/api#get-open-positions</url>
+ */
+
 public class GetOpenPositionsRequestBody extends RequestBodyGeneric {
 
-    // Transaction id
-    String txid;
-    // To include docalcs or not, false by default
-    boolean docalcs;
+    // comma delimited list of transaction ids to restrict output to
+    private String txid;
+    // whether or not to include profit/loss calculations (optional.  default = false)
+    private boolean docalcs;
 
-
+    /**
+     * Constructor with required txid, default docalcs to false
+     *
+     * @param txid      comma delimited list of transaction ids to restrict output to
+     */
     public GetOpenPositionsRequestBody(String txid) {
         this.txid = txid;
         this.docalcs = false;
     }
 
+    /**
+     * Fully Qualified Constructor
+     *
+     * @param txid      comma delimited list of transaction ids to restrict output to
+     * @param docalcs   whether or not to include profit/loss calculations (optional.  default = false)
+     */
     public GetOpenPositionsRequestBody(String txid, boolean docalcs) {
         this.txid = txid;
         this.docalcs = docalcs;
     }
 
+    public GetOpenPositionsRequestBody() {
+
+    }
+
+    // Getters and Setters for variables
     public String getTxid() {
         return txid;
     }
@@ -45,6 +63,11 @@ public class GetOpenPositionsRequestBody extends RequestBodyGeneric {
         this.docalcs = docalcs;
     }
 
+    /**
+     * Method to set parameters for POST calls.
+     *
+     * @return MultiValueMap<String, String> String key - String value map
+     */
     @Override
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
@@ -56,6 +79,11 @@ public class GetOpenPositionsRequestBody extends RequestBodyGeneric {
         return postParameters;
     }
 
+    /**
+     * Method to build String required for POST call signature
+     *
+     * @return String
+     */
     @Override
     public String signPostParam() {
         StringBuilder sb = new StringBuilder();

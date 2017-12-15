@@ -1,29 +1,28 @@
 package co.codingnomads.kraken.model.market.pojo;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 
-/*
-created by PopoPenguin on 12/12/17
-*/
-
-
 /**
- * KrakenAsset POJO for api call <url>https://api.kraken.com/0/public/Assets</url>
+ * created by Jialor Cheung on 12/12/17
  *
- * Kraken API Documentation for this call <url>https://www.kraken.com/help/api#get-asset-info</url>
+ * This is the information body, KrakenAsset POJO, for the result list of objects in
+ * api call GetAssetInfo <url>https://api.kraken.com/0/public/Assets</url>
  *
- * resource : <url>https://github.com/timmolter/XChange/tree/5174f9e931955dc201fa57e228564d8b884c9f84/xchange-kraken/src/main/java/org/knowm/xchange/kraken</url>
+ * Kraken API Documentation for this call can be found  <url>https://www.kraken.com/help/api#get-asset-info</url>
  */
 
 public class KrakenAsset {
 
-    String altname;
-    String aclass;
-    BigDecimal decimals;
-    BigDecimal display_decimals;
+    private final String altname;
+    private final String aclass;
+
+    //using BigDecimal format for most accurate data type associated to monetary values
+    private final BigDecimal decimals;
+    private final BigDecimal display_decimals;
 
     /**
-     * Class Constructor
+     * Fully Qualified Constructor
      *
      * @param altname   alternate name
      * @param aclass    asset class
@@ -39,6 +38,7 @@ public class KrakenAsset {
         this.display_decimals = display_decimals;
     }
 
+    // Getters for variables
     public String getAltname() {
         return altname;
     }
