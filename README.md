@@ -28,6 +28,6 @@
 
 This project is a work in progress and should NOT be used as is. Any liabilities or damages induced by the use of this tool is the sole responsibility of the user of this tool and not the developers.
 
-Resource used for this project include but not limited to:
+Resource used for this project include but not limited to-----------------------------
 krakenXChange by Tim Molter: <url>https://github.com/timmolter/XChange/tree/5174f9e931955dc201fa57e228564d8b884c9f84/xchange-kraken</url>
 

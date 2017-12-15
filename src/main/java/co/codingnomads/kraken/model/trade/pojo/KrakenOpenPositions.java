@@ -1,46 +1,69 @@
 package co.codingnomads.kraken.model.trade.pojo;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-/*
-created by PopoPenguin on 11/29/17
-*/
-
 /**
- * KrakenOpenPositions POJO for api call <url>https://api.kraken.com/0/private/OpenPositions</url>
+ * created by Jialor Cheung on 11/29/17
  *
- * Kraken API Documentation for this call<url>https://www.kraken.com/help/api#get-open-positions</url>
+ * This is the information body, KrakenOpenPositions POJO, for the result list of objects in
+ * api call GetOpenPositions <url>https://api.kraken.com/0/private/OpenPositions</url>
  *
- *
+ * Kraken API Documentation for this call can be found  <url>https://www.kraken.com/help/api#get-open-positions</url>
  */
 
 public class KrakenOpenPositions {
 
-    String ordertxid;
-    String assetPair;
-    Long time;
-    String type;
-    String ordertype;
-    BigDecimal cost;
-    BigDecimal fee;
-    BigDecimal vol;
-    BigDecimal vol_closed;
-    BigDecimal margin;
-    BigDecimal value;
-    BigDecimal net;
-    List misc;
-    List oflags;
-    BigDecimal viqc;
+    private final String ordertxid;
+    private final String assetPair;
+    private final String type;
+    private final String ordertype;
+    private final List<String> misc;
+    private final List<String> oflags;
 
-    public KrakenOpenPositions(@JsonProperty("ordertxid")String ordertxid, @JsonProperty("assetPair")String assetPair,
+    private final Long time;
+
+    //using BigDecimal format for most accurate data type associated to monetary values
+    private final BigDecimal cost;
+    private final BigDecimal fee;
+    private final BigDecimal vol;
+    private final BigDecimal vol_closed;
+    private final BigDecimal margin;
+    private final BigDecimal value;
+    private final BigDecimal net;
+    private final BigDecimal viqc;
+
+    /**
+     * Fully Qualified Constructor
+     *
+     * @param ordertxid     order responsible for execution of trade
+     * @param assetPair     asset pair
+     * @param time          unix timestamp of trade
+     * @param type          type of order used to open position (buy/sell)
+     * @param ordertype     order type used to open position
+     * @param cost          opening cost of position (quote currency unless viqc set in oflags)
+     * @param fee           opening fee of position (quote currency)
+     * @param vol           position volume (base currency unless viqc set in oflags)
+     * @param vol_closed    position volume closed (base currency unless viqc set in oflags)
+     * @param margin        initial margin (quote currency)
+     * @param value         current value of remaining position (if docalcs requested.  quote currency)
+     * @param net           unrealized profit/loss of remaining position (if docalcs requested.  quote currency, quote currency scale)
+     * @param misc          comma delimited list of miscellaneous info
+     * @param oflags        comma delimited list of order flags
+     * @param viqc          volume in quote currency
+     *                      Note: Unless otherwise stated, costs, fees, prices, and volumes are in the asset pair's scale,
+     *                      not the currency's scale.
+     */
+
+    public KrakenOpenPositions(@JsonProperty("ordertxid")String ordertxid, @JsonProperty("pair")String assetPair,
                                @JsonProperty("time")Long time, @JsonProperty("type")String type,
                                @JsonProperty("ordertype")String ordertype, @JsonProperty("cost")BigDecimal cost,
                                @JsonProperty("fee")BigDecimal fee, @JsonProperty("vol")BigDecimal vol,
                                @JsonProperty("vol_closed")BigDecimal vol_closed, @JsonProperty("margin")BigDecimal margin,
                                @JsonProperty("value")BigDecimal value, @JsonProperty("net")BigDecimal net,
-                               @JsonProperty("misc")List misc, @JsonProperty("oflags")List oflags,
+                               @JsonProperty("misc")List<String> misc, @JsonProperty("oflags")List<String> oflags,
                                @JsonProperty("viqc")BigDecimal viqc) {
 
         this.ordertxid = ordertxid;
@@ -60,6 +83,7 @@ public class KrakenOpenPositions {
         this.viqc = viqc;
     }
 
+    // Getters for variables
     public String getOrdertxid() {
         return ordertxid;
     }
@@ -108,11 +132,11 @@ public class KrakenOpenPositions {
         return net;
     }
 
-    public List getMisc() {
+    public List<String> getMisc() {
         return misc;
     }
 
-    public List getOflags() {
+    public List<String> getOflags() {
         return oflags;
     }
 

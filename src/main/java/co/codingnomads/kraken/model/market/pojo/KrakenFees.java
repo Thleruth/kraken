@@ -1,10 +1,5 @@
 package co.codingnomads.kraken.model.market.pojo;
 
-/*
-created by PopoPenguin on 11/29/17
-*/
-
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -16,15 +11,29 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-@JsonDeserialize(using = KrakenFees.FeesDeserializer.class)
+/**
+ * created by Jialor Cheung on 11/29/17
+ *
+ * Fee ranges associated to KrakenAssetPair data
+ * Given that the Json format for GetTradableAssetPairs displays the value of fees in an array,
+ * a deserializer was used to adjust for varying values of the correct data types.
+ */
 
-//Fee ranges associated to KrakenAssetPair data
+@JsonDeserialize(using = KrakenFees.FeesDeserializer.class)
 public class KrakenFees {
 
+    // using BigDecimal format for most accurate data type associated to monetary values
+    // volume variable within Fees array
+    private final BigDecimal volume;
+    // percent fee variable within Fees array
+    private final BigDecimal percentFee;
 
-    BigDecimal volume;
-    BigDecimal percentFee;
-
+    /**
+     * Fully Qualified Constructor
+     *
+     * @param volume
+     * @param percentFee
+     */
     public KrakenFees(BigDecimal volume, BigDecimal percentFee) {
         this.volume = volume;
         this.percentFee = percentFee;
@@ -48,6 +57,7 @@ public class KrakenFees {
 
     static class FeesDeserializer extends JsonDeserializer<KrakenFees> {
 
+        //Deserializer method which returns a constructor with parameters already matched to the Json format.
         @Override
         public KrakenFees deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 
@@ -61,7 +71,6 @@ public class KrakenFees {
             }
 
             return null;
-
         }
     }
 }

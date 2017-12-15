@@ -4,14 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 
 /**
- * created by PopoPenguin on 12/12/17
+ * created by Jialor Cheung on 12/12/17
  *
  * This is the information body, KrakenAsset POJO, for the result list of objects in
  * api call GetAssetInfo <url>https://api.kraken.com/0/public/Assets</url>
  *
  * Kraken API Documentation for this call can be found  <url>https://www.kraken.com/help/api#get-asset-info</url>
- *
- * resource used : <url>https://github.com/timmolter/XChange/tree/5174f9e931955dc201fa57e228564d8b884c9f84/xchange-kraken/src/main/java/org/knowm/xchange/kraken</url>
  */
 
 public class KrakenAsset {
@@ -24,7 +22,7 @@ public class KrakenAsset {
     private final BigDecimal display_decimals;
 
     /**
-     * Class Constructor
+     * Fully Qualified Constructor
      *
      * @param altname   alternate name
      * @param aclass    asset class

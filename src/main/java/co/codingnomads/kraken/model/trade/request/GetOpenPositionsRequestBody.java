@@ -11,6 +11,7 @@ import org.springframework.util.MultiValueMap;
 
 import java.util.List;
 
+
 public class GetOpenPositionsRequestBody extends RequestBodyGeneric {
 
     // Transaction id
