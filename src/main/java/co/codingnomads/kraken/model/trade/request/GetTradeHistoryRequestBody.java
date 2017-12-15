@@ -1,32 +1,48 @@
 package co.codingnomads.kraken.model.trade.request;
 
-/*
-created by PopoPenguin on 12/11/17
-*/
-
-
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+/**
+ * created by PopoPenguin on 12/11/17
+ *
+ * This is the request body for api call GetTradeHistory <url>https://api.kraken.com/0/private/TradesHistory</url>
+
+ * Kraken API Documentation for this call can be found  <url>https://www.kraken.com/help/api#get-trades-history</url>
+ */
+
 public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
 
-    //type is optional, by default all
-    String type;
-    //trades is optional, false by default
-    boolean trades;
-    //start time is optional, exclusive by default
-    Long start;
-    //end time is optional, inclusive by default
-    Long end;
-    //String ofs is a required field
-    String ofs;
+    private String type;
+    private boolean trades;
+    private Long start;
+    private Long end;
+    private int ofs;
 
-    public GetTradeHistoryRequestBody(String ofs) {
+    /**
+     * Constructor with required offset
+     * @param ofs   result offset
+     */
+    public GetTradeHistoryRequestBody(int ofs) {
         this.ofs = ofs;
     }
 
-    public GetTradeHistoryRequestBody(String type, boolean trades, Long start, Long end, String ofs) {
+    /**
+     * Fully Qualified Constructor
+     *
+     * @param type      type is optional, by default all; includes the following options
+     *                  all = all types (default)
+     *                  any position = any position (open or closed)
+     *                  closed position = positions that have been closed
+     *                  closing position = any trade closing all or part of a position
+     *                  no position = non-positional trades
+     * @param trades    whether or not to include trades related to position in output (optional.  default = false)
+     * @param start     starting unix timestamp or trade tx id of results (optional.  exclusive)
+     * @param end       ending unix timestamp or trade tx id of results (optional.  inclusive)
+     * @param ofs       result offset
+     */
+    public GetTradeHistoryRequestBody(String type, boolean trades, Long start, Long end, int ofs) {
         this.type = type;
         this.trades = trades;
         this.start = start;
@@ -34,6 +50,11 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         this.ofs = ofs;
     }
 
+    public GetTradeHistoryRequestBody() {
+
+    }
+
+    // Getters and Setters for variables
     public String getType() {
         return type;
     }
@@ -66,14 +87,19 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         this.end = end;
     }
 
-    public String getOfs() {
+    public int getOfs() {
         return ofs;
     }
 
-    public void setOfs(String ofs) {
+    public void setOfs(int ofs) {
         this.ofs = ofs;
     }
 
+    /**
+     * Method to set parameters for POST calls.
+     *
+     * @return MultiValueMap<String, String> String key - String value map
+     */
     @Override
     public String signPostParam() {
         StringBuilder sb = new StringBuilder();
@@ -94,6 +120,11 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         return sb.toString();
     }
 
+    /**
+     * Method to build String required for POST call signature
+     *
+     * @return String
+     */
     @Override
     public MultiValueMap<String, String> postParam() {
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
@@ -110,7 +141,7 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         if (null != getEnd()) {
             postParameters.add("end", String.valueOf(getEnd()));
         }
-        postParameters.add("ofs", getOfs());
+        postParameters.add("ofs", String.valueOf(getOfs()));
         return postParameters;
     }
 

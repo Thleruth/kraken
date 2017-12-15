@@ -1,6 +1,6 @@
 # Kraken (exchange) API implementation
 
-## This repo is built as part of a final project of a coding bootcanp (CodingNomads)
+## This repo is built as part of a final project of a coding bootcamp (CodingNomads)
 
 | Calls  | Status |
 |:------:|--------|
@@ -11,19 +11,23 @@
 |`GetOHLCdata` | Work in Progress | 
 |`GetOrderBook` | Implemented and Tested |
 |`GetRecentTrades` | Work in Progress | 
-|`GetRecentSpreadData` | Implemeted and tested |
+|`GetRecentSpreadData` | Implemented and tested |
 |`GetAccountBalance` | Implemented and tested | 
 |`GetTradeBalance` | Implemented and tested |
-|`GetOpenOrders` | Implemeted and tested |
-|`GetClosedOrders` | Implemeted and tested |
+|`GetOpenOrders` | Implemented and tested |
+|`GetClosedOrders` | Implemented and tested |
 |`QueryOrdersInfo` | Requires Testing (txid) |
-|`GetTradesHistory` | Requires Testing (trade history) |
-|`QueryTradesInfo` | Requires Testing (txid) |
-|`GetOpenPositions` | Requires Testing (txid) |
+|`GetTradesHistory` | Implemented and tested |
+|`QueryTradesInfo` | Implemented and tested |
+|`GetOpenPositions` | Requires Testing (could not be tested without a valid open order)|
 |`GetLedgersInfo` | Implemented and tested |
 |`QueryLedgers` | Implemented and tested |
 |`GetTradeVolume` | Requires testing (trade history) |
 |`AddStandardOrder` | Work in Progress |
-|`CancelOpenOrder` | Implemeted and tested |
+|`CancelOpenOrder` | Implemented and tested |
 
-This project is a work in progress and should NOT be used as is. Any liabilities or damages induced by the use of this tool is the sole responsability of the user of this tools and not the developpers
+This project is a work in progress and should NOT be used as is. Any liabilities or damages induced by the use of this tool is the sole responsibility of the user of this tool and not the developers.
+
+Resource used for this project include but not limited to-----------------------------
+krakenXChange by Tim Molter: <url>https://github.com/timmolter/XChange/tree/5174f9e931955dc201fa57e228564d8b884c9f84/xchange-kraken</url>
+
