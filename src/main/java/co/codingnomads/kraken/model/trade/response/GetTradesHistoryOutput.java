@@ -1,42 +1,32 @@
 package co.codingnomads.kraken.model.trade.response;
 
-/*
-created by PopoPenguin on 12/8/17
-*/
-
 import co.codingnomads.kraken.model.OutputWrapper;
+import co.codingnomads.kraken.model.trade.pojo.KrakenTradeHistory;
 import co.codingnomads.kraken.model.trade.pojo.KrakenTradeInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
-public class GetTradesHistoryOutput extends OutputWrapper<GetTradesHistoryOutput.KrakenTradeHistory> {
+/**
+ * created by Jialor Cheung on 12/8/17
+ *
+ * Given the JSON format for JSON response from GetTradesHistory api call <url>https://api.kraken.com/0/private/TradesHistory</url>
+ * Returns a String array error and an object KrakenTradeHistory.
+ *
+ * Kraken API Documentation for this call <url>https://www.kraken.com/help/api#get-trades-history</url>
+ */
 
+public class GetTradesHistoryOutput extends OutputWrapper<KrakenTradeHistory> {
 
+    /**
+     * Constructor
+     * Result list consists of object KrakenTradeHistory
+     *
+     * @param error     display of error(s) if encountered
+     * @param result    list of KrakenTradeHistory object(s)
+     */
     public GetTradesHistoryOutput(@JsonProperty("result") KrakenTradeHistory result, @JsonProperty("error") String[] error) {
 
         super(result, error);
     }
-
-    public static class KrakenTradeHistory {
-
-        private final Map<String, KrakenTradeInfo> trades;
-        private final int count;
-
-        public KrakenTradeHistory(@JsonProperty("trades") Map<String, KrakenTradeInfo> trades, @JsonProperty ("count") int count) {
-
-            this.trades = trades;
-            this.count = count;
-        }
-
-        public Map<String, KrakenTradeInfo> getTrades() {
-
-            return trades;
-        }
-
-        public int getCount() {
-            return count;
-        }
-    }
-
 }

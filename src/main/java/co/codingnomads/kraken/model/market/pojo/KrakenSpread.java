@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,27 +20,52 @@ public class KrakenSpread {
     private List<KrakenSpreadData> spreads;
     private long last;
 
+    /**
+     *
+     * @param spreads
+     * @param last
+     */
     public KrakenSpread(List<KrakenSpreadData> spreads, long last) {
         this.spreads = spreads;
         this.last = last;
     }
 
+    /**
+     *
+     * @return List<KrakenSpreadData>
+     */
     public List<KrakenSpreadData> getSpreads() {
         return spreads;
     }
 
+    /**
+     *
+     * @param spreads
+     */
     public void setSpreads(List<KrakenSpreadData> spreads) {
         this.spreads = spreads;
     }
 
+    /**
+     *
+     * @return long
+     */
     public long getLast() {
         return last;
     }
 
+    /**
+     *
+     * @param last
+     */
     public void setLast(long last) {
         this.last = last;
     }
 
+    /**
+     *
+     * @return String
+     */
     @Override
     public String toString() {
         return "KrakenSpread{" +
@@ -50,6 +74,11 @@ public class KrakenSpread {
                 '}';
     }
 
+    /**
+     * Based on boiler plate deserializer code by timmolter.
+     * See <a href="http://bit.ly/2zacRst">http://bit.ly/2zacRst</a>
+     * Deals with List<KrakenSpreadData> containing multiple data types.
+     */
     static class KrakenSpreadDeserializer extends JsonDeserializer<KrakenSpread> {
 
         @Override
