@@ -17,10 +17,10 @@ public class CallCounter {
     static int callDecreaser;
 
     /**
-     * Find the api rate limit based on the tier level of the user
-     *
-     * @param tierLevel
-     * @return
+     * Determines the maximum amount of calls to the api the user is allowed to make
+     * If exceeded the user will be locked out of the api for 15 minutes
+     * @param tierLevel amount of calls a user can make is based on the user's tier level
+     * @return the rate limit (number of calls the user can make)
      */
 
     public static int rateLimitCalc(int tierLevel) {
@@ -43,10 +43,9 @@ public class CallCounter {
 
 
     /**
-     * Find the rate at witch the api gains calls based on tier level
-     *
-     * @param tierLevel
-     * @return
+     * Finds the time it takes the user to gain 1 api call back
+     * @param tierLevel the time it takes to gain back api calls is based on the user's tier level
+     * @return the time it takes to gain 1 api call
      */
 
     public static int callDecreaserCalc(int tierLevel) {
@@ -64,8 +63,10 @@ public class CallCounter {
     }
 
     /**
-     * Create and track a backlog for multiple threads
-     *
+     * For api calls that exceed the rate limit
+     * Throttles the api so that the isUnderRateLimit method always returns true
+     * Creates and tracks a backlog for up to 10 different api calls
+     * Sleeps each call the required time needed before it will be under the rate limit and can be called
      * @param apiAuthentication
      * @throws RateLimitException
      */
@@ -113,11 +114,10 @@ public class CallCounter {
 
 
     /**
-     * Calculates if the thread is runnable, so as not to go over the api rate limit.
-     *
-     * @param apiAuthentication
-     * @param krakenRequestEnum
-     * @return
+     * Calculates if the call is runnable, so as not to go over the api rate limit.
+     *@param apiAuthentication The parameters needed to authenticate the call
+     * @param krakenRequestEnum To determine the number of calls a method charges
+     * @return true, if the call is under the rate limit and can be called
      * @throws RateLimitException
      */
 

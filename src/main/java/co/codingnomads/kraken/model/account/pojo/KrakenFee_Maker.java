@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 /**
  * @author Kevin Neag
  */
-
 public class KrakenFee_Maker {
 
     BigDecimal fee;

@@ -8,7 +8,10 @@ package co.codingnomads.kraken.model;
 
 public class ApiAuthentication {
 
-    //todo make callcounter keep track of the calls
+    /**
+     * The basic parameters needed to authenticate a call to the api
+     */
+
     private String apiKey;
     private int tierLevel;
     private int callCounter;
@@ -16,7 +19,6 @@ public class ApiAuthentication {
     private long lastCallTime;
     private int backLog;
 
-    //todo lastCallTime has to be fixed
     public ApiAuthentication(String apiKey, int tierLevel, String secret) {
         this.apiKey = apiKey;
         this.tierLevel = tierLevel;
