@@ -165,7 +165,7 @@ public class KrakenExchange {
     }
 
     //TODO kevin comment
-    
+
     public Map<String, KrakenLedgersInfo> getLedgerInfo() throws KrakenException {
 
         KrakenRequestEnum ledgerInfoEnum = KrakenRequestEnum.GETLEDGERSINFO;

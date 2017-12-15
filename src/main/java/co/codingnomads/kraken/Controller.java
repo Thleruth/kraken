@@ -28,8 +28,8 @@ public class Controller {
         // of the apiAuthentication and thus getting the elements no (no need to pass in as Param)?
         // just for security purpose and we could raise the access level of the ApiAuthentication
         KrakenExchange exchange = new KrakenExchange(
-                "RHjkEcaWRSEOYmOvfQSfXrzYeB1ZFJoX/B9ewO0cpkMPnI74uMx8AGF4",
-                "qjcKcR6o37vv56BPUEw3FPPpiOvBvjVO0JQpC0bfEUV/bNkYFNGDya9VtFuKDJwrQ4PBAgMSQkKVC+QHxiJ/PA==",
+                "",
+                "",
                 4);
 
 
@@ -54,7 +54,7 @@ public class Controller {
 //
 //
 //        //TODO kevin tradevolume internal error, may need Tom's key
-        RequestBodyGeneric tradeVolume = new GetTradeVolumeRequestBody("XBTUSD");
+        RequestBodyGeneric tradeVolume = new GetTradeVolumeRequestBody("XBTEUR");
         OutputWrapper kevinCallThree = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME,tradeVolume, exchange.getApiAuthentication());
 
 
