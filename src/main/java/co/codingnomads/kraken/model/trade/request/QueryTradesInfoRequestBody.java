@@ -17,6 +17,9 @@ public class QueryTradesInfoRequestBody extends RequestBodyGeneric {
     private String txid;
     private boolean trades;
 
+    public QueryTradesInfoRequestBody() {
+    }
+
     /**
      * Constructor
      *

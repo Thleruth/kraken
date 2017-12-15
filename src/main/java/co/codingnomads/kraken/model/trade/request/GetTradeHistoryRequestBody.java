@@ -50,6 +50,10 @@ public class GetTradeHistoryRequestBody extends RequestBodyGeneric{
         this.ofs = ofs;
     }
 
+    public GetTradeHistoryRequestBody() {
+
+    }
+
     // Getters and Setters for variables
     public String getType() {
         return type;

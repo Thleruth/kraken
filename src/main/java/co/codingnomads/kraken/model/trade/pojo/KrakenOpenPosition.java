@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * created by Jialor Cheung on 11/29/17
  *
- * This is the information body, KrakenOpenPositions POJO, for the result list of objects in
+ * This is the information body, KrakenOpenPosition POJO, for the result list of objects in
  * api call GetOpenPositions <url>https://api.kraken.com/0/private/OpenPositions</url>
  *
  * Kraken API Documentation for this call can be found  <url>https://www.kraken.com/help/api#get-open-positions</url>
  */
 
-public class KrakenOpenPositions {
+public class KrakenOpenPosition {
 
     private final String ordertxid;
     private final String assetPair;
@@ -57,14 +57,14 @@ public class KrakenOpenPositions {
      *                      not the currency's scale.
      */
 
-    public KrakenOpenPositions(@JsonProperty("ordertxid")String ordertxid, @JsonProperty("pair")String assetPair,
-                               @JsonProperty("time")Long time, @JsonProperty("type")String type,
-                               @JsonProperty("ordertype")String ordertype, @JsonProperty("cost")BigDecimal cost,
-                               @JsonProperty("fee")BigDecimal fee, @JsonProperty("vol")BigDecimal vol,
-                               @JsonProperty("vol_closed")BigDecimal vol_closed, @JsonProperty("margin")BigDecimal margin,
-                               @JsonProperty("value")BigDecimal value, @JsonProperty("net")BigDecimal net,
-                               @JsonProperty("misc")List<String> misc, @JsonProperty("oflags")List<String> oflags,
-                               @JsonProperty("viqc")BigDecimal viqc) {
+    public KrakenOpenPosition(@JsonProperty("ordertxid")String ordertxid, @JsonProperty("pair")String assetPair,
+                              @JsonProperty("time")Long time, @JsonProperty("type")String type,
+                              @JsonProperty("ordertype")String ordertype, @JsonProperty("cost")BigDecimal cost,
+                              @JsonProperty("fee")BigDecimal fee, @JsonProperty("vol")BigDecimal vol,
+                              @JsonProperty("vol_closed")BigDecimal vol_closed, @JsonProperty("margin")BigDecimal margin,
+                              @JsonProperty("value")BigDecimal value, @JsonProperty("net")BigDecimal net,
+                              @JsonProperty("misc")List<String> misc, @JsonProperty("oflags")List<String> oflags,
+                              @JsonProperty("viqc")BigDecimal viqc) {
 
         this.ordertxid = ordertxid;
         this.assetPair = assetPair;
@@ -146,7 +146,7 @@ public class KrakenOpenPositions {
 
     @Override
     public String toString() {
-        return "KrakenOpenPositions{" +
+        return "KrakenOpenPosition{" +
                 "ordertxid='" + ordertxid + '\'' +
                 ", assetPair='" + assetPair + '\'' +
                 ", time=" + time +

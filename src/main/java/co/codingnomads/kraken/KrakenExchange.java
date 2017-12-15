@@ -8,10 +8,20 @@ import co.codingnomads.kraken.model.account.pojo.KrakenClosedOrder;
 import co.codingnomads.kraken.model.account.pojo.KrakenOpenOrder;
 import co.codingnomads.kraken.model.account.request.GetClosedOrdersRequestBody;
 import co.codingnomads.kraken.model.account.request.GetOpenOrdersRequestBody;
+import co.codingnomads.kraken.model.account.request.QueryOrderInfoRequestBody;
+import co.codingnomads.kraken.model.market.pojo.KrakenAsset;
+import co.codingnomads.kraken.model.market.pojo.KrakenAssetPairName;
 import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.model.market.pojo.KrakenSpread;
 import co.codingnomads.kraken.model.trade.pojo.KrakenCancelOpenOrder;
+import co.codingnomads.kraken.model.trade.pojo.KrakenOpenPosition;
+import co.codingnomads.kraken.model.trade.pojo.KrakenTradeHistory;
+import co.codingnomads.kraken.model.trade.pojo.KrakenTradeInfo;
 import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
+import co.codingnomads.kraken.model.trade.request.GetOpenPositionsRequestBody;
+import co.codingnomads.kraken.model.trade.request.GetTradeHistoryRequestBody;
+import co.codingnomads.kraken.model.trade.request.QueryTradesInfoRequestBody;
+import co.codingnomads.kraken.model.trade.response.GetTradesHistoryOutput;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 import java.util.HashMap;
@@ -175,31 +185,180 @@ public class KrakenExchange {
         }
     }
 
-    //modify this to adjust to my code JIALOR CODES FOLLOWING BELOW
-//    public Map<String, KrakenSpread> getTradableAssetPairs(HashMap<String, String> params) throws KrakenException{
-//        // Assign specific call enum.
-//        KrakenRequestEnum recentSpreadDataEnum = KrakenRequestEnum.GETRECENTSPREADDATA;
-//        // Update endpoint to add query parameters if params are given
-//        if (null != params){
-//            recentSpreadDataEnum.updateEndpoint(createQueryParams(params));
-//        }
-//        // Call the callAPI method, pass in enum type, null request body (no request body for public get calls),
-//        // and authentication.
-//        OutputWrapper getRecentSpreadData = handler.callAPI(recentSpreadDataEnum,null, authentication);
-//        // If an error is received throw exception
-//        if (getRecentSpreadData.getError().length > 0){
-//            throw new KrakenException(getRecentSpreadData.getError(), "General exception");
-//        } else {
-//            // If no initial error, store & return results as String ("error")/KrakenSpread("result") Map
-//            Map<String, KrakenSpread> results = (Map<String, KrakenSpread>) getRecentSpreadData.getResult();
-//            // If no results are retrieved throw exception.
-//            if (results.isEmpty()){
-//                throw new KrakenException("General exception, results are null");
-//            } else {
-//                return results;
-//            }
-//        }
-//    }
+    /**
+     * Method to update query parameters for the GetAssetInfo API call.
+     * See <url>https://www.kraken.com/help/api#get-asset-info</url>
+     * Returns a Map containing key(asset_name), value(KrakenAsset) corresponding to call's output.
+     * This method is called in the Controller and passed a HashMap of query parameters.
+     * @param params - HashMap<String, String> (URL query parameters)
+     * @return Map<String, KrakenAsset>
+     * @throws KrakenException
+     */
+
+    public Map<String, KrakenAsset> getAssetInfo(HashMap<String, String> params) throws KrakenException {
+        // Assign specific call enum.
+        KrakenRequestEnum assetInfo = KrakenRequestEnum.GETASSETINFO;
+        // If parameters exists
+        if (null != params) {
+            // Update endpoint to add query parameters
+            assetInfo.updateEndpoint(createQueryParams(params));
+        }
+        // Call the callAPI method, pass in enum type, null request body (no request body for public get calls),
+        // and authentication.
+        OutputWrapper getAssetInfo = handler.callAPI(assetInfo, null, authentication);
+        // If an error is received throw exception
+        if (getAssetInfo.getError().length > 0) {
+            throw new KrakenException(getAssetInfo.getError(), "General exception");
+        } else {
+            // If no initial error, store & return results as String ("error")/KrakenAsset("result") Map
+            Map<String, KrakenAsset> results = (Map<String, KrakenAsset>) getAssetInfo.getResult();
+            // If no results are retrieved throw exception, otherwise return results.
+            if (results.isEmpty()) {
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
+    /**
+     * Method to update query parameters for the GetTradableAssetPair API call.
+     * See <url>https://www.kraken.com/help/api#get-tradable-pairs</url>
+     * Returns a Map containing key(pair_name), value(KrakenAssetPairName) corresponding to call's output.
+     * This method is called in the Controller and passed a HashMap of query parameters.
+     * @param params - HashMap<String, String> (URL query parameters)
+     * @return Map<String, KrakenAssetPairName>
+     * @throws KrakenException
+     */
+
+    public Map<String, KrakenAssetPairName> getTradableAssetPairName(HashMap<String, String> params) throws KrakenException {
+        // Assign specific call enum.
+        KrakenRequestEnum tradableAssetPairName = KrakenRequestEnum.GETTRADABLEASSETPAIRS;
+        // If parameters exists
+        if (null != params) {
+            // Update endpoint to add query parameters
+            tradableAssetPairName.updateEndpoint(createQueryParams(params));
+        }
+        // Call the callAPI method, pass in enum type, null request body (no request body for public get calls),
+        // and authentication.
+        OutputWrapper getTradableAssetPairName = handler.callAPI(tradableAssetPairName, null, authentication);
+        // If an error is received throw exception
+        if (getTradableAssetPairName.getError().length > 0) {
+            throw new KrakenException(getTradableAssetPairName.getError(), "General exception");
+        } else {
+            // If no initial error, store & return results as String ("error")/KrakenAssetPairName("result") Map
+            Map<String, KrakenAssetPairName> results = (Map<String, KrakenAssetPairName>) getTradableAssetPairName.getResult();
+            // If no results are retrieved throw exception, otherwise return results.
+            if (results.isEmpty()) {
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
+    /**
+     * Method to update query parameters for the QueryTradeInfo API call.
+     * See <url>https://www.kraken.com/help/api#query-trades-info</url>
+     * Returns a Map containing key(trade_txid), value(KrakenTradeInfo) corresponding to call's output.
+     * This method is called in the Controller and passed a HashMap of query parameters.
+     * @param params - HashMap<String, String> (URL query parameters)
+     * @return Map<String, KrakenTradeInfo>
+     * @throws KrakenException
+     */
+
+    public Map<String, KrakenTradeInfo> queryTradeInfo(HashMap<String, String> params) throws KrakenException {
+        // Assign specific call enum.
+        KrakenRequestEnum tradeInfo = KrakenRequestEnum.QUERYTRADESINFO;
+        // Update endpoint to add query parameters
+        tradeInfo.updateEndpoint(createQueryParams(params));
+        // Create instance of QueryTradesInfoRequestBody for the handler
+        QueryTradesInfoRequestBody queryTradesInfoRequestBody = new QueryTradesInfoRequestBody();
+        // Call the callAPI method, pass in enum type, request body, and authentication.
+        OutputWrapper queryTradeInfo = handler.callAPI(tradeInfo, queryTradesInfoRequestBody, authentication);
+        // If an error is received throw exception
+        if (queryTradeInfo.getError().length > 0) {
+            throw new KrakenException(queryTradeInfo.getError(), "General exception");
+        } else {
+            // If no initial error, store & return results as String ("error")/KrakenTradeInfo("result") Map
+            Map<String, KrakenTradeInfo> results = (Map<String, KrakenTradeInfo>) queryTradeInfo.getResult();
+            // If no results are retrieved throw exception, otherwise return results.
+            if (results.isEmpty()) {
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
+    /**
+     * Method to update query parameters for the GetOpenPositions API call.
+     * See <url>https://www.kraken.com/help/api#get-open-positions</url>
+     * Returns a Map containing key(position_txid), value(KrakenOpenPosition) corresponding to call's output.
+     * This method is called in the Controller and passed a HashMap of query parameters.
+     * @param params - HashMap<String, String> (URL query parameters)
+     * @return Map<String, KrakenOpenPosition>
+     * @throws KrakenException
+     */
+
+    public Map<String, KrakenOpenPosition> getOpenPositions(HashMap<String, String> params) throws KrakenException {
+        // Assign specific call enum.
+        KrakenRequestEnum openPostions = KrakenRequestEnum.GETOPENPOSITIONS;
+        // Update endpoint to add query parameters
+        openPostions.updateEndpoint(createQueryParams(params));
+        // Create instance of GetOpenPositionsRequestBody for the handler
+        GetOpenPositionsRequestBody getOpenPositionsRequestBody = new GetOpenPositionsRequestBody();
+        // Call the callAPI method, pass in enum type, request body, and authentication.
+        OutputWrapper getOpenPositions = handler.callAPI(openPostions, getOpenPositionsRequestBody, authentication);
+        // If an error is received throw exception
+        if (getOpenPositions.getError().length > 0) {
+            throw new KrakenException(getOpenPositions.getError(), "General exception");
+        } else {
+            // If no initial error, store & return results as String ("error")/KrakenOpenPosition("result") Map
+            Map<String, KrakenOpenPosition> results = (Map<String, KrakenOpenPosition>) getOpenPositions.getResult();
+            // If no results are retrieved throw exception, otherwise return results.
+            if (results.isEmpty()) {
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
+    /**
+     * Method to update query parameters for the GetTradeHistory API call.
+     * See <url>https://www.kraken.com/help/api#get-trades-history</url>
+     * Returns an array of KrakenTradeHistory.  Within KrakenTradeHistory returns a map
+     * containing key(txid), value(KrakenTradeInfo) corresponding to call's output.
+     * This method is called in the Controller and passed a HashMap of query parameters.
+     * @param params - HashMap<String, String> (URL query parameters)
+     * @return KrakenTradeHistory
+     * @throws KrakenException
+     */
+
+    public KrakenTradeHistory getTradeHistory(HashMap<String, String> params) throws KrakenException {
+        // Assign specific call enum.
+        KrakenRequestEnum tradeHistory = KrakenRequestEnum.GETTRADESHISTORY;
+        // Update endpoint to add query parameters
+        tradeHistory.updateEndpoint(createQueryParams(params));
+        // Create instance of GetClosedOrdersRequestBody for the handler
+        GetTradeHistoryRequestBody getTradeHistoryRequestBody = new GetTradeHistoryRequestBody();
+        // Call the callAPI method, pass in enum type, request body, and authentication.
+        OutputWrapper getTradeHistory = handler.callAPI(tradeHistory, getTradeHistoryRequestBody, authentication);
+        // If an error is received throw exception
+        if (getTradeHistory.getError().length > 0) {
+            throw new KrakenException(getTradeHistory.getError(), "General exception");
+        } else {
+            // If no initial error, store & return results as String ("error")/KrakenAssetPairName("result") Map
+            KrakenTradeHistory results = (KrakenTradeHistory) getTradeHistory.getResult();
+            // If no results are retrieved throw exception, otherwise return results.
+            if (results.getTrades().isEmpty()) {
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
 
     /**
      * For calls that include query parameters. Takes a String key - String value HashMap parameter.

@@ -42,6 +42,10 @@ public class GetOpenPositionsRequestBody extends RequestBodyGeneric {
         this.docalcs = docalcs;
     }
 
+    public GetOpenPositionsRequestBody() {
+
+    }
+
     // Getters and Setters for variables
     public String getTxid() {
         return txid;

@@ -4,6 +4,8 @@ import co.codingnomads.kraken.exception.KrakenException;
 import co.codingnomads.kraken.model.*;;
 import co.codingnomads.kraken.model.account.request.GetLedgersInfoRequestBody;
 import co.codingnomads.kraken.model.account.request.QueryLedgersRequestBody;
+import co.codingnomads.kraken.model.market.pojo.KrakenAsset;
+import co.codingnomads.kraken.model.market.pojo.KrakenAssetPairName;
 import co.codingnomads.kraken.model.market.pojo.KrakenSpread;
 import co.codingnomads.kraken.model.trade.request.GetOpenPositionsRequestBody;
 import co.codingnomads.kraken.model.trade.request.GetTradeHistoryRequestBody;
@@ -33,13 +35,6 @@ public class Controller {
 
 
         GenericRequestHandler handler = new GenericRequestHandler();
-        
-
-        RequestBodyGeneric b = new QueryTradesInfoRequestBody("1");
-        RequestBodyGeneric c = new GetOpenPositionsRequestBody("1,2,3");
-        RequestBodyGeneric d = new GetTradeHistoryRequestBody(10);
-
-
 
 //        //TODO these need to be tested with Thomas
 //        RequestBodyGeneric queryLedgers = new QueryLedgersRequestBody("thoma's ledger id");
@@ -55,12 +50,6 @@ public class Controller {
         //TODO kevin tradevolume internal error, may need Tom's key
 //        RequestBodyGeneric tradeVolume = new GetTradeVolumeRequestBody();
 //        OutputWrapper kevinCallThree = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME,tradeVolume, exchange.getApiAuthentication());
-        
-
-        //TODO These need to be tested with an api key that has transaction ids
-        OutputWrapper tradeHistory = handler.callAPI(KrakenRequestEnum.GETTRADESHISTORY, d, exchange.getApiAuthentication());
-//        OutputWrapper queryTradeInfo = handler.callAPI(KrakenRequestEnum.QUERYTRADESINFO, b, exchange.getApiAuthentication());
-//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, c, exchange.getApiAuthentication());
 
         // TODO Demonstrating functional example using KrakenExchange. You need to add methods to KrakenExchange.
         // Ask Meghan for assistance if needed.
@@ -78,5 +67,4 @@ public class Controller {
             System.out.println(e.toString());
         }
     }
-
 }
