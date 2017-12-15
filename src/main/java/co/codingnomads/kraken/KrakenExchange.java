@@ -7,9 +7,8 @@ import co.codingnomads.kraken.model.OutputWrapper;
 import co.codingnomads.kraken.model.account.pojo.KrakenClosedOrder;
 import co.codingnomads.kraken.model.account.pojo.KrakenLedgersInfo;
 import co.codingnomads.kraken.model.account.pojo.KrakenOpenOrder;
-import co.codingnomads.kraken.model.account.request.GetClosedOrdersRequestBody;
-import co.codingnomads.kraken.model.account.request.GetLedgersInfoRequestBody;
-import co.codingnomads.kraken.model.account.request.GetOpenOrdersRequestBody;
+import co.codingnomads.kraken.model.account.pojo.KrakenTradeVolume;
+import co.codingnomads.kraken.model.account.request.*;
 import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.model.market.pojo.KrakenSpread;
 import co.codingnomads.kraken.model.trade.pojo.KrakenCancelOpenOrder;
@@ -165,14 +164,15 @@ public class KrakenExchange {
         }
     }
 
-    //TODO kevin comment 
-    public Map<String, KrakenLedgersInfo> getLedgerInfo() throws KrakenException{
+    //TODO kevin comment
+    
+    public Map<String, KrakenLedgersInfo> getLedgerInfo() throws KrakenException {
 
-        KrakenRequestEnum LedgerInfoEnum = KrakenRequestEnum.GETLEDGERSINFO;
+        KrakenRequestEnum ledgerInfoEnum = KrakenRequestEnum.GETLEDGERSINFO;
 
         GetLedgersInfoRequestBody getLedgersInfoRequestBody = new GetLedgersInfoRequestBody(1);
 
-        OutputWrapper getLedgersInfo = handler.callAPI(LedgerInfoEnum, getLedgersInfoRequestBody, authentication);
+        OutputWrapper getLedgersInfo = handler.callAPI(ledgerInfoEnum, getLedgersInfoRequestBody, authentication);
 
         if (getLedgersInfo.getError().length > 0){
             throw new KrakenException(getLedgersInfo.getError(), "General exception");
@@ -185,6 +185,48 @@ public class KrakenExchange {
             }
         }
     }
+
+
+    public Map<String, KrakenLedgersInfo> queryLedgers() throws KrakenException {
+
+        KrakenRequestEnum queryLedgersEnum = KrakenRequestEnum.QUERYLEDGERS;
+
+        QueryLedgersRequestBody queryLedgersRequestBody = new QueryLedgersRequestBody("Ledger-ID");
+
+        OutputWrapper queryLedgers = handler.callAPI(queryLedgersEnum, queryLedgersRequestBody, authentication);
+
+        if (queryLedgers.getError().length > 0){
+            throw new KrakenException(queryLedgers.getError(), "General exception");
+        } else {
+            Map<String, KrakenLedgersInfo> results = (Map<String, KrakenLedgersInfo>) queryLedgers.getResult();
+            if (results.isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
+    public Map<String, KrakenTradeVolume> getTradeVolume() throws KrakenException {
+
+        KrakenRequestEnum getTradeVolumeEnum = KrakenRequestEnum.GETTRADEVOLUME;
+
+        GetTradeVolumeRequestBody getTradeVolumeRequestBody = new GetTradeVolumeRequestBody("optional add pairs and fee info");
+
+        OutputWrapper getTradeVolume = handler.callAPI(getTradeVolumeEnum, getTradeVolumeRequestBody, authentication);
+
+        if (getTradeVolume.getError().length > 0){
+            throw new KrakenException(getTradeVolume.getError(), "General exception");
+        } else {
+            Map<String, KrakenTradeVolume> results = (Map<String, KrakenTradeVolume>) getTradeVolume.getResult();
+            if (results.isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
 
 
     public String createQueryParams(HashMap<String, String> params){
