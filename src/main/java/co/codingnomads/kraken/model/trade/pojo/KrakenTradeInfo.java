@@ -34,7 +34,7 @@ public class KrakenTradeInfo {
     BigDecimal net;
     List<String> trades;
 
-    public KrakenTradeInfo(@JsonProperty("ordertxid")String ordertxid,@JsonProperty("assetPair") String assetPair,
+    public KrakenTradeInfo(@JsonProperty("ordertxid")String ordertxid,@JsonProperty("pair") String assetPair,
                            @JsonProperty("time") long time,@JsonProperty("type") String type,
                            @JsonProperty("ordertype") String ordertype,@JsonProperty("price") BigDecimal price,
                            @JsonProperty("cost") BigDecimal cost,@JsonProperty("fee") BigDecimal fee,

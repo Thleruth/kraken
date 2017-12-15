@@ -12,6 +12,9 @@ created by PopoPenguin on 11/29/17
  * Mapping of JSON response from GetTradableAssetPair api call <url>https://api.kraken.com/0/public/AssetPairs</url>
  *
  * Kraken API Documentation for this call <url>https://www.kraken.com/help/api#get-tradable-pairs</url>
+ *
+ * Given the way the Json element displays the values, a Map is being used with a String[] of errors,
+ * and a List of values for the result section
  */
 
 

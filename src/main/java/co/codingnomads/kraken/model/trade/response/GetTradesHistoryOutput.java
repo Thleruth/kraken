@@ -37,6 +37,15 @@ public class GetTradesHistoryOutput extends OutputWrapper<GetTradesHistoryOutput
         public int getCount() {
             return count;
         }
+
+        @Override
+        public String toString() {
+            return "KrakenTradeHistory{" +
+                    "trades=" + trades +
+                    ", count=" + count +
+                    '}';
+        }
     }
+
 
 }

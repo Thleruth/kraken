@@ -11,7 +11,11 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
     // Restrict results to given user reference id (optional)
     String userref;
 
-    // Fully qualified constructor
+    /**
+     * Fully qualified constructor
+     * @param trades
+     * @param userref
+     */
     public GetOpenOrdersRequestBody(String trades, String userref) {
         this.trades = trades;
         this.userref = userref;
@@ -20,23 +24,42 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
     public GetOpenOrdersRequestBody() {
     }
 
-    // getters and setters
+    /**
+     *
+     * @return String
+     */
     public String getTrades() {
         return trades;
     }
 
+    /**
+     *
+     * @param trades
+     */
     public void setTrades(String trades) {
         this.trades = trades;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getUserref() {
         return userref;
     }
 
+    /**
+     *
+     * @param userref
+     */
     public void setUserref(String userref) {
         this.userref = userref;
     }
 
+    /**
+     *
+     * @return String
+     */
     @Override
     public String toString() {
         return "GetOpenOrdersRequestBody{" +
@@ -46,10 +69,15 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
                 '}';
     }
 
+    /**
+     * Sets parameters for POST calls.
+     * @return MultiValueMap<String, String> String key - String value map
+     */
     @Override
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
         postParameters.add("nonce", getNonce());
+        // Builds postParameters if parameters are provided.
         if (null != getTrades()) {
             postParameters.add("trades", getTrades());
         }
@@ -59,10 +87,12 @@ public class GetOpenOrdersRequestBody extends RequestBodyGeneric {
         return postParameters;
     }
 
+    /**
+     * Builds String required for POST call signature
+     * @return String
+     */
     @Override
     public String signPostParam() {
-
-        // need a way to adjust this string to accomodate different variable options
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
         if (null != getTrades()) {

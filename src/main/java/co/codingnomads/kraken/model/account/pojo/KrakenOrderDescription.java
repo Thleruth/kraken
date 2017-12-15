@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class KrakenOrderDescription {
     /**
      * Created by Meghan Boyce on 11/29/17
-     *
-     * order description info
      */
 
     // KrakenAsset pair
@@ -26,6 +24,17 @@ public class KrakenOrderDescription {
     // Conditional close order description (if conditional close set)
     String close;
 
+    /**
+     *
+     * @param pair
+     * @param type
+     * @param ordertype
+     * @param price
+     * @param price2
+     * @param leverage
+     * @param order
+     * @param close
+     */
     public KrakenOrderDescription(@JsonProperty("pair")String pair,
                                   @JsonProperty("type")String type,
                                   @JsonProperty("ordertype")String ordertype,
@@ -44,5 +53,145 @@ public class KrakenOrderDescription {
         this.close = close;
     }
 
+    /**
+     *
+     * @return String
+     */
+    public String getPair() {
+        return pair;
+    }
 
+    /**
+     *
+     * @param pair
+     */
+    public void setPair(String pair) {
+        this.pair = pair;
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     *
+     * @param type
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public String getOrdertype() {
+        return ordertype;
+    }
+
+    /**
+     *
+     * @param ordertype
+     */
+    public void setOrdertype(String ordertype) {
+        this.ordertype = ordertype;
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public String getPrice() {
+        return price;
+    }
+
+    /**
+     *
+     * @param price
+     */
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public String getPrice2() {
+        return price2;
+    }
+
+    /**
+     *
+     * @param price2
+     */
+    public void setPrice2(String price2) {
+        this.price2 = price2;
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public String getLeverage() {
+        return leverage;
+    }
+
+    /**
+     *
+     * @param leverage
+     */
+    public void setLeverage(String leverage) {
+        this.leverage = leverage;
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public String getOrder() {
+        return order;
+    }
+
+    /**
+     *
+     * @param order
+     */
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public String getClose() {
+        return close;
+    }
+
+    /**
+     *
+     * @param close
+     */
+    public void setClose(String close) {
+        this.close = close;
+    }
+
+    @Override
+    public String toString() {
+        return "KrakenOrderDescription{" +
+                "pair='" + pair + '\'' +
+                ", type='" + type + '\'' +
+                ", ordertype='" + ordertype + '\'' +
+                ", price='" + price + '\'' +
+                ", price2='" + price2 + '\'' +
+                ", leverage='" + leverage + '\'' +
+                ", order='" + order + '\'' +
+                ", close='" + close + '\'' +
+                '}';
+    }
 }

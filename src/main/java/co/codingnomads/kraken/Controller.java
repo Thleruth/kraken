@@ -66,17 +66,17 @@ public class Controller {
         // Ask Meghan for assistance if needed.
 
         //Meghan's example to use for other api call tests
-//        try {
-//            // HashMap needed if API URL requires query parameters. First String is param name, second is param value
-//            HashMap<String, String> params = new HashMap<>();
-//            params.put("pair", "XBTUSD");
-//            // Call to KrakenExchange class, you will need to add KrakenExchange method for each API call
-//            // you implemented. Use getRecentSpreadData as a working example.
-//            Map<String, KrakenSpread> recentSpreadDataMap = exchange.getRecentSpreadData(params);
-//            System.out.println(recentSpreadDataMap.size());
-//        } catch (KrakenException e) {
-//            System.out.println(e.toString());
-//        }
+        try {
+            // HashMap needed if API URL requires query parameters. First String is param name, second is param value
+            HashMap<String, String> params = new HashMap<>();
+            params.put("pair", "XBTUSD");
+            // Call to KrakenExchange class, you will need to add KrakenExchange method for each API call
+            // you implemented. Use getRecentSpreadData as a working example.
+            Map<String, KrakenSpread> recentSpreadDataMap = exchange.getRecentSpreadData(params);
+            System.out.println(recentSpreadDataMap.size());
+        } catch (KrakenException e) {
+            System.out.println(e.toString());
+        }
     }
 
 }
