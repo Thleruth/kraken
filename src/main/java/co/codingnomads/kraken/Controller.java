@@ -32,7 +32,6 @@ public class Controller {
                 "",
                 4);
 
-
         GenericRequestHandler handler = new GenericRequestHandler();
 //
 //
@@ -57,6 +56,7 @@ public class Controller {
         RequestBodyGeneric tradeVolume = new GetTradeVolumeRequestBody("XBTEUR");
         OutputWrapper kevinCallThree = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME,tradeVolume, exchange.getApiAuthentication());
 
+        System.out.println(kevinCallThree.toString());
 
         //TODO These need to be tested with an api key that has transaction ids
 //        OutputWrapper tradeHistory = handler.callAPI(KrakenRequestEnum.GETTRADESHISTORY, d, exchange.getApiAuthentication());
