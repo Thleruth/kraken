@@ -161,6 +161,45 @@ public class KrakenExchange {
         }
     }
 
+
+
+    public String createQueryParams(HashMap<String, String> params){
+        StringBuilder sb = new StringBuilder();
+        Iterator it = params.entrySet().iterator();
+        sb.append("?");
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            sb.append(pair.getKey() + "=" + pair.getValue());
+        }
+        return sb.toString();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Method for Get Ledger Info API call. Returns the highest level POJO
      * corresponding to call's output (KrakenLedgersInfoResult).
@@ -252,16 +291,4 @@ public class KrakenExchange {
         }
     }
 
-
-
-    public String createQueryParams(HashMap<String, String> params){
-        StringBuilder sb = new StringBuilder();
-        Iterator it = params.entrySet().iterator();
-        sb.append("?");
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            sb.append(pair.getKey() + "=" + pair.getValue());
-        }
-        return sb.toString();
-    }
 }
