@@ -16,8 +16,26 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by Ricardo Roque
+ *
+ * This is the information body, KrakenRecentTrade POJO, for the result list of objects in api call GetRecentTrades,
+ *
+ * where all the displayed values are listed inside an array of pair name (trades) <url>https://api.kraken.com/0/public/Trades</url>
+ *
+ * This, mapped according to the body of the Kraken api <url>https://www.kraken.com/help/api#get-recent-trades</url>
+ */
 
 public class KrakenRecentTrade {
+
+    /**
+     * @param price
+     * @param volume
+     * @param time
+     * @param buySell
+     * @param marketLimit
+     * @param miscellaneous
+     */
 
     private final BigDecimal price;
     private final BigDecimal volume;
@@ -26,6 +44,8 @@ public class KrakenRecentTrade {
     private final String marketLimit;
     private final String miscellaneous;
 
+
+    //Fully qualified constructor
     public KrakenRecentTrade(@JsonProperty("price") BigDecimal price, @JsonProperty("volume") BigDecimal volume,
                              @JsonProperty("time") double time, @JsonProperty("buySell") String buySell,
                              @JsonProperty("marketLimit") String marketLimit,

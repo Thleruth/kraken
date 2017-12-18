@@ -1,8 +1,6 @@
 package co.codingnomads.kraken.model.market.pojo;
 
 
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,18 +17,37 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by Ricardo Roque
+ *
+ * This is the information body, KrakenRecentTrades POJO, for the result list of objects from the KrakenRecentTrade.
+ *
+ * The results are included in an array of pair name (trades) and recent trade data (last)
+ *
+ * As seen on the Kraken api call <url>https://www.kraken.com/help/api#get-order-book</url>
+ */
+
 @JsonDeserialize(using = KrakenRecentTrades.KrakenTradeDeserializer.class)
 public class KrakenRecentTrades {
+
+    /**
+     * @param trades = array of array entries(<price>, <volume>, <time>, <buy/sell>, <market/limit>, <miscellaneous>)
+     * @param last = id to be used as since when polling for new trade data
+     */
 
     private final List<KrakenRecentTrade> trades;
     private final long last;
 
+
+    //Fully qualified constructor
     public KrakenRecentTrades(List<KrakenRecentTrade> trades, long last) {
 
         this.trades = trades;
         this.last = last;
     }
 
+
+    //Getters and setters
     public long getLast() {
 
         return last;
@@ -41,15 +58,19 @@ public class KrakenRecentTrades {
         return trades;
     }
 
+
     @Override
     public String toString() {
 
         return "KrakenTrades [trades=" + trades + ", last=" + last + "]";
     }
 
+
     /**
-     * customized deserializer.
+     * Customized deserializer based on boiler plate deserializer code by timmolter <url>https://github.com/timmolter/XChange</url>.
+     * Deals with List<KrakenRecentTrade> containing multiple data types.
      */
+
     static class KrakenTradeDeserializer extends JsonDeserializer<KrakenRecentTrades> {
 
         @Override

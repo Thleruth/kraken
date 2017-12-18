@@ -6,13 +6,16 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 /**
- * Created by Ricardo Roque
- * 1/Dec/2017
- * Since each element within the "result" map displays an array, most of the variables need to be deployed as
- * arrays as well; despite the .
+ * Created by Ricardo Roque- Dec/1/2017
+ *
+ *This section is the body, the POJO, for the result list of objects in the api call GetTickerInformationOutput
+ *<url>https://api.kraken.com/0/public/Ticker?pair=XBTUSD</url>
+ *This, in direct correlation to the mapping of said call on <url>https://www.kraken.com/help/api#get-ticker-info</url>
  */
 
+
 public class KrakenTickerInformation {
+
 
     //ask array contains three values(price, whole lot volume, and lot volume). Letter "a"
     private final String[] ask;
@@ -34,6 +37,18 @@ public class KrakenTickerInformation {
     private final String opening;
 
 
+    /**
+     * @param ask             = "a"
+     * @param bid             = "b
+     * @param lastTradeClosed = "c"
+     * @param volume          = "v"
+     * @param vwaPrice        = "p"
+     * @param trades          = "t"
+     * @param low             = "l"
+     * @param high            = "h"
+     * @param opening         = "o"
+     */
+
     //Fully functional constructor
     public KrakenTickerInformation(@JsonProperty("a") String[] ask, @JsonProperty("b") String[] bid, @JsonProperty("c") String[] lastTradeClosed, @JsonProperty("v") String[] volume,
                                    @JsonProperty("p") String[] vwaPrice, @JsonProperty("t") int[] trades, @JsonProperty("l") String[] low, @JsonProperty("h") String[] high, @JsonProperty("o") String opening) {
@@ -48,7 +63,7 @@ public class KrakenTickerInformation {
         this.opening = opening;
     }
 
-    //Getters and setters
+
     public String[] getAsk() {
         return ask;
     }
@@ -85,7 +100,7 @@ public class KrakenTickerInformation {
         return opening;
     }
 
-    //toString() method
+
     @Override
     public String toString() {
         return "KrakenTickerInformation{" +

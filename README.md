@@ -8,15 +8,15 @@
 |`GetAssetInfo` | Implemented and tested |
 |`GetTradableAssetPairs` | Implemented and tested |
 |`GetTickerInformation` | Implemented and Tested |
-|`GetOHLCdata` | Work in Progress | 
+|`GetOHLCdata` | Implemented and tested |
 |`GetOrderBook` | Implemented and Tested |
-|`GetRecentTrades` | Work in Progress | 
+|`GetRecentTrades` | Implemented and tested |
 |`GetRecentSpreadData` | Implemented and tested |
 |`GetAccountBalance` | Implemented and tested | 
 |`GetTradeBalance` | Implemented and tested |
 |`GetOpenOrders` | Implemented and tested |
 |`GetClosedOrders` | Implemented and tested |
-|`QueryOrdersInfo` | Requires Testing (txid) |
+|`QueryOrdersInfo` | Implemented and Tested |
 |`GetTradesHistory` | Implemented and tested |
 |`QueryTradesInfo` | Implemented and tested |
 |`GetOpenPositions` | Requires Testing (could not be tested without a valid open order)|

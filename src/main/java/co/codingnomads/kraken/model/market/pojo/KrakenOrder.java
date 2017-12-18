@@ -13,14 +13,22 @@ import java.math.BigDecimal;
 
 /**
  * Created by ryandesmond on 12/6/17.
- * Given that the Json format for OrderBook displays the values in a form of different data types within
- * an array, the best course of action was to map the results as objects and then utilize a deserializer
- * to adjust to the correct data types.
+ *
+ * This is the information body, KrakenOrder POJO, for the result list of objects from the KrakenOrderBook.
+ * The values of price, volume, and timestamp are all located within the variable of "asks" and "bids"
+ * As seen on the Kraken api call <url>https://www.kraken.com/help/api#get-order-book</url>
  */
+
 @JsonDeserialize(using = KrakenOrder.OrderDeserializer.class)
 public class KrakenOrder {
 
-    //Using BigDecimal rather than String since it is the most accurate data type when dealing with monetary values
+    /**
+     * @param price
+     * @param volume
+     * @param timestamp
+     * Using BigDecimal rather than String since it is the most accurate data type when dealing with monetary values
+     */
+
     private final BigDecimal price;
     private final BigDecimal volume;
     private final long timestamp;
@@ -33,7 +41,6 @@ public class KrakenOrder {
         this.timestamp = timestamp;
     }
 
-    //Getters and setters
     public BigDecimal getPrice() {
 
         return price;
@@ -55,6 +62,12 @@ public class KrakenOrder {
         return "KrakenOpenOrder [price=" + price + ", volume=" + volume + ", timestamp=" + timestamp + "]";
     }
 
+
+    /**
+     * Based on boiler plate deserializer code by timmolter <url>https://github.com/timmolter/XChange</url>
+     * Deals with List<KrakenOrder> containing multiple data types.
+     */
+
     public static class OrderDeserializer extends JsonDeserializer<KrakenOrder> {
 
         //Deserializer method which returns a constructor with parameters already matched to the Json format.
@@ -74,5 +87,4 @@ public class KrakenOrder {
             return null;
         }
     }
-
 }

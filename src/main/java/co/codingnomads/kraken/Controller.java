@@ -36,17 +36,6 @@ public class Controller {
 
         GenericRequestHandler handler = new GenericRequestHandler();
 
-
-        //TODO These need to be tested with an api key that has transaction ids
-//        OutputWrapper tradeHistory = handler.callAPI(KrakenRequestEnum.GETTRADESHISTORY, d, exchange.getApiAuthentication());
-//        OutputWrapper queryTradeInfo = handler.callAPI(KrakenRequestEnum.QUERYTRADESINFO, b, exchange.getApiAuthentication());
-//        OutputWrapper openPositions = handler.callAPI(KrakenRequestEnum.GETOPENPOSITIONS, c, exchange.getApiAuthentication());
-
-
-        // TODO Demonstrating functional example using KrakenExchange. You need to add methods to KrakenExchange.
-        // Ask Meghan for assistance if needed.
-
-        //Meghan's example to use for other api call tests
         try {
             // HashMap needed if API URL requires query parameters. First String is param name, second is param value
             HashMap<String, String> params = new HashMap<>();

@@ -9,15 +9,20 @@ import java.util.Map;
 
 
 /**
- * Created by Ricardo Roque 1/Dec/2017
- * Given the way the Json element displays the values, a Map is being used with a String[] of errors,
- * and a List of values for the result section
+ * Created by Ricardo Roque - Dec/1/2017
+ *
+ * Mapped accordingly from the Kraken API documentation found in <url>https://www.kraken.com/help/api#get-ticker-info</url>
+ * Based on the JSON format accessible on <url>https://api.kraken.com/0/public/Ticker</url>
  */
 public class GetTickerInformationOutput extends OutputWrapper<Map<String, KrakenTickerInformation>> {
 
+    /**
+     * @param error  will be displayed as a String array
+     * @param result will return a Map<String, KrakenTickerInformation> objects
+     */
+
     public GetTickerInformationOutput(@JsonProperty("error") String[] error, @JsonProperty("result") Map<String, KrakenTickerInformation> result) {
+
         super(result, error);
-
     }
-
 }

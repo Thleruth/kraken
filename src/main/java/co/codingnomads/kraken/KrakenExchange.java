@@ -10,7 +10,7 @@ import co.codingnomads.kraken.model.account.pojo.KrakenClosedOrder;
 import co.codingnomads.kraken.model.account.pojo.KrakenOpenOrder;
 import co.codingnomads.kraken.model.account.request.GetClosedOrdersRequestBody;
 import co.codingnomads.kraken.model.account.request.GetOpenOrdersRequestBody;
-import co.codingnomads.kraken.model.account.request.QueryOrderInfoRequestBody;
+import co.codingnomads.kraken.model.market.pojo.KrakenOHLCResults;
 import co.codingnomads.kraken.model.market.pojo.KrakenAsset;
 import co.codingnomads.kraken.model.market.pojo.KrakenAssetPairName;
 import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
@@ -23,7 +23,6 @@ import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.model.trade.request.GetOpenPositionsRequestBody;
 import co.codingnomads.kraken.model.trade.request.GetTradeHistoryRequestBody;
 import co.codingnomads.kraken.model.trade.request.QueryTradesInfoRequestBody;
-import co.codingnomads.kraken.model.trade.response.GetTradesHistoryOutput;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 import java.util.HashMap;
@@ -48,7 +47,6 @@ public class KrakenExchange {
         return authentication;
     }
 
-    //todo one method for each potential KrakenRequest enum item (via the CallAPI)
 
     /**
      * Method for the Get Recent Spread Data API call. See <a href="https://www.kraken.com/help/api#get-recent-spread-data">https://www.kraken.com/help/api#get-recent-spread-data</a>
@@ -82,10 +80,19 @@ public class KrakenExchange {
     }
 
 
+    /**
+     * Method for the Get order book api call <url>https://www.kraken.com/help/api#get-order-book</url>
+     * This method is called on the controller and returns a Map of String and KrakenOrderBook
+     * This method passes a the String params of "pair" and "count"
+     * @param pair
+     * @param count
+     * @return Map<String, KrakenOrderBook>
+     * @throws KrakenException
+     */
+
     public Map<String, KrakenOrderBook> getOrderBook(String pair, String count) throws KrakenException{
 
         KrakenRequestEnum test = KrakenRequestEnum.GETORDERBOOK;
-        // can make a method to get queryParams
         test.updateEndpoint("?pair=" + pair);// + "&count=" + count);
 
         OutputWrapper orderBook = handler.callAPI(test,null, authentication);
@@ -102,6 +109,41 @@ public class KrakenExchange {
         }
     }
 
+    /**
+     * Method for the OHCL data api call <url>https://www.kraken.com/help/api#get-ohlc-data</url>
+     * This method is called on the controller and returns the objects on KrakenOHLCResults
+     * This method passes a Hashmap of Strings params and throws a KrakenException
+     * @param params
+     * @return KrakenOHLCResults
+     * @throws KrakenException
+     */
+
+    public KrakenOHLCResults getOHCLOutput(HashMap<String, String> params) throws KrakenException{
+        KrakenRequestEnum test = KrakenRequestEnum.GETOHLCDATA;
+        test.updateEndpoint(createQueryParams(params) );
+
+        OutputWrapper ohlcdata = handler.callAPI(test, null, null);
+
+        if (ohlcdata.getError().length > 0){
+            throw new KrakenException(ohlcdata.getError(), "General exception");
+        } else {
+           KrakenOHLCResults results = (KrakenOHLCResults) ohlcdata.getResult();
+            if (results.getOHLCs().isEmpty())   {
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
+    /**
+     * Method for the Cancel Open Orders API call. See <a href="https://www.kraken.com/help/api#cancel-open-order">https://www.kraken.com/help/api#cancel-open-order</a>
+     * Returns a Map containing key(txid), value(KrakenClosedOrder) corresponding to call's output.
+     * This method is called in the Controller and passed a HashMap of query parameters.
+     * @param params
+     * @return Map<String, KrakenCancelOpenOrder>
+     * @throws KrakenException
+     */
     public Map<String, KrakenCancelOpenOrder> cancelOpenOrder(HashMap<String, String> params) throws KrakenException{
 
         KrakenRequestEnum cancelOrderTestEnum = KrakenRequestEnum.CANCELOPENORDERS;
@@ -125,7 +167,7 @@ public class KrakenExchange {
 
     /**
      * Method for the Get Closed Orders API call. See <a href="https://www.kraken.com/help/api#get-closed-orders">https://www.kraken.com/help/api#get-closed-orders</a>
-     * Returns a Map containing key(pair_name), value(KrakenClosedOrder) corresponding to call's output.
+     * Returns a Map containing key(txid), value(KrakenClosedOrder) corresponding to call's output.
      * This method is called in the Controller and passed a HashMap of query parameters.
      * @param params - URL query parameters
      * @return Map<String, KrakenClosedOrder> - URL query parameters
@@ -157,7 +199,7 @@ public class KrakenExchange {
 
     /**
      * Method for the Get Open Orders API call. See <a href="https://www.kraken.com/help/api#get-open-orders">https://www.kraken.com/help/api#get-open-orders</a>
-     * Returns a Map containing key(pair_name), value(KrakenOpenOrder) corresponding to call's output.
+     * Returns a Map containing key(txid), value(KrakenOpenOrder) corresponding to call's output.
      * This method is called in the Controller and passed a HashMap of query parameters.
      * @param params - URL query parameters
      * @return Map<String, KrakenOpenOrder>
@@ -166,8 +208,11 @@ public class KrakenExchange {
     public Map<String, KrakenOpenOrder> getOpenOrder(HashMap<String, String> params) throws KrakenException{
         // Assign specific call enum.
         KrakenRequestEnum openOrderEnum = KrakenRequestEnum.GETOPENORDERS;
-        // Update endpoint to add query parameters
-        openOrderEnum.updateEndpoint(createQueryParams(params));
+        // If parameters exists
+        if (null != params) {
+            // Update endpoint to add query parameters
+            openOrderEnum.updateEndpoint(createQueryParams(params));
+        }
         // Create instance of GetOpenOrdersRequestBody for the handler
         GetOpenOrdersRequestBody getOpenOrdersRequestBody = new GetOpenOrdersRequestBody();
         // Call the callAPI method, pass in enum type, request body (required for private calls), authentication.
@@ -475,5 +520,36 @@ public class KrakenExchange {
         }
         return sb.toString();
     }
-}
 
+
+    /**
+     * For calls that include query parameters. Takes a String key - String value HashMap parameter.
+     * Builds a string beginning with "?" followed by the key + value for all params passed in.
+     * String is returned and added to the end of the URL endpoint in API call methods above that use
+     * query params.
+     * @param params - map of query parameter names and values
+     * @return String - formatted url query parameters
+     * @param params - URL set params
+     * @return Map<String, KrakenOpenOrder>
+     * @throws KrakenException
+     */
+
+    public Map<String, KrakenOpenOrder> getQueryTrades(HashMap<String, String> params) throws KrakenException{
+        KrakenRequestEnum queryTradesInfoEnum = KrakenRequestEnum.QUERYORDERINFO;
+        queryTradesInfoEnum.updateEndpoint(createQueryParams(params));
+
+        OutputWrapper getQueryTradesInfo = handler.callAPI(queryTradesInfoEnum,null, authentication);
+
+        if (getQueryTradesInfo.getError().length > 0){
+            throw new KrakenException(getQueryTradesInfo.getError(), "General exception");
+        } else {
+            Map<String, KrakenOpenOrder> results = (Map<String, KrakenOpenOrder>) getQueryTradesInfo.getResult();
+            if (results.isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
+}
