@@ -377,11 +377,9 @@ public class KrakenExchange {
 
     public KrakenLedgersInfoResult getLedgersInfo(int ofs) throws KrakenException {
 
-        KrakenRequestEnum ledgersInfoEnum = KrakenRequestEnum.GETLEDGERSINFO;
-
         GetLedgersInfoRequestBody getLedgersInfoRequestBody = new GetLedgersInfoRequestBody(ofs);
 
-        OutputWrapper getLedgersInfo = handler.callAPI(ledgersInfoEnum, getLedgersInfoRequestBody, authentication);
+        OutputWrapper getLedgersInfo = handler.callAPI(KrakenRequestEnum.GETLEDGERSINFO, getLedgersInfoRequestBody, authentication);
 
         if (getLedgersInfo.getError().length > 0){
             throw new KrakenException(getLedgersInfo.getError(), "General exception");
@@ -408,11 +406,9 @@ public class KrakenExchange {
 
     public Map<String, KrakenLedgersInfo> queryLedgers(String ledgerId) throws KrakenException {
 
-        KrakenRequestEnum queryLedgersEnum = KrakenRequestEnum.QUERYLEDGERS;
-
         QueryLedgersRequestBody queryLedgersRequestBody = new QueryLedgersRequestBody(ledgerId);
 
-        OutputWrapper queryLedgers = handler.callAPI(queryLedgersEnum, queryLedgersRequestBody, authentication);
+        OutputWrapper queryLedgers = handler.callAPI(KrakenRequestEnum.QUERYLEDGERS, queryLedgersRequestBody, authentication);
 
         if (queryLedgers.getError().length > 0){
             throw new KrakenException(queryLedgers.getError(), "General exception");
@@ -439,11 +435,9 @@ public class KrakenExchange {
 
     public KrakenTradeVolume getTradeVolume(String pairs, boolean feeInfo) throws KrakenException {
 
-        KrakenRequestEnum getTradeVolumeEnum = KrakenRequestEnum.GETTRADEVOLUME;
-
         GetTradeVolumeRequestBody getTradeVolumeRequestBody = new GetTradeVolumeRequestBody(pairs,feeInfo);
 
-        OutputWrapper getTradeVolume = handler.callAPI(getTradeVolumeEnum, getTradeVolumeRequestBody, authentication);
+        OutputWrapper getTradeVolume = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME, getTradeVolumeRequestBody, authentication);
 
         if (getTradeVolume.getError().length > 0){
             throw new KrakenException(getTradeVolume.getError(), "General exception");
