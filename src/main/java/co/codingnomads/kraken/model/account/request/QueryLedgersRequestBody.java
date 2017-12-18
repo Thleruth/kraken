@@ -7,10 +7,10 @@ import org.springframework.util.MultiValueMap;
 /**
  * @author Kevin Neag
  */
+
 public class QueryLedgersRequestBody extends RequestBodyGeneric {
 
-    //comma delimited list of ledger ids to query info about (20 maximum)
-    private String id;
+    private String id; //comma delimited list of ledger ids to query info about (20 maximum)
 
     public QueryLedgersRequestBody(String id) {
         this.id = id;
@@ -22,6 +22,13 @@ public class QueryLedgersRequestBody extends RequestBodyGeneric {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "QueryLedgersRequestBody{" +
+                "id='" + id + '\'' +
+                '}';
     }
 
     @Override

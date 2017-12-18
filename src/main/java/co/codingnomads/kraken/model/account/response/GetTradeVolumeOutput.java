@@ -11,10 +11,10 @@ import java.util.Map;
  * @author Kevin Neag
  */
 
-public class GetTradeVolumeOutput extends OutputWrapper<Map<String, KrakenTradeVolume>> {
+public class GetTradeVolumeOutput extends OutputWrapper<KrakenTradeVolume> {
 
 
-    public GetTradeVolumeOutput(@JsonProperty("error") String[] error, @JsonProperty("result") Map<String, KrakenTradeVolume> result){
+    public GetTradeVolumeOutput(@JsonProperty("error") String[] error, @JsonProperty("result") KrakenTradeVolume result){
         super(result, error);
     }
 }

@@ -4,6 +4,8 @@ import co.codingnomads.kraken.exception.KrakenException;
 import co.codingnomads.kraken.model.ApiAuthentication;
 import co.codingnomads.kraken.model.KrakenRequestEnum;
 import co.codingnomads.kraken.model.OutputWrapper;
+import co.codingnomads.kraken.model.account.pojo.*;
+import co.codingnomads.kraken.model.account.request.*;
 import co.codingnomads.kraken.model.account.pojo.KrakenClosedOrder;
 import co.codingnomads.kraken.model.account.pojo.KrakenOpenOrder;
 import co.codingnomads.kraken.model.account.request.GetClosedOrdersRequestBody;
@@ -204,6 +206,7 @@ public class KrakenExchange {
         }
     }
 
+
     /**
      * Method to update query parameters for the GetAssetInfo API call.
      * See <url>https://www.kraken.com/help/api#get-asset-info</url>
@@ -379,6 +382,100 @@ public class KrakenExchange {
         }
     }
 
+
+
+    /**
+     * Method for Get Ledger Info API call.See <url>https://api.kraken.com/0/private/Ledgers</url>
+     * Returns the highest level POJO corresponding to call's output (KrakenLedgersInfoResult).
+     * Method requires a result offset in the GetLedgersInfoRequestBody to run.
+     * This method is called in the controller.
+     * @params int offset.
+     * @return Map<String, KrakenLedgersInfo>
+     * @throws KrakenException
+     */
+
+    public KrakenLedgersInfoResult getLedgersInfo(int ofs) throws KrakenException {
+
+        KrakenRequestEnum ledgersInfoEnum = KrakenRequestEnum.GETLEDGERSINFO;
+
+        GetLedgersInfoRequestBody getLedgersInfoRequestBody = new GetLedgersInfoRequestBody(ofs);
+
+        OutputWrapper getLedgersInfo = handler.callAPI(ledgersInfoEnum, getLedgersInfoRequestBody, authentication);
+
+        if (getLedgersInfo.getError().length > 0){
+            throw new KrakenException(getLedgersInfo.getError(), "General exception");
+        } else {
+            KrakenLedgersInfoResult result = (KrakenLedgersInfoResult) getLedgersInfo.getResult();
+            if (result.getLedgerMap().isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return result;
+            }
+        }
+    }
+
+    /**
+     * Method for Query Ledgers API call. See <url> https://api.kraken.com/0/private/QueryLedgers</url>
+     * Returns a map containing a String and the POJO
+     * corresponding to the call's output (KrakenLedgersInfo).
+     * This method requires a Ledger ID in the QueryLEdgersRequestBody to run.
+     * This method is called in the controller.
+     * @params  String ledger Id (comma delimited list of ids)
+     * @return Map<String, KrakenLedgersInfo>
+     * @throws KrakenException
+     */
+
+    public Map<String, KrakenLedgersInfo> queryLedgers(String ledgerId) throws KrakenException {
+
+        KrakenRequestEnum queryLedgersEnum = KrakenRequestEnum.QUERYLEDGERS;
+
+        QueryLedgersRequestBody queryLedgersRequestBody = new QueryLedgersRequestBody(ledgerId);
+
+        OutputWrapper queryLedgers = handler.callAPI(queryLedgersEnum, queryLedgersRequestBody, authentication);
+
+        if (queryLedgers.getError().length > 0){
+            throw new KrakenException(queryLedgers.getError(), "General exception");
+        } else {
+            Map<String, KrakenLedgersInfo> results = (Map<String, KrakenLedgersInfo>) queryLedgers.getResult();
+            if (results.isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
+    /**
+     * Method for Get Trade Volume API call. See <url> https://api.kraken.com/0/private/TradeVolume</url>
+     * returns the POJO corresponding to the call's output (KrakenTradeVolume).
+     * This method has the option to take in a list of specific asset pairs and a boolean for fee-info
+     * in order to return the fee or fee_maker information.
+     * This method is called in the controller.
+     * @params String pairs, comma delimited list (optional), boolean fee-info (optional)
+     * @return KrakenTradeVolume
+     * @throws KrakenException
+     */
+
+    public KrakenTradeVolume getTradeVolume(String pairs, boolean feeInfo) throws KrakenException {
+
+        KrakenRequestEnum getTradeVolumeEnum = KrakenRequestEnum.GETTRADEVOLUME;
+
+        GetTradeVolumeRequestBody getTradeVolumeRequestBody = new GetTradeVolumeRequestBody(pairs,feeInfo);
+
+        OutputWrapper getTradeVolume = handler.callAPI(getTradeVolumeEnum, getTradeVolumeRequestBody, authentication);
+
+        if (getTradeVolume.getError().length > 0){
+            throw new KrakenException(getTradeVolume.getError(), "General exception");
+        } else {
+            KrakenTradeVolume results = (KrakenTradeVolume) getTradeVolume.getResult();
+            if (results.getCurrency().isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
     /**
      * For calls that include query parameters. Takes a String key - String value HashMap parameter.
      * Builds a string beginning with "?" followed by the key + value for all params passed in.
@@ -387,6 +484,7 @@ public class KrakenExchange {
      * @param params - map of query parameter names and values
      * @return String - formatted url query parameters
      */
+
     public String createQueryParams(HashMap<String, String> params){
         StringBuilder sb = new StringBuilder();
         Iterator it = params.entrySet().iterator();
@@ -403,3 +501,4 @@ public class KrakenExchange {
         return sb.toString();
     }
 }
+
