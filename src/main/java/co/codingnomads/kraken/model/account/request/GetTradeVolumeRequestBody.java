@@ -7,18 +7,21 @@ import org.springframework.util.MultiValueMap;
 /**
  * @author Kevin Neag
  */
+
 public class GetTradeVolumeRequestBody extends RequestBodyGeneric {
 
-//    pair = comma delimited list of asset pairs to get fee info on (optional)
-//    fee-info = whether or not to include fee info in results (optional)
+    private String pair; //pair = comma delimited list of asset pairs to get fee info on (optional)
+    private Boolean feeInfo = false; //fee-info = whether or not to include fee info in results (optional)
 
-    private String pair;
-    private String feeInfo;
-
-    public GetTradeVolumeRequestBody(String pair, String feeInfo) {
+    public GetTradeVolumeRequestBody(String pair, Boolean feeInfo) {
         super();
         this.pair = pair;
         this.feeInfo = feeInfo;
+    }
+
+    public GetTradeVolumeRequestBody(String pair) {
+        super();
+        this.pair = pair;
     }
 
     public GetTradeVolumeRequestBody() {
@@ -32,23 +35,31 @@ public class GetTradeVolumeRequestBody extends RequestBodyGeneric {
         this.pair = pair;
     }
 
-    public String getFeeInfo() {
+    public Boolean getFeeInfo() {
         return feeInfo;
     }
 
-    public void setFeeInfo(String feeInfo) {
+    public void setFeeInfo(Boolean feeInfo) {
         this.feeInfo = feeInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "GetTradeVolumeRequestBody{" +
+                "pair='" + pair + '\'' +
+                ", feeInfo='" + feeInfo + '\'' +
+                '}';
     }
 
     @Override
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
         postParameters.add("nonce", getNonce());
-        if( null != pair){
+        if(null != pair){
             postParameters.add("pair", getPair());
         }
-        if (null != feeInfo){
-            postParameters.add("fee-info", getFeeInfo());
+        if (feeInfo == true){
+            postParameters.add("fee-info", String.valueOf(getFeeInfo()));
         }
         return postParameters;
     }
@@ -58,12 +69,10 @@ public class GetTradeVolumeRequestBody extends RequestBodyGeneric {
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
         if (null != pair){
-
-            sb.append("pair").append("=").append(getPair());
+            sb.append("&").append("pair").append("=").append(getPair());
         }
-        if (null != feeInfo){
-
-            sb.append("pair").append("=").append(getFeeInfo());
+        if (feeInfo == true){
+            sb.append("&").append("fee-info").append("=").append(getFeeInfo());
         }
         return sb.toString();
     }

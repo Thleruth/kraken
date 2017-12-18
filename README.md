@@ -22,7 +22,7 @@
 |`GetOpenPositions` | Requires Testing (could not be tested without a valid open order)|
 |`GetLedgersInfo` | Implemented and tested |
 |`QueryLedgers` | Implemented and tested |
-|`GetTradeVolume` | Requires testing (trade history) |
+|`GetTradeVolume` | Implemented and tested |
 |`AddStandardOrder` | Work in Progress |
 |`CancelOpenOrder` | Implemented and tested |
 

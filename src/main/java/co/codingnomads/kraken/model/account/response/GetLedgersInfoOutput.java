@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * @author Kevin Neag
  */
-public class GetLedgersInfoOutput extends OutputWrapper<KrakenLedgersInfoResult> {
 
+public class GetLedgersInfoOutput extends OutputWrapper<KrakenLedgersInfoResult> {
 
     public GetLedgersInfoOutput(@JsonProperty("result") KrakenLedgersInfoResult result,
                                 @JsonProperty("error")String[] error) {

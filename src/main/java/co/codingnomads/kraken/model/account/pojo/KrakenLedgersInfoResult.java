@@ -1,6 +1,5 @@
 package co.codingnomads.kraken.model.account.pojo;
 
-import co.codingnomads.kraken.model.account.pojo.KrakenLedgersInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
@@ -37,4 +36,6 @@ public  class KrakenLedgersInfoResult {
 
         return count;
     }
+
+
 }

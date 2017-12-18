@@ -2,16 +2,13 @@
 package co.codingnomads.kraken.model.account.request;
 
 import co.codingnomads.kraken.model.RequestBodyGeneric;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import java.sql.Timestamp;
 
 /**
  * @author Kevin Neag
  */
-
 
 public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
 
@@ -19,8 +16,8 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
     private String asset; //optional, default all
     private String type; //optional, default all, deposit, withdrawal, trade, margin
     private long start; //starting unix timestamp or ledger id of results (optional.  exclusive)
-    private long end;//ending unix timestamp or ledger id of results (optional.  inclusive)
-    private long ofs;
+    private long end; //ending unix timestamp or ledger id of results (optional.  inclusive)
+    private long ofs; //result offset
 
 
     public GetLedgersInfoRequestBody(long ofs) {
@@ -91,6 +88,18 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
     }
 
     @Override
+    public String toString() {
+        return "GetLedgersInfoRequestBody{" +
+                "assetclass='" + assetclass + '\'' +
+                ", asset='" + asset + '\'' +
+                ", type='" + type + '\'' +
+                ", start=" + start +
+                ", end=" + end +
+                ", ofs=" + ofs +
+                '}';
+    }
+
+    @Override
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
         postParameters.add("nonce", getNonce());
@@ -136,9 +145,6 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
         sb.append("&").append("ofs").append("=").append(getOfs());
         return sb.toString();
     }
-
-
-
 }
 
 
