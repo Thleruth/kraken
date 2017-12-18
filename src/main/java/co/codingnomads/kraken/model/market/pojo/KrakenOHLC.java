@@ -4,6 +4,12 @@ import java.math.BigDecimal;
 
 /**
  * created by Ricardo Roque - December 12, 2017
+ *
+ * This is the information body, KrakenOHCL POJO, for the result list of objects in api call KrakenOHLCResults,
+ *
+ * where all the displayed values are listed inside an array of pair name (OHCLs) <url>https://api.kraken.com/0/public/OHLC</url>
+ *
+ * This, mapped according to the body of the Kraken api <url>https://www.kraken.com/help/api#get-ohlc-data</url>
  */
 
 public class KrakenOHLC {

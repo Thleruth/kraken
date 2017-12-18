@@ -19,6 +19,12 @@ import java.util.Map;
 
 /**
  * Created by Ricardo Roque
+ *
+ * This is the information body, KrakenRecentTrades POJO, for the result list of objects from the KrakenRecentTrade.
+ *
+ * The results are included in an array of pair name (trades) and recent trade data (last)
+ *
+ * As seen on the Kraken api call <url>https://www.kraken.com/help/api#get-order-book</url>
  */
 
 @JsonDeserialize(using = KrakenRecentTrades.KrakenTradeDeserializer.class)
@@ -61,7 +67,7 @@ public class KrakenRecentTrades {
 
 
     /**
-     * Customized deserializer based on boiler plate deserializer code by timmolter.
+     * Customized deserializer based on boiler plate deserializer code by timmolter <url>https://github.com/timmolter/XChange</url>.
      * Deals with List<KrakenRecentTrade> containing multiple data types.
      */
 

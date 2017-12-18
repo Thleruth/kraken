@@ -7,6 +7,10 @@ import java.util.Arrays;
 
 /**
  * Created by Ricardo Roque- Dec/1/2017
+ *
+ *This section is the body, the POJO, for the result list of objects in the api call GetTickerInformationOutput
+ *<url>https://api.kraken.com/0/public/Ticker?pair=XBTUSD</url>
+ *This, in direct correlation to the mapping of said call on <url>https://www.kraken.com/help/api#get-ticker-info</url>
  */
 
 

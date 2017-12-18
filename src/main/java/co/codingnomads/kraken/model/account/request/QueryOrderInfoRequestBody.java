@@ -5,12 +5,24 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 /**
- * Created by Ricardo Roque
+ * Created by Ricardo Roque on Dec/10/2017
+ *
+ * This is the request body for api call QueryOrderInfo <url>https://api.kraken.com/0/private/QueryOrders</url>
+
+ * Kraken API Documentation for this call can be found  <url>https://www.kraken.com/help/api#query-orders-info</url>
  */
 
- //TODO needs to be tested
+
 
 public class QueryOrderInfoRequestBody extends RequestBodyGeneric{
+
+    /**
+     * Constructor that maps the content of QueryOrdersInfo api call
+     *
+     * @param trades "optional"
+     * @param userref "optional"
+     * @param txid "required"
+     */
 
     // Whether or not to include trades in output (optional, default = false)
     private Boolean trades;
@@ -26,11 +38,10 @@ public class QueryOrderInfoRequestBody extends RequestBodyGeneric{
         this.txid = txid;
     }
 
+    //Overloaded method for calling only txid since the other two are optional
     public QueryOrderInfoRequestBody(String txid) {
         this.txid = txid;
     }
-
-    // getters and setters
 
 
     public Boolean getTrades() {
@@ -58,6 +69,8 @@ public class QueryOrderInfoRequestBody extends RequestBodyGeneric{
         this.txid = txid;
     }
 
+
+
     @Override
     public String toString() {
         return "QueryOrderInfoRequestBody{" +
@@ -67,11 +80,17 @@ public class QueryOrderInfoRequestBody extends RequestBodyGeneric{
                 '}';
     }
 
+
+    /**
+     * Method to build String required for POST call signature
+     * Will yield results based on the input for "trades"
+     */
+
     @Override
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
         postParameters.add("nonce", getNonce());
-        if(!getTrades()) {
+        if(null != getTrades() && getTrades()) {
             postParameters.add("trades", getTrades().toString());
         }
         if(null != getUserref()) {
@@ -82,11 +101,16 @@ public class QueryOrderInfoRequestBody extends RequestBodyGeneric{
         return postParameters;
     }
 
+    /**
+     * Method to set parameters for POST calls.
+     * Will yield results based on the input for "userref"
+     */
+
     @Override
     public String signPostParam() {
         StringBuilder sb = new StringBuilder();
         sb.append("nonce").append("=").append(getNonce());
-        if(!getTrades()) {
+        if(null != getTrades() && getTrades()) {
             sb.append("&").append("trades").append("=").append(getTrades().toString());
         }
         if(null!=getUserref()) {

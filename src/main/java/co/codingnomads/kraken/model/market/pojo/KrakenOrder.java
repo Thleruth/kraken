@@ -13,6 +13,10 @@ import java.math.BigDecimal;
 
 /**
  * Created by ryandesmond on 12/6/17.
+ *
+ * This is the information body, KrakenOrder POJO, for the result list of objects from the KrakenOrderBook.
+ * The values of price, volume, and timestamp are all located within the variable of "asks" and "bids"
+ * As seen on the Kraken api call <url>https://www.kraken.com/help/api#get-order-book</url>
  */
 
 @JsonDeserialize(using = KrakenOrder.OrderDeserializer.class)
@@ -60,7 +64,7 @@ public class KrakenOrder {
 
 
     /**
-     * Based on boiler plate deserializer code by timmolter.
+     * Based on boiler plate deserializer code by timmolter <url>https://github.com/timmolter/XChange</url>
      * Deals with List<KrakenOrder> containing multiple data types.
      */
 
