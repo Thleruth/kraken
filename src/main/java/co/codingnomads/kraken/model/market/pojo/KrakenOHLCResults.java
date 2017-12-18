@@ -17,6 +17,12 @@ import java.util.Map;
 
 /**
  * Created by Ricardo Roque - December 12, 2017
+ *
+ * This is the information body, KrakenOHLCResults POJO, for the result list of objects from the KrakeOHLC.
+ *
+ * The results are included in an array of pair name (OHCLs) and OHLC data as seen on the
+ *
+ * Kraken api call <url>https://www.kraken.com/help/api#get-ohlc-data</url>
  */
 
 @JsonDeserialize(using = KrakenOHLCResults.KrakenOHLCDeserializer.class)
@@ -54,7 +60,7 @@ public class KrakenOHLCResults {
 
 
     /**
-     * Customized deserializer based on boiler plate deserializer code by timmolter.
+     * Customized deserializer based on boiler plate deserializer code by timmolter <url>https://github.com/timmolter/XChange</url>
      * Deals with KrakenOHLC containing multiple data types.
      */
 

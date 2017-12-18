@@ -79,10 +79,19 @@ public class KrakenExchange {
     }
 
 
+    /**
+     * Method for the Get order book api call <url>https://www.kraken.com/help/api#get-order-book</url>
+     * This method is called on the controller and returns a Map of String and KrakenOrderBook
+     * This method passes a the String params of "pair" and "count"
+     * @param pair
+     * @param count
+     * @return Map<String, KrakenOrderBook>
+     * @throws KrakenException
+     */
+
     public Map<String, KrakenOrderBook> getOrderBook(String pair, String count) throws KrakenException{
 
         KrakenRequestEnum test = KrakenRequestEnum.GETORDERBOOK;
-        // can make a method to get queryParams
         test.updateEndpoint("?pair=" + pair);// + "&count=" + count);
 
         OutputWrapper orderBook = handler.callAPI(test,null, authentication);
@@ -99,7 +108,15 @@ public class KrakenExchange {
         }
     }
 
-    //TODO javadoc comments - ricky
+    /**
+     * Method for the OHCL data api call <url>https://www.kraken.com/help/api#get-ohlc-data</url>
+     * This method is called on the controller and returns the objects on KrakenOHLCResults
+     * This method passes a Hashmap of Strings params and throws a KrakenException
+     * @param params
+     * @return KrakenOHLCResults
+     * @throws KrakenException
+     */
+
     public KrakenOHLCResults getOHCLOutput(HashMap<String, String> params) throws KrakenException{
         KrakenRequestEnum test = KrakenRequestEnum.GETOHLCDATA;
         test.updateEndpoint(createQueryParams(params) );
@@ -402,4 +419,35 @@ public class KrakenExchange {
         }
         return sb.toString();
     }
+
+    /**
+     * For calls that include query parameters. Takes a String key - String value HashMap parameter.
+     * Builds a string beginning with "?" followed by the key + value for all params passed in.
+     * String is returned and added to the end of the URL endpoint in API call methods above that use
+     * query params.
+     * @param params - map of query parameter names and values
+     * @return String - formatted url query parameters
+     * @param params - URL set params
+     * @return Map<String, KrakenOpenOrder>
+     * @throws KrakenException
+     */
+
+    public Map<String, KrakenOpenOrder> getQueryTrades(HashMap<String, String> params) throws KrakenException{
+        KrakenRequestEnum queryTradesInfoEnum = KrakenRequestEnum.QUERYORDERINFO;
+        queryTradesInfoEnum.updateEndpoint(createQueryParams(params));
+
+        OutputWrapper getQueryTradesInfo = handler.callAPI(queryTradesInfoEnum,null, authentication);
+
+        if (getQueryTradesInfo.getError().length > 0){
+            throw new KrakenException(getQueryTradesInfo.getError(), "General exception");
+        } else {
+            Map<String, KrakenOpenOrder> results = (Map<String, KrakenOpenOrder>) getQueryTradesInfo.getResult();
+            if (results.isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return results;
+            }
+        }
+    }
+
 }

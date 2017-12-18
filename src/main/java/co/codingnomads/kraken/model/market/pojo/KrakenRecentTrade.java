@@ -18,6 +18,12 @@ import java.util.Map;
 
 /**
  * Created by Ricardo Roque
+ *
+ * This is the information body, KrakenRecentTrade POJO, for the result list of objects in api call GetRecentTrades,
+ *
+ * where all the displayed values are listed inside an array of pair name (trades) <url>https://api.kraken.com/0/public/Trades</url>
+ *
+ * This, mapped according to the body of the Kraken api <url>https://www.kraken.com/help/api#get-recent-trades</url>
  */
 
 public class KrakenRecentTrade {

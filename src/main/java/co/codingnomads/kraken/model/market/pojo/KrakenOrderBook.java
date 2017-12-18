@@ -6,6 +6,12 @@ import java.util.List;
 
 /**
  * Created by Ricardo Roque - Dec/1/2017
+ *
+ * This is the information body, KrakenOrderBook POJO, for the result list of objects in
+ *
+ * api call GetOrderBookOutput <url>https://api.kraken.com/0/public/Depth</url>
+ *
+ * This, mapped according to the body of the Kraken api <url>https://www.kraken.com/help/api#get-order-book</url>
  */
 
 public class KrakenOrderBook {

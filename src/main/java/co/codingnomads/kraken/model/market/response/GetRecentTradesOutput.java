@@ -10,6 +10,10 @@ import java.util.Map;
 
 /**
  * Created by Ricardo Roque
+ *
+ * Given the JSON format for JSON response from GetRecentTradesOutput api call <url>https://api.kraken.com/0/public/Trades</url>
+ *
+ * Kraken API Documentation for this call is located in <url>https://www.kraken.com/help/api#get-recent-trades</url>
  */
 
 public class GetRecentTradesOutput extends OutputWrapper<KrakenRecentTrades> {
