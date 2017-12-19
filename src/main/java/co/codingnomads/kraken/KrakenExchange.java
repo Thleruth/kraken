@@ -110,7 +110,7 @@ public class KrakenExchange {
     }
 
     /**
-     * Method for the OHCL data api call <url>https://www.kraken.com/help/api#get-ohlc-data</url>
+     * Method for the OHLC data api call <url>https://www.kraken.com/help/api#get-ohlc-data</url>
      * This method is called on the controller and returns the objects on KrakenOHLCResults
      * This method passes a Hashmap of Strings params and throws a KrakenException
      * @param params
@@ -496,30 +496,6 @@ public class KrakenExchange {
         }
     }
 
-    /**
-     * For calls that include query parameters. Takes a String key - String value HashMap parameter.
-     * Builds a string beginning with "?" followed by the key + value for all params passed in.
-     * String is returned and added to the end of the URL endpoint in API call methods above that use
-     * query params.
-     * @param params - map of query parameter names and values
-     * @return String - formatted url query parameters
-     */
-
-    public String createQueryParams(HashMap<String, String> params){
-        StringBuilder sb = new StringBuilder();
-        Iterator it = params.entrySet().iterator();
-        sb.append("?");
-        int count = 0;
-        while (it.hasNext()) {
-            if (count > 0){
-                sb.append("&");
-            }
-            Map.Entry pair = (Map.Entry)it.next();
-            sb.append(pair.getKey() + "=" + pair.getValue());
-            count++;
-        }
-        return sb.toString();
-    }
 
 
     /**
@@ -551,5 +527,33 @@ public class KrakenExchange {
             }
         }
     }
+
+    /**
+     * For calls that include query parameters. Takes a String key - String value HashMap parameter.
+     * Builds a string beginning with "?" followed by the key + value for all params passed in.
+     * String is returned and added to the end of the URL endpoint in API call methods above that use
+     * query params.
+     * @param params - map of query parameter names and values
+     * @return String - formatted url query parameters
+     */
+
+    public String createQueryParams(HashMap<String, String> params){
+        StringBuilder sb = new StringBuilder();
+        Iterator it = params.entrySet().iterator();
+        sb.append("?");
+        int count = 0;
+        while (it.hasNext()) {
+            if (count > 0){
+                sb.append("&");
+            }
+            Map.Entry pair = (Map.Entry)it.next();
+            sb.append(pair.getKey() + "=" + pair.getValue());
+            count++;
+        }
+        return sb.toString();
+    }
+
+
+
 
 }

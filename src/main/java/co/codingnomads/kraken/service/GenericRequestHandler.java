@@ -66,6 +66,7 @@ public class GenericRequestHandler {
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
+               // OutputWrapper.class);
               krakenRequest.getOutputClass());
 
 

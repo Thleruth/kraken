@@ -34,7 +34,7 @@ public class QueryLedgersRequestBody extends RequestBodyGeneric {
     @Override
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
-        postParameters.add("nonce", getNonce());
+        postParameters.add("nonce", super.getNonce());
         postParameters.add("id", getId());
         return postParameters;
     }

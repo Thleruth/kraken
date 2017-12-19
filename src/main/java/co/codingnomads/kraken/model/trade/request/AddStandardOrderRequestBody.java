@@ -4,43 +4,36 @@ import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-public class AddStandardOrderRequestBody extends RequestBodyGeneric{
+import java.util.Map;
 
-    // KrakenAsset pair
+/**
+ * @author Kevin Neag
+ */
+public class AddStandardOrderRequestBody extends RequestBodyGeneric {
+
     String pair;
-    // Type of order (buy/sell)
     String type;
-    // see Kraken API documentation for ordertype options
     String ordertype;
-    // Price (optional.  dependent upon ordertype)
-    String price;
-    // Secondary price (optional.  dependent upon ordertype)
-    String price2;
-    // Order volume in lots
-    String volume;
-    // Amount of leverage desired (optional, default = none)
-    String leverage;
-    // Comma delimited list of order flags (optional)
-    String oflags;
-    // Scheduled start time (optional): 0 = now (default), +<n> = schedule start time <n> seconds from now,
-    String starttm;
-    // Expiration time (optional): 0 = no expiration (default), +<n> = expire <n> seconds from now
-    String expiretm;
-    // User reference id, 32-bit signed number (optional)
-    String userref;
-    // Validate inputs only, do not submit order (optional)
-    String validate;
-
-//    optional closing order to add to system when order gets filled:
+    String price; // Price (optional.  dependent upon ordertype)
+    String price2; // Secondary price (optional.  dependent upon ordertype)
+    double volume;  // Order volume in lots
+    String leverage;  // Amount of leverage desired (optional, default = none)
+    String oflags; // Comma delimited list of order flags (optional)
+    String starttm; // Scheduled start time (optional): 0 = now (default), +<n> = schedule start time <n> seconds from now,
+    String expiretm; // Expiration time (optional): 0 = no expiration (default), +<n> = expire <n> seconds from now
+    String userref; // User reference id, 32-bit signed number (optional)
+    Boolean validate; // Validate inputs only, do not submit order (optional)
+//    Map<String,String> closeInfo; // optional closing order to add to system when order gets filled:
 //    close[ordertype] = order type
 //    close[price] = price
 //    close[price2] = secondary price
 
 
-    public AddStandardOrderRequestBody(String pair, String type, String ordertype, String price,
-                                       String price2, String volume, String leverage,
-                                       String oflags, String starttm, String expiretm,
-                                       String userref, String validate) {
+
+
+    public AddStandardOrderRequestBody(String pair, String type, String ordertype, String price, String price2,
+                                       double volume, String leverage, String oflags, String starttm, String expiretm,
+                                       String userref, Boolean validate) {
         this.pair = pair;
         this.type = type;
         this.ordertype = ordertype;
@@ -53,6 +46,14 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric{
         this.expiretm = expiretm;
         this.userref = userref;
         this.validate = validate;
+//        this.closeInfo = closeInfo;
+    }
+
+    public AddStandardOrderRequestBody(String pair, String type, String ordertype, double volume) {
+        this.pair = pair;
+        this.type = type;
+        this.ordertype = ordertype;
+        this.volume = volume;
     }
 
     public String getPair() {
@@ -95,11 +96,11 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric{
         this.price2 = price2;
     }
 
-    public String getVolume() {
+    public double getVolume() {
         return volume;
     }
 
-    public void setVolume(String volume) {
+    public void setVolume(double volume) {
         this.volume = volume;
     }
 
@@ -143,32 +144,22 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric{
         this.userref = userref;
     }
 
-    public String getValidate() {
+    public Boolean getValidate() {
         return validate;
     }
 
-    public void setValidate(String validate) {
+    public void setValidate(Boolean validate) {
         this.validate = validate;
     }
 
-    @Override
-    public MultiValueMap<String, String> postParam(){
-        MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
-        postParameters.add("nonce", super.getNonce());
-        postParameters.add("pair", getPair());
-        postParameters.add("type", getType());
-        postParameters.add("ordertype", getOrdertype());
-        postParameters.add("price", getPrice());
-        postParameters.add("price2", getPrice2());
-        postParameters.add("volume", getVolume());
-        postParameters.add("leverage", getLeverage());
-        postParameters.add("oflags", getOflags());
-        postParameters.add("starttm", getStarttm());
-        postParameters.add("expiretm", getExpiretm());
-        postParameters.add("userref", getUserref());
-        postParameters.add("validate", getValidate());
-        return postParameters;
-    }
+//    public Map<String, String> getCloseInfo() {
+//        return closeInfo;
+//    }
+//
+//    public void setCloseInfo(Map<String, String> closeInfo) {
+//        this.closeInfo = closeInfo;
+//    }
+
 
     @Override
     public String signPostParam() {
@@ -177,16 +168,75 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric{
         sb.append("&").append("pair").append("=").append(getPair());
         sb.append("&").append("type").append("=").append(getType());
         sb.append("&").append("ordertype").append("=").append(getOrdertype());
-        sb.append("&").append("price").append("=").append(getPrice());
-        sb.append("&").append("price2").append("=").append(getPrice2());
+        if (null != price) {
+            sb.append("&").append("price").append("=").append(getPrice());
+        }
+        if (null != price) {
+            sb.append("&").append("price2").append("=").append(getPrice2());
+        }
         sb.append("&").append("volume").append("=").append(getVolume());
-        sb.append("&").append("leverage").append("=").append(getLeverage());
+        if (null != leverage) {
+            sb.append("&").append("leverage").append("=").append(getLeverage());
+        }
         sb.append("&").append("volume").append("=").append(getPrice2());
-        sb.append("&").append("oflags").append("=").append(getOflags());
-        sb.append("&").append("starttm").append("=").append(getStarttm());
-        sb.append("&").append("expiretm").append("=").append(getExpiretm());
-        sb.append("&").append("userref").append("=").append(getUserref());
-        sb.append("&").append("validate").append("=").append(getValidate());
+        if (null != oflags) {
+            sb.append("&").append("oflags").append("=").append(getOflags());
+        }
+        if (null != starttm) {
+            sb.append("&").append("starttm").append("=").append(getStarttm());
+        }
+        if (null != expiretm) {
+            sb.append("&").append("expiretm").append("=").append(getExpiretm());
+        }
+        if (null != userref) {
+            sb.append("&").append("userref").append("=").append(getUserref());
+        }
+        if (null != validate) {
+            sb.append("&").append("validate").append("=").append(getValidate());
+        }
+//        if (null != closeInfo) {
+//            sb.append("&").append("closeInfo").append("=").append(getCloseInfo());
+//        }
         return sb.toString();
+    }
+
+
+
+    @Override
+    public MultiValueMap<String, String> postParam() {
+        MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
+        postParameters.add("nonce", getNonce());
+        postParameters.add("pair", getPair());
+        postParameters.add("type", getType());
+        postParameters.add("ordertype", getOrdertype());
+        if(null != price) {
+            postParameters.add("price", String.valueOf(getPrice()));
+        }
+        if(null != price2) {
+            postParameters.add("price2", String.valueOf(getPrice2()));
+        }
+        postParameters.add("volume", String.valueOf(getVolume()));
+        if(null != leverage) {
+            postParameters.add("leverage", getLeverage());
+        }
+        if(null != oflags) {
+            postParameters.add("oflags", getOflags());
+        }
+        if(null != starttm) {
+            postParameters.add("starttm", getStarttm());
+        }
+        if(null != expiretm) {
+            postParameters.add("expiretm", getExpiretm());
+        }
+        if(null != userref) {
+            postParameters.add("userref", getUserref());
+        }
+        if(null != validate) {
+            postParameters.add("validate", String.valueOf(getValidate()));
+        }
+//        if(null != closeInfo) {
+//            postParameters.add("closeInfo", String.valueOf(getCloseInfo()));
+//        }
+        return postParameters;
     }
 }

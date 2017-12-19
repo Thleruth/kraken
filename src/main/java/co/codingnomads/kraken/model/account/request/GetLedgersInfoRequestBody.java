@@ -102,7 +102,7 @@ public class GetLedgersInfoRequestBody extends RequestBodyGeneric {
     @Override
     public MultiValueMap<String, String> postParam(){
         MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<>();
-        postParameters.add("nonce", getNonce());
+        postParameters.add("nonce", super.getNonce());
         if (null != assetclass ){
             postParameters.add("aclass", getAssetclass());
         }
