@@ -3,8 +3,6 @@ package co.codingnomads.kraken.model.trade.request;
 import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -28,34 +26,52 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric {
     Boolean validate; // Validate inputs only, do not submit order (optional)
     Map<String,String> closeInfo; // optional closing order to add to system when order gets filled:
 
-    // minimum required
-//    public AddStandardOrderRequestBody(String pair, String type, String ordertype, double volume) {
-//        this.pair = pair;
-//        this.type = type;
-//        this.ordertype = ordertype;
-//        this.volume = volume;
-//    }
+    //minimum constructor for basic parameters
+    public AddStandardOrderRequestBody(String pair, String type, String ordertype, double volume) {
+        this.pair = pair;
+        this.type = type;
+        this.ordertype = ordertype;
+        this.volume = volume;
+    }
 
-    //fully qualified
-    public AddStandardOrderRequestBody(String pair, String type, String ordertype, String price,
+    //fully qualified constructor, enter null for fields you wish to exclude depending on fields you wish to include
+    //see Api documentation for more information  https://api.kraken.com/0/private/AddOrder
+    public AddStandardOrderRequestBody(String pair, String type, String ordertype, String price, String price2,
                                        double volume, String leverage, String oflags, String starttm, String expiretm,
                                        String userref, Boolean validate, Map<String, String> closeInfo) {
         this.pair = pair;
         this.type = type;
         this.ordertype = ordertype;
-        this.price = price;
+        if(price != null) {
+            this.price = price;
+        }
+        if(price2 != null) {
+            this.price2 = price2;
+        }
         this.volume = volume;
-        this.leverage = leverage;
-        this.oflags = oflags;
-        this.starttm = starttm;
-        this.expiretm = expiretm;
-        this.userref = userref;
-        this.validate = validate;
-        this.closeInfo = new HashMap<>();
-            closeInfo.put("type", type.toString());
-            closeInfo.put("price", price.toString());
-    }
 
+        if(leverage != null) {
+            this.leverage = leverage;
+        }
+        if(oflags != null) {
+            this.oflags = oflags;
+        }
+        if(starttm != null) {
+            this.starttm = starttm;
+        }
+        if(expiretm != null) {
+            this.expiretm = expiretm;
+        }
+        if(userref != null) {
+            this.userref = userref;
+        }
+        if(validate != null) {
+            this.validate = validate;
+        }
+        if(closeInfo != null) {
+            this.closeInfo = closeInfo;
+        }
+    }
 
     public String getPair() {
         return pair;

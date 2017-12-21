@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
+/**
+ * Created by Meghan Boyce on 12/07/17
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KrakenClosedOrder {
-    /**
-     * Created by Meghan Boyce on 12/07/17
-     */
 
     // Referral order transaction id for order
     String refid;

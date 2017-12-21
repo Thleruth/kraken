@@ -2,11 +2,12 @@ package co.codingnomads.kraken.model.trade.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Created by Meghan Boyce on 12/07/17
+ *
+ */
+
 public class KrakenCancelOpenOrder {
-    /**
-     * Created by Meghan Boyce on 12/07/17
-     *
-     */
 
     // Number of orders canceled
     int count;

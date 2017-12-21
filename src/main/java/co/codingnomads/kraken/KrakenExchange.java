@@ -16,10 +16,7 @@ import co.codingnomads.kraken.model.market.pojo.KrakenAssetPairName;
 import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.model.market.pojo.KrakenSpread;
 import co.codingnomads.kraken.model.trade.pojo.*;
-import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
-import co.codingnomads.kraken.model.trade.request.GetOpenPositionsRequestBody;
-import co.codingnomads.kraken.model.trade.request.GetTradeHistoryRequestBody;
-import co.codingnomads.kraken.model.trade.request.QueryTradesInfoRequestBody;
+import co.codingnomads.kraken.model.trade.request.*;
 import co.codingnomads.kraken.service.GenericRequestHandler;
 
 import java.util.HashMap;
@@ -525,6 +522,41 @@ public class KrakenExchange {
         }
     }
 
+    
+    /**
+     * Method for Add Standard Order API call.See <url> https://api.kraken.com/0/private/AddOrder</url>
+     * Returns the highest level POJO corresponding to call's output (KrakenStandardOrderDescription).
+     * Method requires a String of asset pairs, a String of ordertype, a double Volume in lots in the
+     * AddStandardOrderRequestBody to run at the bare minimum.
+     * Method can additionally accept a String price, String price2, String leverage, String order flags, String start time,
+     * String end time, String user reference id, boolean validate and a Map of strings of close order information.
+     * input parameters are dependent upon previous parameters entered.
+     * You may enter null for parameters you do not wish to include.
+     * This method is called in the controller.
+     * @params String pair, String type, String ordertype, String price, String price2,double volume, String leverage, String oflags,
+     * String starttm, String expiretm, String userref, Boolean validate, Map<String, String> closeInfo
+     * @return KrakenAddStandardOrder
+     * @throws KrakenException
+     */
+
+    public KrakenStandardOrderDescription addStandardOrder(String pair, String type, String ordertype, double volume) throws KrakenException {
+
+        AddStandardOrderRequestBody addStandardOrderRequestBody = new AddStandardOrderRequestBody(pair, type, ordertype, volume);
+
+        OutputWrapper addStandardOrder = handler.callAPI(KrakenRequestEnum.ADDSTRANDARDORDERS, addStandardOrderRequestBody, authentication);
+
+        if (addStandardOrder.getError().length > 0){
+            throw new KrakenException(addStandardOrder.getError(), "General exception");
+        } else {
+            KrakenStandardOrderDescription result = (KrakenStandardOrderDescription) addStandardOrder.getResult();
+            if (result.getOrderDescription().isEmpty()){
+                throw new KrakenException("General exception, results are null");
+            } else {
+                return result;
+            }
+        }
+    }
+
 
     /**
      * For calls that include query parameters. Takes a String key - String value HashMap parameter.
@@ -550,6 +582,7 @@ public class KrakenExchange {
         }
         return sb.toString();
     }
+
 
 
 

@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
+/**
+ * Created by Meghan Boyce on 11/29/17
+ *
+ */
 public class GetOpenOrdersOutput extends OutputWrapper<Map<String, KrakenOpenOrder>>{
-    /**
-     * Created by Meghan Boyce on 11/29/17
-     *
-     */
 
     /**
      *

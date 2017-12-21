@@ -5,11 +5,12 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+/**
+ * Created by Meghan Boyce on 11/29/17
+ *
+ */
+
 public class GetClosedOrdersRequestBody extends RequestBodyGeneric {
-    /**
-     * Created by Meghan Boyce on 11/29/17
-     *
-     */
 
     // Whether or not to include trades in output (optional - default = false)
     String trades;
