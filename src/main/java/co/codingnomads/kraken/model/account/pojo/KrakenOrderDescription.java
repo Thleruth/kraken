@@ -3,10 +3,8 @@ package co.codingnomads.kraken.model.account.pojo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class KrakenOrderDescription {
-    /**
-     * Created by Meghan Boyce on 11/29/17
-     */
 
+    //KrakenResult[OK: {descr={order=sell 0.02000000 ETHUSD @ market}, txid=[OEIPIA-O3ZJ2-EJORQ3]}]
     // KrakenAsset pair
     String pair;
     // Type of order (buy/sell)

@@ -43,15 +43,19 @@ public class Controller {
 //        RequestBodyGeneric a = new GetTradeVolumeRequestBody();
 //        OutputWrapper k = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME, a, exchange.getApiAuthentication());
 //        System.out.println(k.toString());
-////
-        RequestBodyGeneric addStandardOrder = new AddStandardOrderRequestBody("ETHUSD","buy","market",
-                "20.2", "24.3", 1,"none", "nompp","12", "7", "2147483647",
-                true);
-
-//     RequestBodyGeneric addStandardOrder = new AddStandardOrderRequestBody("BCHEUR","sell","market",0.05);
 //
-        OutputWrapper kevinCallThree = handler.callAPI(KrakenRequestEnum.ADDSTRANDARDORDERS,addStandardOrder, exchange.getApiAuthentication());
 
+//        RequestBodyGeneric getTradeVolume = new GetTradeVolumeRequestBody("ETHUSD",true);
+//        OutputWrapper kevinCallOne = handler.callAPI(KrakenRequestEnum.GETTRADEVOLUME, getTradeVolume, exchange.getApiAuthentication());
+//        System.out.println(kevinCallOne.toString());
+
+//        RequestBodyGeneric addStandardOrder = new AddStandardOrderRequestBody("ETHUSD","buy","market",
+//                "20.2", "24.3", 1,"none", "nompp","12", "7", "2147483647",
+//                true);
+
+        RequestBodyGeneric addStandardOrder = new AddStandardOrderRequestBody("ETHUSD","sell","limit",
+                "754.58",0.02,"none","fciq","0","0","2147483647",true);
+        OutputWrapper kevinCallThree = handler.callAPI(KrakenRequestEnum.ADDSTRANDARDORDERS,addStandardOrder, exchange.getApiAuthentication());
         System.out.println(kevinCallThree.toString());
 
 //        try {
@@ -65,5 +69,12 @@ public class Controller {
 //        } catch (KrakenException e) {
 //            System.out.println(e.toString());
 //        }
+
+
+//        KrakenResult[OK: KrakenTradeVolume{currency='ZUSD', volume=277.9371, fee=null, fee_maker=null}]
+//        KrakenResult[OK: {descr={order=sell 0.02000000 ETHUSD @ market}, txid=[OEIPIA-O3ZJ2-EJORQ3]}]
+        //KrakenResult[OK: KrakenTradeVolume{currency='ZUSD', volume=293.6015, fee={XETHZUSD=KrakenFee{fee=0.2600, minFee=0.1000, maxFee=0.2600, nextFee=0.2400, nextVolume=50000.0000, tiervolume=0.0000}}, fee_maker={XETHZUSD=KrakenFee{fee=0.1600, minFee=0.0000, maxFee=0.1600, nextFee=0.1400, nextVolume=50000.0000, tiervolume=0.0000}}}]
+
+
     }
 }

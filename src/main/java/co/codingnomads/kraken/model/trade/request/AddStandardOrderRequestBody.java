@@ -4,11 +4,14 @@ import co.codingnomads.kraken.model.RequestBodyGeneric;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * @author Kevin Neag
  */
+
 public class AddStandardOrderRequestBody extends RequestBodyGeneric {
 
     String pair;
@@ -23,22 +26,24 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric {
     String expiretm; // Expiration time (optional): 0 = no expiration (default), +<n> = expire <n> seconds from now
     String userref; // User reference id, 32-bit signed number (optional)
     Boolean validate; // Validate inputs only, do not submit order (optional)
-//    Map<String,String> closeInfo; // optional closing order to add to system when order gets filled:
-//    close[ordertype] = order type
-//    close[price] = price
-//    close[price2] = secondary price
+    Map<String,String> closeInfo; // optional closing order to add to system when order gets filled:
 
+    // minimum required
+//    public AddStandardOrderRequestBody(String pair, String type, String ordertype, double volume) {
+//        this.pair = pair;
+//        this.type = type;
+//        this.ordertype = ordertype;
+//        this.volume = volume;
+//    }
 
-
-
-    public AddStandardOrderRequestBody(String pair, String type, String ordertype, String price, String price2,
+    //fully qualified
+    public AddStandardOrderRequestBody(String pair, String type, String ordertype, String price,
                                        double volume, String leverage, String oflags, String starttm, String expiretm,
-                                       String userref, Boolean validate) {
+                                       String userref, Boolean validate, Map<String, String> closeInfo) {
         this.pair = pair;
         this.type = type;
         this.ordertype = ordertype;
         this.price = price;
-        this.price2 = price2;
         this.volume = volume;
         this.leverage = leverage;
         this.oflags = oflags;
@@ -46,15 +51,11 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric {
         this.expiretm = expiretm;
         this.userref = userref;
         this.validate = validate;
-//        this.closeInfo = closeInfo;
+        this.closeInfo = new HashMap<>();
+            closeInfo.put("type", type.toString());
+            closeInfo.put("price", price.toString());
     }
 
-    public AddStandardOrderRequestBody(String pair, String type, String ordertype, double volume) {
-        this.pair = pair;
-        this.type = type;
-        this.ordertype = ordertype;
-        this.volume = volume;
-    }
 
     public String getPair() {
         return pair;
@@ -152,14 +153,13 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric {
         this.validate = validate;
     }
 
-//    public Map<String, String> getCloseInfo() {
-//        return closeInfo;
-//    }
-//
-//    public void setCloseInfo(Map<String, String> closeInfo) {
-//        this.closeInfo = closeInfo;
-//    }
+    public Map<String, String> getCloseInfo() {
+        return closeInfo;
+    }
 
+    public void setCloseInfo(Map<String, String> closeInfo) {
+        this.closeInfo = closeInfo;
+    }
 
     @Override
     public String signPostParam() {
@@ -171,14 +171,15 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric {
         if (null != price) {
             sb.append("&").append("price").append("=").append(getPrice());
         }
-        if (null != price) {
+        if (null != price2) {
             sb.append("&").append("price2").append("=").append(getPrice2());
         }
+
         sb.append("&").append("volume").append("=").append(getVolume());
+
         if (null != leverage) {
             sb.append("&").append("leverage").append("=").append(getLeverage());
         }
-        sb.append("&").append("volume").append("=").append(getPrice2());
         if (null != oflags) {
             sb.append("&").append("oflags").append("=").append(getOflags());
         }
@@ -194,13 +195,11 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric {
         if (null != validate) {
             sb.append("&").append("validate").append("=").append(getValidate());
         }
-//        if (null != closeInfo) {
-//            sb.append("&").append("closeInfo").append("=").append(getCloseInfo());
-//        }
+       if (null != closeInfo) {
+           sb.append("&").append("closeInfo").append("=").append(getCloseInfo());
+       }
         return sb.toString();
     }
-
-
 
     @Override
     public MultiValueMap<String, String> postParam() {
@@ -234,9 +233,9 @@ public class AddStandardOrderRequestBody extends RequestBodyGeneric {
         if(null != validate) {
             postParameters.add("validate", String.valueOf(getValidate()));
         }
-//        if(null != closeInfo) {
-//            postParameters.add("closeInfo", String.valueOf(getCloseInfo()));
-//        }
+        if(null != closeInfo) {
+            postParameters.add("closeInfo", String.valueOf(getCloseInfo()));
+        }
         return postParameters;
     }
 }

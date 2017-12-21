@@ -6,17 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
-public class AddStandardOrderOutput extends OutputWrapper<Map<String, KrakenAddOrder>> {
-    /**
-     * Created by Meghan Boyce on 11/29/17
-     *
-     */
+public class AddStandardOrderOutput extends OutputWrapper<KrakenAddOrder> {
 
     public AddStandardOrderOutput(@JsonProperty("error") String[] error,
-                                  @JsonProperty("result") Map<String, KrakenAddOrder> result) {
+                                  @JsonProperty("result")KrakenAddOrder result) {
         super(result, error);
     }
-
-
-
 }

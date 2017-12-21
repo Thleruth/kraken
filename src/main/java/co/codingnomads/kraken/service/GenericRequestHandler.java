@@ -66,9 +66,7 @@ public class GenericRequestHandler {
                 krakenRequest.getFullURL(),
                 krakenRequest.getHttpMethod(),
                 entity,
-               // OutputWrapper.class);
-              krakenRequest.getOutputClass());
-
+               krakenRequest.getOutputClass());
 
         // check if it was a success and return the item if so
         try {

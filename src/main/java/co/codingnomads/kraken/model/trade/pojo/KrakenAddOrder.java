@@ -1,39 +1,42 @@
 package co.codingnomads.kraken.model.trade.pojo;
 
-import co.codingnomads.kraken.model.account.pojo.KrakenOrderDescription;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+
 
 public class KrakenAddOrder {
-    /**
-     * Created by Meghan Boyce on 12/07/17
-     *
-     */
 
-    // Order description info
-    KrakenOrderDescription descr;       // Same as descr in GetOpenOrders?
-    // Array of transaction ids for order (if order was added successfully)
-    String txid;
 
-    public KrakenAddOrder (@JsonProperty("descr") KrakenOrderDescription descr,
-                           @JsonProperty("txid") String txid) {
+    KrakenStandardOrderDescription descr;
+    List<String> txid;// Array of transaction ids for order (if order was added successfully)
+
+    public KrakenAddOrder (@JsonProperty("descr") KrakenStandardOrderDescription descr,
+                           @JsonProperty("txid") List<String> txid) {
         this.descr = descr;
         this.txid = txid;
     }
 
-    public KrakenOrderDescription getDescr() {
+    public KrakenStandardOrderDescription getDescr() {
         return descr;
     }
 
-    public void setDescr(KrakenOrderDescription descr) {
+    public void setDescr(KrakenStandardOrderDescription descr) {
         this.descr = descr;
     }
 
-    public String getTxid() {
+    public List<String> getTxid() {
         return txid;
     }
 
-    public void setTxid(String txid) {
+    public void setTxid(List<String> txid) {
         this.txid = txid;
     }
 
+    @Override
+    public String toString() {
+        return "KrakenAddOrder{" +
+                "descr=" + descr +
+                ", txid=" + txid +
+                '}';
+    }
 }

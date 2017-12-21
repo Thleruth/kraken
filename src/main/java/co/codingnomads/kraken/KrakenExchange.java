@@ -15,10 +15,7 @@ import co.codingnomads.kraken.model.market.pojo.KrakenAsset;
 import co.codingnomads.kraken.model.market.pojo.KrakenAssetPairName;
 import co.codingnomads.kraken.model.market.pojo.KrakenOrderBook;
 import co.codingnomads.kraken.model.market.pojo.KrakenSpread;
-import co.codingnomads.kraken.model.trade.pojo.KrakenCancelOpenOrder;
-import co.codingnomads.kraken.model.trade.pojo.KrakenOpenPosition;
-import co.codingnomads.kraken.model.trade.pojo.KrakenTradeHistory;
-import co.codingnomads.kraken.model.trade.pojo.KrakenTradeInfo;
+import co.codingnomads.kraken.model.trade.pojo.*;
 import co.codingnomads.kraken.model.trade.request.CancelOpenOrderRequestBody;
 import co.codingnomads.kraken.model.trade.request.GetOpenPositionsRequestBody;
 import co.codingnomads.kraken.model.trade.request.GetTradeHistoryRequestBody;
@@ -527,6 +524,7 @@ public class KrakenExchange {
             }
         }
     }
+
 
     /**
      * For calls that include query parameters. Takes a String key - String value HashMap parameter.
