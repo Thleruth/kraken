@@ -129,9 +129,9 @@ on the Controller.
 ## Contributors
 
 * [Thomas Leruth](https://github.com/Thleruth)
-* [Jialor Chong](https://github.com/PopoPenguin)
+* [Jialor Cheung](https://github.com/PopoPenguin)
 * [Meghan Boyce](https://github.com/meejahnsnutshell)
-* [Kevin Neag](<https://github.com/neagkv)
+* [Kevin Neag](https://github.com/neagkv)
 * [Ricardo Roque](https://github.com/rickypatillas)
 
 ## Acknowledgements
