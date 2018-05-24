@@ -22,7 +22,7 @@ public class GenericRequestHandler {
      * @param requestBody What is based into the call (for GET will be used to adapt the URL,
      *                    for POST will be the request body)
      * @param apiAuthentication The parameters to authenticate the call
-     * @return An OutputWrapper With an error field and a result firled
+     * @return An OutputWrapper with an error field and a result field
      * @throws NullPointerException
      * @throws UnknownException
      * @throws RateLimitException
